@@ -1,0 +1,376 @@
+terapeuta.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAWENMOLL - Panel del Terapeuta</title>
+    <!-- Tailwind CSS para diseño moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF8F5',
+                        forest: '#52796F',
+                        sage: '#84A59D',
+                        slateDark: '#2F3E46',
+                        accent: '#F28482'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FAF8F5;
+        }
+    </style>
+</head>
+<body class="text-slateDark min-h-screen flex flex-col">
+
+    <!-- CABECERA -->
+    <header class="bg-white border-b border-gray-200 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-2">
+                <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                <span class="font-bold text-lg md:text-xl tracking-wider text-forest font-sans">LAWENMOLL <span class="text-[9px] bg-forest/10 text-forest px-2 py-0.5 rounded-full ml-1 font-semibold">Especialistas 💼</span></span>
+                <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-1.5 md:gap-3">
+                <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>Secretos<span class="hidden sm:inline"> de la Abuela</span> 👵</span>
+                </a>
+                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Volver<span class="hidden sm:inline"> al Test</span></span>
+                </a>
+                <div class="text-right hidden sm:block">
+                    <div class="font-bold text-xs text-slateDark">Klgo. Carlos Mendoza</div>
+                    <div class="text-[9px] text-gray-400">Kinesiólogo Integrativo • Santiago, Chile</div>
+                </div>
+                <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-white font-bold shadow-md text-xs">
+                    CM
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto w-full p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 font-sans">
+        
+        <!-- COLUMNA IZQUIERDA: RESUMEN Y AGENDA -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- Tarjeta de Perfil y Métricas en UF con Plan SaaS -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-forest">Resumen Mensual</h3>
+                    <span class="text-[9px] bg-forest text-white px-2 py-0.5 rounded-full font-bold">Plan SaaS Activo ($49 USD/mes)</span>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-forest/5 p-4 rounded-2xl border border-forest/10">
+                        <div class="text-[10px] uppercase font-bold text-forest/70">Ingresos</div>
+                        <div class="text-lg font-black text-forest mt-1">14.5 UF</div>
+                        <div class="text-[9px] text-gray-400 font-medium font-sans">Este mes</div>
+                    </div>
+                    <div class="bg-accent/5 p-4 rounded-2xl border border-accent/10">
+                        <div class="text-[10px] uppercase font-bold text-accent">Pacientes</div>
+                        <div class="text-lg font-black text-slateDark mt-1">28 Activos</div>
+                        <div class="text-[9px] text-gray-400 font-medium">Este mes</div>
+                    </div>
+                </div>
+
+                <!-- Métricas de Convenios y Derivaciones B2B -->
+                <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-left space-y-2.5">
+                    <span class="text-[9px] uppercase font-extrabold text-gray-400 block tracking-wider"><i class="fa-solid fa-chart-line"></i> Red de Negocios B2B</span>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-500">Derivados a Gym / Yoga:</span>
+                        <span class="font-bold text-forest">18 Pacientes</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs border-t border-gray-200/60 pt-1.5">
+                        <span class="text-gray-500">Recibidos de Restaurantes:</span>
+                        <span class="font-bold text-accent">12 Clientes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listado de Citas del Día -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-forest">Citas de Hoy</h3>
+                    <span class="text-xs font-semibold bg-gray-100 text-gray-500 px-2 py-1 rounded-md font-sans">Sábado</span>
+                </div>
+                
+                <div class="space-y-3" id="appointmentList">
+                    <!-- Paciente 1 -->
+                    <button onclick="selectPatient('Camila Silva', '26.0', 'Sobrepeso Moderado', 'Dolor lumbar tras largas jornadas de oficina.', 'Sí (Hipertensión e Hipotiroidismo)', 'Estándar (30 a 45 min)', 'Lunes 24 Ago - 09:30 hrs', '💻 Consulta en Línea (Telemedicina)', '30', 'Neurodivergente (TDAH)', 'Sí (Derivada a clases de Yoga)', '+56912345678')" class="w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">👩</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Camila Silva (30 años)</h4>
+                                <p class="text-[10px] text-gray-400">09:30 hrs • Consulta en Línea</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-forest text-white px-2 py-0.5 rounded-full font-bold">Confirmada</span>
+                    </button>
+
+                    <!-- Paciente 2 -->
+                    <button onclick="selectPatient('Pedro Jara', '23.4', 'Peso Saludable', 'Esguince de tobillo grado 1 jugando fútbol.', 'No', 'Express (5 a 15 min)', 'Martes 25 Ago - 11:00 hrs', '🏢 Consulta Presencial', '24', 'Ninguna', 'No', '+56987654321')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">👨</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Pedro Jara (24 años)</h4>
+                                <p class="text-[10px] text-gray-400">11:00 hrs • Evaluación Presencial</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Pendiente</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: CONSULTA ACTIVA Y FICHA CLÍNICA SOAP -->
+        <div class="lg:col-span-8">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                
+                <!-- Encabezado del Paciente Activo -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center text-2xl">👩</div>
+                        <div>
+                            <h2 class="text-xl font-bold text-forest" id="patientName">Camila Silva (30 años)</h2>
+                            <p class="text-xs text-gray-400" id="patientReason">Motivo de consulta: Dolor lumbar tras largas jornadas de oficina.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 sm:mt-0 bg-forest/5 border border-forest/20 rounded-xl p-2.5 text-center flex space-x-4">
+                        <div>
+                            <span class="text-[9px] uppercase font-bold text-forest/70 block">IMC calculado</span>
+                            <span class="text-sm font-black text-forest" id="patientIMC">26.0</span>
+                        </div>
+                        <div class="border-l border-forest/20 pl-4 text-left">
+                            <span class="text-[9px] uppercase font-bold text-forest/70 block font-sans">Estado Nutricional</span>
+                            <span class="text-xs font-bold text-slateDark" id="patientIMCCat">Sobrepeso Moderado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE AGENDAMIENTO REALIZADO -->
+                <div class="bg-slateDark text-white rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-gray-300 block"><i class="fa-solid fa-clock"></i> Fecha y Hora Agendada</span>
+                        <span class="text-xs font-bold" id="patientDateTime">Lunes 24 Ago - 09:30 hrs</span>
+                    </div>
+                    <div class="sm:border-l sm:border-gray-600 sm:pl-4">
+                        <span class="text-[10px] uppercase font-bold text-gray-300 block"><i class="fa-solid fa-house-laptop"></i> Tipo de Atención</span>
+                        <span class="text-xs font-bold text-accent" id="patientType">💻 Consulta en Línea (Telemedicina)</span>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE RESPUESTAS DEL TEST -->
+                <div class="bg-sage/10 rounded-2xl p-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border border-sage/20">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-forest/80 block">⚠️ Condición Crónica</span>
+                        <span class="text-xs font-bold text-red-600" id="patientChronic">Sí (Hipertensión e Hipotiroidismo)</span>
+                    </div>
+                    <div class="border-l border-forest/20 pl-4">
+                        <span class="text-[10px] uppercase font-bold text-forest/80 block">🧠 Salud / Neuro</span>
+                        <span class="text-xs font-bold text-slateDark" id="patientMental">Neurodivergente (TDAH)</span>
+                    </div>
+                    <div class="sm:border-l sm:border-forest/20 sm:pl-4 pl-4 col-span-1">
+                        <span class="text-[10px] uppercase font-bold text-forest/80 block">🧘‍♀️ Alianza B2B</span>
+                        <span class="text-xs font-bold text-forest" id="patientGym">Sí (Derivada a Yoga)</span>
+                    </div>
+                    <div class="border-l border-forest/20 pl-4 col-span-1">
+                        <span class="text-[10px] uppercase font-bold text-forest/80 block">⏱️ Tiempo Disponible</span>
+                        <span class="text-xs font-bold text-slateDark" id="patientTimeCommit">Estándar (30 a 45 min)</span>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO DE FICHA CLÍNICA FORMATO SOAP -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-bold text-forest flex items-center space-x-2">
+                            <span class="text-lg">📝</span>
+                            <span>Registro Clínico SOAP (Ficha del Profesional)</span>
+                        </h3>
+                        <span class="inline-flex items-center text-[10px] bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-bold border border-emerald-200 shadow-sm"><i class="fa-solid fa-shield-halved mr-1.5 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <!-- S - Subjetivo -->
+                        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-forest mb-1">
+                                [S] Subjetivo <span class="text-[9px] text-gray-400 font-normal normal-case">(Síntomas descritos por el paciente)</span>
+                            </label>
+                            <textarea id="soapS" class="w-full bg-white border border-gray-200 rounded-xl p-3 text-xs focus:border-forest focus:outline-none h-24 resize-none font-medium text-slateDark">Paciente de 30 años refiere dolor sordo en zona lumbar baja (6/10 EVA) agravado por sedentarismo prolongado de oficina. Menciona fatiga relacionada con su diagnóstico de hipotiroidismo.</textarea>
+                        </div>
+
+                        <!-- O - Objetivo -->
+                        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-forest mb-1">
+                                [O] Objetivo <span class="text-[9px] text-gray-400 font-normal normal-case">(Examen físico y parámetros)</span>
+                            </label>
+                            <textarea id="soapO" class="w-full bg-white border border-gray-200 rounded-xl p-3 text-xs focus:border-forest focus:outline-none h-24 resize-none font-medium text-slateDark">Contractura severa de erectores espinales a nivel L4-L5. Limitación en la flexión lumbar. Rangos de movilidad articular de cadera normales. Presión arterial controlada.</textarea>
+                        </div>
+
+                        <!-- A - Apreciación -->
+                        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-forest mb-1">
+                                [A] Apreciación <span class="text-[9px] text-gray-400 font-normal normal-case">(Diagnóstico kinesiológico/médico)</span>
+                            </label>
+                            <textarea id="soapA" class="w-full bg-white border border-gray-200 rounded-xl p-3 text-xs focus:border-forest focus:outline-none h-24 resize-none font-medium text-slateDark">Síndrome doloroso lumbar mecánico, agravado por sedentarismo laboral (IMC: 26.0). Hipertensión e hipotiroidismo de base estables.</textarea>
+                        </div>
+
+                        <!-- P - Plan -->
+                        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
+                            <div class="flex items-center justify-between mb-1">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-forest">
+                                    [P] Plan de Tratamiento <span class="text-[9px] text-gray-400 font-normal normal-case">(Indicaciones clínicas)</span>
+                                </label>
+                                <select id="selectSecret" onchange="insertSecret()" class="bg-white border border-forest/20 text-forest text-[10px] font-bold px-2 py-1 rounded-lg focus:outline-none focus:border-forest shadow-sm">
+                                    <option value="">👵 Recetar Secreto...</option>
+                                    <option value="🍵 Infusión Relajante de Melisa: Preparar infusión con 3 hojas frescas de melisa en agua caliente a 80°C por 5 min. Tomar antes de dormir para calmar el cortisol.">🍵 Melisa para Ansiedad</option>
+                                    <option value="🩹 Compresa de Árnica y Manzanilla: Aplicar compresas tibias de infusión concentrada de árnica en la zona lumbar inflamada por 15 min.">🩹 Árnica para Lumbalgia</option>
+                                    <option value="🥑 Té de Canela y Manzana: Consumir una taza a media tarde para bloquear antojos de carbohidratos y estabilizar glicemia.">🥑 Canela para Glicemia</option>
+                                    <option value="🌿 Cataplasma de Arcilla y Jengibre: Aplicar sobre la articulación afectada por 20 minutos para aliviar el dolor muscular severo.">🌿 Cataplasma Antidolor</option>
+                                </select>
+                            </div>
+                            <textarea id="soapP" class="w-full bg-white border border-gray-200 rounded-xl p-3 text-xs focus:border-forest focus:outline-none h-24 resize-none font-medium text-slateDark">Terapia física manual y de compresión en erectores. Elongación activa e incorporación de pausas activas cada 2 horas de oficina. Indicar infusiones de melisa y adaptógenos naturales bajo prescripción.</textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE ACCIONES AVANZADAS -->
+                <div class="pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <p class="text-[10px] text-gray-400 max-w-sm font-medium">
+                            ⚠️ Al guardar esta sesión, la ficha clínica SOAP de LAWENMOLL se encriptará bajo la Ley de Derechos y Deberes del Paciente chilena.
+                        </p>
+                        <p class="text-[9px] text-forest font-bold">
+                            <i class="fa-solid fa-mobile-screen-button"></i> Teléfono del Paciente: <span id="patientPhone">+56912345678</span>
+                        </p>
+                    </div>
+                    
+                    <div class="flex space-x-2 w-full sm:w-auto">
+                        <!-- BOTÓN DE WHATSAPP INTEGRADO -->
+                        <button onclick="sendPrescriptionWhatsApp()" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Enviar por WhatsApp</span>
+                        </button>
+                        
+                        <!-- BOTÓN DE GUARDADO SEGURO -->
+                        <button onclick="saveClinicalRecord()" class="w-full sm:w-auto bg-forest hover:bg-forest/90 text-white font-bold py-3 px-5 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Guardar Ficha</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-4 text-center text-xs text-gray-400 mt-auto">
+        © 2026 LAWENMOLL Chile. Gestión Clínica Profesional Protegida.
+    </footer>
+
+    <!-- INTERACTIVIDAD -->
+    <script>
+        let activePatientPhone = "+56912345678";
+        
+        function selectPatient(name, imc, imcCat, reason, chronic, timeCommit, dateTime, type, age, mental, gym, phone) {
+            document.getElementById('patientName').innerText = name + " (" + age + " años)";
+            document.getElementById('patientIMC').innerText = imc;
+            document.getElementById('patientIMCCat').innerText = imcCat;
+            document.getElementById('patientReason').innerText = "Motivo de consulta: " + reason;
+            
+            document.getElementById('patientChronic').innerText = chronic;
+            document.getElementById('patientDateTime').innerText = dateTime;
+            document.getElementById('patientType').innerText = type;
+            document.getElementById('patientMental').innerText = mental;
+            document.getElementById('patientGym').innerText = gym;
+            document.getElementById('patientTimeCommit').innerText = timeCommit;
+            document.getElementById('patientPhone').innerText = phone;
+            
+            activePatientPhone = phone;
+
+            if (chronic === "No") {
+                document.getElementById('patientChronic').className = "text-xs font-bold text-green-600";
+            } else {
+                document.getElementById('patientChronic').className = "text-xs font-bold text-red-600";
+            }
+
+            if (name === "Pedro Jara") {
+                document.getElementById('soapS').value = "Paciente masculino de 24 años refiere dolor agudo en el tobillo externo derecho tras torcedura jugando fútbol. Dolor 5/10 EVA.";
+                document.getElementById('soapO').value = "Edema leve en maleolo externo derecho. Dolor a la palpación sobre ligamento peroneoastragalino anterior. Cajón anterior negativo.";
+                document.getElementById('soapA').value = "Esguince de tobillo derecho grado 1, etapa aguda.";
+                document.getElementById('soapP').value = "Reposo relativo y compresión por 48 horas. Se recomiendan ejercicios de movilidad pasiva sin impacto y pauta herbolaria express de 10 min.";
+            } else {
+                document.getElementById('soapS').value = "Paciente de 30 años refiere dolor sordo en zona lumbar baja (6/10 EVA) agravado por sedentarismo prolongado de oficina. Menciona fatiga relacionada con su diagnóstico de hipotiroidismo.";
+                document.getElementById('soapO').value = "Contractura severa de erectores espinales a nivel L4-L5. Limitación en la flexión lumbar. Rangos de movilidad articular de cadera normales. Presión arterial controlada.";
+                document.getElementById('soapA').value = "Síndrome doloroso lumbar mecánico, agravado por sedentarismo laboral (IMC: 26.0). Hipertensión e hipotiroidismo de base estables.";
+                document.getElementById('soapP').value = "Terapia física manual y de compresión en erectores. Elongación activa e incorporación de pausas activas cada 2 horas de oficina. Indicar infusiones de melisa y adaptógenos naturales bajo prescripción.";
+            }
+
+            // Cambiar clase activa en la lista
+            event.currentTarget.parentElement.querySelectorAll('button').forEach(btn => {
+                btn.className = "w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white";
+            });
+            event.currentTarget.className = "w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm";
+        }
+
+        
+        function insertSecret() {
+            const select = document.getElementById('selectSecret');
+            const secretVal = select.value;
+            if (secretVal) {
+                const textarea = document.getElementById('soapP');
+                // Append the secret to the plan text
+                if (textarea.value.trim() === "") {
+                    textarea.value = "• Recomendación tradicional: " + secretVal;
+                } else {
+                    textarea.value += "\n\n• Recomendación tradicional: " + secretVal;
+                }
+                select.value = ""; // Reset dropdown
+            }
+        }
+
+        function saveClinicalRecord() {
+            const name = document.getElementById('patientName').innerText;
+            alert('¡Ficha Guardada con Éxito!\nLa ficha clínica de ' + name + ' ha sido encriptada y resguardada de forma segura.');
+        }
+
+        function sendPrescriptionWhatsApp() {
+            const name = document.getElementById('patientName').innerText;
+            const phone = activePatientPhone;
+            const plan = document.getElementById('soapP').value;
+
+            const textMsg = `*🌿 RECETA DIGITAL - LAWENMOLL*\n\n` +
+                            `Hola, se ha generado tu pauta de tratamiento en LAWENMOLL:\n` +
+                            `• *Paciente:* ${name}\n\n` +
+                            `*📍 INDICACIONES MÉDICAS:*\n` +
+                            `"${plan}"\n\n` +
+                            `Presenta tu código en tu App para canjear tus descuentos de restaurantes y pases SportLife libres.`;
+
+            const encodedMsg = encodeURIComponent(textMsg);
+            
+            alert(`💬 Redirigiendo a WhatsApp Web para enviar pauta médica a ${name} (${phone})...\n\n` +
+                  `Mensaje a enviar:\n----------------------------------\n` + textMsg);
+            
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`, '_blank');
+        }
+    </script>
+</body>
+</html>

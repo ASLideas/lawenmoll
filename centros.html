@@ -1,0 +1,1272 @@
+centros.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAWENMOLL - Directorio de Establecimientos B2B &amp; Ciberseguridad</title>
+    <!-- Tailwind CSS para diseño moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF8F5',
+                        forest: '#52796F',
+                        sage: '#84A59D',
+                        slateDark: '#2F3E46',
+                        accent: '#F28482'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet para el Mapa Real -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FAF8F5;
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+\1
+    <!-- MODAL DE REGISTRO B2B CON CIENTES Y CIBERSEGURIDAD (LEY N° 21.663) -->
+    <div id="b2bRegisterModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark/60 backdrop-blur-sm animate-fadeIn">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden">
+            <!-- Cabecera del Modal -->
+            <div class="bg-forest text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-xl text-accent"></i>
+                    <h3 class="font-bold text-sm uppercase tracking-wider">Afiliación B2B Cibersegura</h3>
+                </div>
+                <button onclick="closeB2BRegisterModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Contenido del Modal -->
+            <div class="p-6 overflow-y-auto space-y-4 font-sans text-xs text-gray-600 leading-relaxed">
+                
+                <!-- PASO 1: FORMULARIO Y ACUERDO DE CIBERSEGURIDAD B2B -->
+                <div id="b2bStepForm" class="space-y-4">
+                    <div class="text-center">
+                        <span class="text-2xl">🏢</span>
+                        <h4 class="font-extrabold text-sm text-slateDark mt-1">Registrar mi Establecimiento</h4>
+                        <p class="text-[10px] text-gray-400">Únete a la red y recibe derivaciones de pacientes de forma geolocalizada.</p>
+                    </div>
+
+                    <div class="bg-forest/5 border border-forest/15 rounded-2xl p-3.5 flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] font-bold text-forest uppercase tracking-wider">Membresía SaaS Comercial</span>
+                            <h5 class="text-xs font-black text-slateDark mt-0.5">Plan Establecimientos</h5>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-base font-black text-forest">$49 USD<span class="text-[10px] font-normal text-gray-400">/mes</span></span>
+                            <p class="text-[9px] text-gray-400 font-semibold font-sans">~ $47.530 CLP al mes</p>
+                        </div>
+                    </div>
+
+                    <!-- Campos de Formulario -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre Comercial</label>
+                            <input type="text" id="b2bName" placeholder="Ej: Gimnasio SportLife Sucursal" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Tipo de Local</label>
+                            <select id="b2bType" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                                <option value="clínica">Centro de Salud / Clínica Holística</option>
+                                <option value="restaurante">Restaurante / Cafetería Saludable</option>
+                                <option value="gym">Gimnasio / Escuela de Yoga o Pilates</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">RUT Comercial (Identificación)</label>
+                            <input type="text" id="b2bRut" placeholder="Ej: 76.543.210-K" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Dirección del Establecimiento</label>
+                            <input type="text" id="b2bAddress" placeholder="Ej: Av. Providencia 1240, Santiago" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
+                    </div>
+
+                    <!-- Acuerdo de Ciberseguridad B2B (Ley N° 21.663) -->
+                    <div class="bg-slateDark text-white p-4 rounded-2xl space-y-2.5 border border-gray-800">
+                        <span class="text-[9px] uppercase font-bold text-accent tracking-wider flex items-center">
+                            <i class="fa-solid fa-user-shield mr-1.5 text-white"></i> ACUERDO DE SEGURIDAD B2B (LEY N° 21.663)
+                        </span>
+                        <p class="text-[10px] text-gray-300 leading-relaxed font-semibold">
+                            Al registrar tu local, acuerdas cumplir con las siguientes medidas de seguridad para proteger los datos médicos y de reserva de nuestros usuarios:
+                        </p>
+                        <div class="space-y-1.5 text-[9px] text-gray-400 font-medium">
+                            <p><i class="fa-solid fa-circle-check text-accent mr-1"></i> <strong>Sincronización Encriptada:</strong> Los planes nutricionales o deportivos de los usuarios de LAWENMOLL se sincronizarán mediante cifrado SSL/TLS de 256 bits.</p>
+                            <p><i class="fa-solid fa-circle-check text-accent mr-1"></i> <strong>Custodia Segura de Fichas:</strong> Queda terminantemente prohibido almacenar externamente o exportar datos sensibles de pacientes sin previo consentimiento.</p>
+                            <p><i class="fa-solid fa-circle-check text-accent mr-1"></i> <strong>Reporte de Incidentes:</strong> Notificación inmediata de cualquier vulnerabilidad en el sistema en conformidad con la Agencia Nacional de Ciberseguridad (ANCI).</p>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox Obligatorio -->
+                    <div class="flex items-start space-x-2 bg-gray-50 p-3 rounded-xl border border-gray-200 text-left">
+                        <input type="checkbox" id="b2bAgreeTerms" onchange="toggleB2BPayButton()" class="mt-0.5 accent-forest cursor-pointer h-4 w-4 flex-shrink-0">
+                        <label for="b2bAgreeTerms" class="text-[10px] text-gray-500 leading-normal font-semibold cursor-pointer select-none">
+                            Consiento el tratamiento de mis datos de facturación comercial y acepto el **Acuerdo de Ciberseguridad B2B y Sincronización Segura** en conformidad con la Ley N° 21.663 de Chile.
+                        </label>
+                    </div>
+
+                    <!-- Botón de Acción Paso 1 -->
+                    <button id="btnProceedToPay" onclick="proceedToB2BCheckout()" class="w-full bg-forest text-white font-extrabold py-3.5 rounded-2xl shadow-md transition text-xs flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed" disabled>
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span>Proceder al Pago Seguro 💳</span>
+                    </button>
+                </div>
+
+                <!-- PASO 2: CHECKOUT WEBPAY / FINTOC SIMULADO -->
+                <div id="b2bStepCheckout" class="space-y-4 hidden animate-fadeIn">
+                    <div class="text-center">
+                        <span class="text-2xl">💳</span>
+                        <h4 class="font-extrabold text-sm text-slateDark mt-1">Terminal de Pago B2B</h4>
+                        <p class="text-[10px] text-gray-400">Transacción cifrada y protegida mediante Webpay Plus</p>
+                    </div>
+
+                    <!-- Detalles del Cobro -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Establecimiento</span>
+                            <h5 id="checkoutB2BName" class="text-xs font-extrabold text-slateDark">Establecimiento Registrado</h5>
+                            <span class="text-[8px] bg-forest/10 text-forest px-2 py-0.5 rounded-full font-bold mt-1 inline-block">SaaS Establecimientos</span>
+                        </div>
+                        <div class="text-right border-l border-gray-200 pl-4">
+                            <span class="text-[10px] text-gray-400 font-bold uppercase">Total a Pagar</span>
+                            <div class="text-lg font-black text-forest mt-0.5">$47.530 CLP</div>
+                            <span class="text-[8px] text-gray-400 font-bold">Cobro Recurrente Mensual</span>
+                        </div>
+                    </div>
+
+                    <!-- Pestañas de Pago -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="switchB2BPayment('webpay', this)" id="b2bTabWebpay" class="border border-forest bg-forest/5 text-forest font-bold py-2 rounded-xl text-center text-xs focus:outline-none transition">
+                            <i class="fa-solid fa-credit-card mr-1"></i> Webpay Plus
+                        </button>
+                        <button onclick="switchB2BPayment('fintoc', this)" id="b2bTabFintoc" class="border border-gray-200 text-gray-400 hover:border-forest/50 hover:text-forest py-2 rounded-xl text-center text-xs focus:outline-none transition bg-white">
+                            <i class="fa-solid fa-building-columns mr-1"></i> Fintoc
+                        </button>
+                    </div>
+
+                    <!-- Panel Webpay -->
+                    <div id="b2bPanelWebpay" class="space-y-3 p-3 bg-gray-50 rounded-xl border border-gray-150">
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre del Titular de la Tarjeta</label>
+                            <input type="text" id="b2bCardName" placeholder="Ej: Francisco Mora S." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Número de Tarjeta</label>
+                            <div class="relative">
+                                <input type="text" id="b2bCardNum" placeholder="•••• •••• •••• ••••" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm pl-8">
+                                <i class="fa-solid fa-credit-card absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha Expiración</label>
+                                <input type="text" id="b2bCardExpiry" placeholder="MM/AA" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-center">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">CVV (Código Seguridad)</label>
+                                <input type="text" id="b2bCardCvv" placeholder="123" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Fintoc (Oculto) -->
+                    <div id="b2bPanelFintoc" class="hidden p-4 bg-gray-50 rounded-xl border border-gray-150 text-center space-y-3.5">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600">
+                            <i class="fa-solid fa-building-columns text-xl"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-slateDark">Transferencia Bancaria Directa vía Fintoc</h5>
+                            <p class="text-[9px] text-gray-400 mt-1 max-w-xs mx-auto leading-relaxed">Conéctate de forma segura a tu cuenta bancaria (BancoEstado, Santander, BCI, Chile) para autorizar el cobro recurrente automático sin comisiones.</p>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Confirmar Pago -->
+                    <button id="btnConfirmB2BPayment" onclick="processB2BPayment()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl shadow-md transition text-xs flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Confirmar y Pagar $47.530 CLP 🔒</span>
+                    </button>
+                </div>
+
+                <!-- PASO 3: PAGO EXITOSO / TICKET DIGITAL -->
+                <div id="b2bStepSuccess" class="space-y-4 hidden animate-fadeIn text-center py-4">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                        <i class="fa-solid fa-circle-check text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-bold border border-emerald-200 uppercase tracking-wider">¡Suscripción Activada Exitosamente!</span>
+                        <h4 class="font-extrabold text-sm text-slateDark mt-3" id="successB2BTitle">Establecimiento de la Red LAWENMOLL</h4>
+                        <p class="text-[10px] text-gray-400 max-w-sm mx-auto leading-relaxed">Tu transacción ha sido procesada de forma segura por Transbank. Los datos de tu comercio y el acuerdo de ciberseguridad han sido firmados y guardados de forma encriptada en la base de datos de LAWENMOLL.</p>
+                    </div>
+
+                    <!-- Recibo Digital -->
+                    <div class="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-left text-[10px] space-y-2 max-w-sm mx-auto">
+                        <div class="flex justify-between font-bold text-slateDark border-b border-gray-200 pb-2">
+                            <span>Comprobante de Suscripción</span>
+                            <span class="text-forest">RUT: 76.543.210-K</span>
+                        </div>
+                        <div class="flex justify-between font-semibold text-gray-500">
+                            <span>Plan Contratado:</span>
+                            <span class="text-slateDark font-bold">SaaS Establecimientos</span>
+                        </div>
+                        <div class="flex justify-between font-semibold text-gray-500">
+                            <span>Monto Facturado:</span>
+                            <span class="text-slateDark font-bold">$47.530 CLP / mes</span>
+                        </div>
+                        <div class="flex justify-between font-semibold text-gray-500">
+                            <span>Método de Pago:</span>
+                            <span class="text-slateDark font-bold" id="successB2BMethod">Webpay Plus</span>
+                        </div>
+                        <div class="flex justify-between font-semibold text-gray-500">
+                            <span>N° Autorización Flow:</span>
+                            <span class="text-slateDark font-mono font-bold" id="successB2BAuth">FLOW-8492048-TX</span>
+                        </div>
+                        <div class="flex justify-between font-semibold text-gray-500">
+                            <span>Normativa Ciberseguridad:</span>
+                            <span class="text-forest font-bold"><i class="fa-solid fa-shield-halved"></i> Ley 21.663 Chile</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 p-3 rounded-2xl border border-yellow-100 text-[10px] text-yellow-800 leading-relaxed font-semibold max-w-sm mx-auto">
+                        <i class="fa-solid fa-circle-exclamation mr-1 text-accent"></i> <strong>Siguiente paso obligatorio:</strong> Nuestro equipo de control de calidad validará tus títulos comerciales y patentes en un plazo menor a 24 horas hábiles. Tu geolocalización pública ya está configurada en la red provisionalmente.
+                    </div>
+
+                    <button onclick="closeB2BRegisterModal()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center space-x-1.5 uppercase tracking-wider max-w-sm mx-auto">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Ir a mi Panel de Establecimiento</span>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CABECERA -->
+    <header class="bg-white border-b border-gray-100 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-2">
+                <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                <span class="font-bold text-lg md:text-xl tracking-wider text-forest">LAWENMOLL</span>
+                <span class="text-[8px] md:text-[9px] bg-accent/25 text-slateDark px-2 py-0.5 rounded-full font-bold font-sans">Ecosistema B2B 🌟</span>
+            </div>
+            <div class="flex flex-wrap justify-center gap-1.5 md:gap-2">
+                <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-bold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>Secretos<span class="hidden sm:inline"> de la Abuela</span> 👵</span>
+                </a>
+                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-semibold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <span>Volver<span class="hidden sm:inline"> al Test</span></span>
+                </a>
+                <a href="terapeuta.html" class="text-[9px] md:text-xs bg-forest hover:bg-forest/90 text-white font-bold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span><span class="hidden sm:inline">Portal </span>Especialistas 💼</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto w-full p-4 lg:p-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 font-sans">
+        
+        <!-- COLUMNA IZQUIERDA: MENÚ DE NAVEGACIÓN Y EXPLICACIÓN DEL MODELO B2B -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- Selector de Módulos (Tabs) -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
+                <h3 class="text-sm font-bold text-forest uppercase tracking-wider mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-magnifying-glass-location"></i>
+                    <span>Buscar Servicios</span>
+                </h3>
+                
+                <div class="space-y-2">
+                    <button onclick="switchTab('centros', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm">
+                        <span class="text-2xl">🏢</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Centros de Salud Natural</h4>
+                            <p class="text-[9px] text-gray-500 font-medium">Clínicas y boxes físicos asociados</p>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab('restaurantes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">🥑</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Restaurantes Saludables</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Menús interactivos y reservas</p>
+                        </div>
+                    </button>
+
+                    <button onclick="switchTab('gimnasios', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">💪</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Gimnasios y Yoga</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Instalaciones de movimiento y fuerza</p>
+                        </div>
+                    </button>
+
+                    <!-- NUEVO TAB: FARMACIAS NATURALES -->
+                    <button id="tab-farmacias" onclick="switchTab('farmacias', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">🌿</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Farmacias Naturales</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Recetarios magistrales y herbolaria</p>
+                        </div>
+                    </button>
+
+                    <!-- NUEVO TAB: PROFESIONALES INDEPENDIENTES -->
+                    <button id="tab-independientes" onclick="switchTab('independientes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">🧑‍⚕️</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Profesionales Independientes</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Terapeutas y Psicólogos Clínicos (Casa/Oficina)</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- EXPLICACIÓN DEL MODELO DE CLIENTES (SaaS B2B para Clínicas, GYM y Restaurantes) -->
+            <div class="bg-slateDark text-white rounded-3xl p-6 shadow-md border border-gray-800 space-y-4">
+                <div class="flex items-center space-x-2.5">
+                    <span class="text-2xl">💼</span>
+                    <div>
+                        <h3 class="font-extrabold text-xs uppercase tracking-wider text-accent">Nuestros Clientes B2B</h3>
+                        <p class="text-[9px] text-gray-400">Cómo LAWENMOLL rentabiliza el ecosistema</p>
+                    </div>
+                </div>
+
+                <p class="text-[11px] text-gray-300 leading-relaxed font-semibold">
+                    En LAWENMOLL los establecimientos (gimnasios, centros holísticos y restaurantes orgánicos) son nuestros <strong>clientes de pago</strong> (SaaS B2B).
+                </p>
+
+                <!-- Tarjeta de Planes Comercializables -->
+                <div class="space-y-2.5 pt-2">
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] font-bold text-accent uppercase">SaaS Establecimientos</span>
+                            <span class="text-xs font-black text-white font-sans">$49 USD/mes</span>
+                        </div>
+                        <p class="text-[9px] text-gray-400 mt-1 leading-relaxed font-medium">
+                            Aparece en la geolocalización, sincroniza menús con el Test del paciente y recibe derivaciones automáticas.
+                        </p>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] font-bold text-white uppercase">SaaS Especialistas</span>
+                            <span class="text-xs font-black text-white font-sans">$19 USD/mes</span>
+                        </div>
+                        <p class="text-[9px] text-gray-400 mt-1 leading-relaxed font-medium">
+                            Vitrina virtual de agendamiento, telemedicina integrada y Ficha Clínica Digital encriptada SOAP.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- INCENTIVO EXCLUSIVO DEL 5% DE DESCUENTO -->
+                <div class="bg-accent/20 border border-accent/30 rounded-2xl p-4 text-left space-y-2">
+                    <h4 class="text-xs font-bold text-accent uppercase tracking-wider flex items-center">
+                        <i class="fa-solid fa-gift mr-1.5 text-white"></i> Descuento del 5% en Membresía
+                    </h4>
+                    <p class="text-[10px] text-gray-200 leading-relaxed font-medium">
+                        Si tu centro médico, centro natural o gimnasio genera y valida cupones de descuento para motivar al paciente de LAWENMOLL, **te descontamos de forma automática un 5% del valor de tu suscripción**. ¡Ayudamos a llenar tus cupos mientras cuidas tu bolsillo!
+                    </p>
+                </div>
+
+                <button onclick="openB2BRegisterModal()" class="w-full bg-accent hover:opacity-95 text-white font-bold py-3 rounded-2xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                    <i class="fa-solid fa-store"></i>
+                    <span>Registrar mi Establecimiento</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: DIRECTORIO INTERACTIVO DINÁMICO -->
+        <div class="lg:col-span-8">
+            
+            <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
+            <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Establecimiento Clínico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                        <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🏢 Centro Holístico "Lawen Ko"</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Providencia 1240, Providencia, Santiago</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-clock mr-1"></i> Abierto</span>
+                        <span class="text-[10px] text-gray-400">Lun a Sáb: 08:30 - 20:30 hrs</span>
+                    </div>
+                </div>
+
+                <!-- Foto de Portada Real del Centro Clínico -->
+                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Centro Holístico Lawen Ko">
+                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
+                        <i class="fa-solid fa-camera mr-1"></i> Vista de Recepción e Instalaciones
+                    </div>
+                </div>
+
+                <!-- Profesionales, Farmacias y Convenios de Turno -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Profesionales de Turno -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-2.5"><i class="fa-solid fa-user-doctor text-forest mr-1"></i> Profesionales de Turno</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-3 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden border border-gray-100 flex-shrink-0">
+                                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover" alt="Dra. Eliana Ruiz">
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slateDark">Dra. Eliana Ruiz</h4>
+                                        <p class="text-[8px] text-gray-400">Médico Integrativa y Fitoterapeuta</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden border border-gray-100 flex-shrink-0">
+                                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover" alt="Klgo. Carlos Mendoza">
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slateDark">Klgo. Carlos Mendoza</h4>
+                                        <p class="text-[8px] text-gray-400">Kinesiólogo Integrativo y Acupuntor</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Farmacias del Ecosistema (Redireccionada con Botón Prominente) -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-2.5"><i class="fa-solid fa-prescription-bottle-medical text-forest mr-1"></i> Farmacias del Ecosistema</h3>
+                            <p class="text-[10px] text-gray-600 leading-relaxed font-semibold mb-3">
+                                Contamos con farmacias herbolarias y mapuches de recetarios tradicionales y fitoterapia con resolución sanitaria del ISP.
+                            </p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2.5 bg-white p-2.5 rounded-xl shadow-sm border border-gray-100">
+                                    <span class="text-lg">🌿</span>
+                                    <span class="text-[11px] font-bold text-slateDark">Farmacia "El Canelo"</span>
+                                </div>
+                                <div class="flex items-center space-x-2.5 bg-white p-2.5 rounded-xl shadow-sm border border-gray-100">
+                                    <span class="text-lg">👵</span>
+                                    <span class="text-[11px] font-bold text-slateDark">Farmacia Mapuche "Makewe"</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="switchTab('farmacias', document.getElementById('tab-farmacias'))" class="w-full bg-forest hover:bg-forest/95 text-white font-bold py-2.5 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                            <i class="fa-solid fa-leaf"></i>
+                            <span>Ver Recetarios y Pedir Despacho</span>
+                        </button>
+                    </div>
+
+                    <!-- Convenios y Reembolsos -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-2.5"><i class="fa-solid fa-shield-halved text-forest mr-1"></i> Convenios y Reembolsos</h3>
+                            <p class="text-[10px] text-gray-600 leading-relaxed font-medium mb-3">
+                                Este establecimiento cuenta con convenios de reembolso automático para consulta médica y kinesiología:
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mb-2">
+                                <span class="text-[9px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full font-bold">Fonasa MLE</span>
+                                <span class="text-[9px] bg-red-50 text-red-700 px-2 py-0.5 rounded-full font-bold">Isapres (Reembolso)</span>
+                                <span class="text-[9px] bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded-full font-bold">Colmena / CruzBlanca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulo de Agendamiento Clínico -->
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 space-y-3">
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-1 flex items-center space-x-1">
+                        <i class="fa-solid fa-calendar-check text-forest"></i>
+                        <span>Módulo de Agendamiento Clínico (Agendar Hora)</span>
+                    </h3>
+                    <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                        Selecciona el profesional, la fecha y hora de tu preferencia. El sistema te alertará automáticamente en tu celular 24 horas antes de la consulta.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 mb-3">
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Elegir Especialista</label>
+                            <select id="clinicalSpecialist" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                                <option value="Dra. Eliana Ruiz">Dra. Eliana Ruiz (Médico Integrativa)</option>
+                                <option value="Klgo. Carlos Mendoza">Klgo. Carlos Mendoza (Kinesiólogo)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Fecha de Consulta</label>
+                            <input type="date" id="clinicalDate" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Hora Disponible</label>
+                            <select id="clinicalTime" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                                <option value="09:00">09:00 hrs</option>
+                                <option value="10:30">10:30 hrs</option>
+                                <option value="12:00">12:00 hrs</option>
+                                <option value="15:00">15:00 hrs</option>
+                                <option value="16:30">16:30 hrs</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
+                            <input type="text" id="clinicalPhone" value="+569 " class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                    </div>
+
+                    <!-- Consentimiento de Ciberseguridad para Horas Clínicas -->
+                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left">
+                        <input type="checkbox" id="clinicalAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
+                        <label for="clinicalAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
+                            Consiento el tratamiento seguro de mis datos biométricos e información clínica bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
+                        </label>
+                    </div>
+
+                    <button onclick="bookClinicalAppointment()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Confirmar y Agendar Hora Clínica</span>
+                    </button>
+                </div>
+
+                <!-- Mapa y Cómo Llegar -->
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500"><i class="fa-solid fa-map mr-1"></i> Geolocalización e Indicaciones</h3>
+                        <button onclick="calculateRoute()" class="bg-forest hover:bg-forest/95 text-white font-bold text-[10px] px-3 py-1.5 rounded-xl shadow-sm transition flex items-center space-x-1">
+                            <i class="fa-solid fa-route"></i>
+                            <span>Trazar Ruta en Tiempo Real</span>
+                        </button>
+                    </div>
+                    <div id="routeExplain" class="hidden bg-forest/5 p-3 rounded-xl border border-forest/20 text-[10px] text-gray-600 leading-relaxed animate-fadeIn">
+                        <p>📍 <strong>Indicaciones de cómo llegar:</strong> Camina hacia la estación de Metro Manuel Montt (Línea 1). Toma el tren en dirección Los Dominicos y bájate en Metro Pedro de Valdivia. Sal al norte, camina 2 cuadras por Av. Providencia hasta el número 1240. ¡El Centro Holístico está en el segundo piso!</p>
+                    </div>
+                    <div id="centerMap" class="w-full h-48 rounded-2xl border border-gray-200 z-10 shadow-inner"></div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA DE FARMACIAS NATURALES (NUEVO) -->
+            <div id="tabPanel-farmacias" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio Herbolario y Homeopatía</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                        <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🌿 Farmacias Naturales y Magistrales</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Ecosistema de preparados tradicionales y herbolaria certificada en Chile.</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-prescription-bottle-medical mr-1"></i> Despacho Nacional</span>
+                        <span class="text-[10px] text-gray-400">Convenios de reembolso Fonasa e Isapre</span>
+                    </div>
+                </div>
+
+                <!-- Foto de Portada de Farmacia Natural -->
+                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Farmacia Natural de LAWENMOLL">
+                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
+                        <i class="fa-solid fa-camera mr-1"></i> Laboratorio y Recetario de Tinturas Nativas
+                    </div>
+                </div>
+
+                <!-- Catálogo de Farmacias Socias B2B -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Farmacia El Canelo -->
+                    <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-3xl">🌿</span>
+                                <div>
+                                    <h3 class="font-extrabold text-sm text-slateDark">Farmacia Herbolaria "El Canelo"</h3>
+                                    <p class="text-[9px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full inline-block">Sustentable &amp; Orgánica</p>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">
+                                Especialistas en tinturas madre, adaptógenos reguladores de cortisol, aceites esenciales puros y fitofármacos tradicionales chilenos.
+                            </p>
+                            <div class="space-y-1.5 pt-1 text-[10px] text-gray-500 font-medium">
+                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> Av. Providencia 1240, Primer piso (Bajo el Centro Lawen Ko)</p>
+                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> +56 2 2843 9201</p>
+                                <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: 20% DCTO en fitoterapéuticos con tu receta digital.</p>
+                            </div>
+                        </div>
+                        <button onclick="selectPharmacyForOrder('canelo')" class="w-full mt-4 bg-forest hover:bg-forest/95 text-white font-bold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
+                            Seleccionar para Pedido
+                        </button>
+                    </div>
+
+                    <!-- Farmacia Mapuche Makewe -->
+                    <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 flex flex-col justify-between shadow-sm">
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-3xl">👵</span>
+                                <div>
+                                    <h3 class="font-extrabold text-sm text-slateDark">Farmacia Mapuche "Makewe"</h3>
+                                    <p class="text-[9px] bg-accent/20 text-accent font-bold px-2 py-0.5 rounded-full inline-block">Medicina Ancestral Mapuche</p>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">
+                                Preparados herbales tradicionales y cosmética natural elaborados de forma sostenible por recolectores y machis en comunidades de la Araucanía.
+                            </p>
+                            <div class="space-y-1.5 pt-1 text-[10px] text-gray-500 font-medium">
+                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> San Francisco 354, Santiago | Despachos nacionales desde Temuco</p>
+                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> +56 9 7482 1059</p>
+                                <p class="text-forest font-bold"><i class="fa-solid fa-truck text-forest mr-1.5"></i> Beneficio: Despacho 100% GRATIS para pacientes crónicos.</p>
+                            </div>
+                        </div>
+                        <button onclick="selectPharmacyForOrder('makewe')" class="w-full mt-4 bg-forest hover:bg-forest/95 text-white font-bold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
+                            Seleccionar para Pedido
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MÓDULO INTERACTIVO DE PEDIDO Y VALIDACIÓN DE RECETA -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 space-y-4">
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-prescription text-forest text-sm"></i>
+                        <span>Módulo de Pedido y Canje de Receta Digital (Ecosistema)</span>
+                    </h3>
+                    <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                        Si tu terapeuta te recetó alguna infusión o extracto natural (como Melisa o Árnica), ingresa tu código de receta, selecciona tu farmacia y envía tu pedido directo por WhatsApp de forma segura.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Código de Receta / Plan</label>
+                            <input type="text" id="pharmaRecipeCode" placeholder="Ej: LW-48392" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm uppercase">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Establecimiento Farmacéutico</label>
+                            <select id="pharmaSelected" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                                <option value="canelo">Farmacia Herbolaria "El Canelo"</option>
+                                <option value="makewe">Farmacia Mapuche "Makewe"</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Seleccionar Preparado / Hierba</label>
+                            <select id="pharmaProduct" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                                <option value="Melisa Ansiedad">Tintura de Melisa (Cortisol / Ansiedad)</option>
+                                <option value="Arnica Lumbalgia">Extracto de Árnica (Dolor Lumbar)</option>
+                                <option value="Canela Glicemia">Té de Canela (Control Glicémico / Peso)</option>
+                                <option value="Boldo Digestión">Extracto de Boldo (Tránsito Lento)</option>
+                                <option value="Herbal Autoguiado">Remedio Herbolario Personalizado v3</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Tu Teléfono Celular</label>
+                            <input type="text" id="pharmaPhone" value="+569 " class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
+                    </div>
+
+                    <!-- Consentimiento de Ciberseguridad -->
+                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left">
+                        <input type="checkbox" id="pharmaAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
+                        <label for="pharmaAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
+                            Consiento el envío encriptado de mi receta y datos de contacto en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
+                        </label>
+                    </div>
+
+                    <button onclick="orderMedicine()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Validar Receta y Enviar por WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 2: RESTAURANTES SALUDABLES -->
+            <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Nutrición Consciente</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                        <h2 class="text-xl font-bold text-forest mt-1.5">🥑 Restaurante "Huerto Orgánico"</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">General Holley 142, Providencia | Teléfono: +56 9 8472 1049</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-accent block">15% Descuento</span>
+                        <span class="text-[10px] text-gray-400">Código: LAWEN-FOOD</span>
+                    </div>
+                </div>
+
+                <!-- Menú Interactivo Sincronizado herbario -->
+                <div>
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-utensils text-forest mr-1"></i> Menú Interactivo con Efecto Medicinal</h3>
+                    <p class="text-[10px] text-gray-400 mb-3 font-semibold">Selecciona un plato para conocer sus ingredientes de origen natural y beneficios para tu salud:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Bowl de Cúrcuma -->
+                        <button onclick="viewDishDetail('cucumaBowl', 'Bowl Antiinflamatorio de Cúrcuma 🥣', 'Ingredientes: Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y aderezo de tahini y limón.', '🌟 Alivio del dolor articular, desinflamación de tejidos y alto contenido de fibra digestiva.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Bowl Cúrcuma">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slateDark">Bowl de Cúrcuma 🥣</h4>
+                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Principal Antiinflamatorio</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-black text-forest">$8.900</span>
+                        </button>
+
+                        <!-- Crema de Hinojo -->
+                        <button onclick="viewDishDetail('hinojoSoup', 'Crema Depurativa de Hinojo 🍵', 'Ingredientes: Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal orgánico.', '🦋 Regulación de la glándula tiroides, eliminación de toxinas y mejora la inflamación abdominal.', 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Crema Hinojo">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slateDark">Crema de Hinojo 🍵</h4>
+                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Sopa Detox &amp; Tiroides</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-black text-forest">$5.400</span>
+                        </button>
+
+                        <!-- Tostadas de Palta -->
+                        <button onclick="viewDishDetail('avocadoToast', 'Tostadas de Palta con Masa Madre 🥑', 'Ingredientes: Pan de masa madre integral tostado, palta madura machacada, semillas de sésamo negro, rabanitos laminados, brotes orgánicos y aceite de oliva prensado en frío.', '🥑 Aporte de grasas saludables de alta calidad, regulación del colesterol LDL y energía de absorción lenta.', 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Tostadas Palta">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slateDark">Tostadas de Palta 🥑</h4>
+                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Snack de Grasas Buenas</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-black text-forest">$5.900</span>
+                        </button>
+
+                        <!-- Jugo Verde -->
+                        <button onclick="viewDishDetail('greenJuice', 'Jugo Verde Energizante Lawen 🍹', 'Ingredientes: Extracción en frío de espinaca orgánica, apio, pepino fresco, manzana verde, menta del huerto y limón sutil.', '🍹 Oxigenación celular, hidratación celular profunda, alcalinización de tejidos y eliminación de metales pesados.', 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Jugo Verde">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slateDark">Jugo Verde Lawen 🍹</h4>
+                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Bebida Detox Energética</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-black text-forest">$3.800</span>
+                        </button>
+                    </div>
+
+                    <!-- Detalle del Plato Seleccionado -->
+                    <div id="dishDetailBox" class="hidden mt-3 bg-forest/5 p-4 rounded-2xl border border-forest/20 animate-fadeIn flex flex-col items-center sm:flex-row sm:items-start sm:space-x-4">
+                        <img id="detailDishImage" src="" class="w-full sm:w-28 sm:h-28 h-40 object-cover rounded-xl mt-1 border border-forest/15 shadow-md flex-shrink-0" alt="Foto del Plato">
+                        <div class="flex-grow mt-2 sm:mt-0 text-left w-full">
+                            <h4 class="font-extrabold text-xs text-forest text-sm" id="detailDishName">Detalle de Plato</h4>
+                            <p class="text-[10px] text-gray-600 mt-1 font-medium leading-relaxed font-sans" id="detailDishIngredients">Ingredientes...</p>
+                            <p class="text-[10px] text-forest font-bold mt-2" id="detailDishMedicinal"><i class="fa-solid fa-leaf"></i> Efecto Medicinal...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reserva de Mesas -->
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-calendar-days text-forest mr-1"></i> Módulo de Reserva de Mesas</h3>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Fecha</label>
+                            <input type="date" id="reserveDate" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Hora</label>
+                            <select id="reserveTime" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                                <option value="12:30">12:30 (Almuerzo)</option>
+                                <option value="13:30">13:30 (Almuerzo)</option>
+                                <option value="14:30">14:30 (Almuerzo)</option>
+                                <option value="19:30">19:30 (Cena)</option>
+                                <option value="20:30">20:30 (Cena)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Personas</label>
+                            <select id="reserveGuests" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                                <option value="1">1 Persona</option>
+                                <option value="2" selected>2 Personas</option>
+                                <option value="4">4 Personas</option>
+                                <option value="6">6 Personas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
+                            <input type="text" id="reservePhone" value="+569 " class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                    </div>
+
+                    
+                    <!-- Consentimiento de Ciberseguridad para Reservas -->
+                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left mb-3">
+                        <input type="checkbox" id="reserveAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
+                        <label for="reserveAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
+                            Consiento la transmisión segura de mis datos de reserva y contacto bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
+                        </label>
+                    </div>
+<button onclick="bookRestaurantTable()" class="w-full bg-forest hover:bg-forest/95 text-white font-bold py-3 rounded-xl text-xs shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Confirmar Reserva de Mesa</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 3: GIMNASIOS Y YOGA -->
+            <div id="tabPanel-gimnasios" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Movimiento Terapéutico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                        <h2 class="text-xl font-bold text-forest mt-1.5">💪 Gimnasio "SportLife Integrativo"</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Vitacura 3568, Vitacura | Redes: @SportlifeIntegrativo</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-heart-pulse"></i> Kinesiología</span>
+                        <span class="text-[10px] text-gray-400">Pase: 3 Días Libres</span>
+                    </div>
+                </div>
+
+                <!-- Carrusel de Instalaciones con fotos y descripción real en CSS -->
+                <div>
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-images text-forest mr-1"></i> Carrusel de Instalaciones</h3>
+                    
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden bg-slateDark border border-gray-100 shadow-inner flex items-center justify-center text-white">
+                        
+                        <!-- Slide 1 (Yoga) -->
+                        <div class="carousel-slide absolute inset-0 transition-opacity duration-500 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop');">
+                            <h4 class="font-bold text-sm text-accent">🧘 Sala de Yoga y Meditación</h4>
+                            <p class="text-[10px] text-gray-300 font-medium">Ambiente climatizado, libre de ruidos y equipado con props terapéuticos.</p>
+                        </div>
+
+                        <!-- Slide 2 (Fuerza) -->
+                        <div class="carousel-slide absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop');">
+                            <h4 class="font-bold text-sm text-accent">🏋️‍♂️ Zona de Fuerza y Rehabilitación</h4>
+                            <p class="text-[10px] text-gray-300 font-medium">Máquinas guiadas ideales para prevenir impactos y fortalecer articulaciones.</p>
+                        </div>
+
+                        <!-- Slide 3 (Pilates) -->
+                        <div class="carousel-slide absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop');">
+                            <h4 class="font-bold text-sm text-accent">🤸 Sala de Pilates Reformer</h4>
+                            <p class="text-[10px] text-gray-300 font-medium">Elongación y control postural asistido por kinesiólogos certificados.</p>
+                        </div>
+
+                        <!-- Botones de Navegación -->
+                        <button onclick="rotateCarousel(-1)" class="absolute left-3 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button onclick="rotateCarousel(1)" class="absolute right-3 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Horarios de Clases -->
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-calendar-check text-forest mr-1"></i> Clases Dirigidas Recomendadas</h3>
+                    <div class="space-y-2">
+                        <div class="bg-white p-3 rounded-xl border border-gray-100 flex justify-between items-center shadow-sm">
+                            <div>
+                                <h4 class="text-xs font-bold text-slateDark">Yoga Restaurativo Postural</h4>
+                                <p class="text-[9px] text-gray-400">Sin saltos ni impactos - Ideal lumbago y sobrepeso</p>
+                            </div>
+                            <span class="text-[10px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">Lun-Mié 18:30</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-gray-100 flex justify-between items-center shadow-sm">
+                            <div>
+                                <h4 class="text-xs font-bold text-slateDark">Acondicionamiento Metabólico Inteligente</h4>
+                                <p class="text-[9px] text-gray-400">Fuerza progresiva supervisada por kinesiólogo</p>
+                            </div>
+                            <span class="text-[10px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">Mar-Jue 09:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 4: PROFESIONALES INDEPENDIENTES -->
+            <div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <span class="text-[9px] bg-accent/20 text-accent px-2.5 py-1 rounded-full font-bold uppercase tracking-wider font-sans">Profesionales Libres</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                        <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🧑‍⚕️ Profesionales de Consulta Privada o Domicilio</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Terapeutas y Psicólogos de la Salud que atienden de forma autónoma.</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-bold text-red-600 block"><i class="fa-solid fa-ban"></i> Restricción Activa</span>
+                        <span class="text-[9px] text-gray-400">Ver Lógica de Precios</span>
+                    </div>
+                </div>
+
+                <!-- Lista de Profesionales Independientes -->
+                <div class="space-y-4">
+                    <!-- Profesional 1: Maite Soler -->
+                    <div class="p-4 border border-gray-100 rounded-2xl shadow-sm bg-white hover:border-forest/40 transition space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border border-sage/30 shadow-sm flex-shrink-0">
+                                    <img src="https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover" alt="Maite Soler">
+                                </div>
+                                <div>
+                                    <h3 class="font-extrabold text-xs text-slateDark">Naturópata Maite Soler</h3>
+                                    <p class="text-[9px] text-gray-500 font-semibold">Consejería Herbal Pura y Fitoterapia</p>
+                                    <p class="text-[8px] text-forest font-bold"><i class="fa-solid fa-house"></i> Domicilio / Consulta Online</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-black text-forest block">$25.000 / sesión</span>
+                                <span class="text-[8px] text-gray-400 font-medium">Tarifa Autónoma</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Lógica de Bloqueo Clínico si atiende en GYM/Centro -->
+                        <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-100 text-[9px] text-yellow-800 leading-relaxed font-semibold">
+                            <i class="fa-solid fa-triangle-exclamation text-accent mr-1"></i> <strong>Regla de Bloqueo por Establecimiento:</strong> Esta profesional atiende bajo tarifa privada. Por contrato con LAWENMOLL, sus horas independientes quedan **Bloqueadas Automáticamente** si agenda para atender dentro de un Gimnasio o Centro de Salud, ya que esos espacios requieren la Tarifa de Centro del 1.5 UF por mayor coste operativo.
+                        </div>
+                    </div>
+
+                    <!-- Profesional 2: Ps. Tomás Araya -->
+                    <div class="p-4 border border-gray-100 rounded-2xl shadow-sm bg-white hover:border-forest/40 transition space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border border-sage/30 shadow-sm flex-shrink-0">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover" alt="Tomás Araya">
+                                </div>
+                                <div>
+                                    <h3 class="font-extrabold text-xs text-slateDark">Ps. Tomás Araya</h3>
+                                    <p class="text-[9px] text-gray-500 font-semibold">Psicólogo Clínico Integrativo y Neurodivergencias (TDAH/TEA)</p>
+                                    <p class="text-[8px] text-forest font-bold"><i class="fa-solid fa-door-open"></i> Consulta Privada / Sala Virtual</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-black text-forest block">$35.000 / sesión</span>
+                                <span class="text-[8px] text-gray-400 font-medium">Tarifa Autónoma</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-100 text-[9px] text-yellow-800 leading-relaxed font-semibold">
+                            <i class="fa-solid fa-triangle-exclamation text-accent mr-1"></i> <strong>Regla de Bloqueo por Establecimiento:</strong> Si el profesional agenda una consulta presencial en la red de clínicas asociadas de Providencia, su tarifa de $35.000 se bloquea para el paciente y se aplica la Tarifa Institucional reajustada.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-4 text-center text-xs text-gray-400 mt-auto">
+        © 2026 LAWENMOLL Chile. Directorio y Ecosistema de Salud Protegido.
+    </footer>
+
+    <!-- INTERACTIVIDAD -->
+    <script>
+        let currentTab = 'centros';
+        let currentCarouselIndex = 0;
+        let map;
+        let marker;
+
+        // Detectar de qué pestaña viene (tab parameter en la URL)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+            if (tabParam) {
+                switchTab(tabParam, document.getElementById(`tab-${tabParam}`));
+            } else {
+                initCenterMap();
+            }
+        };
+
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(`tabPanel-${tab}`).classList.add('active');
+
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.className = "tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white";
+            });
+            
+            if (btn) {
+                btn.className = "tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm";
+            } else {
+                const fallbackBtn = document.getElementById(`tab-${tab}`);
+                if (fallbackBtn) fallbackBtn.className = "tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm";
+            }
+
+            currentTab = tab;
+
+            if (tab === 'centros') {
+                setTimeout(initCenterMap, 100);
+            }
+        }
+
+        function initCenterMap() {
+            if (!map) {
+                map = L.map('centerMap').setView([-33.4285, -70.6125], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+
+                marker = L.marker([-33.4285, -70.6125]).addTo(map)
+                    .bindPopup('<b>Centro Holístico "Lawen Ko"</b><br>Av. Providencia 1240')
+                    .openPopup();
+            } else {
+                map.invalidateSize();
+            }
+        }
+
+        function calculateRoute() {
+            document.getElementById('routeExplain').classList.remove('hidden');
+            if (map) {
+                L.marker([-33.4350, -70.6190]).addTo(map)
+                    .bindPopup('<b>Tu ubicación estimada</b>')
+                    .openPopup();
+                
+                const latlngs = [
+                    [-33.4350, -70.6190],
+                    [-33.4320, -70.6150],
+                    [-33.4285, -70.6125]
+                ];
+                L.polyline(latlngs, {color: '#F28482', weight: 4}).addTo(map);
+                map.setView([-33.4310, -70.6150], 14);
+            }
+        }
+
+        // LÓGICA DE CARRUSEL DE FOTOS (GIMNASIO)
+        function rotateCarousel(dir) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides[currentCarouselIndex].classList.add('opacity-0', 'pointer-events-none');
+            slides[currentCarouselIndex].classList.remove('opacity-100');
+
+            currentCarouselIndex += dir;
+            if (currentCarouselIndex >= slides.length) {
+                currentCarouselIndex = 0;
+            } else if (currentCarouselIndex < 0) {
+                currentCarouselIndex = slides.length - 1;
+            }
+
+            slides[currentCarouselIndex].classList.remove('opacity-0', 'pointer-events-none');
+            slides[currentCarouselIndex].classList.add('opacity-100');
+        }
+
+        // MENÚ INTERACTIVO DE PLATOS
+        function viewDishDetail(id, name, ingredients, medicinal, imageUrl) {
+            document.getElementById('dishDetailBox').classList.remove('hidden');
+            document.getElementById('detailDishName').innerText = name;
+            document.getElementById('detailDishIngredients').innerText = ingredients;
+            document.getElementById('detailDishMedicinal').innerHTML = `<i class='fa-solid fa-leaf text-forest'></i> <strong>Efecto Medicinal:</strong> ` + medicinal;
+            
+            const imgEl = document.getElementById('detailDishImage');
+            if (imageUrl) {
+                imgEl.src = imageUrl;
+                imgEl.classList.remove('hidden');
+            } else {
+                imgEl.classList.add('hidden');
+            }
+        }
+
+        // RESERVA DE MESA
+        
+        // --- INTERACTIVIDAD CIBERSEGURIDAD B2B (LEY N° 21.663) ---
+        let b2bPaymentMethod = 'webpay';
+        
+        function openB2BRegisterModal() {
+            document.getElementById('b2bRegisterModal').classList.remove('hidden');
+            document.getElementById('b2bStepForm').classList.remove('hidden');
+            document.getElementById('b2bStepCheckout').classList.add('hidden');
+            document.getElementById('b2bStepSuccess').classList.add('hidden');
+            // reset fields
+            document.getElementById('b2bAgreeTerms').checked = false;
+            toggleB2BPayButton();
+        }
+
+        function closeB2BRegisterModal() {
+            document.getElementById('b2bRegisterModal').classList.add('hidden');
+        }
+
+        function toggleB2BPayButton() {
+            const isChecked = document.getElementById('b2bAgreeTerms').checked;
+            const btn = document.getElementById('btnProceedToPay');
+            if (isChecked) {
+                btn.removeAttribute('disabled');
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                btn.setAttribute('disabled', 'true');
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function proceedToB2BCheckout() {
+            const nameVal = document.getElementById('b2bName').value.trim();
+            const rutVal = document.getElementById('b2bRut').value.trim();
+            const addressVal = document.getElementById('b2bAddress').value.trim();
+
+            if (!nameVal || !rutVal || !addressVal) {
+                alert("⚠️ Por favor completa los campos Nombre, RUT y Dirección para proceder.");
+                return;
+            }
+
+            document.getElementById('checkoutB2BName').innerText = nameVal;
+            document.getElementById('b2bStepForm').classList.add('hidden');
+            document.getElementById('b2bStepCheckout').classList.remove('hidden');
+        }
+
+        function switchB2BPayment(method, btn) {
+            b2bPaymentMethod = method;
+            document.getElementById('b2bTabWebpay').className = "border border-gray-200 text-gray-400 hover:border-forest/50 hover:text-forest py-2 rounded-xl text-center text-xs focus:outline-none transition bg-white";
+            document.getElementById('b2bTabFintoc').className = "border border-gray-200 text-gray-400 hover:border-forest/50 hover:text-forest py-2 rounded-xl text-center text-xs focus:outline-none transition bg-white";
+            
+            if (method === 'webpay') {
+                btn.className = "border border-forest bg-forest/5 text-forest font-bold py-2 rounded-xl text-center text-xs focus:outline-none transition";
+                document.getElementById('b2bPanelWebpay').classList.remove('hidden');
+                document.getElementById('b2bPanelFintoc').classList.add('hidden');
+            } else {
+                btn.className = "border border-forest bg-forest/5 text-forest font-bold py-2 rounded-xl text-center text-xs focus:outline-none transition";
+                document.getElementById('b2bPanelWebpay').classList.add('hidden');
+                document.getElementById('b2bPanelFintoc').classList.remove('hidden');
+            }
+        }
+
+        function processB2BPayment() {
+            const nameVal = document.getElementById('b2bName').value.trim();
+            const btn = document.getElementById('btnConfirmB2BPayment');
+            
+            if (b2bPaymentMethod === 'webpay') {
+                const cardName = document.getElementById('b2bCardName').value.trim();
+                const cardNum = document.getElementById('b2bCardNum').value.trim();
+                const cardExpiry = document.getElementById('b2bCardExpiry').value.trim();
+                const cardCvv = document.getElementById('b2bCardCvv').value.trim();
+
+                if (!cardName || !cardNum || !cardExpiry || !cardCvv) {
+                    alert("⚠️ Por favor completa todos los datos de tu tarjeta de crédito o débito.");
+                    return;
+                }
+            }
+
+            btn.setAttribute('disabled', 'true');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
+
+            setTimeout(() => {
+                // Success flow
+                document.getElementById('successB2BTitle').innerText = nameVal;
+                document.getElementById('successB2BMethod').innerText = b2bPaymentMethod === 'webpay' ? 'Webpay Plus (Transbank)' : 'Fintoc (Banco Chile/Santander)';
+                document.getElementById('successB2BAuth').innerText = "FLOW-" + Math.floor(1000000 + Math.random() * 9000000) + "-TX";
+                
+                document.getElementById('b2bStepCheckout').classList.add('hidden');
+                document.getElementById('b2bStepSuccess').classList.remove('hidden');
+            }, 2000);
+        }
+
+        function bookClinicalAppointment() {
+            const specialistVal = document.getElementById('clinicalSpecialist').value;
+            const dateVal = document.getElementById('clinicalDate').value;
+            const timeVal = document.getElementById('clinicalTime').value;
+            const phoneVal = document.getElementById('clinicalPhone').value;
+            const agreeVal = document.getElementById('clinicalAgreeTerms').checked;
+
+            if (!agreeVal) {
+                alert("⚠️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
+                return;
+            }
+
+            if (!dateVal || phoneVal.trim() === "+569") {
+                alert("⚠️ Por favor selecciona la fecha de consulta y escribe un celular de contacto válido.");
+                return;
+            }
+
+            // Trigger simulated Browser/SMS Notification Alert
+            alert(`🎉 ¡HORA CLÍNICA AGENDADA CON ÉXITO!\n\n` +
+                  `• Profesional: ${specialistVal}\n` +
+                  `• Fecha: ${dateVal}\n` +
+                  `• Hora: ${timeVal} hrs\n` +
+                  `• Teléfono: ${phoneVal}\n` +
+                  `• Código de Confirmación: CLINIC-${Math.floor(1000 + Math.random() * 9000)}\n\n` +
+                  `⏰ NOTIFICACIÓN DE ALARMA ACTIVADA: Se ha programado un aviso automático en tu celular 24 horas antes de la consulta. ¡Nos vemos en Centro Holístico Lawen Ko!`);
+            
+            // Request native notification permission as a high-fidelity demonstration
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification("LAWENMOLL 🌿", {
+                            body: `Recordatorio: Tienes hora agendada con ${specialistVal} para el ${dateVal} a las ${timeVal} hrs.`,
+                            icon: 'lawenmoll_logo.jpg'
+                        });
+                    }
+                });
+            }
+        }
+
+        function selectPharmacyForOrder(pharmaId) {
+            document.getElementById('pharmaSelected').value = pharmaId;
+            // Scroll dynamically
+            document.getElementById('pharmaSelected').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function orderMedicine() {
+            const recipeCode = document.getElementById('pharmaRecipeCode').value.trim();
+            const pharmaId = document.getElementById('pharmaSelected').value;
+            const productName = document.getElementById('pharmaProduct').options[document.getElementById('pharmaProduct').selectedIndex].text;
+            const phone = document.getElementById('pharmaPhone').value.trim();
+            const agree = document.getElementById('pharmaAgreeTerms').checked;
+
+            if (!agree) {
+                alert("⚠️ Debes consentir el tratamiento ciberseguro de tus datos médicos y de receta antes de continuar.");
+                return;
+            }
+
+            if (!recipeCode || phone === "+569") {
+                alert("⚠️ Por favor ingresa tu Código de Receta Digital (ej: LW-12345) y tu Teléfono Celular.");
+                return;
+            }
+
+            const pharmaName = pharmaId === 'canelo' ? 'Farmacia Herbolaria "El Canelo"' : 'Farmacia Mapuche "Makewe"';
+
+            alert(`🎉 ¡RECETA VALIDADA Y PEDIDO GENERADO!\n\n` +
+                  `• Farmacia: ${pharmaName}\n` +
+                  `• Producto solicitado: ${productName}\n` +
+                  `• Código de Receta: ${recipeCode.toUpperCase()}\n` +
+                  `• Transacción: LW-ORDER-${Math.floor(1000 + Math.random() * 9000)}\n\n` +
+                  `Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para coordinar el retiro en local o despacho a domicilio gratis.`);
+
+            // Open WhatsApp Web with a beautiful clinical message
+            const message = `*🌿 PEDIDO DE RECETA - LAWENMOLL*\n\n` +
+                            `Hola, quiero realizar el despacho/retiro de mi receta digital:\n` +
+                            `• *Código de Receta:* ${recipeCode.toUpperCase()}\n` +
+                            `• *Farmacia:* ${pharmaName}\n` +
+                            `• *Remedio solicitado:* ${productName}\n` +
+                            `• *Teléfono de contacto:* ${phone}\n\n` +
+                            `_Pedido validado de forma segura bajo la Ley Marco de Ciberseguridad N° 21.663._`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function bookRestaurantTable() {
+            const dateVal = document.getElementById('reserveDate').value;
+            const timeVal = document.getElementById('reserveTime').value;
+            const guestsVal = document.getElementById('reserveGuests').value;
+            const phoneVal = document.getElementById('reservePhone').value;
+            const agreeVal = document.getElementById('reserveAgreeTerms').checked;
+
+            if (!agreeVal) {
+                alert("⚠️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
+                return;
+            }
+
+            if (!dateVal || phoneVal.trim() === "+569") {
+                alert("⚠️ Por favor ingresa la fecha de tu reserva y un teléfono de contacto válido.");
+                return;
+            }
+
+            alert(`🎉 ¡Mesa Reservada con Éxito en Restaurante "Huerto Orgánico"!\n\n` +
+                  `• Fecha: ${dateVal}\n` +
+                  `• Hora: ${timeVal}\n` +
+                  `• Invitados: ${guestsVal} personas\n` +
+                  `• Teléfono de contacto: ${phoneVal}\n` +
+                  `• Código Único de Reserva: MESA-${Math.floor(1000 + Math.random() * 9000)}\n\n` +
+                  `¡Recuerda que tienes un 15% de descuento exclusivo presentando este ticket por ser usuario de LAWENMOLL!`);
+        }
+    </script>
+</body>
+</html>
