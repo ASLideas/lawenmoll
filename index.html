@@ -1,4 +1,4 @@
-index.html
+<index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -473,12 +473,95 @@ index.html
                     <button onclick="nextStep(5)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm">Siguiente</button>
                 </div>
             </div>
-
-            <!-- PANTALLA 5: PREGUNTA 1 - ÁREA DE APOYO (OBJETIVO) -->
+            <!-- PANTALLA 5: CALIDAD DE SUEÑO -->
             <div id="step5" class="step-panel flex flex-col justify-between h-full flex-grow">
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 1 de 3</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 1 de 5</span>
+                        <span class="text-[10px] text-gray-400 font-bold">Calidad de Sueño</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-forest mb-2">Calidad de Sueño</h2>
+                    <p class="text-gray-500 text-xs mb-6 font-semibold">El sueño es el pilar de la recuperación metabólica y mental. ¿Cómo evalúas tu descanso?</p>
+
+                    <div class="space-y-3">
+                        <button onclick="setSleepOption('radiant', this)" class="sleep-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                            <span class="text-xl">🌅</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Energía Radiante</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Duermo bien, me despierto con energía y sin alarmas.</p>
+                            </div>
+                        </button>
+                        <button onclick="setSleepOption('fatigue', this)" class="sleep-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                            <span class="text-xl">🥱</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Fatiga Media</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Duermo pero me despierto cansado o tengo sueño a media tarde.</p>
+                            </div>
+                        </button>
+                        <button onclick="setSleepOption('insomnia', this)" class="sleep-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                            <span class="text-xl">🦉</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Insomnio / Alerta Nocturna</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Me cuesta conciliar el sueño o me despierto en la madrugada.</p>
+                            </div>
+                        </button>
+                    </div>
+                    <input type="hidden" id="inputSleep" value="">
+                </div>
+
+                <div class="flex space-x-3 mt-8">
+                    <button onclick="nextStep(4)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
+                    <button onclick="nextStep(6)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep5_new" disabled style="opacity: 0.5;">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 6: NIVEL DE ESTRÉS -->
+            <div id="step6" class="step-panel flex flex-col justify-between h-full flex-grow">
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 2 de 5</span>
+                        <span class="text-[10px] text-gray-400 font-bold">Nivel de Estrés</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-forest mb-2">Nivel de Estrés</h2>
+                    <p class="text-gray-500 text-xs mb-6 font-semibold">El estrés altera el peso, la microbiota digestiva y la presión arterial. ¿Cómo te sientes?</p>
+
+                    <div class="space-y-3">
+                        <button onclick="setStressOption('calm', this)" class="stress-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                            <span class="text-xl">🧘</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Calma Total</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Manejo bien el estrés y tengo espacios de autocuidado.</p>
+                            </div>
+                        </button>
+                        <button onclick="setStressOption('moderate', this)" class="stress-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                            <span class="text-xl">⚖️</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Estrés Moderado</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Tengo días intensos de trabajo o estudio, pero logro desconectar.</p>
+                            </div>
+                        </button>
+                        <button onclick="setStressOption('burnout', this)" class="stress-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                            <span class="text-xl">🌋</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Estrés Crónico / Burnout</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Me siento abrumado, con tensión muscular o ansiedad constante.</p>
+                            </div>
+                        </button>
+                    </div>
+                    <input type="hidden" id="inputStress" value="">
+                </div>
+
+                <div class="flex space-x-3 mt-8">
+                    <button onclick="nextStep(5)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
+                    <button onclick="nextStep(7)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep6_new" disabled style="opacity: 0.5;">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 7: PREGUNTA 3 - ÁREA DE APOYO (OBJETIVO) -->
+            <div id="step7" class="step-panel flex flex-col justify-between h-full flex-grow">
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 3 de 5</span>
                         <span class="text-[10px] text-gray-400 font-bold">Objetivo de Bienestar</span>
                     </div>
                     <h2 class="text-2xl font-bold text-forest mb-2">Área de Apoyo</h2>
@@ -518,16 +601,16 @@ index.html
                 </div>
 
                 <div class="flex space-x-3 mt-8">
-                    <button onclick="nextStep(4)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
-                    <button onclick="nextStep(6)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep5" disabled style="opacity: 0.5;">Siguiente</button>
+                    <button onclick="nextStep(6)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
+                    <button onclick="nextStep(8)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep7" disabled style="opacity: 0.5;">Siguiente</button>
                 </div>
             </div>
 
             <!-- PANTALLA 6: CANAL DE ATENCIÓN (HOGAR / ONLINE / PRESENCIAL) -->
-            <div id="step6" class="step-panel flex flex-col justify-between h-full flex-grow">
+            <div id="step8" class="step-panel flex flex-col justify-between h-full flex-grow">
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 2 de 3</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 4 de 5</span>
                         <span class="text-[10px] text-gray-400 font-bold">Canal de Actividades</span>
                     </div>
                     <h2 class="text-2xl font-bold text-forest mb-2">Canal de Preferencia</h2>
@@ -553,16 +636,16 @@ index.html
                 </div>
 
                 <div class="flex space-x-3 mt-8">
-                    <button onclick="nextStep(5)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
-                    <button onclick="nextStep(7)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep6" disabled style="opacity: 0.5;">Siguiente</button>
+                    <button onclick="nextStep(7)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
+                    <button onclick="nextStep(9)" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep8" disabled style="opacity: 0.5;">Siguiente</button>
                 </div>
             </div>
 
             <!-- PANTALLA 7: COMPROMISO DE TIEMPO DIARIO -->
-            <div id="step7" class="step-panel flex flex-col justify-between h-full flex-grow">
+            <div id="step9" class="step-panel flex flex-col justify-between h-full flex-grow">
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 3 de 3</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 5 de 5</span>
                         <span class="text-[10px] text-gray-400 font-bold">Tiempo Comprometido</span>
                     </div>
                     <h2 class="text-2xl font-bold text-forest mb-2">Tu Tiempo Comprometido</h2>
@@ -595,8 +678,8 @@ index.html
                 </div>
 
                 <div class="flex space-x-3 mt-8">
-                    <button onclick="nextStep(6)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
-                    <button onclick="generatePlan()" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep7" disabled style="opacity: 0.5;">Generar Plan</button>
+                    <button onclick="nextStep(8)" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-4 rounded-2xl hover:bg-gray-50 transition text-sm">Atrás</button>
+                    <button onclick="generatePlan()" class="w-2/3 bg-forest hover:bg-forest/90 text-white font-bold py-4 rounded-2xl shadow-md transition text-sm" id="btnToStep9" disabled style="opacity: 0.5;">Generar Plan</button>
                 </div>
             </div>
 
@@ -632,6 +715,23 @@ index.html
                             <div class="text-[10px] uppercase font-bold tracking-wider text-forest/70">Meta Calórica</div>
                             <div class="text-xl font-bold text-forest mt-0.5" id="resCalories">1.600 kcal</div>
                             <div class="text-[9px] text-gray-400">Déficit suave</div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta de Estilo de Vida (Sueño y Estrés) -->
+                    <div id="resLifestyleCard" class="bg-forest/5 border border-forest/15 rounded-2xl p-4 mb-5 space-y-3">
+                        <div class="text-[10px] uppercase font-bold tracking-wider text-forest/70 border-b border-forest/10 pb-1.5 flex items-center justify-between">
+                            <span>Perfil de Estilo de Vida</span>
+                            <span class="text-xs">😴🧠</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="block text-[9px] uppercase font-bold text-gray-400">Calidad de Sueño</span>
+                                <span id="resSleepText" class="text-xs font-bold text-slateDark flex items-center mt-1">Normal 🌅</span>
+                            </div>
+                            <div class="border-l border-forest/10 pl-4">
+                                <span class="block text-[9px] uppercase font-bold text-gray-400">Nivel de Estrés</span>
+                                <span id="resStressText" class="text-xs font-bold text-slateDark flex items-center mt-1">Calma Total 🧘</span>
+                            </div>
                         </div>
                     </div>
 
@@ -937,6 +1037,17 @@ index.html
 
     <!-- LÓGICA DE INTERACTIVIDAD -->
     <script>
+        const sleepMap = {
+            'radiant': 'Energía Radiante 🌅',
+            'fatigue': 'Fatiga Media 🥱',
+            'insomnia': 'Insomnio 🦉'
+        };
+        const stressMap = {
+            'calm': 'Calma Total 🧘',
+            'moderate': 'Estrés Moderado ⚖️',
+            'burnout': 'Estrés Crónico 🌋'
+        };
+
         let currentStep = 1;
         let selections = {
             gender: 'woman',
@@ -956,7 +1067,9 @@ index.html
             bookingTime: '09:30',
             selectedSpecialist: null,
             mental: 'Ninguna',
-            bypass: false
+            bypass: false,
+            sleep: 'radiant',
+            stress: 'calm'
         };
 
                 const specialists = [
@@ -1026,9 +1139,9 @@ index.html
                 pBar.classList.add('hidden');
                 currentStep = 'Join';
             } else {
-                if (step > 1 && step < 8) {
+                if (step > 1 && step < 10) {
                     pBar.classList.remove('hidden');
-                    document.getElementById('progressBar').style.width = ((step - 1) / 6 * 100) + '%';
+                    document.getElementById('progressBar').style.width = ((step - 1) / 8 * 100) + '%';
                 } else {
                     pBar.classList.add('hidden');
                 }
@@ -1087,6 +1200,31 @@ index.html
             validateAndSet('age');
         }
 
+        
+        function setSleepOption(value, btn) {
+            selections.sleep = value;
+            document.getElementById('inputSleep').value = value;
+            document.querySelectorAll('.sleep-opt').forEach(b => {
+                b.className = "sleep-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white";
+            });
+            btn.className = "sleep-opt w-full text-left border-forest bg-forest/5 p-3 rounded-2xl flex items-center space-x-3 transition focus:outline-none shadow-sm text-forest font-bold";
+            
+            document.getElementById('btnToStep5_new').removeAttribute('disabled');
+            document.getElementById('btnToStep5_new').style.opacity = 1;
+        }
+
+        function setStressOption(value, btn) {
+            selections.stress = value;
+            document.getElementById('inputStress').value = value;
+            document.querySelectorAll('.stress-opt').forEach(b => {
+                b.className = "stress-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white";
+            });
+            btn.className = "stress-opt w-full text-left border-forest bg-forest/5 p-3 rounded-2xl flex items-center space-x-3 transition focus:outline-none shadow-sm text-forest font-bold";
+            
+            document.getElementById('btnToStep6_new').removeAttribute('disabled');
+            document.getElementById('btnToStep6_new').style.opacity = 1;
+        }
+
         function toggleChronicFields(val, btn) {
             selections.chronic = val;
             document.getElementById('inputChronic').value = val ? "Sí" : "No";
@@ -1138,14 +1276,14 @@ index.html
             btn.className = `${type}-opt w-full text-left border-forest bg-forest/5 p-3 rounded-2xl flex items-center space-x-3 transition focus:outline-none shadow-sm text-forest font-bold`;
 
             if (type === 'goal') {
-                document.getElementById('btnToStep5').removeAttribute('disabled');
-                document.getElementById('btnToStep5').style.opacity = 1;
-            } else if (type === 'mode') {
-                document.getElementById('btnToStep6').removeAttribute('disabled');
-                document.getElementById('btnToStep6').style.opacity = 1;
-            } else if (type === 'timeCommit') {
                 document.getElementById('btnToStep7').removeAttribute('disabled');
                 document.getElementById('btnToStep7').style.opacity = 1;
+            } else if (type === 'mode') {
+                document.getElementById('btnToStep8').removeAttribute('disabled');
+                document.getElementById('btnToStep8').style.opacity = 1;
+            } else if (type === 'timeCommit') {
+                document.getElementById('btnToStep9').removeAttribute('disabled');
+                document.getElementById('btnToStep9').style.opacity = 1;
             }
         }
 
@@ -1298,12 +1436,16 @@ index.html
                       `• Nombre Paciente: Usuario LAWENMOLL\n` +
                       `• Edad: ${selections.age} años\n` +
                       `• IMC calculado: ${document.getElementById('resIMC').innerText} (${document.getElementById('resIMCCat').innerText})\n` +
+                      `• Calidad de Sueño: ${sleepMap[selections.sleep] || 'Normal'}\n` +
+                      `• Nivel de Estrés: ${stressMap[selections.stress] || 'Calma'}\n` +
                       `• Pauta de Fitoterapia seleccionada.\n\n` +
                       `¡Listo! Archivo autoguiado descargado correctamente.`);
             } else {
                 alert(`📥 Descargando Evaluaciones Médicas y Recomendaciones LAWENMOLL...\n\n` +
                       `• Nombre Paciente: Paciente Premium\n` +
                       `• Edad: ${selections.age} años\n` +
+                      `• Calidad de Sueño: ${sleepMap[selections.sleep] || 'Normal'}\n` +
+                      `• Nivel de Estrés: ${stressMap[selections.stress] || 'Calma'}\n` +
                       `• Antecedentes Clínicos: ${selections.chronic ? selections.selectedChronical.join(', ') : 'Ninguno'}\n` +
                       `• Salud Mental / Neurodivergencia: ${selections.mental}\n` +
                       `• Especialista Asignado: ${selections.selectedSpecialist ? selections.selectedSpecialist.name : 'No asignado'}\n` +
@@ -1315,6 +1457,10 @@ index.html
         function generatePlan() {
             nextStep('Loading');
             setTimeout(() => {
+                // Actualizar textos de la tarjeta de Estilo de Vida (Global para crónicos y preventivos)
+                document.getElementById('resSleepText').innerText = sleepMap[selections.sleep] || 'Normal 🌅';
+                document.getElementById('resStressText').innerText = stressMap[selections.stress] || 'Calma Total 🧘';
+                
                 const hMeters = selections.height / 100;
                 const imc = (selections.weight / (hMeters * hMeters)).toFixed(1);
                 
@@ -1380,11 +1526,25 @@ index.html
                     document.getElementById('resultsBlockContainer').classList.remove('hidden');
                     document.getElementById('chronicBlock').classList.add('hidden');
 
-                    let textApproach = "Tu plan priorizará el uso de hierbas nativas y extractos naturales para regular tu metabolismo de manera complementaria y armónica.";
+                    let textApproach = "Tu plan priorizará el uso de hierbas nativas y extractos naturales para regular tu metabolismo de manera complementaria y armónica. ";
+                    
+                    if (selections.sleep === 'insomnia') {
+                        textApproach += "Para tratar tu **insomnio y alerta nocturna**, te recetamos infusiones relajantes de **Melisa y Pasiflora** por las tardes, evitando estimulantes. ";
+                    } else if (selections.sleep === 'fatigue') {
+                        textApproach += "Para combatir la **fatiga diaria**, incorporaremos adaptógenos naturales como **Ashwagandha** para equilibrar el cortisol por las mañanas. ";
+                    }
+
+                    if (selections.stress === 'burnout') {
+                        textApproach += "Dado tu nivel de **estrés crónico / burnout**, se priorizará la derivación a terapias mente-cuerpo como clases de **Yoga Restaurativo** o meditación guiada, además de recomendar una consulta preventiva con nuestro psicólogo **Ps. Tomás Araya**. ";
+                    } else if (selections.stress === 'moderate') {
+                        textApproach += "Para mitigar tu **estrés moderado**, sugerimos incorporar infusiones relajantes a media tarde y breves pausas de desconexión activa. ";
+                    }
                     
                     // Aseguramiento defensivo de la tarjeta de enfoque
                     const resApproachEl = document.getElementById('resApproach');
                     if (resApproachEl) { resApproachEl.innerHTML = textApproach; }
+
+
 
                     let textNut = "Plan de alimentación equilibrada limpia de " + targetCal + " kcal. Consumirás un plato distribuido en 50% verduras, 25% proteína magra y 25% carbohidratos complejos.";
                     let textMov = "Entrenamiento de tonificación muscular en casa. 4 rondas de: 15 sentadillas libres, 10 flexiones de brazos completas y 30 segundos de plancha abdominal.";
@@ -1651,3 +1811,4 @@ index.html
 
 </body>
 </html>
+</index>
