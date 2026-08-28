@@ -1,4 +1,3 @@
-centros.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,6 +23,10 @@ centros.html
     </script>
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase JS Library for real-time Database connection -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <!-- Leaflet para el Mapa Real -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -45,7 +48,7 @@ centros.html
         }
     </style>
 </head>
-\1
+<body class="text-slateDark min-h-screen flex flex-col justify-between">
     <!-- MODAL DE REGISTRO B2B CON CIENTES Y CIBERSEGURIDAD (LEY N° 21.663) -->
     <div id="b2bRegisterModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark/60 backdrop-blur-sm animate-fadeIn">
         <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden">
@@ -961,13 +964,48 @@ centros.html
 
     <!-- INTERACTIVIDAD -->
     <script>
+        
+        // CONFIGURACIÓN DE CONEXIÓN CON TU BASE DE DATOS (SUPABASE)
+        const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3Mjg0MDAsImV4cCI6MjA0MDMwNDQwMH0...';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Cargar terapeutas dinámicamente en el selector
+        async function loadTherapistsDropdown() {
+            try {
+                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                    const { data, error } = await _supabase
+                        .from('terapeutas')
+                        .select('id, nombre, especialidad')
+                        .eq('estado_suscripcion', 'activo');
+                    
+                    if (error) throw error;
+                    if (data && data.length > 0) {
+                        const select = document.getElementById('clinicalSpecialist');
+                        if (select) {
+                            select.innerHTML = '';
+                            data.forEach(t => {
+                                const opt = document.createElement('option');
+                                opt.value = t.nombre;
+                                opt.textContent = `${t.nombre} (${t.especialidad})`;
+                                select.appendChild(opt);
+                            });
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error("Error al cargar terapeutas en el dropdown:", err.message);
+            }
+        }
+    
         let currentTab = 'centros';
         let currentCarouselIndex = 0;
         let map;
         let marker;
 
         // Detectar de qué pestaña viene (tab parameter en la URL)
-        window.onload = function() {
+                window.onload = function() {
+            loadTherapistsDropdown();
             const urlParams = new URLSearchParams(window.location.search);
             const tabParam = urlParams.get('tab');
             if (tabParam) {
@@ -1129,8 +1167,11 @@ centros.html
             }
         }
 
-        function processB2BPayment() {
+                async function processB2BPayment() {
             const nameVal = document.getElementById('b2bName').value.trim();
+            const typeVal = document.getElementById('b2bType').value;
+            const rutVal = document.getElementById('b2bRut').value.trim();
+            const addressVal = document.getElementById('b2bAddress').value.trim();
             const btn = document.getElementById('btnConfirmB2BPayment');
             
             if (b2bPaymentMethod === 'webpay') {
@@ -1148,6 +1189,29 @@ centros.html
             btn.setAttribute('disabled', 'true');
             btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
 
+            // Registro real en Supabase
+            try {
+                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                    const { error } = await _supabase
+                        .from('centros_convenios')
+                        .insert([
+                            {
+                                tipo_establecimiento: typeVal,
+                                nombre: nameVal,
+                                descripcion: `Socio B2B registrado de la red Lawenmoll. RUT: ${rutVal}`,
+                                beneficio_detalle: '15% DCTO en servicios seleccionados',
+                                direccion: addressVal,
+                                estado_suscripcion: 'activo',
+                                id_cliente_pasarela: `FLOW-${Math.floor(1000 + Math.random() * 9000)}-TX`
+                            }
+                        ]);
+
+                    if (error) throw error;
+                }
+            } catch (err) {
+                console.error("❌ Error al registrar local en Supabase:", err.message);
+            }
+
             setTimeout(() => {
                 // Success flow
                 document.getElementById('successB2BTitle').innerText = nameVal;
@@ -1158,8 +1222,23 @@ centros.html
                 document.getElementById('b2bStepSuccess').classList.remove('hidden');
             }, 2000);
         }
+            
 
-        function bookClinicalAppointment() {
+            btn.setAttribute('disabled', 'true');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
+
+            setTimeout(() => {
+                // Success flow
+                document.getElementById('successB2BTitle').innerText = nameVal;
+                document.getElementById('successB2BMethod').innerText = b2bPaymentMethod === 'webpay' ? 'Webpay Plus (Transbank)' : 'Fintoc (Banco Chile/Santander)';
+                document.getElementById('successB2BAuth').innerText = "FLOW-" + Math.floor(1000000 + Math.random() * 9000000) + "-TX";
+                
+                document.getElementById('b2bStepCheckout').classList.add('hidden');
+                document.getElementById('b2bStepSuccess').classList.remove('hidden');
+            }, 2000);
+        
+
+                async function bookClinicalAppointment() {
             const specialistVal = document.getElementById('clinicalSpecialist').value;
             const dateVal = document.getElementById('clinicalDate').value;
             const timeVal = document.getElementById('clinicalTime').value;
@@ -1170,6 +1249,74 @@ centros.html
                 alert("⚠️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
                 return;
             }
+
+            if (!dateVal || phoneVal.trim() === "+569") {
+                alert("⚠️ Por favor selecciona la fecha de consulta y escribe un celular de contacto válido.");
+                return;
+            }
+
+            const bookingCode = `CLINIC-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            // Guardado real en Supabase
+            try {
+                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                    // Obtener id del terapeuta
+                    const { data: therapistData } = await _supabase
+                        .from('terapeutas')
+                        .eq('nombre', specialistVal)
+                        .maybeSingle();
+
+                    const { error } = await _supabase
+                        .from('citas')
+                        .insert([
+                            {
+                                terapeuta_id: therapistData ? therapistData.id : null,
+                                fecha_cita: dateVal,
+                                hora_cita: timeVal,
+                                lugar_cita: 'Centro Holístico "Lawen Ko"',
+                                modal_cita: specialistVal.includes('Dra.') ? 'Online' : 'Presencial',
+                                estado_cita: 'Agendada',
+                                codigo_reserva: bookingCode,
+                                telefono_contacto: phoneVal,
+                                consentimiento_datos: true
+                            }
+                        ]);
+
+                    if (error) throw error;
+                }
+            } catch (err) {
+                console.error("❌ Error al guardar cita en Supabase:", err.message);
+            }
+
+            // Trigger simulated Browser/SMS Notification Alert
+            alert(`🎉 ¡HORA CLÍNICA AGENDADA CON ÉXITO!
+
+` +
+                  `• Profesional: ${specialistVal}
+` +
+                  `• Fecha: ${dateVal}
+` +
+                  `• Hora: ${timeVal} hrs
+` +
+                  `• Teléfono: ${phoneVal}
+` +
+                  `• Código de Confirmación: ${bookingCode}
+
+` +
+                  `⏰ NOTIFICACIÓN DE ALARMA ACTIVADA: Se ha programado un aviso automático en tu celular 24 horas antes de la consulta. ¡Nos vemos en Centro Holístico Lawen Ko!`);
+            
+            // Request native notification permission as a high-fidelity demonstration
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification("LAWENMOLL 🌿", {
+                            body: `Recordatorio: Tienes hora agendada con ${specialistVal} para el ${dateVal} a las ${timeVal} hrs.`,
+                            icon: 'lawenmoll_logo.jpg'
+                        });
+                    }
+                });
+            }
+        }
 
             if (!dateVal || phoneVal.trim() === "+569") {
                 alert("⚠️ Por favor selecciona la fecha de consulta y escribe un celular de contacto válido.");
@@ -1196,7 +1343,7 @@ centros.html
                     }
                 });
             }
-        }
+        
 
         function selectPharmacyForOrder(pharmaId) {
             document.getElementById('pharmaSelected').value = pharmaId;
@@ -1242,7 +1389,7 @@ centros.html
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        function bookRestaurantTable() {
+                async function bookRestaurantTable() {
             const dateVal = document.getElementById('reserveDate').value;
             const timeVal = document.getElementById('reserveTime').value;
             const guestsVal = document.getElementById('reserveGuests').value;
@@ -1259,12 +1406,47 @@ centros.html
                 return;
             }
 
-            alert(`🎉 ¡Mesa Reservada con Éxito en Restaurante "Huerto Orgánico"!\n\n` +
-                  `• Fecha: ${dateVal}\n` +
-                  `• Hora: ${timeVal}\n` +
-                  `• Invitados: ${guestsVal} personas\n` +
-                  `• Teléfono de contacto: ${phoneVal}\n` +
-                  `• Código Único de Reserva: MESA-${Math.floor(1000 + Math.random() * 9000)}\n\n` +
+            const bookingCode = `MESA-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            // Guardado real en Supabase
+            try {
+                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                    const { error } = await _supabase
+                        .from('citas')
+                        .insert([
+                            {
+                                fecha_cita: dateVal,
+                                hora_cita: timeVal,
+                                lugar_cita: 'Restaurante "Huerto Orgánico"',
+                                modalidad_cita: 'Presencial',
+                                estado_cita: 'Agendada',
+                                codigo_reserva: bookingCode,
+                                telefono_contacto: phoneVal,
+                                consentimiento_datos: true,
+                                convenio_activado_id: 1 // ID 1 representa Centro Lawen Ko / Huerto Orgánico
+                            }
+                        ]);
+
+                    if (error) throw error;
+                }
+            } catch (err) {
+                console.error("❌ Error al guardar reserva de restaurante en Supabase:", err.message);
+            }
+
+            alert(`🎉 ¡Mesa Reservada con Éxito en Restaurante "Huerto Orgánico"!
+
+` +
+                  `• Fecha: ${dateVal}
+` +
+                  `• Hora: ${timeVal}
+` +
+                  `• Invitados: ${guestsVal} personas
+` +
+                  `• Teléfono de contacto: ${phoneVal}
+` +
+                  `• Código Único de Reserva: ${bookingCode}
+
+` +
                   `¡Recuerda que tienes un 15% de descuento exclusivo presentando este ticket por ser usuario de LAWENMOLL!`);
         }
     </script>

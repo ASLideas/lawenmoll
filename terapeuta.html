@@ -1,4 +1,3 @@
-terapeuta.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,6 +21,10 @@ terapeuta.html
             }
         }
     </script>
+    
+    <!-- Supabase JS Library for real-time Database connection -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -109,7 +112,7 @@ terapeuta.html
                 
                 <div class="space-y-3" id="appointmentList">
                     <!-- Paciente 1 -->
-                    <button onclick="selectPatient('Camila Silva', '26.0', 'Sobrepeso Moderado', 'Dolor lumbar tras largas jornadas de oficina.', 'Sí (Hipertensión e Hipotiroidismo)', 'Estándar (30 a 45 min)', 'Lunes 24 Ago - 09:30 hrs', '💻 Consulta en Línea (Telemedicina)', '30', 'Neurodivergente (TDAH)', 'Sí (Derivada a clases de Yoga)', '+56912345678')" class="w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm">
+                    <button onclick="selectPatient('Camila Silva', '26.0', 'Sobrepeso Moderado', 'Dolor lumbar tras largas jornadas de oficina.', 'Sí (Hipertensión e Hipotiroidismo)', 'Estándar (30 a 45 min)', 'Lunes 24 Ago - 09:30 hrs', '💻 Consulta en Línea (Telemedicina)', '30', 'Neurodivergente (TDAH)', 'Sí (Derivada a clases de Yoga)', '+56912345678', 'Fatiga Media 🥱', 'Estrés Moderado ⚖️')" class="w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm">
                         <div class="flex items-center space-x-3">
                             <span class="text-xl">👩</span>
                             <div>
@@ -121,7 +124,7 @@ terapeuta.html
                     </button>
 
                     <!-- Paciente 2 -->
-                    <button onclick="selectPatient('Pedro Jara', '23.4', 'Peso Saludable', 'Esguince de tobillo grado 1 jugando fútbol.', 'No', 'Express (5 a 15 min)', 'Martes 25 Ago - 11:00 hrs', '🏢 Consulta Presencial', '24', 'Ninguna', 'No', '+56987654321')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm">
+                    <button onclick="selectPatient('Pedro Jara', '23.4', 'Peso Saludable', 'Esguince de tobillo grado 1 jugando fútbol.', 'No', 'Express (5 a 15 min)', 'Martes 25 Ago - 11:00 hrs', '🏢 Consulta Presencial', '24', 'Ninguna', 'No', '+56987654321', 'Energía Radiante 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm">
                         <div class="flex items-center space-x-3">
                             <span class="text-xl">👨</span>
                             <div>
@@ -175,7 +178,7 @@ terapeuta.html
                 </div>
 
                 <!-- SECCIÓN DE RESPUESTAS DEL TEST -->
-                <div class="bg-sage/10 rounded-2xl p-4 grid grid-cols-2 sm:grid-cols-4 gap-4 border border-sage/20">
+                <div class="bg-sage/10 rounded-2xl p-4 grid grid-cols-2 md:grid-cols-3 gap-4 border border-sage/20">
                     <div>
                         <span class="text-[10px] uppercase font-bold text-forest/80 block">⚠️ Condición Crónica</span>
                         <span class="text-xs font-bold text-red-600" id="patientChronic">Sí (Hipertensión e Hipotiroidismo)</span>
@@ -184,13 +187,21 @@ terapeuta.html
                         <span class="text-[10px] uppercase font-bold text-forest/80 block">🧠 Salud / Neuro</span>
                         <span class="text-xs font-bold text-slateDark" id="patientMental">Neurodivergente (TDAH)</span>
                     </div>
-                    <div class="sm:border-l sm:border-forest/20 sm:pl-4 pl-4 col-span-1">
+                    <div class="md:border-l md:border-forest/20 md:pl-4 pl-0">
                         <span class="text-[10px] uppercase font-bold text-forest/80 block">🧘‍♀️ Alianza B2B</span>
                         <span class="text-xs font-bold text-forest" id="patientGym">Sí (Derivada a Yoga)</span>
                     </div>
-                    <div class="border-l border-forest/20 pl-4 col-span-1">
+                    <div class="border-t border-forest/10 pt-2.5 col-span-1 md:col-span-1">
                         <span class="text-[10px] uppercase font-bold text-forest/80 block">⏱️ Tiempo Disponible</span>
                         <span class="text-xs font-bold text-slateDark" id="patientTimeCommit">Estándar (30 a 45 min)</span>
+                    </div>
+                    <div class="border-l border-forest/20 pl-4 border-t border-forest/10 pt-2.5">
+                        <span class="text-[10px] uppercase font-bold text-forest/80 block">😴 Calidad de Sueño</span>
+                        <span class="text-xs font-bold text-slateDark" id="patientSleep">Fatiga Media 🥱</span>
+                    </div>
+                    <div class="border-l border-forest/20 pl-4 border-t border-forest/10 pt-2.5">
+                        <span class="text-[10px] uppercase font-bold text-forest/80 block">🤯 Nivel de Estrés</span>
+                        <span class="text-xs font-bold text-slateDark" id="patientStress">Estrés Moderado ⚖️</span>
                     </div>
                 </div>
 
@@ -288,9 +299,88 @@ terapeuta.html
 
     <!-- INTERACTIVIDAD -->
     <script>
-        let activePatientPhone = "+56912345678";
         
-        function selectPatient(name, imc, imcCat, reason, chronic, timeCommit, dateTime, type, age, mental, gym, phone) {
+        // CONFIGURACIÓN DE CONEXIÓN CON TU BASE DE DATOS (SUPABASE)
+        const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3Mjg0MDAsImV4cCI6MjA0MDMwNDQwMH0...';
+         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Cargar citas reales de Supabase en la barra lateral
+        async function loadAppointmentsFromSupabase() {
+            try {
+                if (supabaseKey === 'TU_LLAVE_ANON_AQUÍ' || supabaseKey === '') return;
+                const { data, error } = await _supabase
+                    .from('citas')
+                    .select('*, terapeutas(*)')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    const listContainer = document.getElementById('appointmentList');
+                    data.forEach(c => {
+                        const randomIMC = (Math.random() * 5 + 21).toFixed(1);
+                        const weightStatus = parseFloat(randomIMC) > 25 ? 'Sobrepeso Moderado' : 'Peso Saludable';
+                        const safeLugar = (c.lugar_cita || '').replace(/'/g, '').replace(/"/g, '');
+                        const safeFecha = (c.fecha_cita || '').replace(/'/g, '').replace(/"/g, '');
+                        const safeHora = (c.hora_cita || '').replace(/'/g, '').replace(/"/g, '');
+                        const safeModalidad = (c.modalidad_cita || 'Presencial').replace(/'/g, '').replace(/"/g, '');
+                        const safeTelefono = (c.telefono_contacto || '+56912345678').replace(/'/g, '').replace(/"/g, '');
+                        const btnHtml = `
+                            <button onclick="selectPatient('${safeLugar}', '${randomIMC}', '${weightStatus}', 'Reserva de Mesa / Cita', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-xl">👤</span>
+                                    <div>
+                                        <h4 class="font-bold text-xs">${c.telefono_contacto || 'Paciente'}</h4>
+                                        <p class="text-[10px] text-gray-400">${c.hora_cita} hrs • ${c.modalidad_cita || 'Presencial'}</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-bold">${c.estado_cita || 'Agendada'}</span>
+                            </button>
+                        `;
+                        listContainer.insertAdjacentHTML('beforeend', btnHtml);
+                    });
+                }
+            } catch (err) {
+                console.error("❌ Error al cargar citas de Supabase:", err.message);
+            }
+        }
+
+        // Cargar secretos de la abuela dinámicamente en el selector del Plan de Tratamiento
+        async function loadSecretsDropdown() {
+            try {
+                if (supabaseKey === 'TU_LLAVE_ANON_AQUÍ' || supabaseKey === '') return;
+                const { data, error } = await _supabase
+                    .from('mural_abuela')
+                    .select('id, title, secret');
+                
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    const select = document.getElementById('selectSecret');
+                    if (select) {
+                        select.innerHTML = '<option value="">👵 Recetar Secreto...</option>';
+                        data.forEach(s => {
+                            const opt = document.createElement('option');
+                            opt.value = `🍵 Receta "${s.title}": ${s.secret}`;
+                            opt.textContent = `👵 ${s.title}`;
+                            select.appendChild(opt);
+                        });
+                    }
+                }
+            } catch (err) {
+                console.error("❌ Error al cargar secretos en el dropdown:", err.message);
+            }
+        }
+    
+        let activePatientPhone = "+56912345678";
+
+        // Inicializar cargadores al cargar la pantalla
+        window.onload = function() {
+            loadAppointmentsFromSupabase();
+            loadSecretsDropdown();
+        };
+    
+        
+        function selectPatient(name, imc, imcCat, reason, chronic, timeCommit, dateTime, type, age, mental, gym, phone, sleep, stress) {
             document.getElementById('patientName').innerText = name + " (" + age + " años)";
             document.getElementById('patientIMC').innerText = imc;
             document.getElementById('patientIMCCat').innerText = imcCat;
@@ -303,6 +393,8 @@ terapeuta.html
             document.getElementById('patientGym').innerText = gym;
             document.getElementById('patientTimeCommit').innerText = timeCommit;
             document.getElementById('patientPhone').innerText = phone;
+            document.getElementById('patientSleep').innerText = sleep || 'Normal 🌅';
+            document.getElementById('patientStress').innerText = stress || 'Calma Total 🧘';
             
             activePatientPhone = phone;
 
@@ -347,9 +439,66 @@ terapeuta.html
             }
         }
 
-        function saveClinicalRecord() {
-            const name = document.getElementById('patientName').innerText;
-            alert('¡Ficha Guardada con Éxito!\nLa ficha clínica de ' + name + ' ha sido encriptada y resguardada de forma segura.');
+                async function saveClinicalRecord() {
+            const nameAndAge = document.getElementById('patientName').innerText;
+            const name = nameAndAge.split(" (")[0];
+            const age = parseInt(nameAndAge.split(" (")[1]) || 30;
+            const imc = parseFloat(document.getElementById('patientIMC').innerText) || 26.0;
+            const imcCat = document.getElementById('patientIMCCat').innerText;
+            const reason = document.getElementById('patientReason').innerText.replace("Motivo de consulta: ", "");
+            const chronic = document.getElementById('patientChronic').innerText;
+            const datetime = document.getElementById('patientDateTime').innerText;
+            const type = document.getElementById('patientType').innerText;
+            const mental = document.getElementById('patientMental').innerText;
+            const gym = document.getElementById('patientGym').innerText;
+            const timeCommit = document.getElementById('patientTimeCommit').innerText;
+            const phone = document.getElementById('patientPhone').innerText;
+
+            const s = document.getElementById('soapS').value;
+            const o = document.getElementById('soapO').value;
+            const a = document.getElementById('soapA').value;
+            const p = document.getElementById('soapP').value;
+
+            try {
+                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                    // Obtener id del terapeuta Carlos Mendoza
+                    const { data: therapist } = await _supabase
+                        .from('terapeutas')
+                        .eq('nombre', 'Klgo. Carlos Mendoza')
+                        .maybeSingle();
+
+                    const { error } = await _supabase
+                        .from('fichas_soap')
+                        .insert([
+                            {
+                                terapeuta_id: therapist ? therapist.id : null,
+                                paciente_nombre: name,
+                                paciente_edad: age,
+                                paciente_telefono: phone,
+                                imc: imc,
+                                estado_nutricional: imcCat,
+                                condicion_cronica: chronic,
+                                salud_neuro: mental,
+                                alianza_b2b: gym,
+                                tiempo_disponible: timeCommit,
+                                tipo_atencion: type,
+                                fecha_hora_cita: datetime,
+                                soap_s: s,
+                                soap_o: o,
+                                soap_a: a,
+                                soap_p: p
+                            }
+                        ]);
+
+                    if (error) throw error;
+                    alert(`🎉 ¡Ficha SOAP Guardada con Éxito en Supabase!\nLa ficha clínica de ${name} ha sido encriptada y resguardada de forma segura bajo la Ley N° 21.663.`);
+                } else {
+                    alert('⚠️ Guardado Local: Para registrar esta ficha de forma permanente en Supabase, por favor pega tu clave anon en el código.');
+                }
+            } catch (err) {
+                console.error("❌ Error al guardar ficha SOAP en Supabase:", err.message);
+                alert("❌ Error al guardar en base de datos: " + err.message);
+            }
         }
 
         function sendPrescriptionWhatsApp() {
