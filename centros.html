@@ -1318,33 +1318,6 @@
             }
         }
 
-            if (!dateVal || phoneVal.trim() === "+569") {
-                alert("⚠️ Por favor selecciona la fecha de consulta y escribe un celular de contacto válido.");
-                return;
-            }
-
-            // Trigger simulated Browser/SMS Notification Alert
-            alert(`🎉 ¡HORA CLÍNICA AGENDADA CON ÉXITO!\n\n` +
-                  `• Profesional: ${specialistVal}\n` +
-                  `• Fecha: ${dateVal}\n` +
-                  `• Hora: ${timeVal} hrs\n` +
-                  `• Teléfono: ${phoneVal}\n` +
-                  `• Código de Confirmación: CLINIC-${Math.floor(1000 + Math.random() * 9000)}\n\n` +
-                  `⏰ NOTIFICACIÓN DE ALARMA ACTIVADA: Se ha programado un aviso automático en tu celular 24 horas antes de la consulta. ¡Nos vemos en Centro Holístico Lawen Ko!`);
-            
-            // Request native notification permission as a high-fidelity demonstration
-            if ("Notification" in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        new Notification("LAWENMOLL 🌿", {
-                            body: `Recordatorio: Tienes hora agendada con ${specialistVal} para el ${dateVal} a las ${timeVal} hrs.`,
-                            icon: 'lawenmoll_logo.jpg'
-                        });
-                    }
-                });
-            }
-        
-
         function selectPharmacyForOrder(pharmaId) {
             document.getElementById('pharmaSelected').value = pharmaId;
             // Scroll dynamically
@@ -1524,4 +1497,3 @@
     </script>
 </body>
 </html>
-
