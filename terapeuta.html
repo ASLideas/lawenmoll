@@ -803,26 +803,60 @@
             document.getElementById('avatarFileInput').click();
         }
 
+        async 
+        // --- FUNCIÓN DE COMPRESIÓN DE IMÁGENES (HTML5 CANVAS) ---
+        // Auto-comprime imágenes pesadas antes de convertirlas a Base64 y subirlas a Supabase
+        function compressImage(file, maxWidth, maxHeight, quality, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                    } else {
+                        if (height > maxHeight) {
+                            width = Math.round((width * maxHeight) / height);
+                            height = maxHeight;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                    callback(compressedBase64);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
         async function uploadTherapistAvatar(event) {
             const file = event.target.files[0];
             if (!file) return;
 
-            // Validar tipo y peso
+            // Validar tipo
             if (!file.type.startsWith('image/')) {
                 alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
                 return;
             }
-            if (file.size > 2 * 1024 * 1024) {
-                alert("⚠️ El archivo es muy pesado. El límite es de 2 MB para asegurar el rendimiento.");
-                return;
+
+            const avatarEl = document.getElementById('headerTherapistAvatar');
+            if (avatarEl) {
+                avatarEl.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-white"></i>`;
             }
 
-            const reader = new FileReader();
-            reader.onload = async function(e) {
-                const base64Data = e.target.result;
-
-                // Actualizar visualmente en pantalla inmediatamente
-                const avatarEl = document.getElementById('headerTherapistAvatar');
+            // Auto-compresión antes de subir a Supabase
+            compressImage(file, 800, 800, 0.7, async function(base64Data) {
                 if (avatarEl) {
                     avatarEl.innerHTML = `<img src="${base64Data}" class="w-full h-full object-cover rounded-full shadow-inner border border-forest/10" alt="Avatar">`;
                 }
@@ -836,15 +870,15 @@
                             .eq('nombre', activeTherapist.nombre);
 
                         if (error) throw error;
-                        alert("📸 ¡Foto de perfil profesional actualizada y sincronizada con éxito en LAWENMOLL!");
+                        alert("📸 ¡Tu foto de perfil ha sido guardada y optimizada permanentemente en Supabase!");
                     } else {
-                        alert("📸 ¡Foto de perfil actualizada de forma local con éxito!");
+                        alert("📸 ¡Tu foto de perfil ha sido guardada de forma local!");
                     }
                 } catch (err) {
-                    console.error("❌ Error al guardar foto de perfil en Supabase:", err.message);
+                    console.error("❌ Error de Supabase al guardar avatar:", err.message);
+                    alert("❌ Error al guardar foto en Supabase: " + err.message);
                 }
-            };
-            reader.readAsDataURL(file);
+            });
         }
     </script>
 </div>

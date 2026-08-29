@@ -394,7 +394,19 @@
                                 <div id="adminLogoPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">🏢</div>
                                 <div>
                                     <input type="file" id="adminLogoFileInput" accept="image/*" class="hidden" onchange="uploadAdminLogo(event)">
-                                    <button onclick="triggerAdminLogoFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Imagen 📷</button>
+                                    <button type="button" onclick="triggerAdminLogoFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Imagen 📷</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Galería / Menú / Máquinas del Local (SaaS B2B Galería) -->
+                        <div class="space-y-1">
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider">Foto de Vitrina (Carta de Menú / Máquinas de Gym / Instalaciones)</label>
+                            <div class="flex items-center space-x-3 bg-white border border-gray-200 p-2 rounded-xl">
+                                <div id="adminGalleryPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">🖼️</div>
+                                <div>
+                                    <input type="file" id="adminGalleryFileInput" accept="image/*" class="hidden" onchange="uploadAdminGallery(event)">
+                                    <button type="button" onclick="triggerAdminGalleryFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Foto 📷</button>
                                 </div>
                             </div>
                         </div>
@@ -1267,6 +1279,124 @@
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Cargar terapeutas dinámicamente en el selector
+        // --- SINCRONIZADOR DINÁMICO DE VITRINAS COMERCIALES B2B ---
+        // Extrae logos, galerías y descripciones guardadas en tiempo real de Supabase y las muestra en la web pública
+        async function syncPublicCentrosFromSupabase() {
+            try {
+                if (supabaseKey === '') return;
+                const { data, error } = await _supabase
+                    .from('centros_convenios')
+                    .select('*')
+                    .eq('estado_suscripcion', 'activo');
+
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    data.forEach(c => {
+                        // Sincronizar según el tipo de establecimiento o por coincidencia de nombre
+                        if (c.tipo_establecimiento === 'clínica' || c.nombre.includes('Lawen Ko')) {
+                            const titleEl = document.querySelector('#tabPanel-centros h2');
+                            const addrEl = document.querySelector('#tabPanel-centros p');
+                            if (titleEl) titleEl.innerHTML = `🏢 ${c.nombre}`;
+                            if (addrEl && c.direccion) addrEl.innerText = c.direccion;
+                            
+                            // Foto de portada (foto_local_1)
+                            if (c.foto_local_1) {
+                                const imgEl = document.querySelector('#tabPanel-centros img');
+                                if (imgEl) imgEl.src = c.foto_local_1;
+                            }
+                            // Foto de galería / instalaciones (foto_local_2)
+                            if (c.foto_local_2) {
+                                let gallBox = document.getElementById('centroGalleryBox');
+                                if (!gallBox) {
+                                    const portImg = document.querySelector('#tabPanel-centros img');
+                                    if (portImg && portImg.parentElement) {
+                                        gallBox = document.createElement('div');
+                                        gallBox.id = 'centroGalleryBox';
+                                        gallBox.className = 'mt-3.5 grid grid-cols-1 gap-2';
+                                        gallBox.innerHTML = `
+                                            <span class="text-[9px] uppercase font-bold text-forest/70 block"><i class="fa-solid fa-images mr-1"></i> Instalaciones y Consulta Física</span>
+                                            <div class="w-full h-36 rounded-xl overflow-hidden shadow-sm border border-gray-150">
+                                                <img id="centroGalleryImg" src="${c.foto_local_2}" class="w-full h-full object-cover">
+                                            </div>
+                                        `;
+                                        portImg.parentElement.insertAdjacentElement('afterend', gallBox);
+                                    }
+                                } else {
+                                    const img = document.getElementById('centroGalleryImg');
+                                    if (img) img.src = c.foto_local_2;
+                                }
+                            }
+                        } else if (c.tipo_establecimiento === 'restaurante' || c.nombre.includes('Huerto')) {
+                            const titleEl = document.querySelector('#tabPanel-restaurantes h2');
+                            const addrEl = document.querySelector('#tabPanel-restaurantes p');
+                            const benefitEl = document.querySelector('#tabPanel-restaurantes .text-right span.text-accent');
+                            
+                            if (titleEl) titleEl.innerHTML = `🥑 ${c.nombre}`;
+                            if (addrEl && c.direccion) addrEl.innerText = c.direccion;
+                            if (benefitEl && c.beneficio_detalle) benefitEl.innerText = c.beneficio_detalle;
+
+                            // Foto de Menú / Alimentos (foto_local_2)
+                            if (c.foto_local_2) {
+                                let gallBox = document.getElementById('restaurantGalleryBox');
+                                if (!gallBox) {
+                                    const menuHeader = document.querySelector('#tabPanel-restaurantes h3');
+                                    if (menuHeader && menuHeader.parentElement) {
+                                        gallBox = document.createElement('div');
+                                        gallBox.id = 'restaurantGalleryBox';
+                                        gallBox.className = 'mb-4';
+                                        gallBox.innerHTML = `
+                                            <span class="text-[9px] uppercase font-bold text-accent block mb-1.5"><i class="fa-solid fa-utensils mr-1"></i> Carta de Menú y Especialidades del Local</span>
+                                            <div class="w-full h-44 rounded-xl overflow-hidden shadow-sm border border-gray-150">
+                                                <img id="restaurantGalleryImg" src="${c.foto_local_2}" class="w-full h-full object-cover">
+                                            </div>
+                                        `;
+                                        menuHeader.parentElement.insertBefore(gallBox, menuHeader);
+                                    }
+                                } else {
+                                    const img = document.getElementById('restaurantGalleryImg');
+                                    if (img) img.src = c.foto_local_2;
+                                }
+                            }
+                        } else if (c.tipo_establecimiento === 'gym' || c.nombre.includes('SportLife')) {
+                            const titleEl = document.querySelector('#tabPanel-gimnasios h2');
+                            const addrEl = document.querySelector('#tabPanel-gimnasios p');
+                            const benefitEl = document.querySelector('#tabPanel-gimnasios .text-right span.text-forest');
+
+                            if (titleEl) titleEl.innerHTML = `💪 ${c.nombre}`;
+                            if (addrEl && c.direccion) addrEl.innerText = c.direccion;
+                            if (benefitEl && c.beneficio_detalle) benefitEl.innerText = c.beneficio_detalle;
+
+                            // Foto de Máquinas / Equipamiento (foto_local_2)
+                            if (c.foto_local_2) {
+                                let gallBox = document.getElementById('gymGalleryBox');
+                                if (!gallBox) {
+                                    const carHeader = document.querySelector('#tabPanel-gimnasios h3');
+                                    if (carHeader && carHeader.parentElement) {
+                                        gallBox = document.createElement('div');
+                                        gallBox.id = 'gymGalleryBox';
+                                        gallBox.className = 'mb-4';
+                                        gallBox.innerHTML = `
+                                            <span class="text-[9px] uppercase font-bold text-forest/70 block mb-1.5"><i class="fa-solid fa-dumbbell mr-1"></i> Máquinas y Áreas de Entrenamiento</span>
+                                            <div class="w-full h-44 rounded-xl overflow-hidden shadow-sm border border-gray-150">
+                                                <img id="gymGalleryImg" src="${c.foto_local_2}" class="w-full h-full object-cover">
+                                            </div>
+                                        `;
+                                        carHeader.parentElement.insertBefore(gallBox, carHeader);
+                                    }
+                                } else {
+                                    const img = document.getElementById('gymGalleryImg');
+                                    if (img) img.src = c.foto_local_2;
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (err) {
+                console.error("Error al sincronizar centros públicos desde Supabase:", err.message);
+            }
+        }
+
+
         async function loadTherapistsDropdown() {
             try {
                 if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
@@ -1302,6 +1432,7 @@
         // Detectar de qué pestaña viene (tab parameter en la URL)
                 window.onload = function() {
             loadTherapistsDropdown();
+            syncPublicCentrosFromSupabase(); // Sincroniza logos y galerías en vivo desde Supabase!
             const urlParams = new URLSearchParams(window.location.search);
             const tabParam = urlParams.get('tab');
             if (tabParam) {
@@ -1499,13 +1630,16 @@
 
                     const preview = document.getElementById('adminLogoPreview');
                     if (loggedInB2B.foto_local_1) {
-                        if (loggedInB2B.foto_local_1.startsWith('data:image')) {
-                            preview.innerHTML = `<img src="${loggedInB2B.foto_local_1}" class="w-full h-full object-cover">`;
-                        } else {
-                            preview.innerHTML = `<img src="${loggedInB2B.foto_local_1}" class="w-full h-full object-cover">`;
-                        }
+                        preview.innerHTML = `<img src="${loggedInB2B.foto_local_1}" class="w-full h-full object-cover">`;
                     } else {
                         preview.innerHTML = '🏢';
+                    }
+
+                    const galleryPreview = document.getElementById('adminGalleryPreview');
+                    if (loggedInB2B.foto_local_2) {
+                        galleryPreview.innerHTML = `<img src="${loggedInB2B.foto_local_2}" class="w-full h-full object-cover">`;
+                    } else {
+                        galleryPreview.innerHTML = '🖼️';
                     }
 
                     // Abrir panel
@@ -1532,6 +1666,45 @@
             document.getElementById('localPassword').value = '';
         }
 
+        
+        // --- FUNCIÓN AVANZADA DE COMPRESIÓN DE IMÁGENES (HTML5 CANVAS) ---
+        // Soluciona permanentemente el problema de subida de fotos pesadas desde teléfonos móviles
+        function compressImage(file, maxWidth, maxHeight, quality, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Redimensionar manteniendo proporción de aspecto
+                    if (width > height) {
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                    } else {
+                        if (height > maxHeight) {
+                            width = Math.round((width * maxHeight) / height);
+                            height = maxHeight;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Comprimir y convertir a JPEG Base64
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                    callback(compressedBase64);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
         function triggerAdminLogoFileInput() {
             document.getElementById('adminLogoFileInput').click();
         }
@@ -1541,23 +1714,45 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert("⚠️ Por favor selecciona una imagen válida.");
-                return;
-            }
-            if (file.size > 2 * 1024 * 1024) {
-                alert("⚠️ La imagen no debe superar los 2MB de peso.");
+                alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64 = e.target.result;
+            // Mostrar spinner de carga de forma elegante
+            document.getElementById('adminLogoPreview').innerHTML = `<i class="fa-solid fa-spinner animate-spin text-forest"></i>`;
+
+            // Comprimir imagen a un máximo de 1000px y 0.7 de calidad ( JPEG ultra liviano )
+            compressImage(file, 1000, 1000, 0.7, function(base64) {
                 document.getElementById('adminLogoPreview').innerHTML = `<img src="${base64}" class="w-full h-full object-cover">`;
                 if (activeB2BClient) {
                     activeB2BClient.foto_local_1 = base64;
                 }
-            };
-            reader.readAsDataURL(file);
+            });
+        }
+
+        function triggerAdminGalleryFileInput() {
+            document.getElementById('adminGalleryFileInput').click();
+        }
+
+        function uploadAdminGallery(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
+                return;
+            }
+
+            // Mostrar spinner de carga de forma elegante
+            document.getElementById('adminGalleryPreview').innerHTML = `<i class="fa-solid fa-spinner animate-spin text-accent"></i>`;
+
+            // Comprimir imagen a un máximo de 1000px y 0.7 de calidad ( JPEG ultra liviano )
+            compressImage(file, 1000, 1000, 0.7, function(base64) {
+                document.getElementById('adminGalleryPreview').innerHTML = `<img src="${base64}" class="w-full h-full object-cover">`;
+                if (activeB2BClient) {
+                    activeB2BClient.foto_local_2 = base64;
+                }
+            });
         }
 
         async function saveLocalProfile() {
@@ -1579,7 +1774,8 @@
                 direccion: address,
                 descripcion: desc,
                 beneficio_detalle: benefit,
-                foto_local_1: activeB2BClient.foto_local_1
+                foto_local_1: activeB2BClient.foto_local_1,
+                foto_local_2: activeB2BClient.foto_local_2
             };
 
             if (pass !== '') {
@@ -1605,6 +1801,8 @@
                 activeB2BClient.direccion = address;
                 activeB2BClient.descripcion = desc;
                 activeB2BClient.beneficio_detalle = benefit;
+                // Sincronizar de inmediato la vista pública tras guardar!
+                syncPublicCentrosFromSupabase();
                 
             } catch (err) {
                 console.error("Error al actualizar B2B profile:", err.message);
