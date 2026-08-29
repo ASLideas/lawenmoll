@@ -517,6 +517,10 @@
             const confirmCancel = confirm("❓ ¿Estás seguro de que deseas marcar esta cita médica como Cancelada de forma permanente en Supabase?");
             if (!confirmCancel) return;
 
+            const patientName = document.getElementById('patientName').innerText;
+            const dateTime = document.getElementById('patientDateTime').innerText;
+            const phone = activePatientPhone;
+
             try {
                 const { error } = await _supabase
                     .from('citas')
@@ -527,6 +531,18 @@
 
                 alert("🎉 ¡Cita Cancelada con Éxito en Supabase!\nEl espacio de atención ha sido liberado de manera segura.");
                 
+                const notify = confirm(`❓ ¿Deseas notificar de forma inmediata la cancelación por WhatsApp al paciente ${patientName} (${phone})?`);
+                if (notify) {
+                    const textMsg = `*⚠️ AVISO DE CANCELACIÓN DE CITA - LAWENMOLL*\n\n` +
+                                    `Hola, se ha cancelado tu cita programada de forma segura:\n` +
+                                    `• *Profesional:* Klgo. Carlos Mendoza\n` +
+                                    `• *Fecha/Hora:* ${dateTime}\n` +
+                                    `• *Paciente:* ${patientName}\n\n` +
+                                    `Lamentamos los inconvenientes ocurridos. Si deseas re-agendar un espacio, por favor contáctame por esta vía o vuelve a iniciar tu Test de Bienestar en LAWENMOLL.`;
+                    
+                    window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(textMsg)}`, '_blank');
+                }
+
                 // Recargar citas para actualizar el estado visual en la barra lateral
                 const listContainer = document.getElementById('appointmentList');
                 listContainer.innerHTML = "";
