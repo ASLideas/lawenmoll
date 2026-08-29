@@ -119,8 +119,14 @@
                     <div class="font-bold text-xs text-slateDark" id="headerTherapistName">Klgo. Carlos Mendoza</div>
                     <div class="text-[9px] text-gray-400" id="headerTherapistSpec">Kinesiólogo Integrativo • Santiago, Chile</div>
                 </div>
-                <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-white font-bold shadow-md text-xs" id="headerTherapistAvatar">
-                    CM
+                <div class="relative group cursor-pointer" onclick="triggerAvatarUpload()" title="Haz clic para subir tu foto de perfil">
+                    <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-white font-bold shadow-md text-xs overflow-hidden" id="headerTherapistAvatar">
+                        CM
+                    </div>
+                    <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+                        <i class="fa-solid fa-camera text-[10px] text-white"></i>
+                    </div>
+                    <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="uploadTherapistAvatar(event)">
                 </div>
                 <!-- BOTÓN DE CERRAR SESIÓN -->
                 <button onclick="handleLogout()" class="text-xs bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-bold py-1.5 px-3 rounded-xl transition flex items-center space-x-1 border border-red-200">
@@ -763,6 +769,82 @@
                   `Mensaje a enviar:\n----------------------------------\n` + textMsg);
             
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`, '_blank');
+        }
+    
+        // --- MOTOR DE TELEMEDICINA JITSI MEET & CARGA DE FOTO AVATAR ---
+        function startVideoCall() {
+            const patientName = document.getElementById('patientName').innerText.split(' (')[0];
+            const therapistName = activeTherapist ? activeTherapist.nombre : 'Carlos Mendoza';
+            const roomName = "Lawenmoll_" + encodeURIComponent(therapistName.replace(/[^a-zA-Z0-9]/g, '')) + "_" + encodeURIComponent(patientName.replace(/[^a-zA-Z0-9]/g, ''));
+            
+            const iframe = document.getElementById('videoCallFrame');
+            if (iframe) {
+                iframe.src = `https://meet.jit.si/${roomName}#config.prejoinPageEnabled=false&interfaceConfig.ALREADY_JOINED_PAGE_ENABLED=false`;
+            }
+            const modal = document.getElementById('videoCallModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeVideoCall() {
+            const iframe = document.getElementById('videoCallFrame');
+            if (iframe) {
+                iframe.src = ''; // Detener transmisión de cámara y micro
+            }
+            const modal = document.getElementById('videoCallModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Carga Interactiva de Foto de Perfil Profesional B2B (Base64 + Supabase)
+        function triggerAvatarUpload() {
+            document.getElementById('avatarFileInput').click();
+        }
+
+        async function uploadTherapistAvatar(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Validar tipo y peso
+            if (!file.type.startsWith('image/')) {
+                alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
+                return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+                alert("⚠️ El archivo es muy pesado. El límite es de 2 MB para asegurar el rendimiento.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64Data = e.target.result;
+
+                // Actualizar visualmente en pantalla inmediatamente
+                const avatarEl = document.getElementById('headerTherapistAvatar');
+                if (avatarEl) {
+                    avatarEl.innerHTML = `<img src="${base64Data}" class="w-full h-full object-cover rounded-full shadow-inner border border-forest/10" alt="Avatar">`;
+                }
+
+                // Guardar de forma persistente en Supabase para el terapeuta logueado
+                try {
+                    if (supabaseKey !== '' && activeTherapist) {
+                        const { error } = await _supabase
+                            .from('terapeutas')
+                            .update({ foto_profesional: base64Data })
+                            .eq('nombre', activeTherapist.nombre);
+
+                        if (error) throw error;
+                        alert("📸 ¡Foto de perfil profesional actualizada y sincronizada con éxito en LAWENMOLL!");
+                    } else {
+                        alert("📸 ¡Foto de perfil actualizada de forma local con éxito!");
+                    }
+                } catch (err) {
+                    console.error("❌ Error al guardar foto de perfil en Supabase:", err.message);
+                }
+            };
+            reader.readAsDataURL(file);
         }
     </script>
 </div>

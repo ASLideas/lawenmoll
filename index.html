@@ -273,6 +273,42 @@
                                 <input type="password" id="joinPassword" placeholder="Crea tu contraseña" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                             </div>
                         </div>
+
+                        <!-- Carga de Foto de Perfil y Certificado (SaaS B2B) -->
+                        <div class="grid grid-cols-2 gap-3 mt-3 text-left">
+                            <div class="space-y-1">
+                                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Cargar Foto de Perfil Profesional</label>
+                                <div class="flex items-center space-x-2 bg-white border border-gray-200 p-2 rounded-xl shadow-sm">
+                                    <div id="joinPhotoPreview" class="w-8 h-8 rounded-full bg-forest/10 border border-forest/10 flex items-center justify-center text-sm overflow-hidden flex-shrink-0">
+                                        📷
+                                    </div>
+                                    <div class="flex-grow text-left overflow-hidden">
+                                        <input type="file" id="joinPhotoInput" accept="image/*" class="hidden" onchange="uploadJoinPhoto(event)">
+                                        <button type="button" onclick="document.getElementById('joinPhotoInput').click()" class="bg-white hover:bg-forest/5 text-forest border border-forest/20 rounded-lg px-2 py-1 text-[8px] font-bold shadow-sm transition focus:outline-none">
+                                            Seleccionar
+                                        </button>
+                                        <span id="joinPhotoFileName" class="text-[7px] text-gray-400 block truncate max-w-[100px]">Mín 150x150px</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="joinPhotoBase64" value="">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Cargar Certificado de Título / Diploma</label>
+                                <div class="flex items-center space-x-2 bg-white border border-gray-200 p-2 rounded-xl shadow-sm">
+                                    <div id="joinDocPreview" class="w-8 h-8 rounded-full bg-forest/10 border border-forest/10 flex items-center justify-center text-sm overflow-hidden flex-shrink-0">
+                                        📄
+                                    </div>
+                                    <div class="flex-grow text-left overflow-hidden">
+                                        <input type="file" id="joinDocInput" accept="image/*" class="hidden" onchange="uploadJoinDoc(event)">
+                                        <button type="button" onclick="document.getElementById('joinDocInput').click()" class="bg-white hover:bg-forest/5 text-forest border border-forest/20 rounded-lg px-2 py-1 text-[8px] font-bold shadow-sm transition focus:outline-none">
+                                            Seleccionar
+                                        </button>
+                                        <span id="joinDocFileName" class="text-[7px] text-gray-400 block truncate max-w-[100px]">PDF, PNG, JPG</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="joinDocBase64" value="">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1800,6 +1836,8 @@
                                 email: emailVal,
                                 password: passVal,
                                 estado_suscripcion: 'activo',
+                                foto_profesional: document.getElementById('joinPhotoBase64').value || null,
+                                foto_titulo: document.getElementById('joinDocBase64').value || null,
                                 id_cliente_pasarela: clientPasarela
                             }
                         ])
@@ -1829,10 +1867,65 @@
                 document.querySelector('#stepJoin input[placeholder="Ej: Registro SIS N° 483920"]').value = "";
                 document.getElementById('joinEmail').value = "";
                 document.getElementById('joinPassword').value = "";
+                document.getElementById('joinPhotoBase64').value = "";
+                document.getElementById('joinDocBase64').value = "";
+                document.getElementById('joinPhotoFileName').innerText = "Mín 150x150px";
+                document.getElementById('joinDocFileName').innerText = "PDF, PNG, JPG";
+                document.getElementById('joinPhotoPreview').innerHTML = "📷";
+                document.getElementById('joinDocPreview').innerHTML = "📄";
                 nextStep(1);
             }, 2000);
         }
 
+    
+        // Carga de Foto y Documento de Especialista B2B (Base64)
+        function uploadJoinPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert("⚠️ Por favor selecciona una imagen válida.");
+                return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+                alert("⚠️ La imagen no debe superar los 2 MB.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Data = e.target.result;
+                document.getElementById('joinPhotoBase64').value = base64Data;
+                document.getElementById('joinPhotoFileName').innerText = file.name;
+                document.getElementById('joinPhotoPreview').innerHTML = `<img src="${base64Data}" class="w-full h-full object-cover">`;
+                alert("📸 ¡Foto de perfil cargada localmente con éxito!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function uploadJoinDoc(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+                alert("⚠️ Por favor selecciona un archivo de imagen o PDF válido.");
+                return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+                alert("⚠️ El archivo no debe superar los 2 MB.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Data = e.target.result;
+                document.getElementById('joinDocBase64').value = base64Data;
+                document.getElementById('joinDocFileName').innerText = file.name;
+                document.getElementById('joinDocPreview').innerHTML = `<div class="text-[9px] text-forest font-bold uppercase">OK</div>`;
+                alert("📄 ¡Certificado de Título cargado localmente con éxito!");
+            };
+            reader.readAsDataURL(file);
+        }
     </script>
     
 

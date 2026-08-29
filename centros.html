@@ -107,6 +107,24 @@
                         </div>
                     </div>
 
+                    <!-- Carga de Logo/Foto del Establecimiento (SaaS B2B) -->
+                    <div class="space-y-1">
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Cargar Logo o Foto del Establecimiento (SaaS B2B)</label>
+                        <div class="flex items-center space-x-3.5 bg-gray-50 border border-gray-200 p-2.5 rounded-2xl shadow-sm">
+                            <div id="b2bLogoPreview" class="w-10 h-10 rounded-xl bg-forest/10 border border-forest/10 flex items-center justify-center text-lg overflow-hidden flex-shrink-0">
+                                🏢
+                            </div>
+                            <div class="flex-grow text-left">
+                                <input type="file" id="b2bLogoInput" accept="image/*" class="hidden" onchange="uploadB2BLogo(event)">
+                                <button type="button" onclick="document.getElementById('b2bLogoInput').click()" class="bg-white hover:bg-forest/5 text-forest border border-forest/20 rounded-xl px-2.5 py-1.5 text-[9px] font-bold shadow-sm transition focus:outline-none">
+                                    <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Seleccionar Imagen
+                                </button>
+                                <span id="b2bLogoFileName" class="text-[8px] text-gray-400 block mt-1 truncate max-w-[180px]">Ningún archivo seleccionado (PNG, JPG de máx 2MB)</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="b2bLogoBase64" value="">
+                    </div>
+
                     <!-- Acuerdo de Ciberseguridad B2B (Ley N° 21.663) -->
                     <div class="bg-slateDark text-white p-4 rounded-2xl space-y-2.5 border border-gray-800">
                         <span class="text-[9px] uppercase font-bold text-accent tracking-wider flex items-center">
@@ -1318,6 +1336,7 @@
                                 beneficio_detalle: '15% DCTO en servicios seleccionados',
                                 direccion: addressVal,
                                 estado_suscripcion: 'activo',
+                                foto_local_1: document.getElementById('b2bLogoBase64').value || null,
                                 id_cliente_pasarela: `FLOW-${Math.floor(1000 + Math.random() * 9000)}-TX`
                             }
                         ]);
@@ -1606,6 +1625,31 @@
 
 ` +
                   `¡Recuerda que tienes un 15% de descuento exclusivo presentando este ticket por ser usuario de LAWENMOLL!`);
+        }
+    
+        // Carga de Logo del Establecimiento B2B (Base64 + Supabase)
+        function uploadB2BLogo(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert("⚠️ Por favor selecciona una imagen válida (PNG o JPG).");
+                return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+                alert("⚠️ La imagen no debe superar los 2 MB para un óptimo rendimiento.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Data = e.target.result;
+                document.getElementById('b2bLogoBase64').value = base64Data;
+                document.getElementById('b2bLogoFileName').innerText = file.name;
+                document.getElementById('b2bLogoPreview').innerHTML = `<img src="${base64Data}" class="w-full h-full object-cover">`;
+                alert("📸 ¡Logo cargado correctamente de forma local! Listo para ser guardado de forma permanente.");
+            };
+            reader.readAsDataURL(file);
         }
     </script>
 </body>
