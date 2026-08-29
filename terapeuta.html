@@ -302,13 +302,13 @@
         
         // CONFIGURACIÓN DE CONEXIÓN CON TU BASE DE DATOS (SUPABASE)
         const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3Mjg0MDAsImV4cCI6MjA0MDMwNDQwMH0...';
-         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo'; // 👈 AQUÍ PEGAS TU CLAVE ANON DE SUPABASE
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Cargar citas reales de Supabase en la barra lateral
         async function loadAppointmentsFromSupabase() {
             try {
-                if (supabaseKey === 'TU_LLAVE_ANON_AQUÍ' || supabaseKey === '') return;
+                if (supabaseKey === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' || supabaseKey === '') return;
                 const { data, error } = await _supabase
                     .from('citas')
                     .select('*, terapeutas(*)')
@@ -348,7 +348,7 @@
         // Cargar secretos de la abuela dinámicamente en el selector del Plan de Tratamiento
         async function loadSecretsDropdown() {
             try {
-                if (supabaseKey === 'TU_LLAVE_ANON_AQUÍ' || supabaseKey === '') return;
+                if (supabaseKey === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' || supabaseKey === '') return;
                 const { data, error } = await _supabase
                     .from('mural_abuela')
                     .select('id, title, secret');
@@ -460,7 +460,7 @@
             const p = document.getElementById('soapP').value;
 
             try {
-                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     // Obtener id del terapeuta Carlos Mendoza
                     const { data: therapist } = await _supabase
                         .from('terapeutas')
@@ -491,7 +491,7 @@
                         ]);
 
                     if (error) throw error;
-                    alert(`🎉 ¡Ficha SOAP Guardada con Éxito en Supabase!\nLa ficha clínica de ${name} ha sido encriptada y resguardada de forma segura bajo la Ley N° 21.663.`);
+                    alert();
                 } else {
                     alert('⚠️ Guardado Local: Para registrar esta ficha de forma permanente en Supabase, por favor pega tu clave anon en el código.');
                 }

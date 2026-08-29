@@ -967,13 +967,13 @@
         
         // CONFIGURACIÓN DE CONEXIÓN CON TU BASE DE DATOS (SUPABASE)
         const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3Mjg0MDAsImV4cCI6MjA0MDMwNDQwMH0...';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo'; // 👈 AQUÍ PEGAS TU CLAVE ANON DE SUPABASE
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Cargar terapeutas dinámicamente en el selector
         async function loadTherapistsDropdown() {
             try {
-                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     const { data, error } = await _supabase
                         .from('terapeutas')
                         .select('id, nombre, especialidad')
@@ -1167,7 +1167,7 @@
             }
         }
 
-                async function processB2BPayment() {
+                        async function processB2BPayment() {
             const nameVal = document.getElementById('b2bName').value.trim();
             const typeVal = document.getElementById('b2bType').value;
             const rutVal = document.getElementById('b2bRut').value.trim();
@@ -1191,7 +1191,7 @@
 
             // Registro real en Supabase
             try {
-                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     const { error } = await _supabase
                         .from('centros_convenios')
                         .insert([
@@ -1222,23 +1222,8 @@
                 document.getElementById('b2bStepSuccess').classList.remove('hidden');
             }, 2000);
         }
-            
 
-            btn.setAttribute('disabled', 'true');
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
-
-            setTimeout(() => {
-                // Success flow
-                document.getElementById('successB2BTitle').innerText = nameVal;
-                document.getElementById('successB2BMethod').innerText = b2bPaymentMethod === 'webpay' ? 'Webpay Plus (Transbank)' : 'Fintoc (Banco Chile/Santander)';
-                document.getElementById('successB2BAuth').innerText = "FLOW-" + Math.floor(1000000 + Math.random() * 9000000) + "-TX";
-                
-                document.getElementById('b2bStepCheckout').classList.add('hidden');
-                document.getElementById('b2bStepSuccess').classList.remove('hidden');
-            }, 2000);
-        
-
-                async function bookClinicalAppointment() {
+        async function bookClinicalAppointment() {
             const specialistVal = document.getElementById('clinicalSpecialist').value;
             const dateVal = document.getElementById('clinicalDate').value;
             const timeVal = document.getElementById('clinicalTime').value;
@@ -1259,7 +1244,7 @@
 
             // Guardado real en Supabase
             try {
-                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     // Obtener id del terapeuta
                     const { data: therapistData } = await _supabase
                         .from('terapeutas')
@@ -1410,7 +1395,7 @@
 
             // Guardado real en Supabase
             try {
-                if (supabaseKey !== 'TU_LLAVE_ANON_AQUÍ' && supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     const { error } = await _supabase
                         .from('citas')
                         .insert([
