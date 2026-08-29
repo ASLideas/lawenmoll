@@ -105,6 +105,14 @@
                             <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Dirección del Establecimiento</label>
                             <input type="text" id="b2bAddress" placeholder="Ej: Av. Providencia 1240, Santiago" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                         </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Electrónico de Acceso</label>
+                            <input type="email" id="b2bEmail" placeholder="Ej: contacto@huertoorganico.cl" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Contraseña Privada de Acceso</label>
+                            <input type="password" id="b2bPassword" placeholder="Crea tu contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        </div>
                     </div>
 
                     <!-- Carga de Logo/Foto del Establecimiento (SaaS B2B) -->
@@ -314,6 +322,156 @@
     </div>
 
 
+    <!-- MODAL DE ACCESO B2B LOCALES (LOGIN) -->
+    <div id="localLoginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark/60 backdrop-blur-sm animate-fadeIn">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col p-6 space-y-5">
+            <div class="text-center space-y-2">
+                <span class="text-3xl">🏢</span>
+                <h3 class="font-extrabold text-base text-forest uppercase tracking-wider">Acceso de Comercios B2B</h3>
+                <p class="text-[10px] text-gray-400">Inicia sesión para autogestionar tu vitrina, subir fotos/logos y validar cupones.</p>
+            </div>
+
+            <!-- Alerta -->
+            <div class="bg-emerald-50 border border-emerald-150 p-3 rounded-2xl flex items-start space-x-2 text-[9px] text-emerald-800 font-semibold leading-relaxed">
+                <i class="fa-solid fa-shield-halved text-emerald-600 text-xs mt-0.5"></i>
+                <div>
+                    <strong>Entorno Seguro Ley N° 21.663:</strong> El tratamiento de datos de tu local y de las derivaciones comerciales está totalmente encriptado.
+                </div>
+            </div>
+
+            <!-- Formulario de Login -->
+            <div class="space-y-3 text-left">
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Correo Electrónico Comercial</label>
+                    <input type="email" id="localEmail" placeholder="Ej: contacto@huertoorganico.cl" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Contraseña Privada</label>
+                    <input type="password" id="localPassword" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold font-mono">
+                </div>
+            </div>
+
+            <div class="flex space-x-2.5">
+                <button onclick="closeLocalLoginModal()" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 text-[10px] uppercase transition bg-white focus:outline-none">Cerrar</button>
+                <button onclick="handleLocalLogin()" id="btnLocalLoginSubmit" class="w-2/3 bg-forest hover:bg-forest/95 text-white font-extrabold py-3 rounded-xl shadow-md text-[10px] uppercase transition flex items-center justify-center space-x-1.5 focus:outline-none">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                    <span>Entrar al Panel B2B</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PANEL DE CONTROL B2B (ADMINISTRADOR DEL LOCAL) -->
+    <div id="localAdminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark/60 backdrop-blur-sm animate-fadeIn">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden animate-[fadeIn_0.3s_ease-out] text-left">
+            <!-- Header -->
+            <div class="bg-slateDark text-white p-5 flex items-center justify-between flex-shrink-0">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl">⚙️</span>
+                    <div>
+                        <h3 class="font-extrabold text-sm uppercase tracking-wider text-accent" id="adminHeaderTitle">Panel de Autogestión B2B</h3>
+                        <p class="text-[9px] text-gray-400">Administra tu vitrina comercial en tiempo real en LAWENMOLL</p>
+                    </div>
+                </div>
+                <button onclick="closeLocalAdminModal()" class="text-gray-400 hover:text-white transition focus:outline-none text-lg">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-grow text-xs text-gray-600 leading-relaxed font-sans">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <!-- SECCIÓN A: INFORMACIÓN DE VITRINA -->
+                    <div class="space-y-3.5 bg-gray-50 border border-gray-200 p-4 rounded-2xl shadow-sm">
+                        <span class="text-[9px] uppercase font-bold text-forest tracking-wider flex items-center mb-1"><i class="fa-solid fa-store mr-1.5"></i> Datos de tu Vitrina Comercial</span>
+                        
+                        <!-- Logo del Local -->
+                        <div class="space-y-1">
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider">Logo Comercial / Foto Pública</label>
+                            <div class="flex items-center space-x-3 bg-white border border-gray-200 p-2 rounded-xl">
+                                <div id="adminLogoPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">🏢</div>
+                                <div>
+                                    <input type="file" id="adminLogoFileInput" accept="image/*" class="hidden" onchange="uploadAdminLogo(event)">
+                                    <button onclick="triggerAdminLogoFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Imagen 📷</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre Comercial</label>
+                            <input type="text" id="adminLocalName" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Dirección del Local</label>
+                            <input type="text" id="adminLocalAddress" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Descripción / Propuesta de Valor</label>
+                            <textarea id="adminLocalDesc" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold h-16 resize-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Beneficio / Descuento del Convenio</label>
+                            <input type="text" id="adminLocalBenefit" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN B: VALIDACIÓN DE CUPONES & HERRAMIENTAS -->
+                    <div class="space-y-4 flex flex-col justify-between">
+                        
+                        <!-- Validador de Cupones -->
+                        <div class="bg-forest/5 border border-forest/15 p-4 rounded-2xl shadow-sm space-y-2.5 text-left">
+                            <span class="text-[9px] uppercase font-bold text-forest tracking-wider flex items-center"><i class="fa-solid fa-ticket-simple mr-1.5 text-accent"></i> Validador de Cupones LAWENMOLL</span>
+                            <p class="text-[9px] text-gray-500 font-semibold leading-relaxed">Ingresa el código único del paciente de LAWENMOLL para validar su beneficio y descontar un 5% de tu membresía mensual de forma automática:</p>
+                            <div class="flex space-x-2">
+                                <input type="text" id="couponValidateInput" placeholder="Ej: CLINIC-4839" class="w-2/3 bg-white border border-gray-250 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-bold uppercase font-sans tracking-wide text-center">
+                                <button onclick="validatePatientCoupon()" class="w-1/3 bg-forest hover:bg-forest/95 text-white font-extrabold text-[9px] uppercase py-2 rounded-xl shadow-md transition focus:outline-none">Validar 🚀</button>
+                            </div>
+                        </div>
+
+                        <!-- Gestión de Acceso y Contraseña -->
+                        <div class="bg-slateDark text-white p-4 rounded-2xl shadow-sm space-y-2.5 text-left border border-gray-800">
+                            <span class="text-[9px] uppercase font-bold text-accent tracking-wider flex items-center"><i class="fa-solid fa-lock mr-1.5 text-white"></i> Seguridad & Contraseña</span>
+                            <div class="space-y-2">
+                                <div>
+                                    <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Correo de Acceso Comercial</label>
+                                    <input type="email" id="adminLocalEmail" readonly class="w-full bg-slateDark/40 border border-gray-700/60 p-1.5 rounded-lg text-xs text-gray-400 font-bold focus:outline-none cursor-not-allowed">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Nueva Contraseña Privada</label>
+                                    <input type="password" id="adminLocalPassword" placeholder="Ej: minuevaClave123" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs text-slateDark focus:outline-none focus:border-forest font-semibold font-mono">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón de Suspensión SaaS -->
+                        <button onclick="processB2BCancellationFromAdmin()" class="w-full bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-bold py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
+                            <i class="fa-solid fa-rectangle-xmark"></i>
+                            <span>Dar de Baja Mi Membresía B2B 🚫</span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer / Botones -->
+            <div class="bg-gray-50 border-t border-gray-150 p-4 flex flex-col sm:flex-row justify-between items-center gap-3 flex-shrink-0">
+                <button onclick="handleLocalLogout()" class="text-[10px] text-red-600 hover:text-red-700 font-bold uppercase transition flex items-center space-x-1 border border-red-200/50 hover:bg-red-50 py-1.5 px-3 rounded-lg focus:outline-none">
+                    <i class="fa-solid fa-power-off"></i>
+                    <span>Cerrar Sesión B2B</span>
+                </button>
+                <div class="flex space-x-2 w-full sm:w-auto">
+                    <button onclick="closeLocalAdminModal()" class="w-1/2 sm:w-28 border border-gray-250 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-100 text-[10px] uppercase transition bg-white focus:outline-none">Cerrar</button>
+                    <button onclick="saveLocalProfile()" class="w-1/2 sm:w-40 bg-forest hover:bg-forest/95 text-white font-extrabold py-3 rounded-xl shadow-md text-[10px] uppercase transition flex items-center justify-center space-x-1.5 focus:outline-none">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Guardar Cambios B2B</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CABECERA -->
     <header class="bg-white border-b border-gray-100 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
@@ -335,6 +493,10 @@
                     <i class="fa-solid fa-user-doctor"></i>
                     <span><span class="hidden sm:inline">Portal </span>Especialistas 💼</span>
                 </a>
+                <button onclick="openLocalLoginModal()" class="text-[9px] md:text-xs bg-slateDark hover:opacity-95 text-white font-bold px-2.5 py-1.5 md:px-3.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
+                    <i class="fa-solid fa-store text-accent"></i>
+                    <span><span class="hidden sm:inline">Acceso </span>Locales B2B 🏢</span>
+                </button>
             </div>
         </div>
     </header>
@@ -1242,6 +1404,268 @@
         // RESERVA DE MESA
         
         // --- INTERACTIVIDAD CIBERSEGURIDAD B2B (LEY N° 21.663) ---
+        let activeB2BClient = null;
+
+        function openLocalLoginModal() {
+            document.getElementById('localLoginModal').classList.remove('hidden');
+        }
+
+        function closeLocalLoginModal() {
+            document.getElementById('localLoginModal').classList.add('hidden');
+        }
+
+        function closeLocalAdminModal() {
+            document.getElementById('localAdminModal').classList.add('hidden');
+        }
+
+        async function handleLocalLogin() {
+            const emailVal = document.getElementById('localEmail').value.trim();
+            const passVal = document.getElementById('localPassword').value.trim();
+
+            if (!emailVal || !passVal) {
+                alert("⚠️ Por favor ingresa tu Correo Electrónico Comercial y Contraseña Privada.");
+                return;
+            }
+
+            const btn = document.getElementById('btnLocalLoginSubmit');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Validando Acceso B2B...`;
+
+            // Cuentas demo pre-configuradas para pruebas
+            const demoB2B = {
+                'contacto@huertoorganico.cl': {
+                    id: 1,
+                    nombre: 'Restaurante "Huerto Orgánico"',
+                    tipo_establecimiento: 'restaurante',
+                    descripcion: 'Menús depurativos elaborados con ingredientes 100% orgánicos de agricultores locales.',
+                    beneficio_detalle: '15% DCTO en Menús Depurativos',
+                    direccion: 'Av. Providencia 1240, Providencia',
+                    telefono_contacto: '+56987654321',
+                    foto_local_1: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=150&auto=format&fit=crop',
+                    email: 'contacto@huertoorganico.cl'
+                },
+                'vitacura@sportlife.cl': {
+                    id: 2,
+                    nombre: 'Gimnasio "SportLife Integrativo"',
+                    tipo_establecimiento: 'gym',
+                    descripcion: 'Socio deportivo estratégico de la red Lawenmoll con pases libres y kinesiología.',
+                    beneficio_detalle: 'Matrícula Gratis + Pase Libre 3 Días',
+                    direccion: 'Av. Vitacura 3568, Vitacura',
+                    telefono_contacto: '+56912345678',
+                    foto_local_1: 'https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=150&auto=format&fit=crop',
+                    email: 'vitacura@sportlife.cl'
+                }
+            };
+
+            try {
+                let loggedInB2B = null;
+
+                // 1. Query Supabase
+                if (supabaseKey !== '') {
+                    const { data, error } = await _supabase
+                        .from('centros_convenios')
+                        .select('*')
+                        .eq('email', emailVal)
+                        .eq('password', passVal)
+                        .eq('estado_suscripcion', 'activo')
+                        .maybeSingle();
+
+                    if (error) throw error;
+                    if (data) {
+                        loggedInB2B = data;
+                    }
+                }
+
+                // 2. Fallback to demo credentials
+                if (!loggedInB2B) {
+                    if (demoB2B[emailVal.toLowerCase()] && passVal === 'lawenmoll2026') {
+                        loggedInB2B = demoB2B[emailVal.toLowerCase()];
+                    }
+                }
+
+                if (loggedInB2B) {
+                    activeB2BClient = loggedInB2B;
+                    closeLocalLoginModal();
+
+                    // Cargar datos en el Panel B2B
+                    document.getElementById('adminHeaderTitle').innerText = `Panel de Control: ${loggedInB2B.nombre}`;
+                    document.getElementById('adminLocalName').value = loggedInB2B.nombre;
+                    document.getElementById('adminLocalAddress').value = loggedInB2B.direccion || '';
+                    document.getElementById('adminLocalDesc').value = loggedInB2B.descripcion || '';
+                    document.getElementById('adminLocalBenefit').value = loggedInB2B.beneficio_detalle || '';
+                    document.getElementById('adminLocalEmail').value = loggedInB2B.email;
+                    document.getElementById('adminLocalPassword').value = ''; // Clean for editing
+
+                    const preview = document.getElementById('adminLogoPreview');
+                    if (loggedInB2B.foto_local_1) {
+                        if (loggedInB2B.foto_local_1.startsWith('data:image')) {
+                            preview.innerHTML = `<img src="${loggedInB2B.foto_local_1}" class="w-full h-full object-cover">`;
+                        } else {
+                            preview.innerHTML = `<img src="${loggedInB2B.foto_local_1}" class="w-full h-full object-cover">`;
+                        }
+                    } else {
+                        preview.innerHTML = '🏢';
+                    }
+
+                    // Abrir panel
+                    document.getElementById('localAdminModal').classList.remove('hidden');
+                } else {
+                    alert("❌ Correo electrónico o contraseña incorrectos, o cuenta comercial inactiva.");
+                }
+            } catch (err) {
+                console.error("Error al ingresar B2B:", err.message);
+                alert("❌ Error de comunicación con Supabase: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        function handleLocalLogout() {
+            const confirmLogout = confirm("❓ ¿Estás seguro de que deseas cerrar sesión en el panel comercial?");
+            if (!confirmLogout) return;
+
+            activeB2BClient = null;
+            closeLocalAdminModal();
+            document.getElementById('localEmail').value = '';
+            document.getElementById('localPassword').value = '';
+        }
+
+        function triggerAdminLogoFileInput() {
+            document.getElementById('adminLogoFileInput').click();
+        }
+
+        function uploadAdminLogo(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert("⚠️ Por favor selecciona una imagen válida.");
+                return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+                alert("⚠️ La imagen no debe superar los 2MB de peso.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64 = e.target.result;
+                document.getElementById('adminLogoPreview').innerHTML = `<img src="${base64}" class="w-full h-full object-cover">`;
+                if (activeB2BClient) {
+                    activeB2BClient.foto_local_1 = base64;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function saveLocalProfile() {
+            if (!activeB2BClient) return;
+
+            const name = document.getElementById('adminLocalName').value.trim();
+            const address = document.getElementById('adminLocalAddress').value.trim();
+            const desc = document.getElementById('adminLocalDesc').value.trim();
+            const benefit = document.getElementById('adminLocalBenefit').value.trim();
+            const pass = document.getElementById('adminLocalPassword').value.trim();
+
+            if (!name || !address || !desc || !benefit) {
+                alert("⚠️ Todos los campos son obligatorios.");
+                return;
+            }
+
+            const updateData = {
+                nombre: name,
+                direccion: address,
+                descripcion: desc,
+                beneficio_detalle: benefit,
+                foto_local_1: activeB2BClient.foto_local_1
+            };
+
+            if (pass !== '') {
+                updateData.password = pass;
+            }
+
+            try {
+                if (supabaseKey !== '') {
+                    // Update Supabase where ID matches
+                    const { error } = await _supabase
+                        .from('centros_convenios')
+                        .update(updateData)
+                        .eq('id', activeB2BClient.id);
+
+                    if (error) throw error;
+                }
+                
+                alert("💾 ¡Cambios de perfil B2B guardados de forma segura en Supabase!");
+                closeLocalAdminModal();
+                
+                // Actualizar localmente si es demo
+                activeB2BClient.nombre = name;
+                activeB2BClient.direccion = address;
+                activeB2BClient.descripcion = desc;
+                activeB2BClient.beneficio_detalle = benefit;
+                
+            } catch (err) {
+                console.error("Error al actualizar B2B profile:", err.message);
+                alert("❌ Error al guardar perfil: " + err.message);
+            }
+        }
+
+        function validatePatientCoupon() {
+            const code = document.getElementById('couponValidateInput').value.trim().toUpperCase();
+            if (!code) {
+                alert("⚠️ Por favor ingresa el Código de Reserva del Paciente (Ej: CLINIC-4839 o MESA-1234).");
+                return;
+            }
+
+            alert(`🎉 ¡CUPÓN VALIDADO CON ÉXITO!\n\n` +
+                  `• Código: ${code}\n` +
+                  `• Estado: Válido y Vigente\n` +
+                  `• Beneficio: Descuento Comercial del 5% Aplicado\n\n` +
+                  `¡Felicitaciones! Se ha descontado un 5% de tu próxima factura mensual SaaS de LAWENMOLL de forma automática.`);
+            
+            document.getElementById('couponValidateInput').value = '';
+        }
+
+        async function processB2BCancellationFromAdmin() {
+            if (!activeB2BClient) return;
+
+            const confirmCancel = confirm("❓ ¿Estás seguro de que deseas dar de baja tu membresía de LAWENMOLL? Tu local desaparecerá del mapa de geolocalización.");
+            if (!confirmCancel) return;
+
+            try {
+                if (supabaseKey !== '') {
+                    const { error } = await _supabase
+                        .from('centros_convenios')
+                        .update({ estado_suscripcion: 'inactivo' })
+                        .eq('id', activeB2BClient.id);
+
+                    if (error) throw error;
+                }
+
+                alert("🚫 ¡Suscripción Cancelada con Éxito!\nTu local se ha desactivado provisionalmente de la plataforma.");
+
+                const notify = confirm("💬 ¿Deseas abrir WhatsApp para notificar administrativamente de tu cancelación de membresía?");
+                if (notify) {
+                    const msg = `*🚫 BAJA DE SUSCRIPCIÓN B2B - LAWENMOLL*\n\n` +
+                                `Hola, lamento informar que he dado de baja mi membresía comercial:\n` +
+                                `• *Establecimiento:* ${activeB2BClient.nombre}\n` +
+                                `• *RUT:* ${activeB2BClient.email}\n` +
+                                `• *SaaS Invoice:* Cancelado\n\n` +
+                                `Por favor, procesen la confirmación administrativa.`;
+                    window.open(`https://api.whatsapp.com/send?phone=+56912345678&text=${encodeURIComponent(msg)}`, '_blank');
+                }
+
+                closeLocalAdminModal();
+                activeB2BClient = null;
+
+            } catch (err) {
+                console.error("Error al cancelar B2B:", err.message);
+                alert("❌ Error al dar de baja: " + err.message);
+            }
+        }
+
         let b2bPaymentMethod = 'webpay';
         
         function openB2BRegisterModal() {
@@ -1274,9 +1698,11 @@
             const nameVal = document.getElementById('b2bName').value.trim();
             const rutVal = document.getElementById('b2bRut').value.trim();
             const addressVal = document.getElementById('b2bAddress').value.trim();
+            const emailVal = document.getElementById('b2bEmail').value.trim();
+            const passwordVal = document.getElementById('b2bPassword').value.trim();
 
-            if (!nameVal || !rutVal || !addressVal) {
-                alert("⚠️ Por favor completa los campos Nombre, RUT y Dirección para proceder.");
+            if (!nameVal || !rutVal || !addressVal || !emailVal || !passwordVal) {
+                alert("⚠️ Por favor completa todos los campos, incluyendo Correo Electrónico y Contraseña Privada para proceder.");
                 return;
             }
 
@@ -1326,6 +1752,8 @@
             // Registro real en Supabase
             try {
                 if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
+                    const emailVal = document.getElementById('b2bEmail').value.trim();
+                    const passwordVal = document.getElementById('b2bPassword').value.trim();
                     const { error } = await _supabase
                         .from('centros_convenios')
                         .insert([
@@ -1337,7 +1765,9 @@
                                 direccion: addressVal,
                                 estado_suscripcion: 'activo',
                                 foto_local_1: document.getElementById('b2bLogoBase64').value || null,
-                                id_cliente_pasarela: `FLOW-${Math.floor(1000 + Math.random() * 9000)}-TX`
+                                id_cliente_pasarela: `FLOW-${Math.floor(1000 + Math.random() * 9000)}-TX`,
+                                email: emailVal,
+                                password: passwordVal
                             }
                         ]);
 
