@@ -363,7 +363,7 @@
 
     <!-- MODAL PANEL DE CONTROL B2B (ADMINISTRADOR DEL LOCAL) -->
     <div id="localAdminModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark/60 backdrop-blur-sm animate-fadeIn">
-        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden animate-[fadeIn_0.3s_ease-out] text-left">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden animate-[fadeIn_0.3s_ease-out] text-left">
             <!-- Header -->
             <div class="bg-slateDark text-white p-5 flex items-center justify-between flex-shrink-0">
                 <div class="flex items-center space-x-2">
@@ -463,6 +463,86 @@
                             <span>Dar de Baja Mi Membresía B2B 🚫</span>
                         </button>
 
+                    </div>
+                </div>
+
+                <!-- GESTIÓN DE PRODUCTOS / PLATILLOS DEL MENÚ SAAS B2B -->
+                <div class="border-t border-gray-200 pt-5 mt-4 space-y-4">
+                    <span class="text-[9px] uppercase font-bold text-forest tracking-wider flex items-center mb-1"><i class="fa-solid fa-utensils mr-1.5 text-accent"></i> Gestión de Platos del Menú / Catálogo de Productos B2B</span>
+                    <p class="text-[9px] text-gray-500 font-semibold leading-relaxed">Configura tus 4 platos interactivos con su nombre, precio, ingredientes/descripción y foto real. Los pacientes de LAWENMOLL verán tu carta actualizada en tiempo real:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Plato 1 -->
+                        <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
+                            <span class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 1</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="adminDish1Name" placeholder="Nombre (Ej: Bowl de Cúrcuma)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish1Price" placeholder="Precio (Ej: $8.900)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            </div>
+                            <input type="text" id="adminDish1Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                                <div id="adminDish1Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div class="flex-grow text-left">
+                                    <input type="file" id="adminDish1Input" accept="image/*" class="hidden" onchange="uploadAdminDish(1, event)">
+                                    <button type="button" onclick="document.getElementById('adminDish1Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="adminDish1Photo" value="">
+                        </div>
+
+                        <!-- Plato 2 -->
+                        <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
+                            <span class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 2</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="adminDish2Name" placeholder="Nombre (Ej: Crema de Hinojo)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish2Price" placeholder="Precio (Ej: $5.400)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            </div>
+                            <input type="text" id="adminDish2Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                                <div id="adminDish2Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div class="flex-grow text-left">
+                                    <input type="file" id="adminDish2Input" accept="image/*" class="hidden" onchange="uploadAdminDish(2, event)">
+                                    <button type="button" onclick="document.getElementById('adminDish2Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="adminDish2Photo" value="">
+                        </div>
+
+                        <!-- Plato 3 -->
+                        <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
+                            <span class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 3</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="adminDish3Name" placeholder="Nombre (Ej: Tostadas de Palta)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish3Price" placeholder="Precio (Ej: $5.900)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            </div>
+                            <input type="text" id="adminDish3Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                                <div id="adminDish3Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div class="flex-grow text-left">
+                                    <input type="file" id="adminDish3Input" accept="image/*" class="hidden" onchange="uploadAdminDish(3, event)">
+                                    <button type="button" onclick="document.getElementById('adminDish3Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="adminDish3Photo" value="">
+                        </div>
+
+                        <!-- Plato 4 -->
+                        <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
+                            <span class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 4</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="adminDish4Name" placeholder="Nombre (Ej: Jugo Verde)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish4Price" placeholder="Precio (Ej: $3.800)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            </div>
+                            <input type="text" id="adminDish4Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                                <div id="adminDish4Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div class="flex-grow text-left">
+                                    <input type="file" id="adminDish4Input" accept="image/*" class="hidden" onchange="uploadAdminDish(4, event)">
+                                    <button type="button" onclick="document.getElementById('adminDish4Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="adminDish4Photo" value="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -636,10 +716,15 @@
             <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
             <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                    <div>
-                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Establecimiento Clínico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
-                        <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🏢 Centro Holístico "Lawen Ko"</h2>
-                        <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Providencia 1240, Providencia, Santiago</p>
+                    <div class="flex items-center space-x-3.5">
+                        <div id="centroLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
+                            <img id="centroLogoImg" src="" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Establecimiento Clínico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                            <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🏢 Centro Holístico "Lawen Ko"</h2>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Providencia 1240, Providencia, Santiago</p>
+                        </div>
                     </div>
                     <div class="text-right">
                         <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-clock mr-1"></i> Abierto</span>
@@ -649,7 +734,7 @@
 
                 <!-- Foto de Portada Real del Centro Clínico -->
                 <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative">
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Centro Holístico Lawen Ko">
+                    <img id="centroBannerImg" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Centro Holístico Lawen Ko">
                     <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
                         <i class="fa-solid fa-camera mr-1"></i> Vista de Recepción e Instalaciones
                     </div>
@@ -940,14 +1025,27 @@
             <!-- PESTAÑA 2: RESTAURANTES SALUDABLES -->
             <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                    <div>
-                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Nutrición Consciente</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
-                        <h2 class="text-xl font-bold text-forest mt-1.5">🥑 Restaurante "Huerto Orgánico"</h2>
-                        <p class="text-xs text-gray-400 font-medium mt-0.5">General Holley 142, Providencia | Teléfono: +56 9 8472 1049</p>
+                    <div class="flex items-center space-x-3.5">
+                        <div id="restaurantLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
+                            <img id="restaurantLogoImg" src="" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Nutrición Consciente</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                            <h2 class="text-xl font-bold text-forest mt-1.5">🥑 Restaurante "Huerto Orgánico"</h2>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">General Holley 142, Providencia | Teléfono: +56 9 8472 1049</p>
+                        </div>
                     </div>
                     <div class="text-right">
                         <span class="text-xs font-bold text-accent block">15% Descuento</span>
                         <span class="text-[10px] text-gray-400">Código: LAWEN-FOOD</span>
+                    </div>
+                </div>
+
+                <!-- Foto de Portada Real del Restaurante / Banner -->
+                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative mb-4">
+                    <img id="restaurantBannerImg" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Banner Restaurante">
+                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
+                        🥑 Menú Nutritivo Consciente
                     </div>
                 </div>
 
@@ -956,7 +1054,7 @@
                     <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-utensils text-forest mr-1"></i> Menú Interactivo con Efecto Medicinal</h3>
                     <p class="text-[10px] text-gray-400 mb-3 font-semibold">Selecciona un plato para conocer sus ingredientes de origen natural y beneficios para tu salud:</p>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="restaurantDishesGrid">
                         <!-- Bowl de Cúrcuma -->
                         <button onclick="viewDishDetail('cucumaBowl', 'Bowl Antiinflamatorio de Cúrcuma 🥣', 'Ingredientes: Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y aderezo de tahini y limón.', '🌟 Alivio del dolor articular, desinflamación de tejidos y alto contenido de fibra digestiva.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
                             <div class="flex items-center space-x-3">
@@ -1084,14 +1182,27 @@
             <!-- PESTAÑA 3: GIMNASIOS Y YOGA -->
             <div id="tabPanel-gimnasios" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                    <div>
-                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Movimiento Terapéutico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
-                        <h2 class="text-xl font-bold text-forest mt-1.5">💪 Gimnasio "SportLife Integrativo"</h2>
-                        <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Vitacura 3568, Vitacura | Redes: @SportlifeIntegrativo</p>
+                    <div class="flex items-center space-x-3.5">
+                        <div id="gymLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
+                            <img id="gymLogoImg" src="" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Movimiento Terapéutico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                            <h2 class="text-xl font-bold text-forest mt-1.5">💪 Gimnasio "SportLife Integrativo"</h2>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Vitacura 3568, Vitacura | Redes: @SportlifeIntegrativo</p>
+                        </div>
                     </div>
                     <div class="text-right">
                         <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-heart-pulse"></i> Kinesiología</span>
                         <span class="text-[10px] text-gray-400">Pase: 3 Días Libres</span>
+                    </div>
+                </div>
+
+                <!-- Foto de Portada Real del Gimnasio / Banner -->
+                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative mb-4">
+                    <img id="gymBannerImg" src="https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Banner Gimnasio">
+                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
+                        💪 Instalaciones y Equipamiento de Kinesiología
                     </div>
                 </div>
 
@@ -1335,27 +1446,104 @@
                             if (addrEl && c.direccion) addrEl.innerText = c.direccion;
                             if (benefitEl && c.beneficio_detalle) benefitEl.innerText = c.beneficio_detalle;
 
-                            // Foto de Menú / Alimentos (foto_local_2)
-                            if (c.foto_local_2) {
-                                let gallBox = document.getElementById('restaurantGalleryBox');
-                                if (!gallBox) {
-                                    const menuHeader = document.querySelector('#tabPanel-restaurantes h3');
-                                    if (menuHeader && menuHeader.parentElement) {
-                                        gallBox = document.createElement('div');
-                                        gallBox.id = 'restaurantGalleryBox';
-                                        gallBox.className = 'mb-4';
-                                        gallBox.innerHTML = `
-                                            <span class="text-[9px] uppercase font-bold text-accent block mb-1.5"><i class="fa-solid fa-utensils mr-1"></i> Carta de Menú y Especialidades del Local</span>
-                                            <div class="w-full h-44 rounded-xl overflow-hidden shadow-sm border border-gray-150">
-                                                <img id="restaurantGalleryImg" src="${c.foto_local_2}" class="w-full h-full object-cover">
-                                            </div>
-                                        `;
-                                        menuHeader.parentElement.insertBefore(gallBox, menuHeader);
-                                    }
-                                } else {
-                                    const img = document.getElementById('restaurantGalleryImg');
-                                    if (img) img.src = c.foto_local_2;
+                            // Foto de Logo (foto_local_1)
+                            if (c.foto_local_1) {
+                                const logoContainer = document.getElementById('restaurantLogoContainer');
+                                const logoImg = document.getElementById('restaurantLogoImg');
+                                if (logoContainer && logoImg) {
+                                    logoImg.src = c.foto_local_1;
+                                    logoContainer.classList.remove('hidden');
                                 }
+                            }
+
+                            // Foto de Portada Banner (foto_local_2)
+                            if (c.foto_local_2) {
+                                const bannerImg = document.getElementById('restaurantBannerImg');
+                                if (bannerImg) bannerImg.src = c.foto_local_2;
+                            }
+
+                            // Sincronizar platos del menú dinámico desde Supabase
+                            const dishesGrid = document.getElementById('restaurantDishesGrid');
+                            if (dishesGrid) {
+                                let dishesHtml = '';
+                                
+                                // Plato 1
+                                const d1Name = c.dish1_name || 'Bowl de Cúrcuma 🥣';
+                                const d1Price = c.dish1_price || '$8.900';
+                                const d1Desc = c.dish1_desc || 'Ingredientes: Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y aderezo de tahini y limón.';
+                                const d1Photo = c.dish1_photo || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop';
+                                
+                                dishesHtml += `
+                                    <button onclick="viewDishDetail('dish1', '${d1Name}', '${d1Desc}', '🌟 Beneficio saludable premium de la casa.', '${d1Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="${d1Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d1Name}">
+                                            <div>
+                                                <h4 class="text-xs font-bold text-slateDark">${d1Name}</h4>
+                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Especialidad Recomendada</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-black text-forest">${d1Price}</span>
+                                    </button>
+                                `;
+                                
+                                // Plato 2
+                                const d2Name = c.dish2_name || 'Crema de Hinojo 🍵';
+                                const d2Price = c.dish2_price || '$5.400';
+                                const d2Desc = c.dish2_desc || 'Ingredientes: Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal orgánico.';
+                                const d2Photo = c.dish2_photo || 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop';
+                                
+                                dishesHtml += `
+                                    <button onclick="viewDishDetail('dish2', '${d2Name}', '${d2Desc}', '🦋 Beneficio saludable de nutrición consciente.', '${d2Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="${d2Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d2Name}">
+                                            <div>
+                                                <h4 class="text-xs font-bold text-slateDark">${d2Name}</h4>
+                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Detox & Digestivo</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-black text-forest">${d2Price}</span>
+                                    </button>
+                                `;
+
+                                // Plato 3
+                                const d3Name = c.dish3_name || 'Tostadas de Palta 🥑';
+                                const d3Price = c.dish3_price || '$5.900';
+                                const d3Desc = c.dish3_desc || 'Ingredientes: Pan de masa madre integral tostado, palta madura machacada, semillas de sésamo negro, rabanitos laminados, brotes orgánicos.';
+                                const d3Photo = c.dish3_photo || 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=400&auto=format&fit=crop';
+                                
+                                dishesHtml += `
+                                    <button onclick="viewDishDetail('dish3', '${d3Name}', '${d3Desc}', '🥑 Aporte energético y de grasas saludables de masa madre.', '${d3Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="${d3Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d3Name}">
+                                            <div>
+                                                <h4 class="text-xs font-bold text-slateDark">${d3Name}</h4>
+                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Snack de Grasas Buenas</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-black text-forest">${d3Price}</span>
+                                    </button>
+                                `;
+
+                                // Plato 4
+                                const d4Name = c.dish4_name || 'Jugo Verde Lawen 🍹';
+                                const d4Price = c.dish4_price || '$3.800';
+                                const d4Desc = c.dish4_desc || 'Ingredientes: Extracción en frío de espinaca orgánica, apio, pepino fresco, manzana verde, menta del huerto y limón sutil.';
+                                const d4Photo = c.dish4_photo || 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=400&auto=format&fit=crop';
+                                
+                                dishesHtml += `
+                                    <button onclick="viewDishDetail('dish4', '${d4Name}', '${d4Desc}', '🍹 Oxigenación celular y bienestar digestivo.', '${d4Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="${d4Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d4Name}">
+                                            <div>
+                                                <h4 class="text-xs font-bold text-slateDark">${d4Name}</h4>
+                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Bebida Detox Energética</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs font-black text-forest">${d4Price}</span>
+                                    </button>
+                                `;
+                                
+                                dishesGrid.innerHTML = dishesHtml;
                             }
                         } else if (c.tipo_establecimiento === 'gym' || c.nombre.includes('SportLife')) {
                             const titleEl = document.querySelector('#tabPanel-gimnasios h2');
@@ -1366,27 +1554,20 @@
                             if (addrEl && c.direccion) addrEl.innerText = c.direccion;
                             if (benefitEl && c.beneficio_detalle) benefitEl.innerText = c.beneficio_detalle;
 
-                            // Foto de Máquinas / Equipamiento (foto_local_2)
-                            if (c.foto_local_2) {
-                                let gallBox = document.getElementById('gymGalleryBox');
-                                if (!gallBox) {
-                                    const carHeader = document.querySelector('#tabPanel-gimnasios h3');
-                                    if (carHeader && carHeader.parentElement) {
-                                        gallBox = document.createElement('div');
-                                        gallBox.id = 'gymGalleryBox';
-                                        gallBox.className = 'mb-4';
-                                        gallBox.innerHTML = `
-                                            <span class="text-[9px] uppercase font-bold text-forest/70 block mb-1.5"><i class="fa-solid fa-dumbbell mr-1"></i> Máquinas y Áreas de Entrenamiento</span>
-                                            <div class="w-full h-44 rounded-xl overflow-hidden shadow-sm border border-gray-150">
-                                                <img id="gymGalleryImg" src="${c.foto_local_2}" class="w-full h-full object-cover">
-                                            </div>
-                                        `;
-                                        carHeader.parentElement.insertBefore(gallBox, carHeader);
-                                    }
-                                } else {
-                                    const img = document.getElementById('gymGalleryImg');
-                                    if (img) img.src = c.foto_local_2;
+                            // Foto de Logo (foto_local_1)
+                            if (c.foto_local_1) {
+                                const logoContainer = document.getElementById('gymLogoContainer');
+                                const logoImg = document.getElementById('gymLogoImg');
+                                if (logoContainer && logoImg) {
+                                    logoImg.src = c.foto_local_1;
+                                    logoContainer.classList.remove('hidden');
                                 }
+                            }
+
+                            // Foto de Portada Banner (foto_local_2)
+                            if (c.foto_local_2) {
+                                const bannerImg = document.getElementById('gymBannerImg');
+                                if (bannerImg) bannerImg.src = c.foto_local_2;
                             }
                         }
                     });
@@ -1642,6 +1823,51 @@
                         galleryPreview.innerHTML = '🖼️';
                     }
 
+                    // Cargar platos del menú
+                    document.getElementById('adminDish1Name').value = loggedInB2B.dish1_name || '';
+                    document.getElementById('adminDish1Price').value = loggedInB2B.dish1_price || '';
+                    document.getElementById('adminDish1Desc').value = loggedInB2B.dish1_desc || '';
+                    document.getElementById('adminDish1Photo').value = loggedInB2B.dish1_photo || '';
+                    const d1Prev = document.getElementById('adminDish1Preview');
+                    if (loggedInB2B.dish1_photo) {
+                        d1Prev.innerHTML = `<img src="${loggedInB2B.dish1_photo}" class="w-full h-full object-cover">`;
+                    } else {
+                        d1Prev.innerHTML = '🍲';
+                    }
+
+                    document.getElementById('adminDish2Name').value = loggedInB2B.dish2_name || '';
+                    document.getElementById('adminDish2Price').value = loggedInB2B.dish2_price || '';
+                    document.getElementById('adminDish2Desc').value = loggedInB2B.dish2_desc || '';
+                    document.getElementById('adminDish2Photo').value = loggedInB2B.dish2_photo || '';
+                    const d2Prev = document.getElementById('adminDish2Preview');
+                    if (loggedInB2B.dish2_photo) {
+                        d2Prev.innerHTML = `<img src="${loggedInB2B.dish2_photo}" class="w-full h-full object-cover">`;
+                    } else {
+                        d2Prev.innerHTML = '🍲';
+                    }
+
+                    document.getElementById('adminDish3Name').value = loggedInB2B.dish3_name || '';
+                    document.getElementById('adminDish3Price').value = loggedInB2B.dish3_price || '';
+                    document.getElementById('adminDish3Desc').value = loggedInB2B.dish3_desc || '';
+                    document.getElementById('adminDish3Photo').value = loggedInB2B.dish3_photo || '';
+                    const d3Prev = document.getElementById('adminDish3Preview');
+                    if (loggedInB2B.dish3_photo) {
+                        d3Prev.innerHTML = `<img src="${loggedInB2B.dish3_photo}" class="w-full h-full object-cover">`;
+                    } else {
+                        d3Prev.innerHTML = '🍲';
+                    }
+
+                    document.getElementById('adminDish4Name').value = loggedInB2B.dish4_name || '';
+                    document.getElementById('adminDish4Price').value = loggedInB2B.dish4_price || '';
+                    document.getElementById('adminDish4Desc').value = loggedInB2B.dish4_desc || '';
+                    document.getElementById('adminDish4Photo').value = loggedInB2B.dish4_photo || '';
+                    const d4Prev = document.getElementById('adminDish4Preview');
+                    if (loggedInB2B.dish4_photo) {
+                        d4Prev.innerHTML = `<img src="${loggedInB2B.dish4_photo}" class="w-full h-full object-cover">`;
+                    } else {
+                        d4Prev.innerHTML = '🍲';
+                    }
+
                     // Abrir panel
                     document.getElementById('localAdminModal').classList.remove('hidden');
                 } else {
@@ -1769,13 +1995,49 @@
                 return;
             }
 
+            const d1Name = document.getElementById('adminDish1Name').value.trim();
+            const d1Price = document.getElementById('adminDish1Price').value.trim();
+            const d1Desc = document.getElementById('adminDish1Desc').value.trim();
+            const d1Photo = document.getElementById('adminDish1Photo').value;
+
+            const d2Name = document.getElementById('adminDish2Name').value.trim();
+            const d2Price = document.getElementById('adminDish2Price').value.trim();
+            const d2Desc = document.getElementById('adminDish2Desc').value.trim();
+            const d2Photo = document.getElementById('adminDish2Photo').value;
+
+            const d3Name = document.getElementById('adminDish3Name').value.trim();
+            const d3Price = document.getElementById('adminDish3Price').value.trim();
+            const d3Desc = document.getElementById('adminDish3Desc').value.trim();
+            const d3Photo = document.getElementById('adminDish3Photo').value;
+
+            const d4Name = document.getElementById('adminDish4Name').value.trim();
+            const d4Price = document.getElementById('adminDish4Price').value.trim();
+            const d4Desc = document.getElementById('adminDish4Desc').value.trim();
+            const d4Photo = document.getElementById('adminDish4Photo').value;
+
             const updateData = {
                 nombre: name,
                 direccion: address,
                 descripcion: desc,
                 beneficio_detalle: benefit,
                 foto_local_1: activeB2BClient.foto_local_1,
-                foto_local_2: activeB2BClient.foto_local_2
+                foto_local_2: activeB2BClient.foto_local_2,
+                dish1_name: d1Name,
+                dish1_price: d1Price,
+                dish1_desc: d1Desc,
+                dish1_photo: d1Photo,
+                dish2_name: d2Name,
+                dish2_price: d2Price,
+                dish2_desc: d2Desc,
+                dish2_photo: d2Photo,
+                dish3_name: d3Name,
+                dish3_price: d3Price,
+                dish3_desc: d3Desc,
+                dish3_photo: d3Photo,
+                dish4_name: d4Name,
+                dish4_price: d4Price,
+                dish4_desc: d4Desc,
+                dish4_photo: d4Photo
             };
 
             if (pass !== '') {
@@ -1796,11 +2058,27 @@
                 alert("💾 ¡Cambios de perfil B2B guardados de forma segura en Supabase!");
                 closeLocalAdminModal();
                 
-                // Actualizar localmente si es demo
+                // Actualizar localmente si es demo o persistente
                 activeB2BClient.nombre = name;
                 activeB2BClient.direccion = address;
                 activeB2BClient.descripcion = desc;
                 activeB2BClient.beneficio_detalle = benefit;
+                activeB2BClient.dish1_name = d1Name;
+                activeB2BClient.dish1_price = d1Price;
+                activeB2BClient.dish1_desc = d1Desc;
+                activeB2BClient.dish1_photo = d1Photo;
+                activeB2BClient.dish2_name = d2Name;
+                activeB2BClient.dish2_price = d2Price;
+                activeB2BClient.dish2_desc = d2Desc;
+                activeB2BClient.dish2_photo = d2Photo;
+                activeB2BClient.dish3_name = d3Name;
+                activeB2BClient.dish3_price = d3Price;
+                activeB2BClient.dish3_desc = d3Desc;
+                activeB2BClient.dish3_photo = d3Photo;
+                activeB2BClient.dish4_name = d4Name;
+                activeB2BClient.dish4_price = d4Price;
+                activeB2BClient.dish4_desc = d4Desc;
+                activeB2BClient.dish4_photo = d4Photo;
                 // Sincronizar de inmediato la vista pública tras guardar!
                 syncPublicCentrosFromSupabase();
                 
