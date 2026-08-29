@@ -263,6 +263,16 @@
                             <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Registro Nacional de Prestadores de Salud (SIS)</label>
                             <input type="text" placeholder="Ej: Registro SIS N° 483920" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                         </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Electrónico de Acceso</label>
+                                <input type="email" id="joinEmail" placeholder="Ej: carlos@lawenmoll.cl" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Contraseña Privada</label>
+                                <input type="password" id="joinPassword" placeholder="Crea tu contraseña" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1708,9 +1718,11 @@
             // Validar campos del formulario de postulación antes de abrir la pasarela
             const name = document.querySelector('#stepJoin input[placeholder="Ej: Dr. Francisco Mora"]').value.trim();
             const sis = document.querySelector('#stepJoin input[placeholder="Ej: Registro SIS N° 483920"]').value.trim();
+            const email = document.getElementById('joinEmail').value.trim();
+            const password = document.getElementById('joinPassword').value.trim();
             
-            if (name === "" || sis === "") {
-                alert("⚠️ Por favor, completa tu Nombre y tu Registro SIS antes de proceder al pago de tu membresía.");
+            if (name === "" || sis === "" || email === "" || password === "") {
+                alert("⚠️ Por favor, completa tu Nombre, tu Registro SIS, Correo y Contraseña antes de proceder al pago.");
                 return;
             }
 
@@ -1768,17 +1780,55 @@
             const btnText = document.getElementById('btnPaymentText');
             btnText.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Procesando transacción con Webpay...`;
             
+            const nameVal = document.querySelector('#stepJoin input[placeholder="Ej: Dr. Francisco Mora"]').value.trim();
+            const sisVal = document.querySelector('#stepJoin input[placeholder="Ej: Registro SIS N° 483920"]').value.trim();
+            const emailVal = document.getElementById('joinEmail').value.trim();
+            const passVal = document.getElementById('joinPassword').value.trim();
+            const specVal = document.querySelector('#stepJoin select').value;
+            const clientPasarela = `Flow-TX-${Math.floor(100000 + Math.random() * 900000)}`;
+
+            // Guardar en Supabase en la tabla terapeutas
+            try {
+                if (supabaseKey !== '') {
+                    _supabase
+                        .from('terapeutas')
+                        .insert([
+                            {
+                                nombre: nameVal,
+                                especialidad: specVal,
+                                registro_sis: sisVal,
+                                email: emailVal,
+                                password: passVal,
+                                estado_suscripcion: 'activo',
+                                id_cliente_pasarela: clientPasarela
+                            }
+                        ])
+                        .then(({ error }) => {
+                            if (error) {
+                                console.error("❌ Error al registrar terapeuta en Supabase:", error.message);
+                            } else {
+                                console.log("✅ Terapeuta registrado exitosamente en la base de datos.");
+                            }
+                        });
+                }
+            } catch (err) {
+                console.error("❌ Error de red o conexión al guardar en Supabase:", err);
+            }
+
             setTimeout(() => {
                 closePaymentModal();
                 alert(`🎉 ¡PAGO EXITOSO Y MEMBRESÍA ACTIVADA!\n\n` +
                       `• Plan contratado: Plan \${selections.selectedPlan.toUpperCase()}\n` +
                       `• Estado de Cuenta: ACTIVADO (SaaS B2B)\n` +
-                      `• Código de Transacción: Flow-TX-\${Math.floor(100000 + Math.random() * 900000)}\n\n` +
-                      `Se ha generado tu cuenta de especialista en LAWENMOLL. Ya tienes acceso al portal clínico SOAP, la vitrina geolocalizada y el chat comunitario 'El Saber de la Abuela' para captar tus primeros pacientes. ¡Bienvenido a LAWENMOLL!`);
+                      `• Código de Transacción: \${clientPasarela}\n` +
+                      `• Credenciales de Acceso: Usa tu correo (\${emailVal}) y contraseña para ingresar a tu panel clínico.\n\n` +
+                      `Se ha generado tu cuenta de especialista en LAWENMOLL. Ya tienes acceso al portal clínico SOAP, la vitrina geolocalizada y el chat herbolario con tus credenciales de seguridad. ¡Bienvenido a LAWENMOLL!`);
                 
                 // Limpiar campos del registro
                 document.querySelector('#stepJoin input[placeholder="Ej: Dr. Francisco Mora"]').value = "";
                 document.querySelector('#stepJoin input[placeholder="Ej: Registro SIS N° 483920"]').value = "";
+                document.getElementById('joinEmail').value = "";
+                document.getElementById('joinPassword').value = "";
                 nextStep(1);
             }, 2000);
         }

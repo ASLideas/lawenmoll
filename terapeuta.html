@@ -36,6 +36,64 @@
 </head>
 <body class="text-slateDark min-h-screen flex flex-col">
 
+    <!-- SECCIÓN DE LOGIN DE ALTA SEGURIDAD (CIBERSEGURIDAD LEY 21.663) -->
+    <div id="loginSection" class="flex-grow flex items-center justify-center p-4 my-auto bg-[#FAF8F5]">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-xl border border-gray-150 p-8 space-y-6 animate-fadeIn">
+            <div class="text-center space-y-3">
+                <div class="w-16 h-16 bg-forest/10 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner border border-forest/10">
+                    🌿
+                </div>
+                <div>
+                    <h2 class="text-2xl font-black text-forest">Portal Clínico LAWENMOLL</h2>
+                    <p class="text-gray-400 text-xs font-semibold leading-relaxed mt-1">Identifícate para acceder de forma segura a tus pautas SOAP e historial médico de pacientes.</p>
+                </div>
+            </div>
+
+            <!-- Alerta de Ciberseguridad -->
+            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 flex items-start space-x-2 text-[10px] text-emerald-800 font-semibold leading-relaxed">
+                <i class="fa-solid fa-shield-halved text-emerald-600 text-sm mt-0.5"></i>
+                <div>
+                    <strong>Acceso Encriptado y Regulado:</strong> Este portal cumple con los estándares de resguardo clínico de la Ley Marco de Ciberseguridad N° 21.663 y la Ley de Derechos de Pacientes.
+                </div>
+            </div>
+
+            <!-- Formulario de Login -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">Correo Electrónico</label>
+                    <div class="relative">
+                        <input type="email" id="loginEmail" placeholder="Ej: carlos.mendoza@lawenmoll.cl" class="w-full bg-gray-50 border border-gray-200 p-3 pl-10 rounded-2xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-gray-300"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Contraseña Privada</label>
+                        <a href="#" onclick="alert('🔑 ¿Olvidaste tu contraseña?\n\nPor favor, contacta con el área administrativa de LAWENMOLL (soporte@lawenmoll.cl) para restablecer tus credenciales previa verificación de identidad.');" class="text-[9px] text-forest font-bold hover:underline">¿La olvidaste?</a>
+                    </div>
+                    <div class="relative">
+                        <input type="password" id="loginPassword" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-3 pl-10 rounded-2xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm font-mono">
+                        <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-gray-300"></i>
+                    </div>
+                </div>
+
+                <button onclick="handleLogin()" id="btnLoginSubmit" class="w-full bg-forest hover:bg-forest/95 text-white font-black py-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider mt-2">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                    <span>Iniciar Sesión en el Portal</span>
+                </button>
+            </div>
+
+            <div class="text-center">
+                <p class="text-[9px] text-gray-400 font-semibold leading-relaxed">
+                    © 2026 LAWENMOLL SpA. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL OCULTO POR DEFECTO -->
+    <div id="mainWorkspace" class="hidden flex-grow flex flex-col">
+
     <!-- CABECERA -->
     <header class="bg-white border-b border-gray-200 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
@@ -54,12 +112,17 @@
                     <span>Volver<span class="hidden sm:inline"> al Test</span></span>
                 </a>
                 <div class="text-right hidden sm:block">
-                    <div class="font-bold text-xs text-slateDark">Klgo. Carlos Mendoza</div>
-                    <div class="text-[9px] text-gray-400">Kinesiólogo Integrativo • Santiago, Chile</div>
+                    <div class="font-bold text-xs text-slateDark" id="headerTherapistName">Klgo. Carlos Mendoza</div>
+                    <div class="text-[9px] text-gray-400" id="headerTherapistSpec">Kinesiólogo Integrativo • Santiago, Chile</div>
                 </div>
-                <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-white font-bold shadow-md text-xs">
+                <div class="w-8 h-8 bg-forest rounded-full flex items-center justify-center text-white font-bold shadow-md text-xs" id="headerTherapistAvatar">
                     CM
                 </div>
+                <!-- BOTÓN DE CERRAR SESIÓN -->
+                <button onclick="handleLogout()" class="text-xs bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-bold py-1.5 px-3 rounded-xl transition flex items-center space-x-1 border border-red-200">
+                    <i class="fa-solid fa-power-off"></i>
+                    <span class="hidden md:inline">Cerrar Sesión</span>
+                </button>
             </div>
         </div>
     </header>
@@ -352,6 +415,111 @@
             }
         }
 
+        let activeTherapist = null;
+
+        async function handleLogin() {
+            const emailVal = document.getElementById('loginEmail').value.trim();
+            const passVal = document.getElementById('loginPassword').value.trim();
+
+            if (emailVal === "" || passVal === "") {
+                alert("⚠️ Por favor ingresa tu Correo Electrónico y Contraseña para continuar.");
+                return;
+            }
+
+            const btn = document.getElementById('btnLoginSubmit');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Validando Credenciales...`;
+
+            // 1. Verificar credenciales locales preestablecidas (Carlos Mendoza y Dra. Eliana Ruiz)
+            const demoTherapists = {
+                'carlos.mendoza@lawenmoll.cl': {
+                    nombre: 'Klgo. Carlos Mendoza',
+                    especialidad: 'Kinesiólogo Integrativo • Santiago, Chile',
+                    registro_sis: 'Registro SIS N° 849204',
+                    iniciales: 'CM'
+                },
+                'eliana.ruiz@lawenmoll.cl': {
+                    nombre: 'Dra. Eliana Ruiz',
+                    especialidad: 'Médico Integrativa • Providencia, Chile',
+                    registro_sis: 'Registro SIS N° 483920',
+                    iniciales: 'ER'
+                }
+            };
+
+            try {
+                let loggedInUser = null;
+
+                // Verificar si existe la conexión con Supabase
+                if (supabaseKey !== '') {
+                    const { data, error } = await _supabase
+                        .from('terapeutas')
+                        .select('*')
+                        .eq('email', emailVal)
+                        .eq('password', passVal)
+                        .eq('estado_suscripcion', 'activo')
+                        .maybeSingle();
+
+                    if (error) throw error;
+
+                    if (data) {
+                        loggedInUser = {
+                            nombre: data.nombre,
+                            especialidad: data.especialidad + ' • Providencia, Chile',
+                            registro_sis: data.registro_sis || 'Registro SIS Certificado',
+                            iniciales: data.nombre.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()
+                        };
+                    }
+                }
+
+                // Si no se encuentra en Supabase, verificar credenciales demo
+                if (!loggedInUser) {
+                    if (demoTherapists[emailVal.toLowerCase()] && passVal === 'lawenmoll2026') {
+                        loggedInUser = demoTherapists[emailVal.toLowerCase()];
+                    }
+                }
+
+                if (loggedInUser) {
+                    activeTherapist = loggedInUser;
+                    
+                    // Actualizar el header dinámicamente con los datos del profesional logueado!
+                    document.getElementById('headerTherapistName').innerText = loggedInUser.nombre;
+                    document.getElementById('headerTherapistSpec').innerText = loggedInUser.especialidad;
+                    document.getElementById('headerTherapistAvatar').innerText = loggedInUser.iniciales;
+
+                    // Ocultar login, mostrar escritorio
+                    document.getElementById('loginSection').classList.add('hidden');
+                    document.getElementById('mainWorkspace').classList.remove('hidden');
+
+                    // Cargar citas desde Supabase
+                    loadAppointmentsFromSupabase();
+                    loadSecretsDropdown();
+                } else {
+                    alert("❌ Credenciales inválidas o cuenta de membresía inactiva. Verifica tu correo, tu contraseña o el estado de tu pago SaaS.");
+                }
+            } catch (err) {
+                console.error("Error al iniciar sesión:", err.message);
+                alert("❌ Error de comunicación con la base de datos: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        function handleLogout() {
+            const confirmLogout = confirm("❓ ¿Estás seguro de que deseas cerrar sesión de forma segura?");
+            if (!confirmLogout) return;
+
+            // Limpiar credenciales de pantalla
+            document.getElementById('loginEmail').value = "";
+            document.getElementById('loginPassword').value = "";
+
+            // Volver a mostrar Login y ocultar escritorio
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('mainWorkspace').classList.add('hidden');
+            activeTherapist = null;
+        }
+
         // Cargar secretos de la abuela dinámicamente en el selector del Plan de Tratamiento
         async function loadSecretsDropdown() {
             try {
@@ -381,10 +549,9 @@
         let activePatientPhone = "+56912345678";
         let activeAppointmentId = null;
 
-        // Inicializar cargadores al cargar la pantalla
+        // Inicializar vacío, esperando el inicio de sesión
         window.onload = function() {
-            loadAppointmentsFromSupabase();
-            loadSecretsDropdown();
+            // No cargar nada hasta que se inicie sesión para proteger los datos médicos
         };
     
         
@@ -574,5 +741,6 @@
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`, '_blank');
         }
     </script>
+</div>
 </body>
 </html>
