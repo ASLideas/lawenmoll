@@ -103,6 +103,10 @@
                 <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
             </div>
             <div class="flex flex-wrap justify-center items-center gap-1.5 md:gap-3">
+                <a href="centros.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>Buscar Servicios 🏢</span>
+                </a>
                 <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
                     <i class="fa-solid fa-leaf"></i>
                     <span>Secretos<span class="hidden sm:inline"> de la Abuela</span> 👵</span>
@@ -229,14 +233,23 @@
                 </div>
 
                 <!-- SECCIÓN DE AGENDAMIENTO REALIZADO -->
-                <div class="bg-slateDark text-white rounded-2xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <span class="text-[10px] uppercase font-bold text-gray-300 block"><i class="fa-solid fa-clock"></i> Fecha y Hora Agendada</span>
-                        <span class="text-xs font-bold" id="patientDateTime">Lunes 24 Ago - 09:30 hrs</span>
+                <div class="bg-slateDark text-white rounded-2xl p-4 space-y-3.5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-gray-300 block"><i class="fa-solid fa-clock"></i> Fecha y Hora Agendada</span>
+                            <span class="text-xs font-bold" id="patientDateTime">Lunes 24 Ago - 09:30 hrs</span>
+                        </div>
+                        <div class="sm:border-l sm:border-gray-600 sm:pl-4">
+                            <span class="text-[10px] uppercase font-bold text-gray-300 block"><i class="fa-solid fa-house-laptop"></i> Tipo de Atención</span>
+                            <span class="text-xs font-bold text-accent" id="patientType">💻 Consulta en Línea (Telemedicina)</span>
+                        </div>
                     </div>
-                    <div class="sm:border-l sm:border-gray-600 sm:pl-4">
-                        <span class="text-[10px] uppercase font-bold text-gray-300 block"><i class="fa-solid fa-house-laptop"></i> Tipo de Atención</span>
-                        <span class="text-xs font-bold text-accent" id="patientType">💻 Consulta en Línea (Telemedicina)</span>
+                    <!-- BOTÓN INTERACTIVO DE VIDEOCALL EN VIVO (JITSI MEET EMBEDDED) -->
+                    <div id="telemedicineCallBtnContainer" class="pt-2.5 border-t border-gray-700/80">
+                        <button onclick="startVideoCall()" class="w-full bg-accent hover:opacity-95 text-white font-extrabold py-2.5 rounded-xl text-[10px] shadow-md transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                            <i class="fa-solid fa-video"></i>
+                            <span>Iniciar Videollamada Telemedicina (Cifrada) 🎥</span>
+                        </button>
                     </div>
                 </div>
 
@@ -557,6 +570,17 @@
         
         function selectPatient(name, imc, imcCat, reason, chronic, timeCommit, dateTime, type, age, mental, gym, phone, sleep, stress) {
             document.getElementById('patientName').innerText = name + " (" + age + " años)";
+            
+            // Mostrar/Ocultar botón de Videollamada si es consulta Online
+            const isOnline = type.includes('Línea') || type.includes('Telemedicina') || type.includes('Online');
+            const callBtnContainer = document.getElementById('telemedicineCallBtnContainer');
+            if (callBtnContainer) {
+                if (isOnline) {
+                    callBtnContainer.classList.remove('hidden');
+                } else {
+                    callBtnContainer.classList.add('hidden');
+                }
+            }
             document.getElementById('patientIMC').innerText = imc;
             document.getElementById('patientIMCCat').innerText = imcCat;
             document.getElementById('patientReason').innerText = "Motivo de consulta: " + reason;
@@ -742,5 +766,32 @@
         }
     </script>
 </div>
+
+    <!-- MODAL DE VIDEOCALL EMBEDDED (TELEMEDICINA CIFRADA JITSI MEET) -->
+    <div id="videoCallModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col h-[85vh] overflow-hidden animate-[fadeIn_0.3s_ease-out]">
+            <!-- Cabecera de la Videollamada -->
+            <div class="bg-forest text-white p-4 flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                    <span class="animate-pulse flex h-3 w-3 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <span class="text-xs font-bold uppercase tracking-wider font-sans">Sala de Telemedicina En Vivo - LAWENMOLL</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-xs text-emerald-300 font-semibold flex items-center hidden sm:flex"><i class="fa-solid fa-lock mr-1.5"></i> Conexión SSL End-to-End (Ley N° 21.663)</span>
+                    <button onclick="closeVideoCall()" class="text-white hover:text-accent transition focus:outline-none text-lg">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Iframe de Jitsi Meet -->
+            <div class="flex-grow bg-slate-900 relative">
+                <iframe id="videoCallFrame" src="" class="w-full h-full border-0" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
