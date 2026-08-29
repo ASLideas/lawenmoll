@@ -314,7 +314,7 @@
         // Cargar citas reales de Supabase en la barra lateral
         async function loadAppointmentsFromSupabase() {
             try {
-                if (supabaseKey === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' || supabaseKey === '') return;
+                if (supabaseKey === '') return;
                 const { data, error } = await _supabase
                     .from('citas')
                     .select('*, terapeutas(*)')
@@ -331,12 +331,13 @@
                         const safeHora = (c.hora_cita || '').replace(/'/g, '').replace(/"/g, '');
                         const safeModalidad = (c.modalidad_cita || 'Presencial').replace(/'/g, '').replace(/"/g, '');
                         const safeTelefono = (c.telefono_contacto || '+56912345678').replace(/'/g, '').replace(/"/g, '');
+                        const patientNameDisplay = c.nombre_paciente || c.telefono_contacto || 'Paciente';
                         const btnHtml = `
-                            <button onclick="activeAppointmentId = ${c.id}; selectPatient('${safeLugar}', '${randomIMC}', '${weightStatus}', 'Reserva de Mesa / Cita', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
+                            <button onclick="activeAppointmentId = ${c.id}; selectPatient('${patientNameDisplay}', '${randomIMC}', '${weightStatus}', 'Reserva de Mesa / Cita', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-xl">👤</span>
                                     <div>
-                                        <h4 class="font-bold text-xs">${c.telefono_contacto || 'Paciente'}</h4>
+                                        <h4 class="font-bold text-xs">${patientNameDisplay}</h4>
                                         <p class="text-[10px] text-gray-400">${c.hora_cita} hrs • ${c.modalidad_cita || 'Presencial'}</p>
                                     </div>
                                 </div>
@@ -354,7 +355,7 @@
         // Cargar secretos de la abuela dinámicamente en el selector del Plan de Tratamiento
         async function loadSecretsDropdown() {
             try {
-                if (supabaseKey === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' || supabaseKey === '') return;
+                if (supabaseKey === '') return;
                 const { data, error } = await _supabase
                     .from('mural_abuela')
                     .select('id, title, secret');
@@ -467,7 +468,7 @@
             const p = document.getElementById('soapP').value;
 
             try {
-                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
+                if (supabaseKey !== '') {
                     // Obtener id del terapeuta Carlos Mendoza
                     const { data: therapist } = await _supabase
                         .from('terapeutas')

@@ -542,7 +542,7 @@
                         Selecciona el profesional, la fecha y hora de tu preferencia. El sistema te alertará automáticamente en tu celular 24 horas antes de la consulta.
                     </p>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 mb-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 mb-3">
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Elegir Especialista</label>
                             <select id="clinicalSpecialist" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
@@ -563,6 +563,10 @@
                                 <option value="15:00">15:00 hrs</option>
                                 <option value="16:30">16:30 hrs</option>
                             </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Nombre Paciente</label>
+                            <input type="text" id="clinicalPatientName" placeholder="Ej: Camila Silva" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
@@ -976,6 +980,10 @@
                                 </div>
                                 <div>
                                     <span class="text-[8px] bg-sage/20 text-forest font-bold px-2 py-0.5 rounded-full uppercase">Independiente Certificada</span>
+                                    <span class="text-[8px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-bold ml-1.5 border border-green-200"><i class="fa-solid fa-user-shield text-green-600"></i> Verificado SIS N° 483920</span>
+                                    <a href="https://rnpi.superdesalud.gob.cl/" target="_blank" class="inline-flex items-center text-[7px] text-gray-400 hover:text-forest transition ml-1" title="Verificar en Superintendencia de Salud"><i class="fa-solid fa-arrow-up-right-from-square"></i> Registro SIS</a>
+                                    <span class="text-[8px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-bold ml-1.5 border border-green-200"><i class="fa-solid fa-user-shield text-green-600"></i> Verificado SIS N° 583921</span>
+                                    <a href="https://rnpi.superdesalud.gob.cl/" target="_blank" class="inline-flex items-center text-[7px] text-gray-400 hover:text-forest transition ml-1" title="Verificar en Superintendencia de Salud"><i class="fa-solid fa-arrow-up-right-from-square"></i> Registro SIS</a>
                                     <h3 class="font-extrabold text-xs text-slateDark mt-1">Naturópata Maite Soler</h3>
                                     <p class="text-[10px] text-gray-500 font-semibold">Consejería Herbal Pura, Fitoterapia y Remedios Ancestrales</p>
                                     <p class="text-[9px] text-forest font-bold flex items-center mt-1"><i class="fa-solid fa-house mr-1"></i> Domicilio / Consulta Online (Providencia)</p>
@@ -1081,7 +1089,7 @@
         // Cargar terapeutas dinámicamente en el selector
         async function loadTherapistsDropdown() {
             try {
-                if (supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     const { data, error } = await _supabase
                         .from('terapeutas')
                         .select('id, nombre, especialidad')
@@ -1112,169 +1120,7 @@
         let marker;
 
         // Detectar de qué pestaña viene (tab parameter en la URL)
-                        function openB2BCancelModal() {
-            document.getElementById('b2bCancelModal').classList.remove('hidden');
-        }
-
-        function closeB2BCancelModal() {
-            document.getElementById('b2bCancelModal').classList.add('hidden');
-        }
-
-        async function processB2BCancellation() {
-            const nameVal = document.getElementById('b2bCancelName').value.trim();
-            const rutVal = document.getElementById('b2bCancelRut').value.trim();
-
-            if (!nameVal || !rutVal) {
-                alert("⚠️ Por favor ingresa el Nombre Comercial y el RUT de tu local.");
-                return;
-            }
-
-            try {
-                if (supabaseKey !== '') {
-                    const { data: establishment, error: fetchError } = await _supabase
-                        .from('centros_convenios')
-                        .select('*')
-                        .eq('nombre', nameVal)
-                        .maybeSingle();
-
-                    if (fetchError) throw fetchError;
-
-                    if (!establishment) {
-                        alert("❌ No se encontró ningún establecimiento registrado con ese nombre: " + nameVal);
-                        return;
-                    }
-
-                    const { error: updateError } = await _supabase
-                        .from('centros_convenios')
-                        .update({ estado_suscripcion: 'inactivo' })
-                        .eq('id', establishment.id);
-
-                    if (updateError) throw updateError;
-
-                    alert(`🎉 ¡Suscripción Cancelada con Éxito!\n\n` +
-                          `• Establecimiento: ${nameVal}\n` +
-                          `• Estado de Suscripción: Inactivo\n\n` +
-                          `Tu local ha dejado de figurar de forma activa en el mapa y la geolocalización.`);
-                    
-                    // Notificación por WhatsApp
-                    const textMsg = `*🚫 SOLICITUD DE CANCELACIÓN DE SOCIO B2B - LAWENMOLL*\n\n` +
-                                    `Hola, se ha cancelado una membresía B2B en la plataforma:\n` +
-                                    `• *Local:* ${nameVal}\n` +
-                                    `• *RUT:* ${rutVal}\n` +
-                                    `• *Id Cliente Pasarela:* ${establishment.id_cliente_pasarela || 'Desconocido'}\n` +
-                                    `• *Estado:* Suscripción cancelada y desactivada de forma automática en Supabase.`;
-                    
-                    window.open(`https://api.whatsapp.com/send?phone=56912345678&text=${encodeURIComponent(textMsg)}`, '_blank');
-                    
-                    closeB2BCancelModal();
-                    document.getElementById('b2bCancelName').value = "";
-                    document.getElementById('b2bCancelRut').value = "";
-                }
-            } catch (err) {
-                console.error("❌ Error al procesar la cancelación B2B en Supabase:", err.message);
-                alert("❌ Error al cancelar suscripción: " + err.message);
-            }
-        }
-
-        async function cancelRestaurantTableFromUser() {
-            const codeVal = document.getElementById('cancelRestaurantCode').value.trim().toUpperCase();
-            if (!codeVal) {
-                alert("⚠️ Por favor ingresa el Código de Reserva de tu mesa (ej: MESA-1234).");
-                return;
-            }
-            await cancelAnyBooking(codeVal, 'cancelRestaurantCode');
-        }
-
-        async function cancelAnyBooking(codeVal, inputId) {
-            try {
-                const { data: appointment, error: fetchError } = await _supabase
-                    .from('citas')
-                    .select('*')
-                    .eq('codigo_reserva', codeVal)
-                    .maybeSingle();
-
-                if (fetchError) throw fetchError;
-
-                if (!appointment) {
-                    alert("❌ No se encontró ninguna cita o reserva de mesa registrada con el código: " + codeVal);
-                    return;
-                }
-
-                if (appointment.estado_cita === 'Cancelada') {
-                    alert("⚠️ Esta reserva ya se encuentra Cancelada.");
-                    return;
-                }
-
-                const { error: updateError } = await _supabase
-                    .from('citas')
-                    .update({ estado_cita: 'Cancelada' })
-                    .eq('codigo_reserva', codeVal);
-
-                if (updateError) throw updateError;
-
-                alert(`🎉 ¡Reserva Cancelada con Éxito!\n\n` +
-                      `• Código de Reserva: ${codeVal}\n` +
-                      `• Estado: Cancelada y Liberada en Supabase.`);
-
-                const notify = confirm("💬 ¿Deseas enviar una notificación de cancelación por WhatsApp para liberar el cupo de forma inmediata?");
-                if (notify) {
-                    const place = appointment.lugar_cita || 'Establecimiento LAWENMOLL';
-                    const date = appointment.fecha_cita || 'Fecha coordinada';
-                    const hour = appointment.hora_cita || 'Hora agendada';
-                    const clientPhone = appointment.telefono_contacto || '+56912345678';
-                    const modality = appointment.modal_cita || 'Presencial';
-
-                    const textMsg = `*🚫 NOTIFICACIÓN DE CANCELACIÓN - LAWENMOLL*\n\n` +
-                                    `Hola, lamento informar que he cancelado mi reserva:\n` +
-                                    `• *Código de Reserva:* ${codeVal}\n` +
-                                    `• *Establecimiento:* ${place}\n` +
-                                    `• *Fecha/Hora:* ${date} - ${hour} hrs\n` +
-                                    `• *Contacto:* ${clientPhone}\n\n` +
-                                    `Por favor, liberen el cupo de forma inmediata. ¡Muchas gracias!`;
-
-                    window.open(`https://api.whatsapp.com/send?phone=${clientPhone}&text=${encodeURIComponent(textMsg)}`, '_blank');
-                }
-                
-                document.getElementById(inputId).value = "";
-            } catch (err) {
-                console.error("❌ Error al cancelar reserva en Supabase:", err.message);
-                alert("❌ Error al procesar cancelación: " + err.message);
-            }
-        }
-
-        function calculateIndependentRoute(lat, lon, title, address) {
-            switchTab('centros', document.getElementById('tab-centros'));
-            document.getElementById('centerMap').scrollIntoView({ behavior: 'smooth' });
-            
-            if (map) {
-                L.marker([-33.4350, -70.6190]).addTo(map)
-                    .bindPopup('<b>Tu ubicación estimada</b>')
-                    .openPopup();
-                
-                L.marker([lat, lon]).addTo(map)
-                    .bindPopup(`<b>${title}</b><br>${address}`)
-                    .openPopup();
-                
-                const latlngs = [
-                    [-33.4350, -70.6190],
-                    [( -33.4350 + lat ) / 2, ( -70.6190 + lon ) / 2],
-                    [lat, lon]
-                ];
-                L.polyline(latlngs, {color: '#52796F', weight: 4, dashArray: '5, 10'}).addTo(map);
-                map.setView([( -33.4350 + lat ) / 2, ( -70.6190 + lon ) / 2], 14);
-                
-                alert(`🗺️ ¡Ruta trazada hacia la consulta de ${title} (${address}) en el mapa principal!`);
-            }
-        }
-
-        function focusCancelBooking(inputId, code) {
-            document.getElementById('cancelBookingCode').scrollIntoView({ behavior: 'smooth' });
-            document.getElementById('cancelBookingCode').value = code;
-            document.getElementById('cancelBookingCode').focus();
-            alert(`💡 ¡Ingresamos el código de pre-cancelación para este profesional: ${code}! Solo presiona "Dar de Baja Reserva" para confirmar.`);
-        }
-
-window.onload = function() {
+                window.onload = function() {
             loadTherapistsDropdown();
             const urlParams = new URLSearchParams(window.location.search);
             const tabParam = urlParams.get('tab');
@@ -1461,7 +1307,7 @@ window.onload = function() {
 
             // Registro real en Supabase
             try {
-                if (supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     const { error } = await _supabase
                         .from('centros_convenios')
                         .insert([
@@ -1497,8 +1343,19 @@ window.onload = function() {
             const specialistVal = document.getElementById('clinicalSpecialist').value;
             const dateVal = document.getElementById('clinicalDate').value;
             const timeVal = document.getElementById('clinicalTime').value;
+            const patientNameVal = document.getElementById('clinicalPatientName') ? document.getElementById('clinicalPatientName').value.trim() : '';
             const phoneVal = document.getElementById('clinicalPhone').value;
             const agreeVal = document.getElementById('clinicalAgreeTerms').checked;
+
+            if (!agreeVal) {
+                alert("⚠️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
+                return;
+            }
+
+            if (!patientNameVal) {
+                alert("⚠️ Por favor ingresa el Nombre del Paciente para agendar la cita.");
+                return;
+            }
 
             if (!agreeVal) {
                 alert("⚠️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
@@ -1514,7 +1371,7 @@ window.onload = function() {
 
             // Guardado real en Supabase
             try {
-                if (supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     // Obtener id del terapeuta
                     const { data: therapistData } = await _supabase
                         .from('terapeutas')
@@ -1533,6 +1390,7 @@ window.onload = function() {
                                 estado_cita: 'Agendada',
                                 codigo_reserva: bookingCode,
                                 telefono_contacto: phoneVal,
+                                nombre_paciente: patientNameVal,
                                 consentimiento_datos: true
                             }
                         ]);
@@ -1710,7 +1568,7 @@ window.onload = function() {
 
             // Guardado real en Supabase
             try {
-                if (supabaseKey !== '') {
+                if (supabaseKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' && supabaseKey !== '') {
                     const { error } = await _supabase
                         .from('citas')
                         .insert([

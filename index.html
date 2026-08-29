@@ -282,6 +282,18 @@
                     <p class="text-gray-500 text-xs mb-6 font-semibold">Necesitamos tus datos para calcular tus rangos y plan metabólico personalizado.</p>
 
                     <div class="space-y-4">
+                        <!-- Nombre y Apellido -->
+                        <div class="grid grid-cols-2 gap-3 mb-4 text-left">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre</label>
+                                <input type="text" id="inputFirstName" required placeholder="Ej: María" class="w-full bg-white border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Apellido</label>
+                                <input type="text" id="inputLastName" required placeholder="Ej: Mendoza" class="w-full bg-white border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            </div>
+                        </div>
+
                         <!-- Género y Etapa de Vida -->
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">Género / Etapa de Vida</label>
@@ -1059,6 +1071,8 @@
 
         let currentStep = 1;
         let selections = {
+            firstName: '',
+            lastName: '',
             gender: 'woman',
 
             age: 30,
@@ -1141,6 +1155,17 @@
         ];
 
         function nextStep(step) {
+            if (currentStep === 2 && step === 3) {
+                const firstNameVal = document.getElementById('inputFirstName') ? document.getElementById('inputFirstName').value.trim() : '';
+                const lastNameVal = document.getElementById('inputLastName') ? document.getElementById('inputLastName').value.trim() : '';
+                if (!firstNameVal || !lastNameVal) {
+                    alert("⚠️ Por favor, ingresa tu Nombre y Apellido para continuar y personalizar tu plan de bienestar.");
+                    return;
+                }
+                selections.firstName = firstNameVal;
+                selections.lastName = lastNameVal;
+            }
+
             document.querySelector(`#step${currentStep}`).classList.remove('active');
             
             const pBar = document.getElementById('progressBarContainer');
@@ -1442,7 +1467,7 @@
         function downloadEvaluationPDF(isFreeOnly) {
             if (isFreeOnly) {
                 alert(`📥 Descargando tu 'Plan General Gratuito' (PDF)...\n\n` +
-                      `• Nombre Paciente: Usuario LAWENMOLL\n` +
+                      `• Nombre Paciente: ${selections.firstName} ${selections.lastName}\n` +
                       `• Edad: ${selections.age} años\n` +
                       `• IMC calculado: ${document.getElementById('resIMC').innerText} (${document.getElementById('resIMCCat').innerText})\n` +
                       `• Calidad de Sueño: ${sleepMap[selections.sleep] || 'Normal'}\n` +
@@ -1451,7 +1476,7 @@
                       `¡Listo! Archivo autoguiado descargado correctamente.`);
             } else {
                 alert(`📥 Descargando Evaluaciones Médicas y Recomendaciones LAWENMOLL...\n\n` +
-                      `• Nombre Paciente: Paciente Premium\n` +
+                      `• Nombre Paciente: ${selections.firstName} ${selections.lastName}\n` +
                       `• Edad: ${selections.age} años\n` +
                       `• Calidad de Sueño: ${sleepMap[selections.sleep] || 'Normal'}\n` +
                       `• Nivel de Estrés: ${stressMap[selections.stress] || 'Calma'}\n` +
@@ -1475,6 +1500,7 @@
                     .from('respuestas_test')
                     .insert([
                         {
+                            nombre_paciente: selections.firstName + ' ' + selections.lastName,
                             genero: selections.gender,
                             edad: parseInt(selections.age) || 30,
                             talla: parseInt(selections.height) || 170,
