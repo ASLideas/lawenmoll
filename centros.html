@@ -548,6 +548,26 @@
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <span>Confirmar y Agendar Hora Clínica</span>
                     </button>
+                    
+                    <!-- BOTÓN DE CANCELACIÓN DE CITA -->
+                    <div class="mt-4 border-t border-gray-100 pt-4">
+                        <details class="group bg-gray-50 rounded-2xl p-3 border border-gray-200 transition-all duration-300">
+                            <summary class="flex justify-between items-center text-[10px] font-bold text-gray-500 uppercase tracking-wider cursor-pointer list-none">
+                                <span class="flex items-center"><i class="fa-solid fa-ban text-accent mr-1.5"></i> ¿Necesitas Cancelar una Cita o Mesa?</span>
+                                <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-gray-400"></i></span>
+                            </summary>
+                            <div class="mt-3 space-y-2.5">
+                                <p class="text-[9px] text-gray-400 font-semibold leading-relaxed">Si ya tienes una cita o mesa agendada y no podrás asistir, ingresa tu código de reserva (ej: CLINIC-1234 o MESA-1234) para darla de baja de inmediato:</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <input type="text" id="cancelBookingCode" placeholder="Ej: CLINIC-4839" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-accent font-semibold shadow-sm uppercase">
+                                    <button onclick="cancelAppointmentFromUser()" class="w-full bg-accent hover:opacity-95 text-white font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        <span>Dar de Baja Reserva</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
                 <!-- Mapa y Cómo Llegar -->
@@ -1372,6 +1392,59 @@
                             `_Pedido validado de forma segura bajo la Ley Marco de Ciberseguridad N° 21.663._`;
 
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        async function cancelAppointmentFromUser() {
+            const codeVal = document.getElementById('cancelBookingCode').value.trim().toUpperCase();
+
+            if (!codeVal) {
+                alert("⚠️ Por favor ingresa el Código de Reserva o Confirmación de tu cita o mesa.");
+                return;
+            }
+
+            if (supabaseKey === 'TU_LLAVE_ANON_AQUÍ' || supabaseKey === '') {
+                alert("⚠️ Para procesar cancelaciones en vivo de Supabase, por favor pega tu clave anon.");
+                return;
+            }
+
+            try {
+                // Primero buscamos la cita para confirmar que existe
+                const { data: appointment, error: fetchError } = await _supabase
+                    .from('citas')
+                    .select('*')
+                    .eq('codigo_reserva', codeVal)
+                    .maybeSingle();
+
+                if (fetchError) throw fetchError;
+
+                if (!appointment) {
+                    alert("❌ No se encontró ninguna cita o reserva de mesa registrada con el código: " + codeVal);
+                    return;
+                }
+
+                if (appointment.estado_cita === 'Cancelada') {
+                    alert("⚠️ Esta cita ya se encuentra Cancelada.");
+                    return;
+                }
+
+                // Procedemos a actualizar el estado a 'Cancelada'
+                const { error: updateError } = await _supabase
+                    .from('citas')
+                    .update({ estado_cita: 'Cancelada' })
+                    .eq('codigo_reserva', codeVal);
+
+                if (updateError) throw updateError;
+
+                alert(`🎉 ¡Reserva Cancelada con Éxito!\n\n` +
+                      `• Código de Reserva: ${codeVal}\n` +
+                      `• Estado: Cancelada y Liberada\n\n` +
+                      `Se ha notificado al establecimiento del espacio liberado de forma automática.`);
+                
+                document.getElementById('cancelBookingCode').value = "";
+            } catch (err) {
+                console.error("❌ Error al cancelar cita en Supabase:", err.message);
+                alert("❌ Error al procesar cancelación: " + err.message);
+            }
         }
 
                 async function bookRestaurantTable() {

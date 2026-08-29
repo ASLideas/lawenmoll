@@ -112,7 +112,7 @@
                 
                 <div class="space-y-3" id="appointmentList">
                     <!-- Paciente 1 -->
-                    <button onclick="selectPatient('Camila Silva', '26.0', 'Sobrepeso Moderado', 'Dolor lumbar tras largas jornadas de oficina.', 'Sí (Hipertensión e Hipotiroidismo)', 'Estándar (30 a 45 min)', 'Lunes 24 Ago - 09:30 hrs', '💻 Consulta en Línea (Telemedicina)', '30', 'Neurodivergente (TDAH)', 'Sí (Derivada a clases de Yoga)', '+56912345678', 'Fatiga Media 🥱', 'Estrés Moderado ⚖️')" class="w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm">
+                    <button onclick="activeAppointmentId = null; selectPatient('Camila Silva', '26.0', 'Sobrepeso Moderado', 'Dolor lumbar tras largas jornadas de oficina.', 'Sí (Hipertensión e Hipotiroidismo)', 'Estándar (30 a 45 min)', 'Lunes 24 Ago - 09:30 hrs', '💻 Consulta en Línea (Telemedicina)', '30', 'Neurodivergente (TDAH)', 'Sí (Derivada a clases de Yoga)', '+56912345678', 'Fatiga Media 🥱', 'Estrés Moderado ⚖️')" class="w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm">
                         <div class="flex items-center space-x-3">
                             <span class="text-xl">👩</span>
                             <div>
@@ -124,7 +124,7 @@
                     </button>
 
                     <!-- Paciente 2 -->
-                    <button onclick="selectPatient('Pedro Jara', '23.4', 'Peso Saludable', 'Esguince de tobillo grado 1 jugando fútbol.', 'No', 'Express (5 a 15 min)', 'Martes 25 Ago - 11:00 hrs', '🏢 Consulta Presencial', '24', 'Ninguna', 'No', '+56987654321', 'Energía Radiante 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm">
+                    <button onclick="activeAppointmentId = null; selectPatient('Pedro Jara', '23.4', 'Peso Saludable', 'Esguince de tobillo grado 1 jugando fútbol.', 'No', 'Express (5 a 15 min)', 'Martes 25 Ago - 11:00 hrs', '🏢 Consulta Presencial', '24', 'Ninguna', 'No', '+56987654321', 'Energía Radiante 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm">
                         <div class="flex items-center space-x-3">
                             <span class="text-xl">👨</span>
                             <div>
@@ -273,6 +273,12 @@
                     </div>
                     
                     <div class="flex space-x-2 w-full sm:w-auto">
+                        <!-- BOTÓN DE CANCELACIÓN DE CITA -->
+                        <button onclick="cancelActiveAppointment()" class="w-full sm:w-auto bg-red-600 hover:bg-red-750 text-white font-bold py-3 px-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-rectangle-xmark"></i>
+                            <span>Cancelar Cita</span>
+                        </button>
+                        
                         <!-- BOTÓN DE WHATSAPP INTEGRADO -->
                         <button onclick="sendPrescriptionWhatsApp()" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
                             <i class="fa-brands fa-whatsapp text-lg"></i>
@@ -326,7 +332,7 @@
                         const safeModalidad = (c.modalidad_cita || 'Presencial').replace(/'/g, '').replace(/"/g, '');
                         const safeTelefono = (c.telefono_contacto || '+56912345678').replace(/'/g, '').replace(/"/g, '');
                         const btnHtml = `
-                            <button onclick="selectPatient('${safeLugar}', '${randomIMC}', '${weightStatus}', 'Reserva de Mesa / Cita', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
+                            <button onclick="activeAppointmentId = ${c.id}; selectPatient('${safeLugar}', '${randomIMC}', '${weightStatus}', 'Reserva de Mesa / Cita', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-xl">👤</span>
                                     <div>
@@ -372,6 +378,7 @@
         }
     
         let activePatientPhone = "+56912345678";
+        let activeAppointmentId = null;
 
         // Inicializar cargadores al cargar la pantalla
         window.onload = function() {
@@ -498,6 +505,35 @@
             } catch (err) {
                 console.error("❌ Error al guardar ficha SOAP en Supabase:", err.message);
                 alert("❌ Error al guardar en base de datos: " + err.message);
+            }
+        }
+
+        async function cancelActiveAppointment() {
+            if (!activeAppointmentId) {
+                alert("⚠️ Por favor selecciona una cita real registrada desde Supabase en la barra lateral izquierda antes de continuar.");
+                return;
+            }
+
+            const confirmCancel = confirm("❓ ¿Estás seguro de que deseas marcar esta cita médica como Cancelada de forma permanente en Supabase?");
+            if (!confirmCancel) return;
+
+            try {
+                const { error } = await _supabase
+                    .from('citas')
+                    .update({ estado_cita: 'Cancelada' })
+                    .eq('id', activeAppointmentId);
+
+                if (error) throw error;
+
+                alert("🎉 ¡Cita Cancelada con Éxito en Supabase!\nEl espacio de atención ha sido liberado de manera segura.");
+                
+                // Recargar citas para actualizar el estado visual en la barra lateral
+                const listContainer = document.getElementById('appointmentList');
+                listContainer.innerHTML = "";
+                loadAppointmentsFromSupabase();
+            } catch (err) {
+                console.error("❌ Error al cancelar cita en Supabase:", err.message);
+                alert("❌ Error al cancelar la cita: " + err.message);
             }
         }
 
