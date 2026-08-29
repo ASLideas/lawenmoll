@@ -32,10 +32,10 @@
             background-color: #FAF8F5;
         }
         .step-panel {
-            display: none;
+            display: none !important;
         }
         .step-panel.active {
-            display: flex;
+            display: flex !important;
             animation: fadeIn 0.4s ease-in-out;
         }
         @keyframes fadeIn {
@@ -1465,7 +1465,7 @@
 
         async function saveTestData() {
             // Validar que el usuario haya reemplazado la llave por defecto para evitar errores
-            if (supabaseKey === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo' || supabaseKey === '') {
+            if (supabaseKey === '') {
                 console.warn('⚠️ Base de Datos: No se han guardado los datos porque no has pegado tu llave ANON de Supabase.');
                 return;
             }
