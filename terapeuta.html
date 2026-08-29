@@ -174,6 +174,62 @@
                         <span class="font-bold text-accent">12 Clientes</span>
                     </div>
                 </div>
+
+                <!-- Configurar Mi Vitrina Pública B2B (Especialistas) -->
+                <div class="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-left space-y-3">
+                    <span class="text-[9px] uppercase font-extrabold text-forest block tracking-wider flex items-center justify-between cursor-pointer" onclick="toggleVitrinaSection()">
+                        <span><i class="fa-solid fa-store mr-1"></i> Configurar Mi Vitrina Pública</span>
+                        <i id="vitrinaChevron" class="fa-solid fa-chevron-down transition"></i>
+                    </span>
+                    <div id="vitrinaForm" class="hidden space-y-2.5 pt-1.5 border-t border-gray-200/60">
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Especialidad y Enfoque</label>
+                            <input type="text" id="vitrinaSpec" placeholder="Ej: Consejería Herbal Pura y Fitoterapia" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Tarifa por Sesión</label>
+                                <input type="text" id="vitrinaRate" placeholder="Ej: $25.000" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Celular de Contacto</label>
+                                <input type="text" id="vitrinaPhone" placeholder="Ej: +56982710938" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Dirección de Box / Consulta</label>
+                            <input type="text" id="vitrinaAddress" placeholder="Ej: Av. Providencia 1450, Providencia" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                        </div>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Instagram</label>
+                                <input type="text" id="vitrinaInsta" placeholder="@usuario" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-[10px] font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">LinkedIn URL</label>
+                                <input type="text" id="vitrinaLinkedin" placeholder="https://..." class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-[10px] font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Telegram</label>
+                                <input type="text" id="vitrinaTelegram" placeholder="usuario" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-[10px] font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Latitud Mapa</label>
+                                <input type="number" step="any" id="vitrinaLat" placeholder="Ej: -33.4250" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                            <div>
+                                <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Longitud Mapa</label>
+                                <input type="number" step="any" id="vitrinaLon" placeholder="Ej: -70.6120" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                            </div>
+                        </div>
+                        <button onclick="saveTherapistVitrinaProfile()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold text-[9px] uppercase py-2 rounded-xl shadow-md transition focus:outline-none flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Guardar Vitrina Profesional 💾</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Listado de Citas del Día -->
@@ -486,7 +542,8 @@
                             nombre: data.nombre,
                             especialidad: data.especialidad + ' • Providencia, Chile',
                             registro_sis: data.registro_sis || 'Registro SIS Certificado',
-                            iniciales: data.nombre.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()
+                            iniciales: data.nombre.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase(),
+                            ...data
                         };
                     }
                 }
@@ -509,6 +566,17 @@
                     // Ocultar login, mostrar escritorio
                     document.getElementById('loginSection').classList.add('hidden');
                     document.getElementById('mainWorkspace').classList.remove('hidden');
+
+                    // Populate Vitrina form fields
+                    document.getElementById('vitrinaSpec').value = loggedInUser.especialidad || '';
+                    document.getElementById('vitrinaRate').value = loggedInUser.tarifa_sesion || '';
+                    document.getElementById('vitrinaPhone').value = loggedInUser.telefono_contacto || '';
+                    document.getElementById('vitrinaAddress').value = loggedInUser.direccion_box || '';
+                    document.getElementById('vitrinaInsta').value = loggedInUser.instagram || '';
+                    document.getElementById('vitrinaLinkedin').value = loggedInUser.linkedin || '';
+                    document.getElementById('vitrinaTelegram').value = loggedInUser.telegram || '';
+                    document.getElementById('vitrinaLat').value = loggedInUser.latitud || '';
+                    document.getElementById('vitrinaLon').value = loggedInUser.longitud || '';
 
                     // Cargar citas desde Supabase
                     loadAppointmentsFromSupabase();
