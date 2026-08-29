@@ -587,7 +587,7 @@
                 </a>
                 <button onclick="openLocalLoginModal()" class="text-[9px] md:text-xs bg-slateDark hover:opacity-95 text-white font-bold px-2.5 py-1.5 md:px-3.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
                     <i class="fa-solid fa-store text-accent"></i>
-                    <span><span class="hidden sm:inline">Acceso </span>Locales B2B 🏢</span>
+                    <span><span class="hidden sm:inline">Portal </span>de Aliados 🏢</span>
                 </button>
             </div>
         </div>
@@ -1410,10 +1410,19 @@
                             if (titleEl) titleEl.innerHTML = `🏢 ${c.nombre}`;
                             if (addrEl && c.direccion) addrEl.innerText = c.direccion;
                             
-                            // Foto de portada (foto_local_1)
+                            // Foto de Logo (foto_local_1)
                             if (c.foto_local_1) {
-                                const imgEl = document.querySelector('#tabPanel-centros img');
-                                if (imgEl) imgEl.src = c.foto_local_1;
+                                const logoContainer = document.getElementById('centroLogoContainer');
+                                const logoImg = document.getElementById('centroLogoImg');
+                                if (logoContainer && logoImg) {
+                                    logoImg.src = c.foto_local_1;
+                                    logoContainer.classList.remove('hidden');
+                                }
+                            }
+                            // Foto de Portada Banner (foto_local_2)
+                            if (c.foto_local_2) {
+                                const bannerImg = document.getElementById('centroBannerImg');
+                                if (bannerImg) bannerImg.src = c.foto_local_2;
                             }
                             // Foto de galería / instalaciones (foto_local_2)
                             if (c.foto_local_2) {
@@ -1747,7 +1756,7 @@
             // Cuentas demo pre-configuradas para pruebas
             const demoB2B = {
                 'contacto@huertoorganico.cl': {
-                    id: 1,
+                    id: 4,
                     nombre: 'Restaurante "Huerto Orgánico"',
                     tipo_establecimiento: 'restaurante',
                     descripcion: 'Menús depurativos elaborados con ingredientes 100% orgánicos de agricultores locales.',
@@ -1758,7 +1767,7 @@
                     email: 'contacto@huertoorganico.cl'
                 },
                 'vitacura@sportlife.cl': {
-                    id: 2,
+                    id: 5,
                     nombre: 'Gimnasio "SportLife Integrativo"',
                     tipo_establecimiento: 'gym',
                     descripcion: 'Socio deportivo estratégico de la red Lawenmoll con pases libres y kinesiología.',
@@ -1977,6 +1986,34 @@
                 document.getElementById('adminGalleryPreview').innerHTML = `<img src="${base64}" class="w-full h-full object-cover">`;
                 if (activeB2BClient) {
                     activeB2BClient.foto_local_2 = base64;
+                }
+            });
+        }
+
+        // --- CARGAR FOTO DE PLATILLO COMPRIMIDA EN TIEMPO REAL ---
+        function uploadAdminDish(num, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert("⚠️ Por favor selecciona una imagen válida (PNG o JPG).");
+                return;
+            }
+
+            const preview = document.getElementById(`adminDish${num}Preview`);
+            if (preview) {
+                preview.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-forest"></i>`;
+            }
+
+            // Comprimir a max 600px para ahorrar espacio en Supabase
+            compressImage(file, 600, 600, 0.7, function(base64) {
+                if (preview) {
+                    preview.innerHTML = `<img src="${base64}" class="w-full h-full object-cover">`;
+                }
+                const photoInput = document.getElementById(`adminDish${num}Photo`);
+                if (photoInput) photoInput.value = base64;
+                if (activeB2BClient) {
+                    activeB2BClient[`dish${num}_photo`] = base64;
                 }
             });
         }
