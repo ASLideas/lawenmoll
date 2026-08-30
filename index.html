@@ -1774,7 +1774,7 @@
             if (selections.selectedPlan === 'trimestral') clpPrice = 48000;
             else if (selections.selectedPlan === 'anual') clpPrice = 155000;
             
-            document.getElementById('checkoutPlanPriceUF').innerText = '$' + clpPrice.toLocaleString('es-CL') + ' CLP';
+            document.getElementById('checkoutPlanPriceCLP').innerText = '$' + clpPrice.toLocaleString('es-CL') + ' CLP';
             document.getElementById('checkoutPlanPriceCLP').innerText = 'SaaS Especialista Activo';
             
             document.getElementById('paymentModal').classList.remove('hidden');
@@ -2012,7 +2012,7 @@
                     </div>
                     <div class="text-right">
                         <span class="text-[10px] uppercase font-bold text-gray-400 block">Total a Pagar</span>
-                        <span id="checkoutPlanPriceUF" class="font-black text-forest text-base block font-sans">$48.000 CLP</span>
+                        <span id="checkoutPlanPriceCLP" class="font-black text-forest text-base block font-sans">$48.000 CLP</span>
                         <span id="checkoutPlanPriceCLP" class="text-xs font-bold text-gray-500 block">~$48.125 CLP</span>
                     </div>
                 </div>
