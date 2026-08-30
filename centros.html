@@ -606,6 +606,17 @@
                     <span>Buscar Servicios</span>
                 </h3>
                 
+                <!-- FILTRADO GEOGRÁFICO NACIONAL (CHILE) v19 -->
+                <div class="mb-4 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
+                    <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-map-location-dot mr-1"></i> Selecciona tu Región (Chile)</label>
+                    <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
+                        <option value="all">🇨🇱 Todas las Regiones</option>
+                        <option value="Región Metropolitana">📍 Región Metropolitana (Santiago)</option>
+                        <option value="Región de la Araucanía">🌲 Región de la Araucanía (Temuco)</option>
+                        <option value="Región de Valparaíso">🌊 Región de Valparaíso (Viña/Valpo)</option>
+                    </select>
+                </div>
+                
                 <div class="space-y-2">
                     <button id="tab-centros" onclick="switchTab('centros', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm">
                         <span class="text-2xl">🏢</span>
@@ -714,194 +725,24 @@
         <div class="lg:col-span-8">
             
             <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
-            <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                        <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                    <div class="flex items-center space-x-3.5">
-                        <div id="centroLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
-                            <img id="centroLogoImg" src="" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Establecimiento Clínico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
-                            <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🏢 Centro Holístico "Lawen Ko"</h2>
-                            <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Providencia 1240, Providencia, Santiago</p>
-                            <div class="flex flex-wrap gap-2 mt-2">
-                                <button onclick="viewEstablishmentDetail('lawenko')" class="text-[10px] bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 px-3 rounded-xl transition flex items-center space-x-1.5 uppercase tracking-wider focus:outline-none"><i class="fa-solid fa-users"></i> <span>Ver Fotos y Personal 👥</span></button>
-                                <button onclick="calculateIndependentRoute(-33.4285, -70.6125, 'Centro Holístico Lawen Ko', 'Av. Providencia 1240')" class="text-[10px] bg-accent/10 hover:bg-accent/20 text-accent font-bold py-1.5 px-3 rounded-xl transition flex items-center space-x-1.5 uppercase tracking-wider focus:outline-none"><i class="fa-solid fa-route"></i> <span>Planificar Viaje 🗺️</span></button>
-                            </div>
-                        </div>
+                    <div>
+                        <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Red de Clínicas y Boxes</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                        <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🏢 Clínicas, Centros y Boxes Físicos Asociados</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios clínicos acreditados y equipados para consultas integrativas, kinesiología y telemedicina.</p>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-clock mr-1"></i> Abierto</span>
-                        <span class="text-[10px] text-gray-400">Lun a Sáb: 08:30 - 20:30 hrs</span>
+                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-clock mr-1"></i> Red Activa</span>
+                        <span class="text-[10px] text-gray-400">Atención presencial y virtual</span>
                     </div>
                 </div>
 
-                <!-- Foto de Portada Real del Centro Clínico -->
-                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative">
-                    <img id="centroBannerImg" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Centro Holístico Lawen Ko">
-                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
-                        <i class="fa-solid fa-camera mr-1"></i> Vista de Recepción e Instalaciones
-                    </div>
-                </div>
-
-                <!-- Profesionales, Farmacias y Convenios de Turno -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Profesionales de Turno -->
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-2.5"><i class="fa-solid fa-user-doctor text-forest mr-1"></i> Profesionales de Turno</h3>
-                            <div class="space-y-2">
-                                <div class="flex items-center space-x-3 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
-                                    <div class="w-8 h-8 rounded-full overflow-hidden border border-gray-100 flex-shrink-0">
-                                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover" alt="Dra. Eliana Ruiz">
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slateDark">Dra. Eliana Ruiz</h4>
-                                        <p class="text-[8px] text-gray-400">Médico Integrativa y Fitoterapeuta</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
-                                    <div class="w-8 h-8 rounded-full overflow-hidden border border-gray-100 flex-shrink-0">
-                                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover" alt="Klgo. Carlos Mendoza">
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-slateDark">Klgo. Carlos Mendoza</h4>
-                                        <p class="text-[8px] text-gray-400">Kinesiólogo Integrativo y Acupuntor</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Farmacias del Ecosistema (Redireccionada con Botón Prominente) -->
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-2.5"><i class="fa-solid fa-prescription-bottle-medical text-forest mr-1"></i> Farmacias del Ecosistema</h3>
-                            <p class="text-[10px] text-gray-600 leading-relaxed font-semibold mb-3">
-                                Contamos con farmacias herbolarias y mapuches de recetarios tradicionales y fitoterapia con resolución sanitaria del ISP.
-                            </p>
-                            <div class="space-y-2 mb-4">
-                                <div class="flex items-center space-x-2.5 bg-white p-2.5 rounded-xl shadow-sm border border-gray-100">
-                                    <span class="text-lg">🌿</span>
-                                    <span class="text-[11px] font-bold text-slateDark">Farmacia "El Canelo"</span>
-                                </div>
-                                <div class="flex items-center space-x-2.5 bg-white p-2.5 rounded-xl shadow-sm border border-gray-100">
-                                    <span class="text-lg">👵</span>
-                                    <span class="text-[11px] font-bold text-slateDark">Farmacia Mapuche "Makewe"</span>
-                                </div>
-                            </div>
-                        </div>
-                        <button onclick="switchTab('farmacias', document.getElementById('tab-farmacias'))" class="w-full bg-forest hover:bg-forest/95 text-white font-bold py-2.5 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
-                            <i class="fa-solid fa-leaf"></i>
-                            <span>Ver Recetarios y Pedir Despacho</span>
-                        </button>
-                    </div>
-
-                    <!-- Convenios y Reembolsos -->
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-2.5"><i class="fa-solid fa-shield-halved text-forest mr-1"></i> Convenios y Reembolsos</h3>
-                            <p class="text-[10px] text-gray-600 leading-relaxed font-medium mb-3">
-                                Este establecimiento cuenta con convenios de reembolso automático para consulta médica y kinesiología:
-                            </p>
-                            <div class="flex flex-wrap gap-1.5 mb-2">
-                                <span class="text-[9px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full font-bold">Fonasa MLE</span>
-                                <span class="text-[9px] bg-red-50 text-red-700 px-2 py-0.5 rounded-full font-bold">Isapres (Reembolso)</span>
-                                <span class="text-[9px] bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded-full font-bold">Colmena / CruzBlanca</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Módulo de Agendamiento Clínico -->
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 space-y-3">
-                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-1 flex items-center space-x-1">
-                        <i class="fa-solid fa-calendar-check text-forest"></i>
-                        <span>Módulo de Agendamiento Clínico (Agendar Hora)</span>
-                    </h3>
-                    <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
-                        Selecciona el profesional, la fecha y hora de tu preferencia. El sistema te alertará automáticamente en tu celular 24 horas antes de la consulta.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 mb-3">
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Elegir Especialista</label>
-                            <select id="clinicalSpecialist" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                                <option value="Dra. Eliana Ruiz">Dra. Eliana Ruiz (Médico Integrativa)</option>
-                                <option value="Klgo. Carlos Mendoza">Klgo. Carlos Mendoza (Kinesiólogo)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Fecha de Consulta</label>
-                            <input type="date" id="clinicalDate" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Hora Disponible</label>
-                            <select id="clinicalTime" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                                <option value="09:00">09:00 hrs</option>
-                                <option value="10:30">10:30 hrs</option>
-                                <option value="12:00">12:00 hrs</option>
-                                <option value="15:00">15:00 hrs</option>
-                                <option value="16:30">16:30 hrs</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Nombre Paciente</label>
-                            <input type="text" id="clinicalPatientName" placeholder="Ej: Camila Silva" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
-                            <input type="text" id="clinicalPhone" value="+569 " class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                        </div>
-                    </div>
-
-                    <!-- Consentimiento de Ciberseguridad para Horas Clínicas -->
-                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left">
-                        <input type="checkbox" id="clinicalAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
-                        <label for="clinicalAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
-                            Consiento el tratamiento seguro de mis datos biométricos e información clínica bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
-                        </label>
-                    </div>
-
-                    <button onclick="bookClinicalAppointment()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <span>Confirmar y Agendar Hora Clínica</span>
-                    </button>
-                    
-                    <!-- CONTROL DE CANCELACIÓN COMPLETAMENTE VISIBLE -->
-                    <div class="mt-5 border-t border-gray-100 pt-4 bg-red-50/40 rounded-2xl p-4 border border-red-100">
-                        <h4 class="text-[10px] font-extrabold text-red-700 uppercase tracking-wider flex items-center mb-1.5">
-                            <i class="fa-solid fa-circle-minus mr-1.5 text-red-500"></i> ¿Necesitas Cancelar una Cita o Mesa?
-                        </h4>
-                        <p class="text-[9px] text-gray-500 font-semibold leading-relaxed mb-3">Si ya tienes una cita o mesa agendada y no podrás asistir, ingresa tu código de reserva para darla de baja de inmediato:</p>
-                        <div class="flex flex-col sm:flex-row gap-2">
-                            <input type="text" id="cancelBookingCode" placeholder="Ej: CLINIC-4839" class="w-full sm:w-1/2 bg-white border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-red-400 font-semibold shadow-sm uppercase font-mono">
-                            <button onclick="cancelAppointmentFromUser()" class="w-full sm:w-1/2 bg-red-500 hover:bg-red-600 text-white font-extrabold py-2.5 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
-                                <i class="fa-solid fa-trash-can"></i>
-                                <span>Dar de Baja Reserva</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mapa y Cómo Llegar -->
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500"><i class="fa-solid fa-map mr-1"></i> Geolocalización e Indicaciones</h3>
-                        <button onclick="calculateRoute()" class="bg-forest hover:bg-forest/95 text-white font-bold text-[10px] px-3 py-1.5 rounded-xl shadow-sm transition flex items-center space-x-1">
-                            <i class="fa-solid fa-route"></i>
-                            <span>Trazar Ruta en Tiempo Real</span>
-                        </button>
-                    </div>
-                    <div id="routeExplain" class="hidden bg-forest/5 p-3 rounded-xl border border-forest/20 text-[10px] text-gray-600 leading-relaxed animate-fadeIn">
-                        <p>📍 <strong>Indicaciones de cómo llegar:</strong> Camina hacia la estación de Metro Manuel Montt (Línea 1). Toma el tren en dirección Los Dominicos y bájate en Metro Pedro de Valdivia. Sal al norte, camina 2 cuadras por Av. Providencia hasta el número 1240. ¡El Centro Holístico está en el segundo piso!</p>
-                    </div>
-                    <div id="centerMap" class="w-full h-48 rounded-2xl border border-gray-200 z-10 shadow-inner"></div>
-                </div>
+                <!-- Contenedor de la Cuadrícula de Clínicas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="clinicsListGrid"></div>
             </div>
 
-            <!-- PESTAÑA DE FARMACIAS NATURALES (NUEVO) -->
-            <div id="tabPanel-farmacias" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+<div id="tabPanel-farmacias" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
                         <div id="farmaciaLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
@@ -991,230 +832,45 @@
             </div>
 
             <!-- PESTAÑA 2: RESTAURANTES SALUDABLES -->
-            <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                        <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
-                        <div id="restaurantLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
-                            <img id="restaurantLogoImg" src="" class="w-full h-full object-cover">
-                        </div>
                         <div>
-                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Nutrición Consciente</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
-                            <h2 class="text-xl font-bold text-forest mt-1.5">🥑 Restaurante "Huerto Orgánico"</h2>
-                            <p class="text-xs text-gray-400 font-medium mt-0.5">General Holley 142, Providencia | Teléfono: +56 9 8472 1049</p>
+                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Nutrición de Precisión</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                            <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">🥑 Restaurantes Saludables y Alimentación Limpia</h2>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">Ecosistema de gastronomía consciente y menús depurativos integrados con la salud del paciente.</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs font-bold text-accent block">15% Descuento</span>
-                        <span class="text-[10px] text-gray-400">Código: LAWEN-FOOD</span>
+                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-cookie-bite mr-1"></i> Descuentos Activos</span>
+                        <span class="text-[10px] text-gray-400">15% de Descuento con tu Receta</span>
                     </div>
                 </div>
 
-                <!-- Foto de Portada Real del Restaurante / Banner -->
-                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative mb-4">
-                    <img id="restaurantBannerImg" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Banner Restaurante">
-                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
-                        🥑 Menú Nutritivo Consciente
-                    </div>
-                </div>
-
-                <!-- Menú Interactivo Sincronizado herbario -->
-                <div>
-                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-utensils text-forest mr-1"></i> Menú Interactivo con Efecto Medicinal</h3>
-                    <p class="text-[10px] text-gray-400 mb-3 font-semibold">Selecciona un plato para conocer sus ingredientes de origen natural y beneficios para tu salud:</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="restaurantDishesGrid">
-                        <!-- Bowl de Cúrcuma -->
-                        <button onclick="viewDishDetail('cucumaBowl', 'Bowl Antiinflamatorio de Cúrcuma 🥣', 'Ingredientes: Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y aderezo de tahini y limón.', '🌟 Alivio del dolor articular, desinflamación de tejidos y alto contenido de fibra digestiva.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Bowl Cúrcuma">
-                                <div>
-                                    <h4 class="text-xs font-bold text-slateDark">Bowl de Cúrcuma 🥣</h4>
-                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Principal Antiinflamatorio</p>
-                                </div>
-                            </div>
-                            <span class="text-xs font-black text-forest">$8.900</span>
-                        </button>
-
-                        <!-- Crema de Hinojo -->
-                        <button onclick="viewDishDetail('hinojoSoup', 'Crema Depurativa de Hinojo 🍵', 'Ingredientes: Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal orgánico.', '🦋 Regulación de la glándula tiroides, eliminación de toxinas y mejora la inflamación abdominal.', 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Crema Hinojo">
-                                <div>
-                                    <h4 class="text-xs font-bold text-slateDark">Crema de Hinojo 🍵</h4>
-                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Sopa Detox &amp; Tiroides</p>
-                                </div>
-                            </div>
-                            <span class="text-xs font-black text-forest">$5.400</span>
-                        </button>
-
-                        <!-- Tostadas de Palta -->
-                        <button onclick="viewDishDetail('avocadoToast', 'Tostadas de Palta con Masa Madre 🥑', 'Ingredientes: Pan de masa madre integral tostado, palta madura machacada, semillas de sésamo negro, rabanitos laminados, brotes orgánicos y aceite de oliva prensado en frío.', '🥑 Aporte de grasas saludables de alta calidad, regulación del colesterol LDL y energía de absorción lenta.', 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Tostadas Palta">
-                                <div>
-                                    <h4 class="text-xs font-bold text-slateDark">Tostadas de Palta 🥑</h4>
-                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Snack de Grasas Buenas</p>
-                                </div>
-                            </div>
-                            <span class="text-xs font-black text-forest">$5.900</span>
-                        </button>
-
-                        <!-- Jugo Verde -->
-                        <button onclick="viewDishDetail('greenJuice', 'Jugo Verde Energizante Lawen 🍹', 'Ingredientes: Extracción en frío de espinaca orgánica, apio, pepino fresco, manzana verde, menta del huerto y limón sutil.', '🍹 Oxigenación celular, hidratación celular profunda, alcalinización de tejidos y eliminación de metales pesados.', 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=400&auto=format&fit=crop')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                            <div class="flex items-center space-x-3">
-                                <img src="https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=120&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="Jugo Verde">
-                                <div>
-                                    <h4 class="text-xs font-bold text-slateDark">Jugo Verde Lawen 🍹</h4>
-                                    <p class="text-[9px] text-gray-400 font-semibold font-sans">Bebida Detox Energética</p>
-                                </div>
-                            </div>
-                            <span class="text-xs font-black text-forest">$3.800</span>
-                        </button>
-                    </div>
-
-                    <!-- Detalle del Plato Seleccionado -->
-                    <div id="dishDetailBox" class="hidden mt-3 bg-forest/5 p-4 rounded-2xl border border-forest/20 animate-fadeIn flex flex-col items-center sm:flex-row sm:items-start sm:space-x-4">
-                        <img id="detailDishImage" src="" class="w-full sm:w-28 sm:h-28 h-40 object-cover rounded-xl mt-1 border border-forest/15 shadow-md flex-shrink-0" alt="Foto del Plato">
-                        <div class="flex-grow mt-2 sm:mt-0 text-left w-full">
-                            <h4 class="font-extrabold text-xs text-forest text-sm" id="detailDishName">Detalle de Plato</h4>
-                            <p class="text-[10px] text-gray-600 mt-1 font-medium leading-relaxed font-sans" id="detailDishIngredients">Ingredientes...</p>
-                            <p class="text-[10px] text-forest font-bold mt-2" id="detailDishMedicinal"><i class="fa-solid fa-leaf"></i> Efecto Medicinal...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reserva de Mesas -->
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-calendar-days text-forest mr-1"></i> Módulo de Reserva de Mesas</h3>
-                    
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Fecha</label>
-                            <input type="date" id="reserveDate" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Hora</label>
-                            <select id="reserveTime" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                                <option value="12:30">12:30 (Almuerzo)</option>
-                                <option value="13:30">13:30 (Almuerzo)</option>
-                                <option value="14:30">14:30 (Almuerzo)</option>
-                                <option value="19:30">19:30 (Cena)</option>
-                                <option value="20:30">20:30 (Cena)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Personas</label>
-                            <select id="reserveGuests" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                                <option value="1">1 Persona</option>
-                                <option value="2" selected>2 Personas</option>
-                                <option value="4">4 Personas</option>
-                                <option value="6">6 Personas</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
-                            <input type="text" id="reservePhone" value="+569 " class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
-                        </div>
-                    </div>
-
-                    
-                    <!-- Consentimiento de Ciberseguridad para Reservas -->
-                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left mb-3">
-                        <input type="checkbox" id="reserveAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
-                        <label for="reserveAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
-                            Consiento la transmisión segura de mis datos de reserva y contacto bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
-                        </label>
-                    </div>
-<button onclick="bookRestaurantTable()" class="w-full bg-forest hover:bg-forest/95 text-white font-bold py-3 rounded-xl text-xs shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Confirmar Reserva de Mesa</span>
-                    </button>
-
-                    <!-- CONTROL DE CANCELACIÓN DE MESA (RESTAURANTES) -->
-                    <div class="mt-5 border-t border-gray-100 pt-4 bg-red-50/40 rounded-2xl p-4 border border-red-100 text-left">
-                        <h4 class="text-[10px] font-extrabold text-red-700 uppercase tracking-wider flex items-center mb-1.5">
-                            <i class="fa-solid fa-circle-minus mr-1.5 text-red-500"></i> ¿Necesitas Cancelar tu Mesa?
-                        </h4>
-                        <p class="text-[9px] text-gray-500 font-semibold leading-relaxed mb-3">Si reservaste una mesa en "Huerto Orgánico" y no podrás asistir, ingresa tu código de reserva (ej: MESA-1234) para cancelarla de inmediato:</p>
-                        <div class="flex flex-col sm:flex-row gap-2">
-                            <input type="text" id="cancelRestaurantCode" placeholder="Ej: MESA-4839" class="w-full sm:w-1/2 bg-white border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-red-400 font-semibold shadow-sm uppercase font-mono">
-                            <button onclick="cancelRestaurantTableFromUser()" class="w-full sm:w-1/2 bg-red-500 hover:bg-red-600 text-white font-extrabold py-2.5 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
-                                <i class="fa-solid fa-trash-can"></i>
-                                <span>Dar de Baja Mesa</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Contenedor de la Cuadrícula de Restaurantes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="restaurantsListGrid"></div>
             </div>
 
-            <!-- PESTAÑA 3: GIMNASIOS Y YOGA -->
             <div id="tabPanel-gimnasios" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
-                        <div id="gymLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
-                            <img id="gymLogoImg" src="" class="w-full h-full object-cover">
-                        </div>
                         <div>
-                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Socio de Movimiento Terapéutico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
-                            <h2 class="text-xl font-bold text-forest mt-1.5">💪 Gimnasio "SportLife Integrativo"</h2>
-                            <p class="text-xs text-gray-400 font-medium mt-0.5">Av. Vitacura 3568, Vitacura | Redes: @SportlifeIntegrativo</p>
+                            <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Movimiento Terapéutico</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
+                            <h2 class="text-xl font-bold text-forest mt-1.5 font-sans">💪 Gimnasios, Escuelas de Yoga y Pilates Reformer</h2>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios de entrenamiento supervisado por kinesiólogos y entrenadores metabólicos.</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-heart-pulse"></i> Kinesiología</span>
-                        <span class="text-[10px] text-gray-400">Pase: 3 Días Libres</span>
+                        <span class="text-xs font-bold text-forest block"><i class="fa-solid fa-dumbbell mr-1"></i> Bienestar Activo</span>
+                        <span class="text-[10px] text-gray-400">Matrículas rebajadas y pases libres</span>
                     </div>
                 </div>
 
-                <!-- Foto de Portada Real del Gimnasio / Banner -->
-                <div class="w-full h-48 rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative mb-4">
-                    <img id="gymBannerImg" src="https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Banner Gimnasio">
-                    <div class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-forest font-bold text-[10px] px-2.5 py-1 rounded-full shadow-sm">
-                        💪 Instalaciones y Equipamiento de Kinesiología
-                    </div>
-                </div>
-
-                <!-- Carrusel de Instalaciones con fotos y descripción real en CSS -->
-                <div>
-                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-images text-forest mr-1"></i> Carrusel de Instalaciones</h3>
-                    
-                    <div class="relative w-full h-48 rounded-2xl overflow-hidden bg-slateDark border border-gray-100 shadow-inner flex items-center justify-center text-white">
-                        
-                        <!-- Slide 1 (Yoga) -->
-                        <div class="carousel-slide absolute inset-0 transition-opacity duration-500 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop');">
-                            <h4 class="font-bold text-sm text-accent">🧘 Sala de Yoga y Meditación</h4>
-                            <p class="text-[10px] text-gray-300 font-medium">Ambiente climatizado, libre de ruidos y equipado con props terapéuticos.</p>
-                        </div>
-
-                        <!-- Slide 2 (Fuerza) -->
-                        <div class="carousel-slide absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop');">
-                            <h4 class="font-bold text-sm text-accent">🏋️‍♂️ Zona de Fuerza y Rehabilitación</h4>
-                            <p class="text-[10px] text-gray-300 font-medium">Máquinas guiadas ideales para prevenir impactos y fortalecer articulaciones.</p>
-                        </div>
-
-                        <!-- Slide 3 (Pilates) -->
-                        <div class="carousel-slide absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop');">
-                            <h4 class="font-bold text-sm text-accent">🤸 Sala de Pilates Reformer</h4>
-                            <p class="text-[10px] text-gray-300 font-medium">Elongación y control postural asistido por kinesiólogos certificados.</p>
-                        </div>
-
-                        <!-- Botones de Navegación -->
-                        <button onclick="rotateCarousel(-1)" class="absolute left-3 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button onclick="rotateCarousel(1)" class="absolute right-3 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- Horarios de Clases -->
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-3"><i class="fa-solid fa-calendar-check text-forest mr-1"></i> Clases Dirigidas Recomendadas</h3>
-                    <div class="space-y-2" id="gymClassesGrid">
-                        <!-- Las clases deportivas dinámicas de Supabase se cargarán aquí en vivo -->
-                    </div>
-                </div>
+                <!-- Contenedor de la Cuadrícula de Gimnasios -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="gymsListGrid"></div>
             </div>
 
-            <!-- PESTAÑA 4: PROFESIONALES INDEPENDIENTES -->
-            <div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+<div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div>
                         <span class="text-[9px] bg-accent/20 text-accent px-2.5 py-1 rounded-full font-bold uppercase tracking-wider font-sans">Profesionales Libres</span> <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
@@ -1348,6 +1004,148 @@
         // --- SINCRONIZADOR DINÁMICO DE VITRINAS COMERCIALES B2B ---
         // Extrae logos, galerías y descripciones guardadas en tiempo real de Supabase y las muestra en la web pública
                 // --- SINCRONIZADOR DINÁMICO DE VITRINAS COMERCIALES B2B ---
+                // --- LISTADO DE ESTABLECIMIENTOS Y CONVENIOS B2B ---
+        let allClinicsData = [
+            {
+                id: 1,
+                nombre: 'Centro Holístico "Lawen Ko"',
+                direccion: 'Av. Providencia 1240, Providencia, Santiago',
+                descripcion: 'Nuestro centro clínico principal que coordina todas las pautas, kinesiología rehabilitadora, medicina general integrativa y telemedicina cifrada de la red LAWENMOLL.',
+                beneficio_detalle: 'Matrícula costo cero y 15% DCTO en consultas de evaluación.',
+                telefono_contacto: '+56 2 2843 9201',
+                foto_local_1: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=150&auto=format&fit=crop', // Logo/Icono
+                foto_local_2: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=400&auto=format&fit=crop', // Portada
+                tipo_establecimiento: 'clínica',
+                region_chile: 'Región Metropolitana',
+                latitud: -33.4285,
+                longitud: -70.6125,
+                horarios: 'Lun a Sáb: 08:30 - 20:30 hrs'
+            },
+            {
+                id: 10,
+                nombre: 'Centro de Salud Integrativa "Meli Rewe"',
+                direccion: 'Avenida Alemania 0850, Temuco',
+                descripcion: 'Centro especializado en herbolaria tradicional ancestral Mapuche combinada con tratamientos kinesiológicos integrales y pautas metabólicas limpias.',
+                beneficio_detalle: '20% DCTO en tu primera consulta presencial o telemática.',
+                telefono_contacto: '+56 45 2384 1029',
+                foto_local_1: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'clínica',
+                region_chile: 'Región de la Araucanía',
+                latitud: -38.7396,
+                longitud: -72.6028,
+                horarios: 'Lun a Vie: 09:00 - 19:00 hrs'
+            },
+            {
+                id: 11,
+                nombre: 'Clínica de Bienestar de la Costa "Savia"',
+                direccion: 'Avenida Libertad 1420, Viña del Mar',
+                descripcion: 'Espacio clínico dedicado a terapias de desintoxicación, nutrición de precisión, masoterapia y yoga terapéutico con vista al mar.',
+                beneficio_detalle: 'Evaluación de composición corporal 100% gratuita para afiliados.',
+                telefono_contacto: '+56 32 2948 1038',
+                foto_local_1: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'clínica',
+                region_chile: 'Región de Valparaíso',
+                latitud: -33.0245,
+                longitud: -71.5518,
+                horarios: 'Lun a Vie: 09:00 - 19:30 hrs'
+            }
+        ];
+
+        let allRestaurantsData = [
+            {
+                id: 4,
+                nombre: 'Restaurante "Huerto Orgánico"',
+                direccion: 'General Holley 142, Providencia, Santiago',
+                descripcion: 'Alimentación consciente y ecológica. Cocinamos con ingredientes 100% orgánicos libres de pesticidas, cosechados por agricultores locales de la Región Metropolitana.',
+                beneficio_detalle: '15% de descuento en el total de tu consumo o menús semanales presentando tu código LAWENMOLL.',
+                telefono_contacto: '+56 9 8472 1049',
+                foto_local_1: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'restaurante',
+                region_chile: 'Región Metropolitana',
+                latitud: -33.4225,
+                longitud: -70.6105,
+                codigo_descuento: 'LAWEN-FOOD'
+            },
+            {
+                id: 12,
+                nombre: 'Cocina Vegana "Raíces Ancestrales"',
+                direccion: 'San Martín 450, Temuco',
+                descripcion: 'Platos tradicionales elaborados exclusivamente con insumos de origen vegetal, hongos silvestres recolectados en los bosques del sur de Chile y harinas integrales de piñón.',
+                beneficio_detalle: '15% DCTO en almuerzos y colaciones saludables.',
+                telefono_contacto: '+56 9 7482 1029',
+                foto_local_1: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'restaurante',
+                region_chile: 'Región de la Araucanía',
+                latitud: -38.7359,
+                longitud: -72.5902,
+                codigo_descuento: 'ARAUCANIA-VEG'
+            },
+            {
+                id: 13,
+                nombre: 'Cafetería & Emporio Orgánico "Verde Amor"',
+                direccion: 'Calle Valparaíso 358, Viña del Mar',
+                descripcion: 'Exquisitos desayunos, jugos naturales prensados en frío, pastelería sin azúcar refinada y pautas detox preparadas en el momento por especialistas en nutrición.',
+                beneficio_detalle: '10% DCTO en cafetería y 5% de descuento en el emporio natural.',
+                telefono_contacto: '+56 9 8271 0938',
+                foto_local_1: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'restaurante',
+                region_chile: 'Región de Valparaíso',
+                latitud: -33.0221,
+                longitud: -71.5542,
+                codigo_descuento: 'VERDEAMOR-10'
+            }
+        ];
+
+        let allGymsData = [
+            {
+                id: 5,
+                nombre: 'Gimnasio "SportLife Integrativo"',
+                direccion: 'Av. Vitacura 3568, Vitacura, Santiago',
+                descripcion: 'Espacio dedicado al movimiento y la fuerza terapéutica guiada por profesionales. Ideal para lumbago, acondicionamiento metabólico y reducción de grasa abdominal.',
+                beneficio_detalle: 'Matrícula 100% Gratis + Pase Libre de 3 días consecutivos.',
+                telefono_contacto: '+56 9 1234 5678',
+                foto_local_1: 'https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'gym',
+                region_chile: 'Región Metropolitana',
+                latitud: -33.4350,
+                longitud: -70.6190
+            },
+            {
+                id: 14,
+                nombre: 'Estudio de Yoga Kundalini Temuco',
+                direccion: 'Avenida Alemania 1240, Temuco',
+                descripcion: 'Clases grupales e individuales de respiración diafragmática, meditación y yoga postural para controlar el estrés, regular el cortisol y aliviar tensiones crónicas.',
+                beneficio_detalle: '2 clases de prueba gratuitas y 15% DCTO en planes mensuales.',
+                telefono_contacto: '+56 9 7384 1029',
+                foto_local_1: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'gym',
+                region_chile: 'Región de la Araucanía',
+                latitud: -38.7402,
+                longitud: -72.6115
+            },
+            {
+                id: 15,
+                nombre: 'Estudio Kinesiológico & Pilates "Vitale"',
+                direccion: 'Camino El Alba 11500, Las Condes',
+                descripcion: 'Entrenamiento supervisado y personalizado utilizando camas de Pilates Reformer Clínico para tonificación profunda, flexibilidad espinal y reeducación postural.',
+                beneficio_detalle: 'Evaluación postural gratis con kinesióloga por la compra de un plan.',
+                telefono_contacto: '+56 9 8492 0401',
+                foto_local_1: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'gym',
+                region_chile: 'Región Metropolitana',
+                latitud: -33.4112,
+                longitud: -70.5234
+            }
+        ];
+
         let allFarmaciasData = [
             {
                 id: 2,
@@ -1357,7 +1155,9 @@
                 beneficio_detalle: '20% DCTO en fitoterapéuticos con tu receta digital.',
                 telefono_contacto: '+56 2 2843 9201',
                 foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop',
-                tipo_establecimiento: 'farmacia'
+                foto_local_2: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'farmacia',
+                region_chile: 'Región Metropolitana'
             },
             {
                 id: 3,
@@ -1367,7 +1167,33 @@
                 beneficio_detalle: 'Despacho 100% GRATIS para pacientes crónicos.',
                 telefono_contacto: '+56 9 7482 1059',
                 foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop',
-                tipo_establecimiento: 'farmacia'
+                foto_local_2: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'farmacia',
+                region_chile: 'Región de la Araucanía'
+            },
+            {
+                id: 16,
+                nombre: 'Farmacia Orgánica "BioBotica"',
+                direccion: 'Av. Andrés Bello 2320, Providencia',
+                descripcion: 'Suplementos alimenticios naturales certificados, vitaminas veganas, aromaterapia pura de grado médico y pautas de suplementación limpia.',
+                beneficio_detalle: '15% DCTO en suplementos de la casa.',
+                telefono_contacto: '+56 2 2948 0492',
+                foto_local_1: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'farmacia',
+                region_chile: 'Región Metropolitana'
+            },
+            {
+                id: 17,
+                nombre: 'Farmacia Homeopática "Hahnemann"',
+                direccion: 'Arlegui 450, Viña del Mar',
+                descripcion: 'Recetarios magistrales homeopáticos y fitomedicina preparada según altos estándares científicos europeos de dilución infinitesimal.',
+                beneficio_detalle: '10% de descuento en la preparación de recetas magistrales.',
+                telefono_contacto: '+56 32 2948 1029',
+                foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop',
+                foto_local_2: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400&auto=format&fit=crop',
+                tipo_establecimiento: 'farmacia',
+                region_chile: 'Región de Valparaíso'
             }
         ];
 
@@ -1387,7 +1213,8 @@
                 foto_profesional: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop',
                 codeVal: 'CLINIC-MAITE',
                 email: 'maite.soler@lawenmoll.cl',
-                atiende_clinica: true
+                atiende_clinica: true,
+                region_chile: 'Región Metropolitana'
             },
             {
                 nombre: 'Ps. Tomás Araya',
@@ -1404,14 +1231,51 @@
                 foto_profesional: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop',
                 codeVal: 'CLINIC-TOMAS',
                 email: 'tomas.araya@lawenmoll.cl',
-                atiende_clinica: false
+                atiende_clinica: false,
+                region_chile: 'Región Metropolitana'
+            },
+            {
+                nombre: 'Dra. Macarena Rojas',
+                especialidad: 'Médica Integrativa y Nutrición Celular Activa',
+                registro_sis: 'SIS-583921',
+                telefono_contacto: '+56 9 7482 1029',
+                instagram: '@dra.macarojas',
+                linkedin: 'https://linkedin.com',
+                telegram: 'dra_maca_rojas_lawenmoll',
+                tarifa_sesion: '$45.000',
+                latitud: -38.7396,
+                longitud: -72.6028,
+                direccion_box: 'Avenida Alemania 0850, Temuco (Presencial / Online)',
+                foto_profesional: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop',
+                codeVal: 'CLINIC-MACA',
+                email: 'maca.rojas@lawenmoll.cl',
+                atiende_clinica: false,
+                region_chile: 'Región de la Araucanía'
+            },
+            {
+                nombre: 'Klgo. Felipe Castro',
+                especialidad: 'Kinesiólogo Integrativo y Rehabilitación Postural Mecánica',
+                registro_sis: 'SIS-849205',
+                telefono_contacto: '+56 9 8492 0401',
+                instagram: '@kine.felipecastro',
+                linkedin: 'https://linkedin.com',
+                telegram: 'kine_felipe_lawenmoll',
+                tarifa_sesion: '$30.000',
+                latitud: -33.0245,
+                longitud: -71.5518,
+                direccion_box: 'Avenida Libertad 1420, Viña del Mar',
+                foto_profesional: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=200&auto=format&fit=crop',
+                codeVal: 'CLINIC-FELIPE',
+                email: 'felipe.castro@lawenmoll.cl',
+                atiende_clinica: false,
+                region_chile: 'Región de Valparaíso'
             }
         ];
 
-        async function syncPublicCentrosFromSupabase() {
+                async function syncPublicCentrosFromSupabase() {
             try {
                 if (supabaseKey === '') {
-                    renderPublicFarmaciasGrid();
+                    renderAllGrids();
                     return;
                 }
                 const { data, error } = await _supabase
@@ -1421,266 +1285,39 @@
 
                 if (error) throw error;
                 if (data && data.length > 0) {
-                    // Update allFarmaciasData dynamically with Supabase records!
-                    const dbFarmacias = data.filter(c => c.tipo_establecimiento === 'farmacia');
-                    dbFarmacias.forEach(dbf => {
-                        const idx = allFarmaciasData.findIndex(f => f.id === dbf.id);
-                        if (idx !== -1) {
-                            allFarmaciasData[idx] = dbf;
-                        } else {
-                            allFarmaciasData.push(dbf);
-                        }
-                    });
-
                     data.forEach(c => {
-                        // 1. Establecimiento Clínico (Lawen Ko)
-                        if (c.tipo_establecimiento === 'clínica' || c.nombre.includes('Lawen Ko')) {
-                            const titleEl = document.querySelector('#tabPanel-centros h2');
-                            const addrEl = document.querySelector('#tabPanel-centros p');
-                            if (titleEl) titleEl.innerHTML = `🏢 ${c.nombre}`;
-                            if (addrEl && c.direccion) addrEl.innerText = c.direccion;
-                            
-                            // Logo (foto_local_1)
-                            if (c.foto_local_1) {
-                                const logoContainer = document.getElementById('centroLogoContainer');
-                                const logoImg = document.getElementById('centroLogoImg');
-                                if (logoContainer && logoImg) {
-                                    logoImg.src = c.foto_local_1;
-                                    logoContainer.classList.remove('hidden');
-                                }
-                            }
-                            // Banner Portada (foto_local_2)
-                            if (c.foto_local_2) {
-                                const bannerImg = document.getElementById('centroBannerImg');
-                                if (bannerImg) bannerImg.src = c.foto_local_2;
-                            }
-                        } 
-                        // 2. Restaurantes Saludables (Huerto Orgánico)
-                        else if (c.tipo_establecimiento === 'restaurante' || c.nombre.includes('Huerto')) {
-                            const titleEl = document.querySelector('#tabPanel-restaurantes h2');
-                            const addrEl = document.querySelector('#tabPanel-restaurantes p');
-                            const benefitEl = document.querySelector('#tabPanel-restaurantes .text-right span.text-accent');
-                            
-                            if (titleEl) titleEl.innerHTML = `🥑 ${c.nombre}`;
-                            if (addrEl && c.direccion) addrEl.innerText = c.direccion;
-                            if (benefitEl && c.beneficio_detalle) benefitEl.innerText = c.beneficio_detalle;
-
-                            // Foto de Logo (foto_local_1)
-                            if (c.foto_local_1) {
-                                const logoContainer = document.getElementById('restaurantLogoContainer');
-                                const logoImg = document.getElementById('restaurantLogoImg');
-                                if (logoContainer && logoImg) {
-                                    logoImg.src = c.foto_local_1;
-                                    logoContainer.classList.remove('hidden');
-                                }
-                            }
-                            // Foto de Portada Banner (foto_local_2)
-                            if (c.foto_local_2) {
-                                const bannerImg = document.getElementById('restaurantBannerImg');
-                                if (bannerImg) bannerImg.src = c.foto_local_2;
-                            }
-
-                            // Sincronizar platos del menú dinámico desde Supabase
-                            const dishesGrid = document.getElementById('restaurantDishesGrid');
-                            if (dishesGrid) {
-                                let dishesHtml = '';
-                                
-                                // Plato 1
-                                const d1Name = c.dish1_name || 'Bowl de Cúrcuma 🥣';
-                                const d1Price = c.dish1_price || '$8.900';
-                                const d1Desc = c.dish1_desc || 'Ingredientes: Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y aderezo de tahini y limón.';
-                                const d1Photo = c.dish1_photo || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop';
-                                
-                                dishesHtml += `
-                                    <button onclick="viewDishDetail('dish1', '${d1Name}', '${d1Desc}', '🌟 Beneficio saludable premium de la casa.', '${d1Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${d1Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d1Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${d1Name}</h4>
-                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Especialidad Recomendada</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-black text-forest">${d1Price}</span>
-                                    </button>
-                                `;
-                                
-                                // Plato 2
-                                const d2Name = c.dish2_name || 'Crema de Hinojo 🍵';
-                                const d2Price = c.dish2_price || '$5.400';
-                                const d2Desc = c.dish2_desc || 'Ingredientes: Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal orgánico.';
-                                const d2Photo = c.dish2_photo || 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop';
-                                
-                                dishesHtml += `
-                                    <button onclick="viewDishDetail('dish2', '${d2Name}', '${d2Desc}', '🦋 Beneficio saludable de nutrición consciente.', '${d2Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${d2Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d2Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${d2Name}</h4>
-                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Detox & Digestivo</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-black text-forest">${d2Price}</span>
-                                    </button>
-                                `;
-
-                                // Plato 3
-                                const d3Name = c.dish3_name || 'Tostadas de Palta 🥑';
-                                const d3Price = c.dish3_price || '$5.900';
-                                const d3Desc = c.dish3_desc || 'Ingredientes: Pan de masa madre integral tostado, palta madura machacada, semillas de sésamo negro, rabanitos laminados, brotes orgánicos.';
-                                const d3Photo = c.dish3_photo || 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=400&auto=format&fit=crop';
-                                
-                                dishesHtml += `
-                                    <button onclick="viewDishDetail('dish3', '${d3Name}', '${d3Desc}', '🥑 Aporte energético y de grasas saludables de masa madre.', '${d3Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${d3Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d3Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${d3Name}</h4>
-                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Snack de Grasas Buenas</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-black text-forest">${d3Price}</span>
-                                    </button>
-                                `;
-
-                                // Plato 4
-                                const d4Name = c.dish4_name || 'Jugo Verde Lawen 🍹';
-                                const d4Price = c.dish4_price || '$3.800';
-                                const d4Desc = c.dish4_desc || 'Ingredientes: Extracción en frío de espinaca orgánica, apio, pepino fresco, manzana verde, menta del huerto y limón sutil.';
-                                const d4Photo = c.dish4_photo || 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=400&auto=format&fit=crop';
-                                
-                                dishesHtml += `
-                                    <button onclick="viewDishDetail('dish4', '${d4Name}', '${d4Desc}', '🍹 Oxigenación celular y bienestar digestivo.', '${d4Photo}')" class="w-full text-left p-3 border border-gray-100 rounded-2xl shadow-sm hover:border-forest/40 transition bg-white flex items-center justify-between space-x-3.5 focus:outline-none">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${d4Photo}" class="w-12 h-12 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${d4Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${d4Name}</h4>
-                                                <p class="text-[9px] text-gray-400 font-semibold font-sans">Bebida Detox Energética</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-black text-forest">${d4Price}</span>
-                                    </button>
-                                `;
-                                
-                                dishesGrid.innerHTML = dishesHtml;
-                            }
-                        } 
-                        // 3. Gimnasios y Yoga (SportLife)
-                        else if (c.tipo_establecimiento === 'gym' || c.nombre.includes('SportLife')) {
-                            const titleEl = document.querySelector('#tabPanel-gimnasios h2');
-                            const addrEl = document.querySelector('#tabPanel-gimnasios p');
-                            const benefitEl = document.querySelector('#tabPanel-gimnasios .text-right span.text-forest');
-
-                            if (titleEl) titleEl.innerHTML = `💪 ${c.nombre}`;
-                            if (addrEl && c.direccion) addrEl.innerText = c.direccion;
-                            if (benefitEl && c.beneficio_detalle) benefitEl.innerText = c.beneficio_detalle;
-
-                            // Foto de Logo (foto_local_1)
-                            if (c.foto_local_1) {
-                                const logoContainer = document.getElementById('gymLogoContainer');
-                                const logoImg = document.getElementById('gymLogoImg');
-                                if (logoContainer && logoImg) {
-                                    logoImg.src = c.foto_local_1;
-                                    logoContainer.classList.remove('hidden');
-                                }
-                            }
-                            // Foto de Portada Banner (foto_local_2)
-                            if (c.foto_local_2) {
-                                const bannerImg = document.getElementById('gymBannerImg');
-                                if (bannerImg) bannerImg.src = c.foto_local_2;
-                            }
-
-                            // Sincronizar clases del gimnasio dinámicamente desde Supabase
-                            const classesGrid = document.getElementById('gymClassesGrid');
-                            if (classesGrid) {
-                                let classesHtml = '';
-                                
-                                // Clase 1
-                                const g1Name = c.dish1_name || 'Yoga Restaurativo Postural';
-                                const g1Price = c.dish1_price || 'Lun-Mié 18:30';
-                                const g1Desc = c.dish1_desc || 'Sin saltos ni impactos - Ideal lumbago y sobrepeso';
-                                const g1Photo = c.dish1_photo || 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop';
-                                
-                                classesHtml += `
-                                    <div class="bg-white p-3.5 rounded-2xl border border-gray-100 flex justify-between items-center shadow-sm hover:border-forest/40 transition">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${g1Photo}" class="w-10 h-10 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${g1Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${g1Name}</h4>
-                                                <p class="text-[9px] text-gray-400 leading-normal font-semibold">${g1Desc}</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-[9px] bg-forest/10 text-forest font-black px-2.5 py-1 rounded-full flex-shrink-0">${g1Price}</span>
-                                    </div>
-                                `;
-                                
-                                // Clase 2
-                                const g2Name = c.dish2_name || 'Acondicionamiento Metabólico Inteligente';
-                                const g2Price = c.dish2_price || 'Mar-Jue 09:00';
-                                const g2Desc = c.dish2_desc || 'Fuerza progresiva supervisada por kinesiólogo';
-                                const g2Photo = c.dish2_photo || 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop';
-                                
-                                classesHtml += `
-                                    <div class="bg-white p-3.5 rounded-2xl border border-gray-100 flex justify-between items-center shadow-sm hover:border-forest/40 transition mt-2">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${g2Photo}" class="w-10 h-10 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${g2Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${g2Name}</h4>
-                                                <p class="text-[9px] text-gray-400 leading-normal font-semibold">${g2Desc}</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-[9px] bg-forest/10 text-forest font-black px-2.5 py-1 rounded-full flex-shrink-0">${g2Price}</span>
-                                    </div>
-                                `;
-
-                                // Clase 3
-                                const g3Name = c.dish3_name || 'Pilates Reformer Clínico';
-                                const g3Price = c.dish3_price || 'Vie-Sáb 10:30';
-                                const g3Desc = c.dish3_desc || 'Elongación y control postural guiado por especialistas';
-                                const g3Photo = c.dish3_photo || 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop';
-                                
-                                classesHtml += `
-                                    <div class="bg-white p-3.5 rounded-2xl border border-gray-100 flex justify-between items-center shadow-sm hover:border-forest/40 transition mt-2">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${g3Photo}" class="w-10 h-10 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${g3Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${g3Name}</h4>
-                                                <p class="text-[9px] text-gray-400 leading-normal font-semibold">${g3Desc}</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-[9px] bg-forest/10 text-forest font-black px-2.5 py-1 rounded-full flex-shrink-0">${g3Price}</span>
-                                    </div>
-                                `;
-
-                                // Clase 4
-                                const g4Name = c.dish4_name || 'Meditación y Respiración Consciente';
-                                const g4Price = c.dish4_price || 'Mié-Vie 19:30';
-                                const g4Desc = c.dish4_desc || 'Calma mental, respiración diafragmática y reducción de cortisol';
-                                const g4Photo = c.dish4_photo || 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600&auto=format&fit=crop';
-                                
-                                classesHtml += `
-                                    <div class="bg-white p-3.5 rounded-2xl border border-gray-100 flex justify-between items-center shadow-sm hover:border-forest/40 transition mt-2">
-                                        <div class="flex items-center space-x-3">
-                                            <img src="${g4Photo}" class="w-10 h-10 rounded-xl object-cover border border-gray-100 shadow-sm" alt="${g4Name}">
-                                            <div>
-                                                <h4 class="text-xs font-bold text-slateDark">${g4Name}</h4>
-                                                <p class="text-[9px] text-gray-400 leading-normal font-semibold">${g4Desc}</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-[9px] bg-forest/10 text-forest font-black px-2.5 py-1 rounded-full flex-shrink-0">${g4Price}</span>
-                                    </div>
-                                `;
-                                
-                                classesGrid.innerHTML = classesHtml;
-                            }
+                        if (c.tipo_establecimiento === 'clínica') {
+                            const idx = allClinicsData.findIndex(item => item.id === c.id);
+                            if (idx !== -1) allClinicsData[idx] = c;
+                            else allClinicsData.push(c);
+                        } else if (c.tipo_establecimiento === 'restaurante') {
+                            const idx = allRestaurantsData.findIndex(item => item.id === c.id);
+                            if (idx !== -1) allRestaurantsData[idx] = c;
+                            else allRestaurantsData.push(c);
+                        } else if (c.tipo_establecimiento === 'gym') {
+                            const idx = allGymsData.findIndex(item => item.id === c.id);
+                            if (idx !== -1) allGymsData[idx] = c;
+                            else allGymsData.push(c);
+                        } else if (c.tipo_establecimiento === 'farmacia') {
+                            const idx = allFarmaciasData.findIndex(item => item.id === c.id);
+                            if (idx !== -1) allFarmaciasData[idx] = c;
+                            else allFarmaciasData.push(c);
                         }
                     });
                 }
-                // Render public farmacias list
-                renderPublicFarmaciasGrid();
+                renderAllGrids();
             } catch (err) {
                 console.error("Error al sincronizar centros públicos desde Supabase:", err.message);
-                renderPublicFarmaciasGrid(); // Fallback always
+                renderAllGrids(); // Fallback always
             }
+        }
+
+        function renderAllGrids() {
+            renderPublicClinicsGrid();
+            renderPublicRestaurantsGrid();
+            renderPublicGymsGrid();
+            renderPublicFarmaciasGrid();
+            renderPublicTherapistsGrid();
         }
 
         // Renderizar farmacias dinámicamente o con defaults en grid público
@@ -1945,31 +1582,351 @@
             }
         });
 
-        // Filtrado Global por Región de Chile
+                // --- FILTRADO GLOBAL POR REGIONES (CHILE) v19 ---
         let activeRegion = 'all';
 
         function filterAllByRegion() {
-            activeRegion = document.getElementById('globalRegionFilter').value;
+            const filterEl = document.getElementById('globalRegionFilter');
+            if (filterEl) {
+                activeRegion = filterEl.value;
+            }
+            renderPublicClinicsGrid();
+            renderPublicRestaurantsGrid();
+            renderPublicGymsGrid();
             renderPublicFarmaciasGrid();
             renderPublicTherapistsGrid();
             
-            // Filtrar también los tabs estáticos como centros y gimnasios
-            const rmCentros = document.getElementById('centroLogoContainer').parentElement.parentElement.parentElement;
-            const rmGyms = document.getElementById('gymLogoContainer').parentElement.parentElement.parentElement;
-            
-            if (activeRegion === 'all' || activeRegion === 'RM') {
-                rmCentros.classList.remove('hidden');
-                rmGyms.classList.remove('hidden');
-            } else {
-                rmCentros.classList.add('hidden');
-                rmGyms.classList.add('hidden');
-            }
-            
-            alert(`📍 Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion === 'RM' ? 'Región Metropolitana' : 'Región de la Araucanía'}`);
+            alert(`📍 Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion}`);
         }
 
-        // --- DETALLE DE ESTABLECIMIENTO (FOTOS Y PERSONAL TRABAJADOR) v17 ---
-        function viewEstablishmentDetail(type) {
+        // --- RENDERIZADORES DINÁMICOS DE LA RED COMERCIAL v19 ---
+
+        // A. Clínicas y Centros de Salud
+        function renderPublicClinicsGrid() {
+            const grid = document.getElementById('clinicsListGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            allClinicsData.forEach(c => {
+                if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
+
+                const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=150&auto=format&fit=crop';
+                const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop';
+                const desc = c.descripcion || 'Centro clínico acreditado para terapias integrativas y kinesiología.';
+                const address = c.direccion || 'Dirección de la Red';
+                const phone = c.telefono_contacto || '+56 2 2843 9201';
+                const benefit = c.beneficio_detalle || 'Matrícula costo cero y 15% DCTO en evaluaciones.';
+                const hours = c.horarios || 'Lun a Sáb: 08:30 - 20:30 hrs';
+
+                const cardHtml = `
+                    <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 flex flex-col justify-between shadow-sm hover:border-forest/40 transition text-left animate-popIn">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0">
+                                    <img src="${logo}" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="font-extrabold text-sm text-slateDark">${c.nombre}</h3>
+                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full inline-block">🇨🇱 ${c.region_chile || 'Región Metropolitana'}</span>
+                                </div>
+                            </div>
+                            <div class="w-full h-28 rounded-xl overflow-hidden shadow-inner border border-gray-150 relative">
+                                <img src="${banner}" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">${desc}</p>
+                            <div class="space-y-1 text-[10px] text-gray-500 font-medium border-t border-dashed border-gray-200 pt-3">
+                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> ${address}</p>
+                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
+                                <p><i class="fa-solid fa-clock text-gray-400 mr-1.5"></i> ${hours}</p>
+                                <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4">
+                            <button onclick="viewEstablishmentDetail('clínica', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
+                                Ver Personal 👥
+                            </button>
+                            <button onclick="calculateIndependentRoute(${c.latitud || -33.4285}, ${c.longitud || -70.6125}, '${c.nombre}', '${address}')" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
+                                <i class="fa-solid fa-route"></i>
+                                <span>Trazar Ruta 🗺️</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // B. Restaurantes Saludables
+        function renderPublicRestaurantsGrid() {
+            const grid = document.getElementById('restaurantsListGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            allRestaurantsData.forEach(c => {
+                if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
+
+                const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150&auto=format&fit=crop';
+                const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop';
+                const desc = c.descripcion || 'Gastronomía saludable elaborada con insumos 100% naturales.';
+                const address = c.direccion || 'Dirección de la Red';
+                const phone = c.telefono_contacto || '+56 9 8472 1049';
+                const benefit = c.beneficio_detalle || '15% de descuento presentando tu receta.';
+                const promoCode = c.codigo_descuento || 'LAWEN-FOOD';
+
+                const cardHtml = `
+                    <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 flex flex-col justify-between shadow-sm hover:border-forest/40 transition text-left animate-popIn">
+                        <div class="space-y-3.5">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center space-x-3.5">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0">
+                                        <img src="${logo}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-extrabold text-sm text-slateDark">${c.nombre}</h3>
+                                        <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full inline-block">🇨🇱 ${c.region_chile || 'Región Metropolitana'}</span>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] bg-accent/20 text-accent font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">15% DCTO</span>
+                            </div>
+                            <div class="w-full h-28 rounded-xl overflow-hidden shadow-inner border border-gray-150 relative">
+                                <img src="${banner}" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">${desc}</p>
+                            <div class="space-y-1 text-[10px] text-gray-500 font-medium border-t border-dashed border-gray-200 pt-3">
+                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> ${address}</p>
+                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
+                                <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
+                                <p class="text-accent font-bold"><i class="fa-solid fa-key mr-1.5"></i> Código: ${promoCode}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4">
+                            <button onclick="viewEstablishmentDetail('restaurante', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
+                                Ver Menú y Personal 👥
+                            </button>
+                            <button onclick="calculateIndependentRoute(${c.latitud || -33.4225}, ${c.longitud || -70.6105}, '${c.nombre}', '${address}')" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
+                                <i class="fa-solid fa-route"></i>
+                                <span>Trazar Ruta 🗺️</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // C. Gimnasios y Estudios
+        function renderPublicGymsGrid() {
+            const grid = document.getElementById('gymsListGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            allGymsData.forEach(c => {
+                if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
+
+                const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=150&auto=format&fit=crop';
+                const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop';
+                const desc = c.descripcion || 'Entrenamiento de movimiento y fuerza terapéutica guiada.';
+                const address = c.direccion || 'Dirección de la Red';
+                const phone = c.telefono_contacto || '+56 9 1234 5678';
+                const benefit = c.beneficio_detalle || 'Matrícula gratis + Pase libre.';
+
+                const cardHtml = `
+                    <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 flex flex-col justify-between shadow-sm hover:border-forest/40 transition text-left animate-popIn">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0">
+                                    <img src="${logo}" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="font-extrabold text-sm text-slateDark">${c.nombre}</h3>
+                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full inline-block">🇨🇱 ${c.region_chile || 'Región Metropolitana'}</span>
+                                </div>
+                            </div>
+                            <div class="w-full h-28 rounded-xl overflow-hidden shadow-inner border border-gray-150 relative">
+                                <img src="${banner}" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">${desc}</p>
+                            <div class="space-y-1 text-[10px] text-gray-500 font-medium border-t border-dashed border-gray-200 pt-3">
+                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> ${address}</p>
+                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
+                                <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4">
+                            <button onclick="viewEstablishmentDetail('gym', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
+                                Ver Clases y Personal 👥
+                            </button>
+                            <button onclick="calculateIndependentRoute(${c.latitud || -33.4350}, ${c.longitud || -70.6190}, '${c.nombre}', '${address}')" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
+                                <i class="fa-solid fa-route"></i>
+                                <span>Trazar Ruta 🗺️</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // D. Farmacias Naturales y Magistrales
+        function renderPublicFarmaciasGrid() {
+            const grid = document.getElementById('farmaciasListGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            allFarmaciasData.forEach(c => {
+                if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
+
+                const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop';
+                const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=400&auto=format&fit=crop';
+                const desc = c.descripcion || 'Preparados de origen natural y botica de fitofármacos tradicionales.';
+                const address = c.direccion || 'Dirección de la Red';
+                const phone = c.telefono_contacto || '+56 2 2843 9201';
+                const benefit = c.beneficio_detalle || '20% DCTO en fitoterapéuticos con receta.';
+                const typeLabel = c.nombre.includes('Makewe') ? 'Medicina Ancestral Mapuche' : 'Sustentable & Orgánica';
+
+                const cardHtml = `
+                    <div id="farmaciaCard-${c.id}" class="bg-gray-50 p-5 rounded-3xl border border-gray-150 flex flex-col justify-between shadow-sm hover:border-forest/40 transition text-left animate-popIn">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0">
+                                    <img src="${logo}" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="font-extrabold text-sm text-slateDark">${c.nombre}</h3>
+                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full inline-block">🇨🇱 ${c.region_chile || 'Región Metropolitana'}</span>
+                                    <span class="text-[8px] bg-sage/25 text-slateDark font-bold px-1.5 py-0.5 rounded-full inline-block ml-1">${typeLabel}</span>
+                                </div>
+                            </div>
+                            <div class="w-full h-28 rounded-xl overflow-hidden shadow-inner border border-gray-150 relative">
+                                <img src="${banner}" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">${desc}</p>
+                            <div class="space-y-1 text-[10px] text-gray-500 font-medium border-t border-dashed border-gray-200 pt-3">
+                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> ${address}</p>
+                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
+                                <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4">
+                            <button onclick="viewEstablishmentDetail('farmacia', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
+                                Ver Personal 👥
+                            </button>
+                            <button onclick="selectPharmacyForOrder(${c.id})" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
+                                <i class="fa-solid fa-prescription-bottle-medical"></i>
+                                <span>Pedir Receta</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // E. Profesionales Independientes
+        function renderPublicTherapistsGrid() {
+            const grid = document.getElementById('independentTherapistsGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            allTherapistsData.forEach(t => {
+                if (activeRegion !== 'all' && t.region_chile !== activeRegion) return;
+
+                const rate = t.tarifa_sesion || '$25.000';
+                const spec = t.especialidad || 'Consejería Herbal Pura y Fitoterapia';
+                const sis = t.registro_sis || 'SIS-948201';
+                const phone = t.telefono_contacto || '+56 9 8271 0938';
+                const cleanPhone = phone.replace(/\s+/g, '').replace('+', '');
+                const inst = t.instagram || '@lawenmoll.cl';
+                const lnk = t.linkedin || 'https://linkedin.com';
+                const tel = t.telegram || 'lawenmoll_soporte';
+                const lat = t.latitud || -33.4250;
+                const lon = t.longitud || -70.6120;
+                const address = t.direccion_box || 'Av. Providencia 1450, Providencia';
+                const photo = t.foto_profesional || 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop';
+                
+                // Lógica de bloqueo si atiende en clínica
+                const isBlocked = t.atiende_clinica === true || t.atiende_clinica === 'true';
+                const bgClass = isBlocked ? "bg-gray-50/90 border-red-200/60 opacity-95" : "bg-white border-gray-150 hover:border-forest/40";
+                const bannerBlockHtml = isBlocked ? `
+                    <div class="bg-red-50 text-red-800 border border-red-200 px-3 py-2 rounded-2xl text-[9px] font-bold flex items-center space-x-1.5 shadow-sm mb-3">
+                        <i class="fa-solid fa-circle-minus text-red-600 animate-pulse"></i>
+                        <span>HORAS INDEPENDIENTES BLOQUEADAS (Atendiendo en Clínica Asociada)</span>
+                    </div>
+                ` : '';
+
+                const buttonsHtml = isBlocked ? `
+                    <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                        <button onclick="switchTab('centros', document.getElementById('tab-centros')); setTimeout(() => { const sel = document.getElementById('clinicalSpecialist'); if (sel) { sel.value = '${t.nombre}'; sel.scrollIntoView({ behavior: 'smooth' }); } }, 150);" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3 rounded-xl text-[10px] shadow-md transition uppercase tracking-wider flex items-center justify-center space-x-1.5">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <span>Agendar en Centro Holístico "Lawen Ko" 🏢</span>
+                        </button>
+                    </div>
+                ` : `
+                    <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                        <button onclick="calculateIndependentRoute(${lat}, ${lon}, '${t.nombre}', '${address}')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                            <i class="fa-solid fa-route"></i>
+                            <span>Programar Tu Viaje 🗺️</span>
+                        </button>
+                        <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                            <i class="fa-solid fa-ban"></i>
+                            <span>Cancelar Mi Cita ❌</span>
+                        </button>
+                    </div>
+                `;
+
+                const cardHtml = `
+                    <div class="p-5 border rounded-3xl shadow-sm transition space-y-4 text-left ${bgClass} animate-popIn">
+                        ${bannerBlockHtml}
+                        <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sage/40 shadow-md flex-shrink-0">
+                                    <img src="${photo}" class="w-full h-full object-cover" alt="${t.nombre}">
+                                </div>
+                                <div>
+                                    <span class="text-[8px] bg-sage/20 text-forest font-bold px-2 py-0.5 rounded-full uppercase">Independiente Certificado</span>
+                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full uppercase ml-1">🇨🇱 ${t.region_chile || 'Región Metropolitana'}</span>
+                                    <h3 class="font-extrabold text-xs text-slateDark mt-1">${t.nombre}</h3>
+                                    <p class="text-[10px] text-gray-500 font-semibold">${spec}</p>
+                                    <p class="text-[9px] text-forest font-bold flex items-center mt-1"><i class="fa-solid fa-house mr-1"></i> ${address}</p>
+                                    <p class="text-[9px] text-gray-400 font-medium flex items-center mt-0.5"><i class="fa-solid fa-phone mr-1"></i> ${phone}</p>
+                                </div>
+                            </div>
+                            <div class="text-right flex flex-col items-end flex-shrink-0">
+                                <span class="text-xs font-black text-forest block">${rate} / sesión</span>
+                                <span class="text-[9px] text-gray-400 font-semibold font-sans">Tarifa Autónoma</span>
+                                
+                                <!-- Sello SIS con Enlace Directo -->
+                                <div class="flex items-center space-x-1.5 mt-1 bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200 text-[8px] font-bold shadow-sm">
+                                    <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                                    <span>SIS N° ${sis}</span>
+                                    <a href="https://represtadores.superdesalud.gob.cl/consultas/buscar.aspx" target="_blank" class="text-forest hover:text-accent font-black ml-1 underline" title="Verificar en Superintendencia de Salud">Verificar</a>
+                                </div>
+
+                                <!-- Redes Sociales (Only active if not blocked!) -->
+                                <div class="flex items-center space-x-2.5 mt-2 ${isBlocked ? 'opacity-40 pointer-events-none' : ''}">
+                                    <a href="https://instagram.com/${inst.replace('@', '')}" target="_blank" class="text-pink-600 hover:text-pink-700 transition" title="Instagram"><i class="fa-brands fa-instagram text-base"></i></a>
+                                    <a href="${lnk}" target="_blank" class="text-blue-600 hover:text-blue-700 transition" title="LinkedIn"><i class="fa-brands fa-linkedin text-base"></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Hola%20${encodeURIComponent(t.nombre)},%20vengo%20desde%20LAWENMOLL%20y%20me%20gustar%C3%ADa%20agendar%20una%20consulta." target="_blank" class="text-green-600 hover:text-green-700 transition" title="WhatsApp"><i class="fa-brands fa-whatsapp text-base"></i></a>
+                                    <a href="https://t.me/${tel}" target="_blank" class="text-sky-500 hover:text-sky-600 transition" title="Telegram"><i class="fa-brands fa-telegram text-base"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        ${buttonsHtml}
+                        
+                        <!-- Lógica de Bloqueo Clínico -->
+                        <div class="bg-yellow-50 p-3 rounded-xl border border-yellow-100 text-[9px] text-yellow-800 leading-relaxed font-semibold">
+                            <i class="fa-solid fa-triangle-exclamation text-accent mr-1"></i> <strong>Regla de Bloqueo por Establecimiento:</strong> ${isBlocked ? 'Este profesional está actualmente atendiendo en la clínica de la red. Sus horas independientes están bloqueadas según contrato B2B.' : 'Este profesional atiende bajo tarifa privada. Por contrato, sus horas privadas quedarán bloqueadas si atiende en clínicas de la red.'}
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+
+        // --- DETALLE DE ESTABLECIMIENTO (FOTOS Y PERSONAL TRABAJADOR) v19 ---
+        function viewEstablishmentDetail(type, id) {
             const modal = document.getElementById('establishmentDetailModal');
             const title = document.getElementById('estModalTitle');
             const sub = document.getElementById('estModalSub');
@@ -1982,100 +1939,93 @@
             gallery.innerHTML = '';
             staff.innerHTML = '';
 
-            let name = "";
-            let category = "";
-            let description = "";
-            let photos = [];
-            let employees = [];
-            let lat = 0;
-            let lon = 0;
-            let address = "";
-
-            if (type === 'lawenko' || type === 'centros') {
-                name = 'Centro Holístico "Lawen Ko"';
-                category = 'Centro Clínico de Medicina Integrativa';
-                description = 'Nuestro centro principal que coordina todas las derivaciones y tratamientos biométricos del test del paciente. Contamos con boxes totalmente equipados, sala de meditación y laboratorios de fitofármacos con las más altas acreditaciones sanitarias en Chile.';
-                photos = [
-                    'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=400&auto=format&fit=crop', // Recepción
-                    'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=400&auto=format&fit=crop', // Box Clínico
-                    'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=400&auto=format&fit=crop'  // Sala de Yoga/Meditación
-                ];
-                employees = [
-                    { name: 'Klgo. Carlos Mendoza', role: 'Director Clínico y Rehabilitación', photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Dra. Eliana Ruiz', role: 'Médico General e Integrativa', photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Sra. Marta Colipí', role: 'Asesora Herbolaria Mapuche', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Sofía Valenzuela', role: 'Coordinadora de Pacientes B2B', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop' }
-                ];
-                lat = -33.4285;
-                lon = -70.6125;
-                address = 'Av. Providencia 1240, Providencia';
-            } else if (type === 'sportlife' || type === 'gym') {
-                name = 'Gimnasio "SportLife Integrativo"';
-                category = 'Socio de Movimiento Terapéutico y Fuerza';
-                description = 'Espacio de acondicionamiento físico adaptado para pacientes con condiciones de salud que exigen supervisión profesional. Equipado con máquinas de bajo impacto, piscina temperada e instructores certificados en salud integrativa.';
-                photos = [
-                    'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop', // Sala de máquinas
-                    'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&auto=format&fit=crop', // Pilates reformer
-                    'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=400&auto=format&fit=crop'  // Zona de Fuerza
-                ];
-                employees = [
-                    { name: 'Prof. Eduardo Fuentes', role: 'Instructor Senior de Yoga y Respiración', photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Klga. Camila Silva', role: 'Especialista en Rehabilitación Postural', photo: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Coach Tomás Andrade', role: 'Entrenador Metabólico', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop' }
-                ];
-                lat = -33.4350;
-                lon = -70.6190;
-                address = 'Av. Vitacura 3568, Vitacura';
-            } else if (type === 'canelo' || type === 'farmacia-canelo') {
-                name = 'Farmacia Herbolaria "El Canelo"';
-                category = 'Dispensario de Fitomedicina y Tinturas';
-                description = 'Botica especializada en fitoterapia tradicional y adaptógenos reguladores de estrés. Ofrecemos el catálogo completo de preparados recomendados por nuestro equipo clínico con despacho nacional.';
-                photos = [
-                    'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=400&auto=format&fit=crop', // Botica
-                    'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=400&auto=format&fit=crop'  // Laboratorio
-                ];
-                employees = [
-                    { name: 'Químico Javier Canales', role: 'Director de Fórmulas Magistrales', photo: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Rosa Millán', role: 'Técnico en Elaboración de Fitomedicamentos', photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop' }
-                ];
-                lat = -33.4285;
-                lon = -70.6125;
-                address = 'Av. Providencia 1240, Primer piso';
-            } else if (type === 'makewe' || type === 'farmacia-makewe') {
-                name = 'Farmacia Mapuche "Makewe"';
-                category = 'Medicina Ancestral y Cosmética Sustentable';
-                description = 'Preparados elaborados de manera sostenible por recolectores y machis en comunidades de la Araucanía. Despachos y asesoría herbolaria directa para pacientes de nuestra red.';
-                photos = [
-                    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop', // Secado de plantas
-                    'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=400&auto=format&fit=crop'  // Preparación
-                ];
-                employees = [
-                    { name: 'Machi Juana Makewe', role: 'Asesora en Recolección y Sanación Ancestral', photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=150&auto=format&fit=crop' },
-                    { name: 'Lautaro Colipí', role: 'Director de Distribución Sostenible', photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop' }
-                ];
-                lat = -33.4500;
-                lon = -70.6200;
-                address = 'San Francisco 354, Santiago / Envío Temuco';
+            let item = null;
+            if (type === 'clínica') {
+                item = allClinicsData.find(x => x.id === id);
+            } else if (type === 'restaurante') {
+                item = allRestaurantsData.find(x => x.id === id);
+            } else if (type === 'gym') {
+                item = allGymsData.find(x => x.id === id);
+            } else if (type === 'farmacia') {
+                item = allFarmaciasData.find(x => x.id === id);
             }
 
-            title.innerText = name;
-            sub.innerText = category;
-            desc.innerText = description;
+            if (!item) {
+                // Fallback safe defaults if not found
+                item = {
+                    nombre: 'Socio B2B Activo LAWENMOLL',
+                    direccion: 'Dirección Registrada de la Red',
+                    descripcion: 'Establecimiento afiliado de alta calidad ciberseguro.',
+                    foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150',
+                    foto_local_2: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=400',
+                    tipo_establecimiento: type,
+                    latitud: -33.4250,
+                    longitud: -70.6120
+                };
+            }
+
+            title.innerText = item.nombre;
+            sub.innerText = `${type.toUpperCase()} - ${item.region_chile || 'Región Metropolitana'}`;
+            desc.innerText = item.descripcion;
 
             // Generate photo slides
-            photos.forEach((p, index) => {
+            const photoList = [
+                item.foto_local_1 || 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150',
+                item.foto_local_2 || 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=400'
+            ];
+            photoList.forEach(p => {
                 const slide = document.createElement('div');
-                slide.className = "w-1/3 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm h-36 border border-gray-100";
+                slide.className = "w-1/2 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm h-36 border border-gray-100 bg-gray-50";
                 slide.innerHTML = `<img src="${p}" class="w-full h-full object-cover hover:scale-105 transition-all duration-300">`;
                 gallery.appendChild(slide);
             });
 
-            // Generate employee cards
+            // Generate employee cards based on name/id
+            let employees = [];
+            if (item.nombre.includes('Lawen Ko') || item.id === 1) {
+                employees = [
+                    { name: 'Klgo. Carlos Mendoza', role: 'Director Clínico y Rehabilitación', photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Dra. Eliana Ruiz', role: 'Médico General e Integrativa', photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Sra. Marta Colipí', role: 'Asesora Herbolaria Mapuche', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop' }
+                ];
+            } else if (item.nombre.includes('Meli Rewe')) {
+                employees = [
+                    { name: 'Machi Juana Colipí', role: 'Asesora de Sanación Tradicional', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Klgo. Lautaro Paine', role: 'Director de Fisioterapia Nativa', photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=150&auto=format&fit=crop' }
+                ];
+            } else if (item.nombre.includes('Savia')) {
+                employees = [
+                    { name: 'Dra. Camila Silva', role: 'Directora Médica de Bienestar', photo: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Prof. Eduardo Fuentes', role: 'Instructor Postural Terapéutico', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop' }
+                ];
+            } else if (item.nombre.includes('SportLife') || item.id === 5) {
+                employees = [
+                    { name: 'Coach Tomás Andrade', role: 'Entrenador Metabólico Certificado', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Klga. Camila Silva', role: 'Rehabilitación y Pilates Reformer', photo: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=150&auto=format&fit=crop' }
+                ];
+            } else if (item.nombre.includes('Canelo') || item.id === 2) {
+                employees = [
+                    { name: 'Químico Javier Canales', role: 'Director de Fórmulas Magistrales', photo: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Rosa Millán', role: 'Auxiliar Elaborador de Fitomedicamentos', photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop' }
+                ];
+            } else if (item.nombre.includes('Makewe') || item.id === 3) {
+                employees = [
+                    { name: 'Machi Juana Makewe', role: 'Sanadora Ancestral y Sabia Familiar', photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Lautaro Colipí', role: 'Recolector Sustentable Araucanía', photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop' }
+                ];
+            } else {
+                // Default generic employees for any newly created establishment
+                employees = [
+                    { name: 'Felipe Mendoza', role: 'Director del Establecimiento', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop' },
+                    { name: 'Sofía Valenzuela', role: 'Coordinadora de Atención B2B', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop' }
+                ];
+            }
+
             employees.forEach(emp => {
                 const card = document.createElement('div');
                 card.className = "flex items-center space-x-3 bg-gray-50 border border-gray-100 p-2.5 rounded-2xl shadow-sm hover:border-forest/30 transition-all";
                 card.innerHTML = `
-                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-sage/40 shadow-sm flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-sage/40 shadow-sm flex-shrink-0 bg-gray-100">
                         <img src="${emp.photo}" class="w-full h-full object-cover">
                     </div>
                     <div>
@@ -2086,11 +2036,11 @@
                 staff.appendChild(card);
             });
 
-            // Update Map / Route button
+            // Update Map / Route button click handler
             planBtn.onclick = function() {
                 closeEstablishmentDetailModal();
                 setTimeout(() => {
-                    calculateIndependentRoute(lat, lon, name, address);
+                    calculateIndependentRoute(item.latitud || -33.4250, item.longitud || -70.6120, item.nombre, item.direccion || address);
                 }, 150);
             };
 
@@ -2100,12 +2050,6 @@
         function closeEstablishmentDetailModal() {
             document.getElementById('establishmentDetailModal').classList.add('hidden');
         }
-
-
-        let modalMap = null;
-        let modalMarkerUser = null;
-        let modalMarkerDest = null;
-        let modalPolyline = null;
 
         function calculateIndependentRoute(lat, lon, name, address) {
             document.getElementById('mapModalTitle').innerText = `Ruta hacia: ${name}`;
@@ -2203,6 +2147,7 @@
         // Detectar de qué pestaña viene (tab parameter en la URL)
                 window.onload = function() {
             loadTherapistsDropdown();
+            renderAllGrids();
             syncPublicCentrosFromSupabase(); syncPublicTherapistsFromSupabase(); // Sincroniza en vivo desde Supabase!
             const urlParams = new URLSearchParams(window.location.search);
             const tabParam = urlParams.get('tab');
@@ -3269,8 +3214,8 @@
                 Trazando ruta de navegación óptima hacia la consulta...
             </div>
             <!-- Contenedor del Mapa -->
-            <div class="flex-grow w-full relative">
-                <div id="modalMapContainer" class="absolute inset-0 w-full h-full"></div>
+            <div class="flex-grow w-full relative" style="min-height: 450px; height: 100%; border-radius: 1rem; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <div id="modalMapContainer" class="absolute inset-0 w-full h-full" style="min-height: 450px; height: 100%;"></div>
             </div>
         </div>
     </div>
