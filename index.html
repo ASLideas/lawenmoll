@@ -204,7 +204,7 @@
                         <div id="plan-mensual" onclick="selectMembershipPlan('mensual', 0.5)" class="membership-card border border-gray-200 rounded-2xl p-3 bg-white hover:border-forest/50 transition cursor-pointer shadow-sm">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slateDark uppercase">Plan Mensual</span>
-                                <span class="text-xs font-black text-forest">0.5 UF/mes</span>
+                                <span class="text-xs font-black text-forest">$19.000 / mes</span>
                             </div>
                             <p class="text-[9px] text-gray-400 font-medium">Facturado mes a mes de forma flexible. Acceso a ficha clínica SOAP básica y vitrina de derivación.</p>
                         </div>
@@ -214,7 +214,7 @@
                             <div class="absolute right-0 top-0 bg-accent text-white text-[7px] font-bold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider">Ahorro 15%</div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slateDark uppercase">Plan Trimestral</span>
-                                <span class="text-xs font-black text-forest">1.25 UF (~0.41 UF/mes)</span>
+                                <span class="text-xs font-black text-forest">$48.000 (~$16.000 / mes)</span>
                             </div>
                             <p class="text-[9px] text-gray-500 font-semibold mt-0.5">La opción más popular para terapeutas y psicólogos clínicos de LAWENMOLL.</p>
                         </div>
@@ -224,7 +224,7 @@
                             <div class="absolute right-0 top-0 bg-forest text-white text-[7px] font-bold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider">Ahorro 30%</div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slateDark uppercase">Plan Anual</span>
-                                <span class="text-xs font-black text-forest">4.1 UF (~0.34 UF/mes)</span>
+                                <span class="text-xs font-black text-forest">$155.000 (~$12.900 / mes)</span>
                             </div>
                             <p class="text-[9px] text-gray-400 font-medium">El máximo ahorro para profesionales de salud independientes establecidos.</p>
                         </div>
@@ -1735,6 +1735,11 @@
         function selectMembershipPlan(plan, price) {
             selections.selectedPlan = plan;
             selections.planPriceUF = price;
+            // Guardar precio directamente en CLP también
+            let clpPrice = 19000;
+            if (plan === 'trimestral') clpPrice = 48000;
+            else if (plan === 'anual') clpPrice = 155000;
+            selections.planPriceCLP = clpPrice;
             
             document.querySelectorAll('.membership-card').forEach(card => {
                 card.className = "membership-card border border-gray-200 rounded-2xl p-3 bg-white hover:border-forest/50 transition cursor-pointer shadow-sm";
@@ -1763,11 +1768,14 @@
             }
 
             document.getElementById('checkoutPlanName').innerText = 'Plan ' + selections.selectedPlan;
-            document.getElementById('checkoutPlanPriceUF').innerText = selections.planPriceUF + ' UF';
             
-            const ufValue = 38500;
-            const clpValue = Math.round(selections.planPriceUF * ufValue);
-            document.getElementById('checkoutPlanPriceCLP').innerText = '~$' + clpValue.toLocaleString('es-CL') + ' CLP';
+            // Calculate round CLP price cleanly
+            let clpPrice = 19000;
+            if (selections.selectedPlan === 'trimestral') clpPrice = 48000;
+            else if (selections.selectedPlan === 'anual') clpPrice = 155000;
+            
+            document.getElementById('checkoutPlanPriceUF').innerText = '$' + clpPrice.toLocaleString('es-CL') + ' CLP';
+            document.getElementById('checkoutPlanPriceCLP').innerText = 'SaaS Especialista Activo';
             
             document.getElementById('paymentModal').classList.remove('hidden');
         }

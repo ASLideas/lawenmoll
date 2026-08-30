@@ -143,7 +143,7 @@
         <!-- COLUMNA IZQUIERDA: RESUMEN Y AGENDA -->
         <div class="lg:col-span-4 space-y-6">
             
-            <!-- Tarjeta de Perfil y Métricas en UF con Plan SaaS -->
+            <!-- Tarjeta de Perfil y Métricas en Pesos Chilenos con Plan SaaS -->
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-forest">Resumen Mensual</h3>
@@ -152,7 +152,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-forest/5 p-4 rounded-2xl border border-forest/10">
                         <div class="text-[10px] uppercase font-bold text-forest/70">Ingresos</div>
-                        <div class="text-lg font-black text-forest mt-1">14.5 UF</div>
+                        <div class="text-lg font-black text-forest mt-1">$558.000</div>
                         <div class="text-[9px] text-gray-400 font-medium font-sans">Este mes</div>
                     </div>
                     <div class="bg-accent/5 p-4 rounded-2xl border border-accent/10">
@@ -199,6 +199,12 @@
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Dirección de Box / Consulta</label>
                             <input type="text" id="vitrinaAddress" placeholder="Ej: Av. Providencia 1450, Providencia" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs font-semibold focus:outline-none focus:border-forest shadow-sm text-slateDark">
+                        </div>
+                        <div class="flex items-center space-x-2 pt-1 bg-yellow-50/50 p-2.5 rounded-xl border border-yellow-100">
+                            <input type="checkbox" id="vitrinaAtiendeClinica" class="accent-forest h-4 w-4 rounded cursor-pointer">
+                            <label for="vitrinaAtiendeClinica" class="text-[9px] text-yellow-800 leading-normal font-semibold cursor-pointer select-none">
+                                ⚠️ <strong>Regla de Bloqueo por Establecimiento:</strong> Atiendo presencialmente en clínica o centro de terceros (Bloquear automáticamente mis horas independientes si agendo en clínica, según Acuerdo B2B).
+                            </label>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5">
                             <div>
@@ -622,6 +628,7 @@
                         document.getElementById('vitrinaTelegram').value = data.telegram || '';
                         document.getElementById('vitrinaLat').value = data.latitud || '';
                         document.getElementById('vitrinaLon').value = data.longitud || '';
+                        document.getElementById('vitrinaAtiendeClinica').checked = data.atiende_clinica === true || data.atiende_clinica === 'true';
                     }
 
                     // Populate Vitrina form fields
@@ -634,6 +641,7 @@
                     document.getElementById('vitrinaTelegram').value = loggedInUser.telegram || '';
                     document.getElementById('vitrinaLat').value = loggedInUser.latitud || '';
                     document.getElementById('vitrinaLon').value = loggedInUser.longitud || '';
+                    document.getElementById('vitrinaAtiendeClinica').checked = loggedInUser.atiende_clinica === true || loggedInUser.atiende_clinica === 'true';
 
                     // Cargar citas desde Supabase
                     loadAppointmentsFromSupabase();
@@ -1051,7 +1059,8 @@
                             linkedin: linkedin,
                             telegram: telegram,
                             latitud: lat,
-                            longitud: lon
+                            longitud: lon,
+                            atiende_clinica: document.getElementById('vitrinaAtiendeClinica').checked
                         })
                         .eq('nombre', activeTherapist.nombre);
 
