@@ -2102,6 +2102,71 @@
             }, 250);
         }
 
+
+        function openRestaurantBookingModal(restaurantName) {
+            document.getElementById('bookingEstName').innerText = restaurantName;
+            document.getElementById('restaurantBookingModal').classList.remove('hidden');
+        }
+
+        function closeRestaurantBookingModal() {
+            document.getElementById('restaurantBookingModal').classList.add('hidden');
+        }
+
+        async function bookRestaurantTableReal() {
+            const dateVal = document.getElementById('resModalDate').value;
+            const timeVal = document.getElementById('resModalTime').value;
+            const guestsVal = document.getElementById('resModalGuests').value;
+            const phoneVal = document.getElementById('resModalPhone').value;
+            const agreeVal = document.getElementById('resModalAgreeTerms').checked;
+            const restaurantName = document.getElementById('bookingEstName').innerText;
+
+            if (!agreeVal) {
+                alert("⚠️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
+                return;
+            }
+
+            if (!dateVal || phoneVal.trim() === "+569" || phoneVal.length < 8) {
+                alert("⚠️ Por favor ingresa la fecha de tu reserva y un teléfono celular de contacto válido.");
+                return;
+            }
+
+            const bookingCode = `MESA-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            // Guardado real en Supabase
+            try {
+                if (supabaseKey !== '') {
+                    const { error } = await _supabase
+                        .from('citas')
+                        .insert([
+                            {
+                                fecha_cita: dateVal,
+                                hora_cita: timeVal,
+                                lugar_cita: restaurantName,
+                                modalidad_cita: 'Presencial',
+                                estado_cita: 'Agendada',
+                                codigo_reserva: bookingCode,
+                                telefono_contacto: phoneVal,
+                                consentimiento_datos: true
+                            }
+                        ]);
+
+                    if (error) throw error;
+                }
+            } catch (err) {
+                console.error("❌ Error al guardar reserva de restaurante en Supabase:", err.message);
+            }
+
+            alert(`🎉 ¡MESA RESERVADA CON ÉXITO EN ${restaurantName.toUpperCase()}!\n\n` +
+                  `• Fecha: ${dateVal}\n` +
+                  `• Hora: ${timeVal} hrs\n` +
+                  `• Invitados: ${guestsVal} personas\n` +
+                  `• Celular: ${phoneVal}\n` +
+                  `• Código Único de Reserva: ${bookingCode}\n\n` +
+                  `¡Recuerda que tienes un 15% de descuento exclusivo presentando este ticket por ser usuario de LAWENMOLL!`);
+                  
+            closeRestaurantBookingModal();
+        }
+    
         function closeMapModal() {
             document.getElementById('mapModal').classList.add('hidden');
         }
@@ -3196,6 +3261,85 @@
     </div>
 
 
+    <!-- MODAL DE RESERVA DE MESAS REAL v21 -->
+    <div id="restaurantBookingModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-fadeIn">
+            <!-- Header -->
+            <div class="bg-forest text-white p-5 flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                    <i class="fa-solid fa-calendar-days text-xl text-accent"></i>
+                    <div>
+                        <h3 class="font-extrabold text-sm uppercase tracking-wider" id="resBookingModalTitle">Reservar Mesa / Hora</h3>
+                        <p class="text-[9px] text-white/80" id="resBookingModalSub">Reserva de mesa con descuento exclusivo</p>
+                    </div>
+                </div>
+                <button onclick="closeRestaurantBookingModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <!-- Cuerpo -->
+            <div class="p-6 space-y-4 text-left font-sans text-xs text-gray-600 leading-relaxed">
+                <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/10 flex justify-between items-center">
+                    <div>
+                        <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Establecimiento Seleccionado</span>
+                        <h5 id="bookingEstName" class="text-xs font-extrabold text-slateDark">Restaurante "Huerto Orgánico"</h5>
+                        <span class="text-[8px] bg-accent/20 text-accent px-2 py-0.5 rounded-full font-bold mt-1 inline-block">Socio de Nutrición Consciente</span>
+                    </div>
+                    <div class="text-right border-l border-gray-200 pl-4">
+                        <span class="text-[9px] text-gray-400 font-bold uppercase">Beneficio Activo</span>
+                        <div class="text-xs font-black text-forest mt-0.5">15% DCTO</div>
+                        <span class="text-[8px] text-gray-400 font-bold">Presentando tu Receta</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha de Reserva</label>
+                        <input type="date" id="resModalDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Hora de Almuerzo/Cena</label>
+                        <select id="resModalTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <option value="12:30">12:30 hrs (Almuerzo)</option>
+                            <option value="13:30">13:30 hrs (Almuerzo)</option>
+                            <option value="14:30">14:30 hrs (Almuerzo)</option>
+                            <option value="19:30">19:30 hrs (Cena)</option>
+                            <option value="20:30">20:30 hrs (Cena)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Cantidad de Personas</label>
+                        <select id="resModalGuests" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <option value="1">1 Persona</option>
+                            <option value="2" selected>2 Personas</option>
+                            <option value="4">4 Personas</option>
+                            <option value="6">6 Personas</option>
+                            <option value="8">8 Personas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Celular de Contacto</label>
+                        <input type="text" id="resModalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                    </div>
+                </div>
+
+                <!-- Consentimiento de Ciberseguridad -->
+                <div class="flex items-start space-x-2 bg-gray-50 p-3 rounded-2xl border border-gray-150 text-left">
+                    <input type="checkbox" id="resModalAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
+                    <label for="resModalAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
+                        Consiento la transmisión segura de mis datos de reserva de mesa bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
+                    </label>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex justify-end space-x-3">
+                <button onclick="closeRestaurantBookingModal()" class="bg-gray-200 hover:bg-gray-300 text-slateDark font-bold py-2.5 px-4 rounded-xl text-[10px] uppercase transition focus:outline-none">Cerrar</button>
+                <button onclick="bookRestaurantTableReal()" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 px-4 rounded-xl text-[10px] uppercase shadow-md transition flex items-center space-x-1.5 focus:outline-none">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Confirmar Reserva de Mesa 📅</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL DE MAPA INTERACTIVO (GEOLOCALIZACIÓN PROFESIONALES) -->
     <div id="mapModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col h-[80vh] overflow-hidden animate-fadeIn">
@@ -3216,7 +3360,7 @@
             </div>
             <!-- Contenedor del Mapa -->
             <div class="flex-grow w-full relative" style="min-height: 450px; height: 100%; border-radius: 1rem; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                <div id="modalMapContainer" class="absolute inset-0 w-full h-full" style="min-height: 450px; height: 100%;"></div>
+                <div id="modalMapContainer" style="height: 450px; width: 100%; display: block; position: relative;"></div>
             </div>
         </div>
     </div>

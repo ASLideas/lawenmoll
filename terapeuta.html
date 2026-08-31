@@ -25,7 +25,9 @@
     <!-- Supabase JS Library for real-time Database connection -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
-    <!-- FontAwesome para iconos -->
+        <!-- html2pdf.js para exportaciones de alta calidad en PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -289,6 +291,14 @@
                     <span class="text-xs font-semibold bg-gray-100 text-gray-500 px-2 py-1 rounded-md font-sans">Sábado</span>
                 </div>
                 
+                <!-- Buscador de Citas en vivo por Código o Nombre -->
+                <div class="mb-3.5 relative">
+                    <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="searchAppointmentCode" oninput="searchAppointmentByCode()" placeholder="Buscar por Código o Nombre..." class="w-full bg-gray-50 border border-gray-100 pl-9 pr-3 py-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-inner text-slateDark">
+                </div>
+                
                 <div class="space-y-3" id="appointmentList">
                     <!-- Paciente 1 -->
                     <button onclick="activeAppointmentId = null; selectPatient('Camila Silva', '26.0', 'Sobrepeso Moderado', 'Dolor lumbar tras largas jornadas de oficina.', 'Sí (Hipertensión e Hipotiroidismo)', 'Estándar (30 a 45 min)', 'Lunes 24 Ago - 09:30 hrs', '💻 Consulta en Línea (Telemedicina)', '30', 'Neurodivergente (TDAH)', 'Sí (Derivada a clases de Yoga)', '+56912345678', 'Fatiga Media 🥱', 'Estrés Moderado ⚖️')" class="w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center justify-between shadow-sm">
@@ -473,6 +483,12 @@
                             <span>Enviar por WhatsApp</span>
                         </button>
                         
+                        <!-- BOTÓN DE DESCARGA PDF DE LA FICHA -->
+                        <button onclick="downloadSOAPPDF()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>Descargar Pauta PDF</span>
+                        </button>
+                        
                         <!-- BOTÓN DE GUARDADO SEGURO -->
                         <button onclick="saveClinicalRecord()" class="w-full sm:w-auto bg-forest hover:bg-forest/90 text-white font-bold py-3 px-5 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-floppy-disk"></i>
@@ -521,7 +537,7 @@
                         const safeTelefono = (c.telefono_contacto || '+56912345678').replace(/'/g, '').replace(/"/g, '');
                         const patientNameDisplay = c.nombre_paciente || c.telefono_contacto || 'Paciente';
                         const btnHtml = `
-                            <button onclick="activeAppointmentId = ${c.id}; selectPatient('${patientNameDisplay}', '${randomIMC}', '${weightStatus}', 'Reserva de Mesa / Cita', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
+                            <button data-code="${c.codigo_reserva || ''}" data-name="${patientNameDisplay.toLowerCase()}" onclick="activeAppointmentId = ${c.id}; activePatientPhone = '${safeTelefono}'; selectPatient('${patientNameDisplay}', '${randomIMC}', '${weightStatus}', 'Cita Médica • Código: ${c.codigo_reserva || ''}', 'No', 'Estándar', '${safeFecha} - ${safeHora} hrs', '💻 ${safeModalidad}', '28', 'Ninguna', 'No', '${safeTelefono}', 'Normal 🌅', 'Calma Total 🧘')" class="appointment-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center justify-between shadow-sm bg-white mt-2">
                                 <div class="flex items-center space-x-3">
                                     <span class="text-xl">👤</span>
                                     <div>
@@ -799,10 +815,12 @@
 
             try {
                 if (supabaseKey !== '') {
-                    // Obtener id del terapeuta Carlos Mendoza
+                    // Obtener id del terapeuta Carlos Mendoza de forma segura (select primero!)
+                    const therapistName = activeTherapist ? activeTherapist.nombre : 'Klgo. Carlos Mendoza';
                     const { data: therapist } = await _supabase
                         .from('terapeutas')
-                        .eq('nombre', 'Klgo. Carlos Mendoza')
+                        .select('id')
+                        .eq('nombre', therapistName)
                         .maybeSingle();
 
                     const { error } = await _supabase
@@ -905,6 +923,110 @@
         }
     
         // --- MOTOR DE TELEMEDICINA JITSI MEET & CARGA DE FOTO AVATAR ---
+
+        function searchAppointmentByCode() {
+            const query = document.getElementById('searchAppointmentCode').value.trim().toLowerCase();
+            const btns = document.querySelectorAll('.appointment-btn');
+            btns.forEach(btn => {
+                const code = btn.getAttribute('data-code').toLowerCase();
+                const name = btn.getAttribute('data-name').toLowerCase();
+                if (code.includes(query) || name.includes(query)) {
+                    btn.classList.remove('hidden');
+                } else {
+                    btn.classList.add('hidden');
+                }
+            });
+        }
+
+        function downloadSOAPPDF() {
+            const nameAndAge = document.getElementById('patientName').innerText;
+            const patientName = nameAndAge.split(" (")[0];
+            const age = nameAndAge.split(" (")[1] ? nameAndAge.split(" (")[1].replace(")", "") : "30 años";
+            
+            const imcVal = document.getElementById('patientIMC').innerText;
+            const imcCatVal = document.getElementById('patientIMCCat').innerText;
+            const chronicVal = document.getElementById('patientChronic').innerText;
+            const dateTimeVal = document.getElementById('patientDateTime').innerText;
+            const typeVal = document.getElementById('patientType').innerText;
+            const mentalVal = document.getElementById('patientMental').innerText;
+            const gymVal = document.getElementById('patientGym').innerText;
+            const timeCommitVal = document.getElementById('patientTimeCommit').innerText;
+            const phoneVal = document.getElementById('patientPhone').innerText;
+
+            const s = document.getElementById('soapS').value;
+            const o = document.getElementById('soapO').value;
+            const a = document.getElementById('soapA').value;
+            const p = document.getElementById('soapP').value;
+
+            const therapistName = activeTherapist ? activeTherapist.nombre : 'Klgo. Carlos Mendoza';
+            const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
+
+            const element = document.createElement('div');
+            element.className = "p-10 bg-white font-sans text-xs text-gray-700 leading-relaxed";
+            element.style.color = "#2F3E46";
+            element.style.width = "700px";
+
+            let contentHtml = `
+                <div style="border: 2px solid #52796F; border-radius: 24px; padding: 30px; background-color: #FAF8F5;">
+                    <div style="text-align: center; border-bottom: 2px solid #52796F; padding-bottom: 15px; margin-bottom: 20px;">
+                        <span style="font-size: 32px;">🌿</span>
+                        <h1 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: #52796F; margin: 5px 0 0 0; text-transform: uppercase;">PAUTA DE TRATAMIENTO CLÍNICO (SOAP)</h1>
+                        <p style="font-size: 10px; font-weight: bold; color: #84A59D; margin: 3px 0 0 0; letter-spacing: 2px; text-transform: uppercase;">Ecosistema de Salud Integrativa LAWENMOLL</p>
+                    </div>
+
+                    <h3 style="color: #52796F; font-size: 12px; border-bottom: 1px dashed #E2E8F0; padding-bottom: 5px; margin-bottom: 12px; text-transform: uppercase; font-weight: 800;">📍 Identificación del Paciente y Cita</h3>
+                    <div style="font-size: 11px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 15px; margin-bottom: 20px; color: #4A5568;">
+                        <div><strong>Paciente:</strong> ${patientName}</div>
+                        <div><strong>Edad:</strong> ${age}</div>
+                        <div><strong>Celular de Contacto:</strong> ${phoneVal}</div>
+                        <div><strong>Fecha / Hora de Cita:</strong> ${dateTimeVal}</div>
+                        <div><strong>Tipo de Atención:</strong> ${typeVal}</div>
+                        <div><strong>Convenio Alianza:</strong> ${gymVal}</div>
+                    </div>
+
+                    <h3 style="color: #52796F; font-size: 12px; border-bottom: 1px dashed #E2E8F0; padding-bottom: 5px; margin-bottom: 12px; text-transform: uppercase; font-weight: 800;">📍 Antecedentes Físicos y Diagnóstico</h3>
+                    <div style="font-size: 11px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 15px; margin-bottom: 20px; color: #4A5568;">
+                        <div><strong>IMC / Estado Nutricional:</strong> ${imcVal} (${imcCatVal})</div>
+                        <div><strong>Condición Crónica:</strong> ${chronicVal}</div>
+                        <div><strong>Tiempo Disponible para Ejercicio:</strong> ${timeCommitVal}</div>
+                        <div><strong>Salud Cognitiva / Neurodivergencia:</strong> ${mentalVal}</div>
+                    </div>
+
+                    <h3 style="color: #52796F; font-size: 12px; border-bottom: 1px dashed #E2E8F0; padding-bottom: 5px; margin-bottom: 12px; text-transform: uppercase; font-weight: 800;">📍 Registro Clínico Profesional (SOAP)</h3>
+                    <div style="font-size: 11px; margin-bottom: 20px; color: #4A5568; line-height: 1.6; space-y: 10px;">
+                        <p style="margin-bottom: 8px;"><strong>[S] SUBJETIVO (Síntomas descritos por el paciente):</strong><br>${s || 'No registrado'}</p>
+                        <p style="margin-bottom: 8px;"><strong>[O] OBJETIVO (Evaluación física y parámetros médicos):</strong><br>${o || 'No registrado'}</p>
+                        <p style="margin-bottom: 8px;"><strong>[A] APRECIACIÓN (Hipótesis clínica y diagnóstico integrativo):</strong><br>${a || 'No registrado'}</p>
+                        <p style="margin-bottom: 8px; background-color: #EBF8FF; border-left: 4px solid #3182CE; padding: 10px; border-radius: 8px;"><strong>[P] PLAN DE TRATAMIENTO Y PAUTA DE FITOTERAPIA:</strong><br>${p || 'No registrado'}</p>
+                    </div>
+
+                    <h3 style="color: #52796F; font-size: 12px; border-bottom: 1px dashed #E2E8F0; padding-bottom: 5px; margin-bottom: 12px; text-transform: uppercase; font-weight: 800;">📍 Firma del Profesional</h3>
+                    <div style="font-size: 11px; margin-top: 15px; color: #4A5568;">
+                        <p style="font-weight: bold; margin: 0; font-size: 12px; color: #2F3E46;">${therapistName}</p>
+                        <p style="margin: 2px 0 0 0; color: #718096; font-size: 10px;">${therapistSis}</p>
+                        <p style="margin: 2px 0 0 0; color: #718096; font-size: 10px;">Especialista de la Red de Salud LAWENMOLL</p>
+                    </div>
+
+                    <div style="text-align: center; border-top: 1px dashed #E2E8F0; padding-top: 15px; margin-top: 30px; font-size: 9px; color: #A0AEC0;">
+                        <p style="margin: 0; font-weight: bold; color: #52796F;">© 2026 LAWENMOLL Chile. Registro Clínico y Ecosistema de Salud Integrativa Protegido.</p>
+                        <p style="margin: 3px 0 0 0;">Documento médico oficial resguardado bajo la Ley Marco de Ciberseguridad N° 21.663.</p>
+                    </div>
+                </div>
+            `;
+
+            element.innerHTML = contentHtml;
+
+            const opt = {
+                margin:       15,
+                filename:     `LAWENMOLL_Ficha_SOAP_${patientName.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().from(element).set(opt).save();
+        }
+    
         function startVideoCall() {
             const patientName = document.getElementById('patientName').innerText.split(' (')[0];
             const therapistName = activeTherapist ? activeTherapist.nombre : 'Carlos Mendoza';
