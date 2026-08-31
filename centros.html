@@ -1863,14 +1863,18 @@
                         </button>
                     </div>
                 ` : `
-                    <div class="flex flex-col sm:flex-row gap-2 pt-1">
-                        <button onclick="calculateIndependentRoute(${lat}, ${lon}, '${t.nombre}', '${address}')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                    <div class="grid grid-cols-3 gap-2 pt-1">
+                        <button onclick="calculateIndependentRoute(${lat}, ${lon}, '${t.nombre}', '${address}')" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0" title="Programar Tu Viaje">
                             <i class="fa-solid fa-route"></i>
-                            <span>Programar Tu Viaje 🗺️</span>
+                            <span>Viaje 🗺️</span>
                         </button>
-                        <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                        <button onclick="viewEstablishmentDetail('terapeuta', '${t.nombre}')" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0" title="Ver Reseñas y Perfil">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Reseñas 👥</span>
+                        </button>
+                        <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0" title="Cancelar Mi Cita">
                             <i class="fa-solid fa-ban"></i>
-                            <span>Cancelar Mi Cita ❌</span>
+                            <span>Cancelar ❌</span>
                         </button>
                     </div>
                 `;
@@ -2045,6 +2049,7 @@
                 }, 150);
             };
 
+            loadReviewsForTarget(item.nombre, type);
             modal.classList.remove('hidden');
         }
 
@@ -2052,13 +2057,194 @@
             document.getElementById('establishmentDetailModal').classList.add('hidden');
         }
 
+        // --- SISTEMA DE RESEÑAS PROFESIONALES EN VIVO v22 ---
+        let defaultReviews = [
+            { target_name: 'Centro Holístico "Lawen Ko"', autor_nombre: 'Dra. Patricia Valdés (Cardióloga)', comentario: 'Excelente coordinación de derivación clínica. Las pautas de kinesiología han aliviado dolores lumbares severos de mis pacientes derivados.', calificacion: 5, date: '25 Ago, 2026' },
+            { target_name: 'Centro Holístico "Lawen Ko"', autor_nombre: 'Sr. Andrés Aravena (Paciente Crónico)', comentario: 'Excelente atención de la Dra. Ruiz. Muy profesional y empática.', calificacion: 5, date: '28 Ago, 2026' },
+            { target_name: 'Gimnasio "SportLife Integrativo"', autor_nombre: 'Klgo. Roberto Flores', comentario: 'Recomiendo totalmente el área de Pilates Reformer para pacientes en rehabilitación postural de columna. Los instructores están excelentemente capacitados.', calificacion: 5, date: '22 Ago, 2026' },
+            { target_name: 'Restaurante "Huerto Orgánico"', autor_nombre: 'Nutricionista Sofía Letelier', comentario: 'Los menús depurativos de 7 días están perfectamente balanceados y con un efecto antiinflamatorio maravilloso gracias al uso de cúrcuma orgánica.', calificacion: 5, date: '26 Ago, 2026' },
+            { target_name: 'Farmacia Herbolaria "El Canelo"', autor_nombre: 'Dra. Elena Muñoz (Med. Familiar)', comentario: 'La calidad de las tinturas de boldo y los adaptógenos herbolarios es del más alto nivel clínico. Mis pacientes de Providencia han reportado excelente tolerancia.', calificacion: 5, date: '27 Ago, 2026' },
+            { target_name: 'Farmacia Mapuche "Makewe"', autor_nombre: 'Enf. Carmen Gacitúa', comentario: 'Maravillosa herbolaria tradicional mapuche y cosmética nativa. Un aporte fundamental al rescate de nuestra medicina de la tierra.', calificacion: 5, date: '29 Ago, 2026' },
+            { target_name: 'Naturópata Maite Soler', autor_nombre: 'Dra. Eliana Ruiz', comentario: 'Excelente profesional herbolaria. Las consejerías de Maite son un complemento de fitoterapia maravilloso para mis tratamientos médicos integrativos.', calificacion: 5, date: '24 Ago, 2026' },
+            { target_name: 'Ps. Tomás Araya', autor_nombre: 'Psicopedagoga Nicole Bascuñán', comentario: 'Tomás tiene un manejo brillante e integral del TDAH en adultos, incorporando hábitos saludables de sueño y regulación de dopamina con bases clínicas.', calificacion: 5, date: '26 Ago, 2026' }
+        ];
+
+        async function loadReviewsForTarget(targetName, serviceType) {
+            const container = document.getElementById('estModalReviews');
+            if (!container) return;
+            container.innerHTML = `<div class="text-[10px] text-gray-400 font-medium italic"><i class="fa-solid fa-spinner animate-spin"></i> Cargando reseñas en vivo...</div>`;
+
+            let reviewsToShow = defaultReviews.filter(r => r.target_name === targetName);
+
+            try {
+                if (supabaseKey !== '') {
+                    const { data, error } = await _supabase
+                        .from('reseñas_profesionales')
+                        .select('*')
+                        .eq('target_name', targetName)
+                        .order('created_at', { ascending: false });
+
+                    if (error) throw error;
+                    if (data && data.length > 0) {
+                        const dbReviews = data.map(r => ({
+                            target_name: r.target_name,
+                            autor_nombre: r.autor_nombre,
+                            comentario: r.comentario,
+                            calificacion: parseInt(r.calificacion) || 5,
+                            date: new Date(r.created_at).toLocaleDateString('es-CL', { day: 'numeric', month: 'short', year: 'numeric' })
+                        }));
+                        reviewsToShow = [...dbReviews, ...reviewsToShow];
+                    }
+                }
+            } catch (err) {
+                console.error("Error al cargar reseñas de Supabase:", err.message);
+            }
+
+            container.innerHTML = '';
+            if (reviewsToShow.length === 0) {
+                container.innerHTML = `<p class="text-[10px] text-gray-400 italic">No hay reseñas todavía. ¡Sé el primero en compartir tu experiencia!</p>`;
+                return;
+            }
+
+            reviewsToShow.forEach(r => {
+                const stars = '⭐'.repeat(r.calificacion);
+                const card = document.createElement('div');
+                card.className = "p-3 bg-white border border-gray-100 rounded-2xl shadow-sm text-left space-y-1";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center text-[9px]">
+                        <span class="font-bold text-forest">${r.autor_nombre}</span>
+                        <span class="text-gray-400 font-semibold">${r.date || 'Reciente'}</span>
+                    </div>
+                    <div class="text-[9px] text-amber-500 font-bold">${stars}</div>
+                    <p class="text-[10px] text-gray-600 leading-relaxed font-semibold italic">"${r.comentario}"</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function submitReviewReal() {
+            const nameEl = document.getElementById('reviewAuthorName');
+            const ratingEl = document.getElementById('reviewRating');
+            const commentEl = document.getElementById('reviewComment');
+            const targetName = document.getElementById('estModalTitle').innerText;
+            const subText = document.getElementById('estModalSub').innerText;
+            const serviceType = subText.split(' - ')[0].toLowerCase();
+
+            const name = nameEl.value.trim();
+            const rating = parseInt(ratingEl.value);
+            const comment = commentEl.value.trim();
+
+            if (!name || !comment) {
+                alert("⚠️ Por favor completa tu Nombre/Profesión y tu Comentario antes de enviar.");
+                return;
+            }
+
+            const btn = document.querySelector("button[onclick='submitReviewReal()']");
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Guardando Reseña...`;
+
+            const newReview = {
+                target_name: targetName,
+                autor_nombre: name,
+                comentario: comment,
+                calificacion: rating,
+                date: 'Hoy'
+            };
+
+            try {
+                if (supabaseKey !== '') {
+                    const { error } = await _supabase
+                        .from('reseñas_profesionales')
+                        .insert([
+                            {
+                                target_name: targetName,
+                                tipo_servicio: serviceType,
+                                autor_nombre: name,
+                                comentario: comment,
+                                calificacion: rating
+                            }
+                        ]);
+
+                    if (error) throw error;
+                    alert("🎉 ¡Reseña Profesional guardada con éxito en Supabase!");
+                } else {
+                    alert("🎉 ¡Reseña agregada de forma local con éxito!");
+                }
+
+                defaultReviews.unshift(newReview);
+                nameEl.value = '';
+                commentEl.value = '';
+                loadReviewsForTarget(targetName, serviceType);
+
+            } catch (err) {
+                console.error("❌ Error de Supabase al guardar la reseña:", err.message);
+                alert("❌ Error al guardar en base de datos: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+
+        let currentRouteTarget = {
+            lat: 0,
+            lon: 0,
+            name: '',
+            address: '',
+            region: 'Región Metropolitana'
+        };
+        let currentRouteTransport = 'metro';
+
         function calculateIndependentRoute(lat, lon, name, address) {
-            document.getElementById('mapModalTitle').innerText = `Ruta hacia: ${name}`;
-            document.getElementById('mapModalSub').innerText = `Consulta en: ${address}`;
+            // Find region of this target if possible from lists, or guess based on name/address
+            let targetRegion = 'Región Metropolitana';
             
-            // Dynamic instructions in pesos and beautiful text
-            const metroStation = name.includes('Tomás') ? 'Metro Los Leones (Línea 1)' : 'Metro Pedro de Valdivia (Línea 1)';
-            document.getElementById('mapModalExplain').innerHTML = `🚇 <strong>Programando tu viaje:</strong> Toma la Línea 1 del Metro de Santiago y desciende en la estación <strong>${metroStation}</strong>. Camina aproximadamente 3 minutos hasta la dirección de consulta en <strong>${address}</strong>. ¡Tu ruta ha sido programada con éxito en pesos chilenos sin cargos adicionales!`;
+            // Look up in clinics
+            const cl = allClinicsData.find(c => c.nombre === name);
+            if (cl) {
+                targetRegion = cl.region_chile || 'Región Metropolitana';
+            } else {
+                const rt = allRestaurantsData.find(r => r.nombre === name);
+                if (rt) {
+                    targetRegion = rt.region_chile || 'Región Metropolitana';
+                } else {
+                    const gy = allGymsData.find(g => g.nombre === name);
+                    if (gy) {
+                        targetRegion = gy.region_chile || 'Región Metropolitana';
+                    } else {
+                        const fm = allFarmaciasData.find(f => f.nombre === name);
+                        if (fm) {
+                            targetRegion = fm.region_chile || 'Región Metropolitana';
+                        } else {
+                            const th = allTherapistsData.find(t => t.nombre === name);
+                            if (th) {
+                                targetRegion = th.region_chile || 'Región Metropolitana';
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (address.includes('Temuco') || name.includes('Makewe') || name.includes('Meli') || name.includes('Kundalini') || name.includes('Raíces')) {
+                targetRegion = 'Región de la Araucanía';
+            } else if (address.includes('Viña') || address.includes('Valparaíso') || name.includes('Savia') || name.includes('Hahnemann') || name.includes('Verde Amor') || name.includes('Castro')) {
+                targetRegion = 'Región de Valparaíso';
+            }
+
+            currentRouteTarget = { lat, lon, name, address, region: targetRegion };
+
+            // Default transport mode: metro for RM/Valpo, micro for Araucanía
+            if (targetRegion === 'Región de la Araucanía') {
+                currentRouteTransport = 'micro';
+            } else {
+                currentRouteTransport = 'metro';
+            }
+
+            document.getElementById('mapModalTitle').innerText = `Ruta hacia: ${name}`;
+            document.getElementById('mapModalSub').innerText = `Consulta en: ${address} (${targetRegion})`;
+
+            updateRouteExplain();
             
             // Show modal
             document.getElementById('mapModal').classList.remove('hidden');
@@ -2084,7 +2270,7 @@
                     .openPopup();
                     
                 modalMarkerDest = L.marker([lat, lon]).addTo(modalMap)
-                    .bindPopup(`<b>${name}</b><br>${address}`)
+                    .bindPopup(`<b>\${name}</b><br>\${address}`)
                     .openPopup();
                     
                 // Draw polyline
@@ -2101,6 +2287,74 @@
                 modalMap.invalidateSize();
             }, 250);
         }
+
+        function selectRouteTransport(mode) {
+            currentRouteTransport = mode;
+            updateRouteExplain();
+        }
+
+        function updateRouteExplain() {
+            const t = currentRouteTarget;
+            const mode = currentRouteTransport;
+            const explainEl = document.getElementById('mapModalExplain');
+            if (!explainEl) return;
+
+            // Highlight transport button
+            document.querySelectorAll('.transport-btn').forEach(btn => {
+                btn.className = "transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark";
+            });
+            const activeBtn = document.getElementById('btn-route-' + mode);
+            if (activeBtn) {
+                activeBtn.className = "transport-btn text-[9px] bg-forest text-white border border-forest px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 transition focus:outline-none";
+            }
+
+            // Hide/Show Metro button if in Araucanía (no Metro)
+            const metroBtn = document.getElementById('btn-route-metro');
+            if (metroBtn) {
+                if (t.region === 'Región de la Araucanía') {
+                    metroBtn.classList.add('hidden');
+                } else {
+                    metroBtn.classList.remove('hidden');
+                }
+            }
+
+            let textHtml = '';
+
+            if (t.region === 'Región Metropolitana') {
+                if (mode === 'metro') {
+                    const nearestStation = t.name.includes('SportLife') ? 'Metro Tobalaba o El Golf (Línea 1)' : t.name.includes('Tomás') ? 'Metro Los Leones (Línea 1)' : 'Metro Pedro de Valdivia (Línea 1)';
+                    textHtml = `🚇 <strong>Programando tu viaje en Metro de Santiago:</strong> Toma la <strong>Línea 1</strong> y desciende en la estación <strong>\${nearestStation}</strong>. Camina aproximadamente 4 minutos hasta <strong>\${t.address}</strong>. Costo del viaje: $730 - $840 CLP (según horario valle/punta). ¡Ruta calculada con éxito!`;
+                } else if (mode === 'micro') {
+                    textHtml = `🚌 <strong>Programando tu viaje en Micro (RED Transantiago):</strong> Toma el recorrido troncal <strong>412, 418, 421 o 503</strong> que transita por el eje Av. Providencia. Desciende en el paradero más cercano a la altura del 1200. Costo del viaje: $730 CLP utilizando tu tarjeta bip! con transbordo de Metro integrado.`;
+                } else if (mode === 'colectivo') {
+                    textHtml = `🚗 <strong>Programando tu viaje en Colectivo:</strong> Toma la línea de colectivos autorizados del sector Providencia/Las Condes con dirección al Oriente. Te dejarán directamente a pasos de <strong>\${t.address}</strong>. Costo aproximado: $1.200 - $1.500 CLP por persona.`;
+                } else if (mode === 'taxi') {
+                    textHtml = `🚕 <strong>Viaje en Taxi o Aplicación (Uber/Cabify):</strong> Solicita tu móvil con dirección directa a <strong>\${t.address}</strong>. Tiempo de viaje estimado: 15 minutos desde el centro histórico. Tarifa aproximada: $4.500 - $6.500 CLP según tráfico actual de Santiago.`;
+                }
+            } else if (t.region === 'Región de Valparaíso') {
+                if (mode === 'metro') {
+                    const station = t.name.includes('Hahnemann') ? 'Estación Viña del Mar' : 'Estación Miramar';
+                    textHtml = `🚇 <strong>Programando tu viaje en Metro Valparaíso (Limache-Puerto):</strong> Toma el tren suburbano y desciende en la estación <strong>\${station}</strong>. Camina por el par de vías hacia <strong>\${t.address}</strong>. Costo estimado: $800 - $1.150 CLP según zona de origen.`;
+                } else if (mode === 'micro') {
+                    textHtml = `🚌 <strong>Programando tu viaje en Microbús Local:</strong> Toma las líneas de micros del Gran Valparaíso (recorridos <strong>101, 106, 602 o 605</strong>) que transitan por el eje Libertad o Álvarez. Desciende en el paradero de Calle Arlegui o 1 Norte. Costo: $450 - $600 CLP.`;
+                } else if (mode === 'colectivo') {
+                    textHtml = `🚗 <strong>Programando tu viaje en Colectivo local:</strong> Toma la línea de colectivos con dirección al centro de Viña del Mar (Avenida Libertad / 15 Norte). Te dejarán directamente en la esquina de <strong>\${t.address}</strong>. Tarifa: $1.000 CLP.`;
+                } else if (mode === 'taxi') {
+                    textHtml = `🚕 <strong>Viaje en Taxi o Aplicación (Uber/Didi):</strong> Solicita un auto directo a <strong>\${t.address}</strong>. Tiempo estimado: 10 minutos desde el terminal de buses o sectores costeros. Tarifa aproximada: $3.500 - $5.000 CLP.`;
+                }
+            } else if (t.region === 'Región de la Araucanía') {
+                if (mode === 'micro') {
+                    textHtml = `🚌 <strong>Programando tu viaje en Micro de Temuco:</strong> Toma la línea de micros local <strong>Línea 1, Línea 7 o Línea 9</strong> que transitan de forma regular por el eje Av. Alemania o San Martín. Desciende frente al Portal Temuco o la altura del 0850. Costo: $450 CLP (estudiantes $150 CLP).`;
+                } else if (mode === 'colectivo') {
+                    textHtml = `🚗 <strong>Programando tu viaje en Colectivo de Temuco:</strong> Toma las líneas de colectivos autorizadas de Temuco (<strong>Línea 11, 14, 15 o 24</strong>) que conectan el centro con el sector Poniente/Avenida Alemania. Te dejarán justo al frente de la consulta en <strong>\${t.address}</strong>. Tarifa: $800 CLP (nocturna $1.000 CLP).`;
+                } else if (mode === 'taxi') {
+                    textHtml = `🚕 <strong>Viaje en Radiotaxi o Aplicación de Temuco:</strong> Solicita tu traslado directo a <strong>\${t.address}</strong>. El trayecto demora aproximadamente 8 minutos desde la Plaza de Armas Aníbal Pinto. Tarifa estimada: $2.500 - $4.000 CLP.`;
+                }
+            }
+
+            explainEl.innerHTML = textHtml;
+        }
+
 
 
         function openRestaurantBookingModal(restaurantName) {
@@ -3248,6 +3502,30 @@
                     <span class="text-[9px] uppercase font-bold text-gray-400 tracking-wider block"><i class="fa-solid fa-id-card-clip mr-1"></i> Personal Clínico y Administrativo</span>
                     <div id="estModalStaff" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
                 </div>
+
+                <!-- Sección de Reseñas Profesionales -->
+                <div class="space-y-2.5 pt-3 border-t border-gray-100">
+                    <span class="text-[9px] uppercase font-bold text-gray-400 tracking-wider block"><i class="fa-solid fa-star mr-1 text-accent animate-pulse"></i> Experiencias y Aval de Profesionales de la Salud</span>
+                    <div id="estModalReviews" class="space-y-2.5 max-h-48 overflow-y-auto pr-1"></div>
+                    
+                    <!-- Formulario de Reseña -->
+                    <div class="bg-gray-50 border border-gray-150 p-4 rounded-2xl space-y-2.5 mt-2">
+                        <span class="text-[9px] uppercase font-bold text-forest tracking-wider block"><i class="fa-solid fa-pen-to-square mr-1"></i> Publicar Aval / Reseña Profesional</span>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <input type="text" id="reviewAuthorName" placeholder="Tu Nombre o Profesión (Ej: Dra. Patricia Valdés)" class="bg-white border border-gray-250 p-2.5 rounded-xl text-[10px] focus:outline-none focus:border-forest font-semibold shadow-sm w-full text-slateDark">
+                            <select id="reviewRating" class="bg-white border border-gray-250 p-2.5 rounded-xl text-[10px] focus:outline-none focus:border-forest font-semibold shadow-sm w-full text-slateDark cursor-pointer">
+                                <option value="5">⭐⭐⭐⭐⭐ Excelente (5/5)</option>
+                                <option value="4">⭐⭐⭐⭐ Muy Bueno (4/5)</option>
+                                <option value="3">⭐⭐⭐ Bueno (3/5)</option>
+                            </select>
+                        </div>
+                        <textarea id="reviewComment" placeholder="Escribe tu recomendación clínica o experiencia profesional con este establecimiento..." class="bg-white border border-gray-250 p-2.5 rounded-xl text-[10px] focus:outline-none focus:border-forest font-semibold shadow-sm w-full h-14 resize-none text-slateDark"></textarea>
+                        <button onclick="submitReviewReal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[9px] transition uppercase tracking-wider flex items-center justify-center space-x-1.5 focus:outline-none shadow-sm">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Enviar Reseña Profesional</span>
+                        </button>
+                    </div>
+                </div>
             </div>
             <!-- Footer del Modal -->
             <div class="p-4 bg-gray-50 border-t border-gray-100 flex justify-end space-x-3">
@@ -3340,9 +3618,9 @@
         </div>
     </div>
 
-    <!-- MODAL DE MAPA INTERACTIVO (GEOLOCALIZACIÓN PROFESIONALES) -->
+        <!-- MODAL DE MAPA INTERACTIVO (GEOLOCALIZACIÓN PROFESIONALES) -->
     <div id="mapModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col h-[80vh] overflow-hidden animate-fadeIn">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col h-[85vh] overflow-hidden animate-fadeIn">
             <!-- Cabecera -->
             <div class="bg-forest text-white p-4 flex items-center justify-between">
                 <div class="flex items-center space-x-2.5">
@@ -3352,6 +3630,34 @@
                         <p class="text-[9px] text-white/80" id="mapModalSub">Calculando viaje en tiempo real...</p>
                     </div>
                 </div>
+                <button onclick="closeMapModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <!-- Selector de Tipo de Transporte -->
+            <div class="bg-gray-50 p-3 border-b border-gray-150 flex flex-wrap items-center justify-center gap-2" id="mapTransportSelectorContainer">
+                <span class="text-[9px] font-bold text-gray-400 uppercase mr-2"><i class="fa-solid fa-person-walking"></i> Medio de Transporte:</span>
+                <button onclick="selectRouteTransport('metro')" id="btn-route-metro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                    <span>🚇 Metro</span>
+                </button>
+                <button onclick="selectRouteTransport('micro')" id="btn-route-micro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                    <span>🚌 Micro</span>
+                </button>
+                <button onclick="selectRouteTransport('colectivo')" id="btn-route-colectivo" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                    <span>🚗 Colectivo</span>
+                </button>
+                <button onclick="selectRouteTransport('taxi')" id="btn-route-taxi" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                    <span>🚕 Taxi / Uber</span>
+                </button>
+            </div>
+            <!-- Indicaciones de Ruta -->
+            <div class="bg-yellow-50 p-3.5 border-b border-gray-100 text-[10px] text-yellow-800 font-semibold leading-relaxed" id="mapModalExplain">
+                Trazando ruta de navegación óptima hacia la consulta...
+            </div>
+            <!-- Contenedor del Mapa -->
+            <div class="flex-grow w-full relative" style="min-height: 400px; height: 100%; border-radius: 1rem; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                <div id="modalMapContainer" style="height: 400px; width: 100%; display: block; position: relative;"></div>
+            </div>
+        </div>
+    </div>
                 <button onclick="closeMapModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <!-- Indicaciones de Ruta -->
