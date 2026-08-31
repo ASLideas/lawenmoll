@@ -1863,19 +1863,25 @@
                         </button>
                     </div>
                 ` : `
-                    <div class="grid grid-cols-3 gap-2 pt-1">
-                        <button onclick="calculateIndependentRoute(${lat}, ${lon}, '${t.nombre}', '${address}')" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0" title="Programar Tu Viaje">
-                            <i class="fa-solid fa-route"></i>
-                            <span>Viaje 🗺️</span>
+                    <div class="space-y-2 pt-1 w-full">
+                        <button onclick="openIndependentBookingModal('${t.nombre}', '${rate}')" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3 rounded-xl text-[10px] shadow-md transition uppercase tracking-wider flex items-center justify-center space-x-1.5 focus:outline-none">
+                            <i class="fa-solid fa-calendar-check animate-pulse"></i>
+                            <span>Agendar Cita Privada 📅</span>
                         </button>
-                        <button onclick="viewEstablishmentDetail('terapeuta', '${t.nombre}')" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0" title="Ver Reseñas y Perfil">
-                            <i class="fa-solid fa-star"></i>
-                            <span>Reseñas 👥</span>
-                        </button>
-                        <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0" title="Cancelar Mi Cita">
-                            <i class="fa-solid fa-ban"></i>
-                            <span>Cancelar ❌</span>
-                        </button>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="calculateIndependentRoute(${lat}, ${lon}, '${t.nombre}', '${address}')" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0 focus:outline-none" title="Programar Tu Viaje">
+                                <i class="fa-solid fa-route"></i>
+                                <span>Viaje 🗺️</span>
+                            </button>
+                            <button onclick="viewEstablishmentDetail('terapeuta', '${t.nombre}')" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0 focus:outline-none" title="Ver Reseñas y Perfil">
+                                <i class="fa-solid fa-star"></i>
+                                <span>Reseñas 👥</span>
+                            </button>
+                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider flex-shrink-0 focus:outline-none" title="Cancelar Mi Cita">
+                                <i class="fa-solid fa-ban"></i>
+                                <span>Cancelar ❌</span>
+                            </button>
+                        </div>
                     </div>
                 `;
 
@@ -1940,9 +1946,19 @@
             const staff = document.getElementById('estModalStaff');
             const planBtn = document.getElementById('estModalPlanBtn');
 
-            // Reset modal contents
+            const gymSection = document.getElementById('estModalGymSection');
+            const gymGrid = document.getElementById('estModalGymGrid');
+            const menuSection = document.getElementById('estModalMenuSection');
+            const menuGrid = document.getElementById('estModalMenuGrid');
+
+            // Reset modal sections and styles
             gallery.innerHTML = '';
             staff.innerHTML = '';
+            if (gymGrid) gymGrid.innerHTML = '';
+            if (menuGrid) menuGrid.innerHTML = '';
+            if (gymSection) gymSection.classList.add('hidden');
+            if (menuSection) menuSection.classList.add('hidden');
+            staff.parentElement.classList.remove('hidden');
 
             let item = null;
             if (type === 'clínica') {
@@ -1953,12 +1969,14 @@
                 item = allGymsData.find(x => x.id === id);
             } else if (type === 'farmacia') {
                 item = allFarmaciasData.find(x => x.id === id);
+            } else if (type === 'terapeuta' || type === 'profesional') {
+                item = allTherapistsData.find(x => x.nombre === id);
             }
 
             if (!item) {
                 // Fallback safe defaults if not found
                 item = {
-                    nombre: 'Socio B2B Activo LAWENMOLL',
+                    nombre: id || 'Socio B2B Activo LAWENMOLL',
                     direccion: 'Dirección Registrada de la Red',
                     descripcion: 'Establecimiento afiliado de alta calidad ciberseguro.',
                     foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150',
@@ -1993,12 +2011,12 @@
                     { name: 'Dra. Eliana Ruiz', role: 'Médico General e Integrativa', photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=150&auto=format&fit=crop' },
                     { name: 'Sra. Marta Colipí', role: 'Asesora Herbolaria Mapuche', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop' }
                 ];
-            } else if (item.nombre.includes('Meli Rewe')) {
+            } else if (item.nombre.includes('Meli Rewe') || item.id === 10) {
                 employees = [
                     { name: 'Machi Juana Colipí', role: 'Asesora de Sanación Tradicional', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop' },
                     { name: 'Klgo. Lautaro Paine', role: 'Director de Fisioterapia Nativa', photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=150&auto=format&fit=crop' }
                 ];
-            } else if (item.nombre.includes('Savia')) {
+            } else if (item.nombre.includes('Savia') || item.id === 11) {
                 employees = [
                     { name: 'Dra. Camila Silva', role: 'Directora Médica de Bienestar', photo: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=150&auto=format&fit=crop' },
                     { name: 'Prof. Eduardo Fuentes', role: 'Instructor Postural Terapéutico', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop' }
@@ -2018,8 +2036,11 @@
                     { name: 'Machi Juana Makewe', role: 'Sanadora Ancestral y Sabia Familiar', photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=150&auto=format&fit=crop' },
                     { name: 'Lautaro Colipí', role: 'Recolector Sustentable Araucanía', photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop' }
                 ];
+            } else if (type === 'terapeuta' || type === 'profesional') {
+                employees = [
+                    { name: item.nombre, role: item.especialidad, photo: item.foto_profesional || 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop' }
+                ];
             } else {
-                // Default generic employees for any newly created establishment
                 employees = [
                     { name: 'Felipe Mendoza', role: 'Director del Establecimiento', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop' },
                     { name: 'Sofía Valenzuela', role: 'Coordinadora de Atención B2B', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop' }
@@ -2041,11 +2062,128 @@
                 staff.appendChild(card);
             });
 
+            // GIMNASIOS: Clases Dirigidas, Horarios y Valores
+            if (type === 'gym') {
+                staff.parentElement.classList.add('hidden'); // Hide staff for gyms to make space
+                if (gymSection && gymGrid) {
+                    gymSection.classList.remove('hidden');
+                    
+                    let classes = [];
+                    if (item.nombre.includes('SportLife')) {
+                        classes = [
+                            { name: 'Yoga Kundalini Terapéutico 🧘', schedule: 'Lun y Mié: 08:30 - 09:30 hrs', price: '$35.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' },
+                            { name: 'Pilates Reformer Clínico 🤸', schedule: 'Mar y Jue: 17:00 - 18:00 hrs', price: '$45.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
+                            { name: 'Entrenamiento de Fuerza Adaptada 🏋️', schedule: 'Mar y Jue: 10:00 - 11:00 hrs', price: '$40.000 / mes', photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150' }
+                        ];
+                    } else if (item.nombre.includes('Kundalini')) {
+                        classes = [
+                            { name: 'Hatha Yoga para Columna 🧘', schedule: 'Lun y Mié: 09:00 - 10:00 hrs', price: '$32.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' },
+                            { name: 'Kundalini & Control de Estrés 🍃', schedule: 'Mar y Jue: 18:30 - 19:30 hrs', price: '$38.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
+                            { name: 'Meditación Cuencos Tibetanos 🥣', schedule: 'Viernes: 19:00 - 20:00 hrs', price: '$25.000 / mes', photo: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=150' }
+                        ];
+                    } else if (item.nombre.includes('Vitale')) {
+                        classes = [
+                            { name: 'Pilates Reformer Postural 🤸', schedule: 'Lun, Mié y Vie: 11:00 - 12:00 hrs', price: '$55.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
+                            { name: 'Kinesiología de Columna (Lumbago) 🩺', schedule: 'Mar y Jue: 15:00 - 16:00 hrs', price: '$48.000 / mes', photo: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=150' },
+                            { name: 'Fuerza Funcional de Bajo Impacto 💪', schedule: 'Lun y Mié: 18:00 - 19:00 hrs', price: '$40.000 / mes', photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150' }
+                        ];
+                    } else {
+                        classes = [
+                            { name: 'Clase Dirigida General 🧘', schedule: 'Lunes a Viernes: Consulta Bloques', price: '$30.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' }
+                        ];
+                    }
+
+                    classes.forEach(cls => {
+                        const card = document.createElement('div');
+                        card.className = "bg-white p-3 rounded-2xl border border-gray-150 shadow-sm flex flex-col justify-between text-left space-y-2";
+                        card.innerHTML = `
+                            <div class="flex items-center space-x-3">
+                                <img src="${cls.photo}" class="w-11 h-11 rounded-xl object-cover border border-gray-100 flex-shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-black text-slateDark leading-tight">${cls.name}</h4>
+                                    <p class="text-[9px] text-gray-500 font-semibold font-sans mt-0.5">${cls.schedule}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-1 border-t border-dashed border-gray-100">
+                                <span class="text-xs font-black text-forest">${cls.price}</span>
+                                <button onclick="closeEstablishmentDetailModal(); setTimeout(() => { openRestaurantBookingModal('${item.nombre}', 'gym', '${cls.name.replace(/'/g, "\'")}', '${cls.price}'); }, 150);" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
+                                    Agendar Clase
+                                </button>
+                            </div>
+                        `;
+                        gymGrid.appendChild(card);
+                    });
+                }
+            }
+
+            // RESTAURANTES: Menú y Platos con botón de Reserva Directa al pinchar
+            if (type === 'restaurante') {
+                staff.parentElement.classList.add('hidden'); // Hide staff for restaurants to make space
+                if (menuSection && menuGrid) {
+                    menuSection.classList.remove('hidden');
+
+                    let dishes = [];
+                    if (item.nombre.includes('Huerto')) {
+                        dishes = [
+                            { name: 'Bowl Antiinflamatorio de Cúrcuma 🥣', desc: 'Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y tahini.', price: '$8.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
+                            { name: 'Crema de Hinojo Terapéutica 🍵', desc: 'Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal.', price: '$5.400', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
+                            { name: 'Tostadas de Palta Ancestral 🥑', desc: 'Pan de masa madre integral, palta madura machacada, sésamo negro y brotes.', price: '$5.900', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
+                            { name: 'Jugo Verde Lawen 🍹', desc: 'Extracción en frío de espinaca, apio, pepino fresco, manzana verde y menta.', price: '$3.800', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
+                        ];
+                    } else if (item.nombre.includes('Raíces')) {
+                        dishes = [
+                            { name: 'Guiso de Mote y Changles 🥣', desc: 'Trigo mote de la zona, changles recolectados, sofrito criollo herbario y cilantro.', price: '$7.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
+                            { name: 'Sopa Purificadora de Piñón 🍵', desc: 'Piñones nativos molidos, zapallo asado, merkén ancestral, caldo de hierbas.', price: '$6.200', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
+                            { name: 'Ensalada Silvestre de Maqui 🥗', desc: 'Berros de agua, hojas de mostaza silvestre, aderezo concentrado de maqui y nueces.', price: '$5.800', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
+                            { name: 'Té de Canelo y Miel de Ulmo 🍵', desc: 'Corteza de canelo tierno infusionada, endulzado con miel de ulmo pura.', price: '$2.500', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
+                        ];
+                    } else if (item.nombre.includes('Verde Amor')) {
+                        dishes = [
+                            { name: 'Bowl de Acaí y Frutos Nativos 🥣', desc: 'Pulpa de acaí batida, granola artesanal, plátano, arándanos y semillas de chía.', price: '$6.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
+                            { name: 'Tarta de Frambuesas sin Azúcar 🍰', desc: 'Base de almendras y dátiles, frambuesas de Viña endulzadas con estevia de hoja.', price: '$4.500', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
+                            { name: 'Tostadas Hummus de Betarraga 🥑', desc: 'Pan integral con masa madre, hummus de betarraga asada, brotes, sésamo.', price: '$5.200', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
+                            { name: 'Smoothie Espirulina & Piña 🍹', desc: 'Piña natural, espirulina azul orgánica, leche de almendras prensada en local.', price: '$3.900', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
+                        ];
+                    } else {
+                        dishes = [
+                            { name: 'Plato Consciente del Día 🥑', desc: 'Ingredientes 100% orgánicos, libres de agroquímicos, cosechados localmente.', price: '$6.500', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' }
+                        ];
+                    }
+
+                    dishes.forEach(dish => {
+                        const card = document.createElement('div');
+                        card.className = "bg-white p-3 rounded-2xl border border-gray-150 shadow-sm flex flex-col justify-between text-left space-y-2 cursor-pointer hover:border-forest/40 transition-all duration-300";
+                        card.onclick = function(e) {
+                            // Only trigger if they didn't click the reservation button itself
+                            if (e.target.tagName !== 'BUTTON' && e.target.parentElement.tagName !== 'BUTTON') {
+                                viewDishDetail('dishModal', dish.name, dish.desc, '🌟 Aporte herbolario de nutrición consciente.', dish.photo);
+                            }
+                        };
+                        card.innerHTML = `
+                            <div class="flex items-center space-x-3">
+                                <img src="${dish.photo}" class="w-11 h-11 rounded-xl object-cover border border-gray-100 flex-shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-black text-slateDark leading-tight">${dish.name}</h4>
+                                    <p class="text-[9px] text-gray-500 font-semibold font-sans mt-0.5 leading-snug truncate max-w-[170px]">${dish.desc}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-1 border-t border-dashed border-gray-100">
+                                <span class="text-xs font-black text-forest">${dish.price}</span>
+                                <button onclick="closeEstablishmentDetailModal(); setTimeout(() => { openRestaurantBookingModal('${item.nombre}', 'restaurant'); }, 150);" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
+                                    Reservar Mesa
+                                </button>
+                            </div>
+                        `;
+                        menuGrid.appendChild(card);
+                    });
+                }
+            }
+
             // Update Map / Route button click handler
             planBtn.onclick = function() {
                 closeEstablishmentDetailModal();
                 setTimeout(() => {
-                    calculateIndependentRoute(item.latitud || -33.4250, item.longitud || -70.6120, item.nombre, item.direccion || address);
+                    calculateIndependentRoute(item.latitud || -33.4250, item.longitud || -70.6120, item.nombre, item.direccion || 'Providencia, Santiago');
                 }, 150);
             };
 
@@ -2357,7 +2495,101 @@
 
 
 
-        function openRestaurantBookingModal(restaurantName) {
+        
+        let activeIndependentTherapistName = '';
+        let activeIndependentTherapistRate = '';
+
+        function openIndependentBookingModal(therapistName, rate) {
+            activeIndependentTherapistName = therapistName;
+            activeIndependentTherapistRate = rate;
+            document.getElementById('indepBookingTitle').innerText = therapistName;
+            document.getElementById('indepBookingPrice').innerText = rate + ' / Sesión';
+            document.getElementById('indepPatientName').value = '';
+            document.getElementById('indepPatientPhone').value = '+569';
+            document.getElementById('indepPatientEmail').value = '';
+            document.getElementById('indepAgreeTerms').checked = false;
+            document.getElementById('independentBookingModal').classList.remove('hidden');
+        }
+
+        function closeIndependentBookingModal() {
+            document.getElementById('independentBookingModal').classList.add('hidden');
+        }
+
+        async function bookIndependentAppointmentReal() {
+            const nameVal = document.getElementById('indepPatientName').value.trim();
+            const phoneVal = document.getElementById('indepPatientPhone').value.trim();
+            const emailVal = document.getElementById('indepPatientEmail').value.trim();
+            const dateVal = document.getElementById('indepBookingDate').value;
+            const timeVal = document.getElementById('indepBookingTime').value;
+            const agreeVal = document.getElementById('indepAgreeTerms').checked;
+
+            if (!agreeVal) {
+                alert("⚠️ Debes consentir el tratamiento seguro de tus datos antes de continuar.");
+                return;
+            }
+
+            if (!nameVal || !dateVal || phoneVal === "+569" || phoneVal.length < 8) {
+                alert("⚠️ Por favor completa tu Nombre, selecciona la fecha y escribe un teléfono celular de contacto válido.");
+                return;
+            }
+
+            const bookingCode = `CLINIC-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            try {
+                if (supabaseKey !== '') {
+                    // Obtener id del terapeuta de forma segura (select primero!)
+                    const { data: therapistData } = await _supabase
+                        .from('terapeutas')
+                        .select('id')
+                        .eq('nombre', activeIndependentTherapistName)
+                        .maybeSingle();
+
+                    const { error } = await _supabase
+                        .from('citas')
+                        .insert([
+                            {
+                                 terapeuta_id: therapistData ? therapistData.id : null,
+                                 fecha_cita: dateVal,
+                                 hora_cita: timeVal,
+                                 lugar_cita: 'Consulta Privada de ' + activeIndependentTherapistName,
+                                 modalidad_cita: 'Presencial / Domicilio',
+                                 estado_cita: 'Agendada',
+                                 codigo_reserva: bookingCode,
+                                 telefono_contacto: phoneVal,
+                                 nombre_paciente: nameVal,
+                                 consentimiento_datos: true
+                            }
+                        ]);
+
+                    if (error) throw error;
+                }
+            } catch (err) {
+                console.error("❌ Error al guardar cita privada en Supabase:", err.message);
+            }
+
+            alert(`🎉 ¡CITA PRIVADA AGENDADA CON ÉXITO!\n\n` +
+                  `• Profesional: ${activeIndependentTherapistName}\n` +
+                  `• Paciente: ${nameVal}\n` +
+                  `• Fecha: ${dateVal}\n` +
+                  `• Hora: ${timeVal} hrs\n` +
+                  `• Código de Confirmación: ${bookingCode}\n\n` +
+                  `⏰ NOTIFICACIÓN DE WHATSAPP GENERADA: Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para confirmar tu cita con el especialista de forma rápida.`);
+
+            // Open WhatsApp with a beautiful message
+            const message = `*🌿 AGENDAMIENTO PRIVADO - LAWENMOLL*\n\n` +
+                            `Hola, he agendado una cita privada de forma exitosa:\n` +
+                            `• *Especialista:* ${activeIndependentTherapistName}\n` +
+                            `• *Paciente:* ${nameVal}\n` +
+                            `• *Fecha/Hora:* ${dateVal} - ${timeVal} hrs\n` +
+                            `• *Código de Reserva:* ${bookingCode}\n` +
+                            `• *Tarifa:* ${activeIndependentTherapistRate} / sesión\n\n` +
+                            `_Agendamiento resguardado bajo la Ley Marco de Ciberseguridad N° 21.663._`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${phoneVal}&text=${encodeURIComponent(message)}`, '_blank');
+            closeIndependentBookingModal();
+        }
+
+function openRestaurantBookingModal(restaurantName) {
             document.getElementById('bookingEstName').innerText = restaurantName;
             document.getElementById('restaurantBookingModal').classList.remove('hidden');
         }
@@ -3503,6 +3735,20 @@
                     <div id="estModalStaff" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
                 </div>
 
+                <!-- Sección Extra para Gimnasio (Clases, Horarios y Valores) v24 -->
+                <div id="estModalGymSection" class="space-y-2.5 pt-3 border-t border-gray-100 hidden">
+                    <span class="text-[9px] uppercase font-bold text-gray-400 tracking-wider block"><i class="fa-solid fa-dumbbell mr-1 text-forest animate-bounce"></i> Clases Dirigidas, Horarios y Valores</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="estModalGymGrid"></div>
+                </div>
+
+                <!-- Sección Extra para Restaurantes (Menú y Platos) v24 -->
+                <div id="estModalMenuSection" class="space-y-2.5 pt-3 border-t border-gray-100 hidden">
+                    <span class="text-[9px] uppercase font-bold text-gray-400 tracking-wider block"><i class="fa-solid fa-utensils mr-1 text-accent animate-pulse"></i> Menú Terapéutico y Platos Recomendados</span>
+                    <p class="text-[10px] text-gray-400 font-semibold mb-2">Haz clic en un plato para conocer sus ingredientes y reservar una mesa directamente:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="estModalMenuGrid"></div>
+                </div>
+
+
                 <!-- Sección de Reseñas Profesionales -->
                 <div class="space-y-2.5 pt-3 border-t border-gray-100">
                     <span class="text-[9px] uppercase font-bold text-gray-400 tracking-wider block"><i class="fa-solid fa-star mr-1 text-accent animate-pulse"></i> Experiencias y Aval de Profesionales de la Salud</span>
@@ -3540,135 +3786,4 @@
 
 
     <!-- MODAL DE RESERVA DE MESAS REAL v21 -->
-    <div id="restaurantBookingModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-fadeIn">
-            <!-- Header -->
-            <div class="bg-forest text-white p-5 flex items-center justify-between">
-                <div class="flex items-center space-x-2.5">
-                    <i class="fa-solid fa-calendar-days text-xl text-accent"></i>
-                    <div>
-                        <h3 class="font-extrabold text-sm uppercase tracking-wider" id="resBookingModalTitle">Reservar Mesa / Hora</h3>
-                        <p class="text-[9px] text-white/80" id="resBookingModalSub">Reserva de mesa con descuento exclusivo</p>
-                    </div>
-                </div>
-                <button onclick="closeRestaurantBookingModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <!-- Cuerpo -->
-            <div class="p-6 space-y-4 text-left font-sans text-xs text-gray-600 leading-relaxed">
-                <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/10 flex justify-between items-center">
-                    <div>
-                        <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Establecimiento Seleccionado</span>
-                        <h5 id="bookingEstName" class="text-xs font-extrabold text-slateDark">Restaurante "Huerto Orgánico"</h5>
-                        <span class="text-[8px] bg-accent/20 text-accent px-2 py-0.5 rounded-full font-bold mt-1 inline-block">Socio de Nutrición Consciente</span>
-                    </div>
-                    <div class="text-right border-l border-gray-200 pl-4">
-                        <span class="text-[9px] text-gray-400 font-bold uppercase">Beneficio Activo</span>
-                        <div class="text-xs font-black text-forest mt-0.5">15% DCTO</div>
-                        <span class="text-[8px] text-gray-400 font-bold">Presentando tu Receta</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha de Reserva</label>
-                        <input type="date" id="resModalDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Hora de Almuerzo/Cena</label>
-                        <select id="resModalTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                            <option value="12:30">12:30 hrs (Almuerzo)</option>
-                            <option value="13:30">13:30 hrs (Almuerzo)</option>
-                            <option value="14:30">14:30 hrs (Almuerzo)</option>
-                            <option value="19:30">19:30 hrs (Cena)</option>
-                            <option value="20:30">20:30 hrs (Cena)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Cantidad de Personas</label>
-                        <select id="resModalGuests" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                            <option value="1">1 Persona</option>
-                            <option value="2" selected>2 Personas</option>
-                            <option value="4">4 Personas</option>
-                            <option value="6">6 Personas</option>
-                            <option value="8">8 Personas</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Celular de Contacto</label>
-                        <input type="text" id="resModalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                    </div>
-                </div>
-
-                <!-- Consentimiento de Ciberseguridad -->
-                <div class="flex items-start space-x-2 bg-gray-50 p-3 rounded-2xl border border-gray-150 text-left">
-                    <input type="checkbox" id="resModalAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
-                    <label for="resModalAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
-                        Consiento la transmisión segura de mis datos de reserva de mesa bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
-                    </label>
-                </div>
-            </div>
-            <!-- Footer -->
-            <div class="p-4 bg-gray-50 border-t border-gray-100 flex justify-end space-x-3">
-                <button onclick="closeRestaurantBookingModal()" class="bg-gray-200 hover:bg-gray-300 text-slateDark font-bold py-2.5 px-4 rounded-xl text-[10px] uppercase transition focus:outline-none">Cerrar</button>
-                <button onclick="bookRestaurantTableReal()" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 px-4 rounded-xl text-[10px] uppercase shadow-md transition flex items-center space-x-1.5 focus:outline-none">
-                    <i class="fa-solid fa-calendar-check"></i>
-                    <span>Confirmar Reserva de Mesa 📅</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-        <!-- MODAL DE MAPA INTERACTIVO (GEOLOCALIZACIÓN PROFESIONALES) -->
-    <div id="mapModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col h-[85vh] overflow-hidden animate-fadeIn">
-            <!-- Cabecera -->
-            <div class="bg-forest text-white p-4 flex items-center justify-between">
-                <div class="flex items-center space-x-2.5">
-                    <i class="fa-solid fa-map-location-dot text-lg"></i>
-                    <div>
-                        <h3 class="font-extrabold text-sm uppercase tracking-wider" id="mapModalTitle">Ruta de Navegación</h3>
-                        <p class="text-[9px] text-white/80" id="mapModalSub">Calculando viaje en tiempo real...</p>
-                    </div>
-                </div>
-                <button onclick="closeMapModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <!-- Selector de Tipo de Transporte -->
-            <div class="bg-gray-50 p-3 border-b border-gray-150 flex flex-wrap items-center justify-center gap-2" id="mapTransportSelectorContainer">
-                <span class="text-[9px] font-bold text-gray-400 uppercase mr-2"><i class="fa-solid fa-person-walking"></i> Medio de Transporte:</span>
-                <button onclick="selectRouteTransport('metro')" id="btn-route-metro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚇 Metro</span>
-                </button>
-                <button onclick="selectRouteTransport('micro')" id="btn-route-micro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚌 Micro</span>
-                </button>
-                <button onclick="selectRouteTransport('colectivo')" id="btn-route-colectivo" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚗 Colectivo</span>
-                </button>
-                <button onclick="selectRouteTransport('taxi')" id="btn-route-taxi" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚕 Taxi / Uber</span>
-                </button>
-            </div>
-            <!-- Indicaciones de Ruta -->
-            <div class="bg-yellow-50 p-3.5 border-b border-gray-100 text-[10px] text-yellow-800 font-semibold leading-relaxed" id="mapModalExplain">
-                Trazando ruta de navegación óptima hacia la consulta...
-            </div>
-            <!-- Contenedor del Mapa -->
-            <div class="flex-grow w-full relative" style="min-height: 400px; height: 100%; border-radius: 1rem; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                <div id="modalMapContainer" style="height: 400px; width: 100%; display: block; position: relative;"></div>
-            </div>
-        </div>
-    </div>
-                <button onclick="closeMapModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <!-- Indicaciones de Ruta -->
-            <div class="bg-yellow-50 p-3.5 border-b border-gray-100 text-[10px] text-yellow-800 font-semibold leading-relaxed" id="mapModalExplain">
-                Trazando ruta de navegación óptima hacia la consulta...
-            </div>
-            <!-- Contenedor del Mapa -->
-            <div class="flex-grow w-full relative" style="min-height: 450px; height: 100%; border-radius: 1rem; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem;">
-                <div id="modalMapContainer" style="height: 450px; width: 100%; display: block; position: relative;"></div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+    
