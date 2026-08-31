@@ -328,7 +328,7 @@
                     <p class="text-gray-500 text-xs mb-6 font-semibold">Necesitamos tus datos para calcular tus rangos y plan metabólico personalizado.</p>
 
                     <div class="space-y-4">
-                        <!-- Nombre y Apellido -->
+                        <!-- Nombre, Apellido y Correo -->
                         <div class="grid grid-cols-2 gap-3 mb-4 text-left">
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre</label>
@@ -338,6 +338,10 @@
                                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Apellido</label>
                                 <input type="text" id="inputLastName" required placeholder="Ej: Mendoza" class="w-full bg-white border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                             </div>
+                        </div>
+                        <div class="mb-4 text-left">
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Electrónico (Para envío de Boleta y Ficha SOAP) 📧</label>
+                            <input type="email" id="inputEmail" required placeholder="Ej: maria.mendoza@correo.cl" class="w-full bg-white border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                         </div>
 
                         <!-- Género y Etapa de Vida -->
@@ -984,7 +988,7 @@
                     </div>
 
                     <p class="text-[10px] text-gray-400 max-w-xs mx-auto mb-4">
-                        Los detalles del agendamiento y la boleta se enviaron a tu correo. El especialista completará la ficha clínica SOAP de manera privada durante tu atención.
+                        Los detalles del agendamiento y la boleta se enviaron de forma segura a tu correo <strong class="text-forest font-bold" id="ticketEmail">tu-correo@ejemplo.cl</strong>. El especialista completará tu ficha clínica SOAP de manera privada en tu sesión.
                     </p>
                     
                     <!-- BOTÓN DE VOLVER AL INICIO DEL TEST (REINICIAR) -->
@@ -1204,12 +1208,18 @@
             if (currentStep === 2 && step === 3) {
                 const firstNameVal = document.getElementById('inputFirstName') ? document.getElementById('inputFirstName').value.trim() : '';
                 const lastNameVal = document.getElementById('inputLastName') ? document.getElementById('inputLastName').value.trim() : '';
-                if (!firstNameVal || !lastNameVal) {
-                    alert("⚠️ Por favor, ingresa tu Nombre y Apellido para continuar y personalizar tu plan de bienestar.");
+                const emailVal = document.getElementById('inputEmail') ? document.getElementById('inputEmail').value.trim() : '';
+                if (!firstNameVal || !lastNameVal || !emailVal) {
+                    alert("⚠️ Por favor, ingresa tu Nombre, Apellido y Correo Electrónico para continuar y personalizar tu plan de bienestar.");
+                    return;
+                }
+                if (!emailVal.includes('@') || !emailVal.includes('.')) {
+                    alert("⚠️ Por favor, ingresa un Correo Electrónico válido para recibir tu boleta y ficha SOAP.");
                     return;
                 }
                 selections.firstName = firstNameVal;
                 selections.lastName = lastNameVal;
+                selections.email = emailVal;
             }
 
             document.querySelector(`#step${currentStep}`).classList.remove('active');
@@ -1478,6 +1488,11 @@
             document.getElementById('ticketMode').innerText = selections.mode === 'online' ? '💻 Consulta Online' : '🏢 Presencial';
             document.getElementById('ticketSpecialist').innerText = selections.selectedSpecialist.name;
             document.getElementById('ticketAddress').innerText = selections.mode === 'online' ? 'Enlace de sala virtual enviado al correo' : selections.selectedSpecialist.address;
+            
+            const emailContainer = document.getElementById('ticketEmail');
+            if (emailContainer && selections.email) {
+                emailContainer.innerText = selections.email;
+            }
             
             // Set specialist photo on the final ticket
             const ticketPhoto = document.getElementById('ticketSpecialistPhoto');
