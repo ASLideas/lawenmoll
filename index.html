@@ -1646,7 +1646,10 @@
                 jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
             };
 
-            html2pdf().from(element).set(opt).save();
+                        document.body.appendChild(element);
+            html2pdf().from(element).set(opt).save().then(() => {
+                document.body.removeChild(element);
+            });
         }
 
         async function saveTestData() {
