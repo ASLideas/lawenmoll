@@ -2616,10 +2616,23 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const benefitSubEl = document.querySelector('#restaurantBookingModal .text-right span:last-child');
             
             // Default inputs reset
+            if (document.getElementById('resModalName')) document.getElementById('resModalName').value = '';
             document.getElementById('resModalDate').value = '';
             document.getElementById('resModalTime').value = '12:30';
             document.getElementById('resModalPhone').value = '+569';
             document.getElementById('resModalAgreeTerms').checked = false;
+
+            // Dynamically load establishment logo inside reservation modal
+            let logoSrc = 'lawenmoll_logo.jpg';
+            if (type === 'gym') {
+                const gym = allGymsData.find(g => g.nombre === targetEstName);
+                if (gym && gym.foto_local_1) logoSrc = gym.foto_local_1;
+            } else {
+                const rest = allRestaurantsData.find(r => r.nombre === targetEstName);
+                if (rest && rest.foto_local_1) logoSrc = rest.foto_local_1;
+            }
+            const logoEl = document.getElementById('bookingEstLogo');
+            if (logoEl) logoEl.src = logoSrc;
 
             if (type === 'gym') {
                 if (titleEl) titleEl.innerText = "Inscripción de Clase Dirigida 🏋️";
@@ -2650,12 +2663,18 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         }
 
         async function bookRestaurantTableReal() {
+            const nameVal = document.getElementById('resModalName').value.trim();
             const dateVal = document.getElementById('resModalDate').value;
             const timeVal = document.getElementById('resModalTime').value;
             const guestsVal = document.getElementById('resModalGuests').value;
             const phoneVal = document.getElementById('resModalPhone').value;
             const agreeVal = document.getElementById('resModalAgreeTerms').checked;
             const estNameText = document.getElementById('bookingEstName').innerText;
+
+            if (!nameVal) {
+                alert("⚠️ Por favor ingresa tu Nombre Completo para proceder con la reserva.");
+                return;
+            }
 
             if (!agreeVal) {
                 alert("⚠️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
@@ -2685,6 +2704,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                                 estado_cita: 'Agendada',
                                 codigo_reserva: bookingCode,
                                 telefono_contacto: phoneVal,
+                                nombre_paciente: nameVal,
                                 consentimiento_datos: true
                             }
                         ]);
@@ -2698,21 +2718,48 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (isGym) {
                 alert(`🎉 ¡CLASE DIRIGIDA AGENDADA CON ÉXITO!\n\n` +
                       `• Gimnasio: ${estNameText.split('\n')[0]}\n` +
+                      `• Clase: ${estNameText.split('Clase: ')[1] || 'Clase Dirigida'}\n` +
+                      `• Alumno: ${nameVal}\n` +
                       `• Fecha: ${dateVal}\n` +
                       `• Hora: ${timeVal} hrs\n` +
-                      `• Alumno: Cita reservada para ${guestsVal} persona(s)\n` +
-                      `• Celular: ${phoneVal}\n` +
                       `• Código Único de Registro: ${bookingCode}\n\n` +
-                      `¡Tu matrícula costo cero ha sido activada de forma automática! Te esperamos.`);
+                      `⏰ NOTIFICACIÓN DE WHATSAPP GENERADA: Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para confirmar tu inscripción con el gimnasio de forma rápida.`);
             } else {
                 alert(`🎉 ¡MESA RESERVADA CON ÉXITO EN ${estNameText.split('\n')[0].toUpperCase()}!\n\n` +
+                      `• Establecimiento: ${estNameText.split('\n')[0]}\n` +
+                      `• Cliente: ${nameVal}\n` +
                       `• Fecha: ${dateVal}\n` +
                       `• Hora: ${timeVal} hrs\n` +
                       `• Invitados: ${guestsVal} personas\n` +
-                      `• Celular: ${phoneVal}\n` +
                       `• Código Único de Reserva: ${bookingCode}\n\n` +
-                      `¡Recuerda que tienes un 15% de descuento exclusivo presentando este ticket por ser usuario de LAWENMOLL!`);
+                      `⏰ NOTIFICACIÓN DE WHATSAPP GENERADA: Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para confirmar tu mesa con el restaurante de forma rápida.`);
             }
+
+            // WhatsApp confirmation redirect
+            let message = '';
+            if (isGym) {
+                message = `*🏋️ INSCRIPCIÓN DE CLASE - LAWENMOLL*\n\n` +
+                          `Hola, quiero confirmar mi inscripción a la clase dirigida:\n` +
+                          `• *Gimnasio:* ${estNameText.split('\n')[0]}\n` +
+                          `• *Clase:* ${estNameText.split('Clase: ')[1] || 'Clase Dirigida'}\n` +
+                          `• *Alumno:* ${nameVal}\n` +
+                          `• *Fecha/Hora:* ${dateVal} - ${timeVal} hrs\n` +
+                          `• *Código de Registro:* ${bookingCode}\n` +
+                          `• *Teléfono:* ${phoneVal}\n\n` +
+                          `_Inscripción gestionada bajo el convenio SaaS B2B de LAWENMOLL._`;
+            } else {
+                message = `*🥑 RESERVA DE MESA - LAWENMOLL*\n\n` +
+                          `Hola, he realizado una reserva de mesa de nutrición consciente:\n` +
+                          `• *Establecimiento:* ${estNameText.split('\n')[0]}\n` +
+                          `• *Cliente:* ${nameVal}\n` +
+                          `• *Fecha/Hora:* ${dateVal} - ${timeVal} hrs\n` +
+                          `• *Invitados:* ${guestsVal} personas\n` +
+                          `• *Código de Reserva:* ${bookingCode}\n` +
+                          `• *Teléfono:* ${phoneVal}\n\n` +
+                          `_Reserva con 15% DCTO exclusivo por convenio SaaS B2B de LAWENMOLL._`;
+            }
+
+            window.open(`https://api.whatsapp.com/send?phone=${phoneVal}&text=${encodeURIComponent(message)}`, '_blank');
                   
             closeRestaurantBookingModal();
         }
@@ -3862,10 +3909,15 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             <!-- Cuerpo -->
             <div class="p-6 space-y-4 text-left font-sans text-xs text-gray-600 leading-relaxed">
                 <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/10 flex justify-between items-center">
-                    <div>
-                        <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Establecimiento Seleccionado</span>
-                        <h5 id="bookingEstName" class="text-xs font-extrabold text-slateDark">Restaurante "Huerto Orgánico"</h5>
-                        <span class="text-[8px] bg-accent/20 text-accent px-2 py-0.5 rounded-full font-bold mt-1 inline-block">Socio de Nutrición Consciente</span>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 bg-white">
+                            <img id="bookingEstLogo" src="lawenmoll_logo.jpg" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150';">
+                        </div>
+                        <div>
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Establecimiento Seleccionado</span>
+                            <h5 id="bookingEstName" class="text-xs font-extrabold text-slateDark">Restaurante "Huerto Orgánico"</h5>
+                            <span id="bookingEstBadge" class="text-[8px] bg-accent/20 text-accent px-2 py-0.5 rounded-full font-bold mt-1 inline-block">Socio de Nutrición Consciente</span>
+                        </div>
                     </div>
                     <div class="text-right border-l border-gray-200 pl-4">
                         <span class="text-[9px] text-gray-400 font-bold uppercase">Beneficio Activo</span>
@@ -3874,34 +3926,42 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="space-y-3">
                     <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha de Reserva</label>
-                        <input type="date" id="resModalDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre de Quién Reserva</label>
+                        <input type="text" id="resModalName" placeholder="Ej: María Silva" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                     </div>
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Hora de Almuerzo/Cena</label>
-                        <select id="resModalTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                            <option value="12:30">12:30 hrs (Almuerzo)</option>
-                            <option value="13:30">13:30 hrs (Almuerzo)</option>
-                            <option value="14:30">14:30 hrs (Almuerzo)</option>
-                            <option value="19:30">19:30 hrs (Cena)</option>
-                            <option value="20:30">20:30 hrs (Cena)</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha de Reserva</label>
+                            <input type="date" id="resModalDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Hora de Almuerzo/Cena</label>
+                            <select id="resModalTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                                <option value="12:30">12:30 hrs (Almuerzo)</option>
+                                <option value="13:30">13:30 hrs (Almuerzo)</option>
+                                <option value="14:30">14:30 hrs (Almuerzo)</option>
+                                <option value="19:30">19:30 hrs (Cena)</option>
+                                <option value="20:30">20:30 hrs (Cena)</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Cantidad de Personas</label>
-                        <select id="resModalGuests" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                            <option value="1">1 Persona</option>
-                            <option value="2" selected>2 Personas</option>
-                            <option value="4">4 Personas</option>
-                            <option value="6">6 Personas</option>
-                            <option value="8">8 Personas</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Celular de Contacto</label>
-                        <input type="text" id="resModalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Cantidad de Personas</label>
+                            <select id="resModalGuests" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                                <option value="1">1 Persona</option>
+                                <option value="2" selected>2 Personas</option>
+                                <option value="4">4 Personas</option>
+                                <option value="6">6 Personas</option>
+                                <option value="8">8 Personas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Celular de Contacto</label>
+                            <input type="text" id="resModalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                        </div>
                     </div>
                 </div>
 

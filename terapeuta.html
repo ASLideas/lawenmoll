@@ -959,6 +959,10 @@
             element.className = "p-10 bg-white font-sans text-xs text-gray-700 leading-relaxed";
             element.style.color = "#2F3E46";
             element.style.width = "750px";
+            element.style.position = 'absolute';
+            element.style.left = '-9999px';
+            element.style.top = '0';
+            element.style.display = 'block';
 
             let contentHtml = `
                 <div style="border: 2px solid #52796F; border-radius: 24px; padding: 35px; background-color: #FAF8F5; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);">
@@ -1054,8 +1058,9 @@
                 margin:       12,
                 filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+                html2canvas:  { scale: 2.5, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' },
+                pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
             };
 
                         document.body.appendChild(element);
