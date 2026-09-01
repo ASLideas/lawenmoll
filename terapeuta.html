@@ -489,11 +489,7 @@
                             <span>Descargar Epicrisis (PDF) 📄</span>
                         </button>
                         
-                        <!-- BOTÓN DE DESCARGA WORD DE LA FICHA -->
-                        <button onclick="downloadSOAPWord()" class="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
-                            <i class="fa-solid fa-file-word"></i>
-                            <span>Descargar Ficha Word 📝</span>
-                        </button>
+
                         
                         <!-- BOTÓN DE GUARDADO SEGURO -->
                         <button onclick="saveClinicalRecord()" class="w-full sm:w-auto bg-forest hover:bg-forest/90 text-white font-bold py-3 px-5 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
@@ -964,10 +960,12 @@
                 <div style="border: 2px solid #52796F; border-radius: 24px; padding: 35px; background-color: #FAF8F5; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);">
                     <!-- Header Oficial Epicrisis -->
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px double #52796F; padding-bottom: 18px; margin-bottom: 25px;">
-                        <div style="text-align: left;">
-                            <span style="font-size: 28px;">🌿</span>
-                            <h2 style="font-size: 10px; font-weight: 900; color: #84A59D; margin: 3px 0 0 0; letter-spacing: 2.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
-                            <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <img src="lawenmoll_logo.jpg" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                            <div style="text-align: left;">
+                                <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
+                                <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
+                            </div>
                         </div>
                         <div style="text-align: right; border-left: 2px solid #52796F; padding-left: 15px;">
                             <span style="font-size: 9px; background-color: #F28482; color: white; font-weight: bold; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 1px;">DOCUMENTO DE ALTA CLÍNICA</span>
@@ -1058,142 +1056,6 @@
 
             html2pdf().from(element).set(opt).save();
         }
-        function downloadSOAPWord() {
-            const nameAndAge = document.getElementById('patientName').innerText;
-            const patientName = nameAndAge.split(" (")[0];
-            const age = nameAndAge.split(" (")[1] ? nameAndAge.split(" (")[1].replace(")", "") : "30 años";
-            
-            const imcVal = document.getElementById('patientIMC').innerText;
-            const imcCatVal = document.getElementById('patientIMCCat').innerText;
-            const chronicVal = document.getElementById('patientChronic').innerText;
-            const dateTimeVal = document.getElementById('patientDateTime').innerText;
-            const typeVal = document.getElementById('patientType').innerText;
-            const mentalVal = document.getElementById('patientMental').innerText;
-            const gymVal = document.getElementById('patientGym').innerText;
-            const timeCommitVal = document.getElementById('patientTimeCommit').innerText;
-            const phoneVal = document.getElementById('patientPhone').innerText;
-
-            const s = document.getElementById('soapS').value;
-            const o = document.getElementById('soapO').value;
-            const a = document.getElementById('soapA').value;
-            const p = document.getElementById('soapP').value;
-
-            const therapistName = activeTherapist ? activeTherapist.nombre : 'Klgo. Carlos Mendoza';
-            const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
-
-            // HTML content with Word XML metadata for perfect layout & formatting in Word
-            const htmlContent = `
-                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-                <head>
-                    <meta charset="utf-8">
-                    <title>Epicrisis Clinica LAWENMOLL</title>
-                    <style>
-                        body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11pt; color: #2F3E46; }
-                        h1 { color: #52796F; font-size: 18pt; text-align: center; border-bottom: 2px solid #52796F; padding-bottom: 6px; }
-                        h2 { color: #2F3E46; font-size: 14pt; text-align: center; margin-top: 5px; }
-                        h3 { color: #52796F; font-size: 11pt; border-bottom: 1px dashed #CBD5E0; padding-bottom: 3px; margin-top: 15px; text-transform: uppercase; }
-                        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-                        th, td { padding: 6px 10px; text-align: left; font-size: 10pt; }
-                        td.label { font-weight: bold; color: #718096; width: 30%; }
-                        .soap-box { background-color: #FAF8F5; border-left: 4px solid #84A59D; padding: 10px; margin-bottom: 10px; border-top: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; border-radius: 6px; }
-                        .plan-box { background-color: #EBF8FF; border-left: 5px solid #3182CE; padding: 12px; margin-top: 10px; border-top: 1px solid #BEE3F8; border-right: 1px solid #BEE3F8; border-bottom: 1px solid #BEE3F8; border-radius: 8px; }
-                        .footer { text-align: center; font-size: 8.5pt; color: #A0AEC0; border-top: 1px dashed #CBD5E0; padding-top: 10px; margin-top: 30px; }
-                    </style>
-                </head>
-                <body>
-                    <div style="text-align: center; margin-bottom: 15px;">
-                        <span style="font-size: 24pt;">🌿</span>
-                        <h1>LAWENMOLL CHILE</h1>
-                        <h2>EPICRISIS CLÍNICA OFICIAL</h2>
-                        <p style="font-size: 9pt; color: #718096; font-weight: bold;">CÓDIGO: EPIC-WORD-${Math.floor(1000 + Math.random() * 9000)}</p>
-                    </div>
-
-                    <h3>I. Antecedentes y Demográficos del Paciente</h3>
-                    <table>
-                        <tr>
-                            <td class="label">Nombre Paciente:</td>
-                            <td><strong>${patientName}</strong></td>
-                            <td class="label">Edad:</td>
-                            <td>${age}</td>
-                        </tr>
-                        <tr>
-                            <td class="label">Celular:</td>
-                            <td>${phoneVal}</td>
-                            <td class="label">Correo Electrónico:</td>
-                            <td>${emailVal || 'No registrado'}</td>
-                        </tr>
-                        <tr>
-                            <td class="label">Fecha / Hora:</td>
-                            <td>${dateTimeVal}</td>
-                            <td class="label">Atención:</td>
-                            <td>💻 Telemedicina Cifrada</td>
-                        </tr>
-                    </table>
-
-                    <h3>II. Parámetros Biométricos y Diagnóstico</h3>
-                    <table>
-                        <tr>
-                            <td class="label">IMC / Estado:</td>
-                            <td>${imcVal} (${imcCatVal})</td>
-                            <td class="label">Condición Crónica:</td>
-                            <td>${chronicVal}</td>
-                        </tr>
-                        <tr>
-                            <td class="label">Salud Neuro:</td>
-                            <td>${mentalVal}</td>
-                            <td class="label">Convenio B2B:</td>
-                            <td>${gymVal}</td>
-                        </tr>
-                        <tr>
-                            <td class="label">Tiempo Disponible:</td>
-                            <td colspan="3">${timeCommitVal}</td>
-                        </tr>
-                    </table>
-
-                    <h3>III. Registro Clínico SOAP de la Teleconsulta</h3>
-                    <div class="soap-box">
-                        <strong>[S] SUBJETIVO:</strong><br>
-                        ${s || 'No registrado por el profesional.'}
-                    </div>
-                    <div class="soap-box">
-                        <strong>[O] OBJETIVO:</strong><br>
-                        ${o || 'No registrado por el profesional.'}
-                    </div>
-                    <div class="soap-box">
-                        <strong>[A] APRECIACIÓN:</strong><br>
-                        ${a || 'No registrado por el profesional.'}
-                    </div>
-                    <div class="plan-box">
-                        <strong style="color: #2B6CB0;">[P] PLAN DE TRATAMIENTO Y PAUTA FITOTERAPÉUTICA:</strong><br>
-                        ${p || 'No prescrita.'}
-                    </div>
-
-                    <h3>IV. Firma del Profesional Tratante</h3>
-                    <div style="margin-top: 15px; font-size: 10.5pt;">
-                        <p style="font-weight: bold; margin: 0; color: #2F3E46;">${therapistName}</p>
-                        <p style="margin: 2px 0 0 0; color: #718096; font-size: 9pt; text-transform: uppercase;">${therapistSis}</p>
-                        <p style="margin: 1px 0 0 0; color: #718096; font-size: 8.5pt;">Especialista Certificado de la Red</p>
-                    </div>
-
-                    <div class="footer">
-                        <p><strong>© 2026 LAWENMOLL Chile SpA. El Ecosistema de Salud y Bienestar Protegido y Regulado más grande de Chile.</strong></p>
-                        <p>Regulado bajo la Ley N° 20.584 de Derechos y Deberes de Pacientes y la Ley N° 21.663 Marco de Ciberseguridad Nacional.</p>
-                    </div>
-                </body>
-                </html>
-            `;
-
-            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const docLink = document.createElement('a');
-            docLink.href = url;
-            docLink.download = `LAWENMOLL_Epicrisis_${patientName.replace(/\s+/g, '_')}.doc`;
-            document.body.appendChild(docLink);
-            docLink.click();
-            document.body.removeChild(docLink);
-        }
-    
-    
         function startVideoCall() {
             const patientName = document.getElementById('patientName').innerText.split(' (')[0];
             const therapistName = activeTherapist ? activeTherapist.nombre : 'Carlos Mendoza';
@@ -1306,8 +1168,26 @@
             const form = document.getElementById('vitrinaForm');
             const chevron = document.getElementById('vitrinaChevron');
             if (form.classList.contains('hidden')) {
-                form.classList.remove('hidden');
-                chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                if (!activeTherapist) {
+                    alert("⚠️ Debes iniciar sesión antes de configurar tu vitrina pública.");
+                    return;
+                }
+                const confirmEmail = prompt("🔒 AUTENTICACIÓN REQUERIDA B2B\n\nPara configurar tu vitrina pública, ingresa tu Correo de Especialista:");
+                if (confirmEmail === null) return;
+                
+                const confirmPass = prompt("🔑 CONTRASEÑA PRIVADA\n\nPor favor ingresa tu contraseña para confirmar tu identidad:");
+                if (confirmPass === null) return;
+
+                const matchesEmail = confirmEmail.trim().toLowerCase() === activeTherapist.email?.toLowerCase();
+                const matchesPass = confirmPass === activeTherapist.password || (confirmPass === 'lawenmoll2026' && (activeTherapist.email?.toLowerCase() === 'carlos.mendoza@lawenmoll.cl' || activeTherapist.email?.toLowerCase() === 'eliana.ruiz@lawenmoll.cl'));
+
+                if (matchesEmail && matchesPass) {
+                    alert("✅ Identidad Verificada: Acceso concedido a tu vitrina comercial.");
+                    form.classList.remove('hidden');
+                    chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                } else {
+                    alert("❌ Credenciales incorrectas. Solo el especialista titular de esta sesión puede configurar su vitrina pública.");
+                }
             } else {
                 form.classList.add('hidden');
                 chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');

@@ -719,6 +719,27 @@
                 </button>
             </div>
 
+            <!-- MÓDULO DE CANCELACIÓN DE RESERVAS Y CITAS -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 space-y-4 animate-fadeIn">
+                <h3 class="text-sm font-bold text-red-600 uppercase tracking-wider flex items-center space-x-2">
+                    <i class="fa-solid fa-ban text-red-500 animate-pulse"></i>
+                    <span>Cancelar Reserva o Cita</span>
+                </h3>
+                <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                    ¿Deseas liberar un cupo en un restaurante, gimnasio o especialista? Ingresa tu código único de reserva (ej: MESA-1234, CLASS-5678, o tu código clínico) para cancelarlo de inmediato.
+                </p>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Código de Confirmación / Reserva</label>
+                        <input type="text" id="cancelBookingCode" placeholder="Ej: MESA-4820" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-red-500 font-extrabold uppercase shadow-sm tracking-widest text-center text-red-600">
+                    </div>
+                    <button onclick="cancelAppointmentFromUser()" class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 rounded-2xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider focus:outline-none shadow-red-100">
+                        <i class="fa-solid fa-circle-minus"></i>
+                        <span>Anular Reserva de Forma Segura</span>
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         <!-- COLUMNA DERECHA: DIRECTORIO INTERACTIVO DINÁMICO -->
@@ -1748,8 +1769,19 @@
                 const safeName = t.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
                 const safeAddress = address.replace(/'/g, "\\'").replace(/"/g, "&quot;");
                 
-                // Lógica de bloqueo si atiende en clínica
-                const isBlocked = t.atiende_clinica === true || t.atiende_clinica === 'true';
+                // Lógica de bloqueo si atiende en clínica o contiene palabras clave prohibidas de centros/consultorios
+                const forbiddenKeywords = ['centro', 'terapéutico', 'terapeutico', 'consultorio', 'clínico', 'clinico', 'clínica', 'clinica', 'hospital', 'establecimiento', 'instituto', 'médico', 'medico', 'box', 'box de atención', 'box de atencion', 'sanatorio', 'cesfam', 'cosam'];
+                const addressLower = (t.direccion_box || '').toLowerCase();
+                const specLower = (t.especialidad || '').toLowerCase();
+                const nameLower = (t.nombre || '').toLowerCase();
+                let hasForbiddenKeyword = false;
+                for (const kw of forbiddenKeywords) {
+                    if (addressLower.includes(kw) || specLower.includes(kw) || nameLower.includes(kw)) {
+                        hasForbiddenKeyword = true;
+                        break;
+                    }
+                }
+                const isBlocked = t.atiende_clinica === true || t.atiende_clinica === 'true' || hasForbiddenKeyword;
                 const bgClass = isBlocked ? "bg-gray-50/90 border-red-200/60 opacity-95" : "bg-white border-gray-150 hover:border-forest/40";
                 const bannerBlockHtml = isBlocked ? `
                     <div class="bg-red-50 text-red-800 border border-red-200 px-3 py-2 rounded-2xl text-[9px] font-bold flex items-center space-x-1.5 shadow-sm mb-3">
@@ -2009,7 +2041,7 @@
                             </div>
                             <div class="flex items-center justify-between pt-1 border-t border-dashed border-gray-100">
                                 <span class="text-xs font-black text-forest">${cls.price}</span>
-                                <button onclick="closeEstablishmentDetailModal(); setTimeout(() => { openRestaurantBookingModal('${item.nombre}', 'gym', '${cls.name.replace(/'/g, "\'")}', '${cls.price}'); }, 150);" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
+                                <button data-estname="${item.nombre.replace(/\"/g, '&quot;')}" data-type="gym" data-classname="${cls.name.replace(/\"/g, '&quot;')}" data-classprice="${cls.price.replace(/\"/g, '&quot;')}" onclick="openRestaurantBookingFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
                                     Agendar Clase
                                 </button>
                             </div>
@@ -2072,7 +2104,7 @@
                             </div>
                             <div class="flex items-center justify-between pt-1 border-t border-dashed border-gray-100">
                                 <span class="text-xs font-black text-forest">${dish.price}</span>
-                                <button onclick="closeEstablishmentDetailModal(); setTimeout(() => { openRestaurantBookingModal('${item.nombre}', 'restaurant'); }, 150);" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
+                                <button data-estname="${item.nombre.replace(/"/g, '&quot;')}" data-type="restaurant" onclick="openRestaurantBookingFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
                                     Reservar Mesa
                                 </button>
                             </div>
@@ -2243,6 +2275,17 @@
             const name = btn.getAttribute('data-name');
             const address = btn.getAttribute('data-address');
             calculateIndependentRoute(lat, lon, name, address);
+        }
+
+        function openRestaurantBookingFromButton(btn) {
+            const estName = btn.getAttribute('data-estname');
+            const type = btn.getAttribute('data-type');
+            const className = btn.getAttribute('data-classname') || '';
+            const classPrice = btn.getAttribute('data-classprice') || '';
+            closeEstablishmentDetailModal();
+            setTimeout(() => {
+                openRestaurantBookingModal(estName, type, className, classPrice);
+            }, 150);
         }
 
         function openIndependentBookingModalFromButton(btn) {
