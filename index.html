@@ -1116,6 +1116,50 @@
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo'; 
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+        // --- SISTEMA DE RESERVAS REALES EN SUPABASE (TEST DE BIENESTAR) v48 ---
+        async function saveAppointmentToSupabase() {
+            if (supabaseKey === '') return;
+            const specialistName = selections.selectedSpecialist ? selections.selectedSpecialist.name : 'Dra. Eliana Ruiz';
+            const bookingCode = `CLINIC-${Math.floor(1000 + Math.random() * 9000)}`;
+            const patientNameVal = selections.firstName + ' ' + selections.lastName;
+            const phoneVal = selections.phone || '+56912345678';
+            
+            try {
+                // 1. Obtener ID real del terapeuta en Supabase
+                const { data: therapistData, error: tError } = await _supabase
+                    .from('terapeutas')
+                    .select('id')
+                    .eq('nombre', specialistName)
+                    .maybeSingle();
+
+                if (tError) throw tError;
+
+                // 2. Insertar cita en Supabase en la tabla citas
+                const { error: insertError } = await _supabase
+                    .from('citas')
+                    .insert([
+                        {
+                            terapeuta_id: therapistData ? therapistData.id : null,
+                            fecha_cita: selections.bookingDate,
+                            hora_cita: selections.bookingTime,
+                            lugar_cita: selections.mode === 'online' ? 'Online / Telemedicina' : (selections.selectedSpecialist ? selections.selectedSpecialist.address : 'Av. Providencia 1240'),
+                            modalidad_cita: selections.mode === 'online' ? 'Online' : 'Presencial',
+                            modal_cita: selections.mode === 'online' ? 'Online' : 'Presencial',
+                            estado_cita: 'Agendada',
+                            codigo_reserva: bookingCode,
+                            telefono_contacto: phoneVal,
+                            nombre_paciente: patientNameVal,
+                            consentimiento_datos: true
+                        }
+                    ]);
+
+                if (insertError) throw insertError;
+                console.log("✅ Cita agendada exitosamente en Supabase (tabla citas) con código:", bookingCode);
+            } catch (err) {
+                console.error("❌ Error al guardar cita en Supabase desde el Test de Bienestar:", err.message);
+            }
+        }
+
         const sleepMap = {
             'radiant': 'Energía Radiante 🌅',
             'fatigue': 'Fatiga Media 🥱',
@@ -1498,7 +1542,10 @@
             }
         }
 
-        function confirmBooking() {
+        async function confirmBooking() {
+            // Guardar cita real en Supabase (tabla citas) antes de mostrar el ticket
+            await saveAppointmentToSupabase();
+
             document.getElementById('ticketDate').innerText = selections.bookingDate;
             document.getElementById('ticketTime').innerText = selections.bookingTime + " hrs";
             document.getElementById('ticketMode').innerText = selections.mode === 'online' ? '💻 Consulta Online' : '🏢 Presencial';
