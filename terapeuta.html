@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAWENMOLL - Panel del Terapeuta</title>
+    <title>LAWENMOLL - Panel del Terapeuta v55</title>
     <!-- Tailwind CSS para diseño moderno -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -100,7 +100,7 @@
     <header class="bg-white border-b border-gray-200 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
-                <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                <img src="lawenmoll_logo.jpg" crossorigin="anonymous" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
                 <span class="font-bold text-lg md:text-xl tracking-wider text-forest font-sans">LAWENMOLL <span class="text-[9px] bg-forest/10 text-forest px-2 py-0.5 rounded-full ml-1 font-semibold">Especialistas 💼</span></span>
                 <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
             </div>
@@ -982,7 +982,7 @@
                         <!-- Header Oficial Epicrisis con Logo Circular -->
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 5px;">
                             <div style="display: flex; align-items: center; gap: 12px;">
-                                <img src="lawenmoll_logo.jpg" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                                <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
                                 <div style="text-align: left;">
                                     <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
                                     <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
@@ -1086,9 +1086,35 @@
             wrapper.appendChild(element);
             document.body.appendChild(wrapper);
 
-            html2pdf().from(element).set(opt).save().then(() => {
-                document.body.removeChild(wrapper);
+            // Wait for all images to complete loading to prevent missing logo on mobile slow networks
+            const imgs = element.querySelectorAll('img');
+            const promises = Array.from(imgs).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
             });
+
+            Promise.all(promises).then(() => {
+                setTimeout(() => {
+                    html2pdf().from(element).set(opt).save().then(() => {
+                        document.body.removeChild(wrapper);
+                    });
+                }, 250);
+            });
+        }
+
+        // --- SISTEMA CRIPTOGRÁFICO DE SEGURIDAD: HASHING SHA-256 ---
+        async function hashPassword(password) {
+            if (!password) return '';
+            // Si ya es un hash SHA-256 (64 caracteres hex), no volver a hashear
+            if (/^[0-9a-fA-F]{64}$/.test(password)) return password;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
         function startVideoCall() {

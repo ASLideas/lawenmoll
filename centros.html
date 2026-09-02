@@ -4,7 +4,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAWENMOLL - Directorio de Establecimientos B2B &amp; Ciberseguridad</title>
+    <title>LAWENMOLL - Directorio de Establecimientos B2B &amp; Ciberseguridad v55</title>
     <!-- Tailwind CSS para diseño moderno -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -2813,6 +2813,26 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         let activeClaimB2B = null;
 
         function openCouponClaimModal(estName, promoCode, logo, benefit) {
+            // Reset slide verify for new claim
+            const completedInput = document.getElementById('slideVerifyCompleted');
+            if (completedInput) completedInput.value = 'false';
+            const handle = document.getElementById('slideVerifyHandle');
+            if (handle) {
+                handle.style.left = '0px';
+                handle.innerHTML = '🌿';
+                handle.className = 'absolute h-full w-11 bg-forest hover:bg-forest/95 flex items-center justify-center text-sm rounded-2xl shadow-md z-20 cursor-grab';
+            }
+            const bg = document.getElementById('slideVerifyBg');
+            if (bg) {
+                bg.style.width = '0%';
+                bg.className = 'absolute left-0 top-0 h-full bg-forest/20 rounded-2xl transition-all duration-100';
+            }
+            const text = document.getElementById('slideVerifyText');
+            if (text) {
+                text.innerText = 'Arrastra la hojita para verificar 🌿';
+                text.className = 'text-[9px] font-bold text-gray-500 uppercase tracking-wider relative z-10 transition-colors pointer-events-none select-none';
+            }
+
             activeClaimB2B = { name: estName, code: promoCode, logo: logo, benefit: benefit };
             document.getElementById('couponEstLogo').src = logo || 'lawenmoll_logo.jpg';
             document.getElementById('couponEstName').innerText = estName;
@@ -2832,6 +2852,12 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         }
 
         async function processCouponClaimReal() {
+            // Verificar que el Deslizador de Bienestar se haya completado
+            const verifiedVal = document.getElementById('slideVerifyCompleted') ? document.getElementById('slideVerifyCompleted').value === 'true' : true;
+            if (!verifiedVal) {
+                alert("⚠️ Por favor desliza la hojita de bienestar herbolario hacia la derecha para verificar que eres un humano.");
+                return;
+            }
             const nameVal = document.getElementById('couponClaimName').value.trim();
             const emailVal = document.getElementById('couponClaimEmail').value.trim();
             const phoneVal = document.getElementById('couponClaimPhone').value.trim();
@@ -3199,17 +3225,45 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             try {
                 let loggedInB2B = null;
 
-                // 1. Query Supabase
+                // 1. Query Supabase (Cifrado SHA-256 Backwards-Compatible)
                 if (supabaseKey !== '') {
-                    const { data, error } = await _supabase
+                    const hashedPassVal = await hashPassword(passVal);
+                    // Probar primero con contraseña cifrada (hash)
+                    let response = await _supabase
                         .from('centros_convenios')
                         .select('*')
                         .eq('email', emailVal)
-                        .eq('password', passVal)
+                        .eq('password', hashedPassVal)
                         .eq('estado_suscripcion', 'activo')
                         .maybeSingle();
 
-                    if (error) throw error;
+                    if (response.error) throw response.error;
+                    let data = response.data;
+
+                    // Compatibilidad con cuentas de texto plano antiguas: migrar al vuelo
+                    if (!data) {
+                        response = await _supabase
+                            .from('centros_convenios')
+                            .select('*')
+                            .eq('email', emailVal)
+                            .eq('password', passVal)
+                            .eq('estado_suscripcion', 'activo')
+                            .maybeSingle();
+                        
+                        if (response.error) throw response.error;
+                        data = response.data;
+                        
+                        if (data) {
+                            // Actualizar contraseña a hash seguro de forma transparente
+                            await _supabase
+                                .from('centros_convenios')
+                                .update({ password: hashedPassVal })
+                                .eq('id', data.id);
+                            console.log("🔒 Cuenta B2B migrada de forma automática a hash SHA-256 seguro.");
+                            data.password = hashedPassVal;
+                        }
+                    }
+
                     if (data) {
                         loggedInB2B = data;
                     }
@@ -3534,7 +3588,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             };
 
             if (pass !== '') {
-                updateData.password = pass;
+                updateData.password = await hashPassword(pass);
             }
 
             try {
@@ -3720,11 +3774,12 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             btn.setAttribute('disabled', 'true');
             btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
 
-            // Registro real en Supabase
+            // Registro real en Supabase con contraseña cifrada (hashing)
             try {
                 if (supabaseKey !== '') {
                     const emailVal = document.getElementById('b2bEmail').value.trim();
                     const passwordVal = document.getElementById('b2bPassword').value.trim();
+                    const hashedPassVal = await hashPassword(passwordVal);
                     const { error } = await _supabase
                         .from('centros_convenios')
                         .insert([
@@ -3738,7 +3793,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                                 foto_local_1: document.getElementById('b2bLogoBase64').value || null,
                                 id_cliente_pasarela: `FLOW-${Math.floor(1000 + Math.random() * 9000)}-TX`,
                                 email: emailVal,
-                                password: passwordVal
+                                password: hashedPassVal
                             }
                         ]);
 
@@ -4048,6 +4103,94 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             };
             reader.readAsDataURL(file);
         }
+
+        // --- INJECT v55 SECURITY PACK ---
+
+        // --- SISTEMA INTERACTIVO ANTI-BOTS: DESLIZADOR DE BIENESTAR 🌿 ---
+        function initSlideVerify() {
+            const handle = document.getElementById('slideVerifyHandle');
+            const container = document.getElementById('slideVerifyContainer');
+            const bg = document.getElementById('slideVerifyBg');
+            const text = document.getElementById('slideVerifyText');
+            const completedInput = document.getElementById('slideVerifyCompleted');
+            
+            if (!handle || !container) return;
+            
+            let isDragging = false;
+            let startX = 0;
+            const handleWidth = handle.clientWidth || 44;
+            const containerWidth = container.clientWidth || 320;
+            const maxDrag = containerWidth - handleWidth;
+            
+            function onStart(e) {
+                if (completedInput.value === 'true') return;
+                isDragging = true;
+                startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                handle.classList.remove('transition-all', 'duration-100');
+                bg.classList.remove('transition-all', 'duration-100');
+                handle.style.cursor = 'grabbing';
+            }
+            
+            function onMove(e) {
+                if (!isDragging) return;
+                const x = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                let walk = x - startX;
+                if (walk < 0) walk = 0;
+                if (walk > maxDrag) walk = maxDrag;
+                
+                handle.style.left = walk + 'px';
+                const percent = (walk / maxDrag) * 100;
+                bg.style.width = percent + '%';
+                
+                if (walk >= maxDrag) {
+                    isDragging = false;
+                    completedInput.value = 'true';
+                    handle.style.left = maxDrag + 'px';
+                    bg.style.width = '100%';
+                    bg.className = 'absolute left-0 top-0 h-full bg-emerald-500/20 rounded-2xl';
+                    handle.innerHTML = '✨';
+                    handle.className = 'absolute h-full w-11 bg-emerald-600 flex items-center justify-center text-sm rounded-2xl shadow-md z-20 cursor-default';
+                    text.innerText = '¡HUMANO VERIFICADO! 🌿';
+                    text.className = 'text-[9px] font-black text-emerald-800 uppercase tracking-wider relative z-10';
+                    handle.style.cursor = 'default';
+                }
+            }
+            
+            function onEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                handle.style.cursor = 'grab';
+                if (completedInput.value !== 'true') {
+                    handle.classList.add('transition-all', 'duration-100');
+                    bg.classList.add('transition-all', 'duration-100');
+                    handle.style.left = '0px';
+                    bg.style.width = '0%';
+                }
+            }
+            
+            handle.addEventListener('mousedown', onStart);
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+            
+            handle.addEventListener('touchstart', onStart, {passive: true});
+            document.addEventListener('touchmove', onMove, {passive: false});
+            document.addEventListener('touchend', onEnd);
+        }
+
+        // --- SISTEMA CRIPTOGRÁFICO DE SEGURIDAD: HASHING SHA-256 ---
+        async function hashPassword(password) {
+            if (!password) return '';
+            // Si ya es un hash SHA-256 (64 caracteres hex), no volver a hashear
+            if (/^[0-9a-fA-F]{64}$/.test(password)) return password;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Auto-initialize slide verify on load
+        setTimeout(initSlideVerify, 300);
     </script>
 
     
@@ -4395,6 +4538,20 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                         <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Celular de Contacto</label>
                         <input type="text" id="couponClaimPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                     </div>
+
+                    <!-- Deslizador de Bienestar Anti-Bots -->
+                    <div class="space-y-1 text-left mt-3">
+                        <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Verificación Humana de Bienestar</label>
+                        <div class="relative w-full h-11 bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden select-none flex items-center justify-center" id="slideVerifyContainer">
+                            <div id="slideVerifyBg" class="absolute left-0 top-0 h-full bg-forest/20 rounded-2xl transition-all duration-100" style="width: 0%;"></div>
+                            <span id="slideVerifyText" class="text-[9px] font-bold text-gray-500 uppercase tracking-wider relative z-10 transition-colors pointer-events-none select-none">Arrastra la hojita para verificar 🌿</span>
+                            <div id="slideVerifyHandle" class="absolute left-0 top-0 h-full w-11 bg-forest hover:bg-forest/95 flex items-center justify-center text-sm cursor-grab transition-all duration-100 rounded-2xl shadow-md z-20">
+                                🌿
+                            </div>
+                        </div>
+                        <input type="hidden" id="slideVerifyCompleted" value="false">
+                    </div>
+
                 </div>
 
                 <!-- Consentimiento -->
