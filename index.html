@@ -1559,89 +1559,105 @@
                 severe: 'Agotamiento Extremo 💥'
             };
 
-            // Contenedor invisible (altura 0 y desbordamiento oculto) para que el navegador lo dibuje sin mostrarlo al usuario
-            const wrapper = document.createElement('div');
-            wrapper.style.height = '0';
-            wrapper.style.overflow = 'hidden';
-            wrapper.style.position = 'absolute';
-            wrapper.style.top = '0';
-            wrapper.style.left = '0';
-            wrapper.style.width = '750px';
-
             const element = document.createElement('div');
-            element.className = "p-8 bg-white font-sans text-xs text-gray-700 leading-relaxed";
+            element.className = "p-8 bg-[#FAF8F5] font-sans text-xs text-gray-700 leading-relaxed";
             element.style.color = "#2F3E46";
-            element.style.width = "720px";
-            element.style.background = "#FAF8F5";
+            element.style.width = "790px"; // exact A4 width at 96 DPI
+            element.style.boxSizing = "border-box";
+            element.style.position = 'fixed';
+            element.style.left = '0';
+            element.style.top = '0';
+            element.style.zIndex = '-9999';
+            element.style.opacity = '1';
+            element.style.display = 'block';
 
             const imcVal = document.getElementById('resIMC') ? document.getElementById('resIMC').innerText : '25.0';
             const imcCatVal = document.getElementById('resIMCCat') ? document.getElementById('resIMCCat').innerText : 'Normal';
             const metabolicAge = selections.age + 3;
 
             let contentHtml = `
-                <div style="border: 2px solid #52796F; border-radius: 20px; padding: 22px; background-color: #FAF8F5; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; border-bottom: 2px solid #52796F; padding-bottom: 10px; margin-bottom: 12px; text-align: center;">
-                        <img src="lawenmoll_logo.jpg" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
-                        <div style="text-align: left;">
-                            <h1 style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: #52796F; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">REPORTE DE EVALUACIÓN DE BIENESTAR</h1>
-                            <p style="font-size: 8px; font-weight: bold; color: #84A59D; margin: 1px 0 0 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa LAWENMOLL</p>
+                <div style="border: 2px solid #52796F; border-radius: 24px; padding: 30px; background-color: #FAF8F5; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); min-height: 1060px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <!-- Header Oficial Epicrisis -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px double #52796F; padding-bottom: 18px; margin-bottom: 25px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="lawenmoll_logo.jpg" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                                <div style="text-align: left;">
+                                    <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 2px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
+                                    <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
+                                </div>
+                            </div>
+                            <div style="text-align: right; border-left: 2px solid #52796F; padding-left: 15px;">
+                                <span style="font-size: 9px; background-color: #F28482; color: white; font-weight: bold; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 1px;">REPORTE DE EVALUACIÓN</span>
+                                <p style="font-size: 9px; color: #718096; margin: 6px 0 0 0; font-weight: bold;">CÓDIGO: EVAL-LAWEN-${Math.floor(1000 + Math.random() * 9000)}</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #84A59D; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 800;">📍 Datos de Identificación del Paciente</h3>
-                    <div style="font-size: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 15px; margin-bottom: 10px; color: #4A5568;">
-                        <div><strong>Nombre Completo:</strong> ${selections.firstName} ${selections.lastName}</div>
-                        <div><strong>Celular de Contacto:</strong> ${selections.phone || 'No registrado'}</div>
-                        <div><strong>Correo Electrónico:</strong> ${selections.email || 'No registrado'}</div>
-                        <div><strong>Edad del Paciente:</strong> ${selections.age} años (Metabólica: ${metabolicAge} años)</div>
-                    </div>
+                        <div style="text-align: center; margin-bottom: 25px;">
+                            <h2 style="font-size: 18px; font-weight: 800; color: #2F3E46; text-transform: uppercase; margin: 0; letter-spacing: 1px;">EVALUACIÓN INTEGRAL DE BIENESTAR</h2>
+                            <p style="font-size: 9px; color: #718096; font-weight: 600; margin: 4px 0 0 0;">Análisis Biométrico y Recomendaciones del Test de Bienestar</p>
+                        </div>
 
-                    <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #84A59D; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 800;">📍 Parámetros Biométricos y Estilo de Vida</h3>
-                    <div style="font-size: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 15px; margin-bottom: 10px; color: #4A5568;">
-                        <div><strong>Estatura (Talla):</strong> ${selections.height} cm</div>
-                        <div><strong>Peso Corporal:</strong> ${selections.weight} kg</div>
-                        <div><strong>Índice de Masa Corporal (IMC):</strong> ${imcVal} (${imcCatVal})</div>
-                        <div><strong>Grasa Corporal Estimada:</strong> ${selections.fat}%</div>
-                        <div><strong>Calidad de Sueño:</strong> ${sleepMap[selections.sleep] || 'Normal'}</div>
-                        <div><strong>Nivel de Estrés:</strong> ${stressMap[selections.stress] || 'Calma'}</div>
-                    </div>
+                        <!-- 1. IDENTIFICACIÓN DEL PACIENTE -->
+                        <h3 style="color: #52796F; font-size: 11px; border-bottom: 1.5px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: 900; display: flex; align-items: center;"><span style="margin-right: 6px;">📋</span> I. Antecedentes y Demográficos</h3>
+                        <div style="font-size: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin-bottom: 20px; color: #4A5568; background-color: white; padding: 15px; border-radius: 16px; border: 1px solid #E2E8F0;">
+                            <div><strong>Nombre Completo:</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.firstName} ${selections.lastName}</span></div>
+                            <div><strong>Edad del Paciente:</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.age} años (Metabólica: ${metabolicAge} años)</span></div>
+                            <div><strong>Celular de Contacto:</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.phone || 'No registrado'}</span></div>
+                            <div><strong>Correo Electrónico:</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.email || 'No registrado'}</span></div>
+                        </div>
 
-                    <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #84A59D; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 800;">📍 Diagnóstico y Antecedentes Clínicos</h3>
-                    <div style="font-size: 10px; margin-bottom: 10px; color: #4A5568; line-height: 1.4;">
-                        <p style="margin: 0 0 3px 0;"><strong>Antecedentes Crónicos:</strong> ${selections.chronic ? selections.selectedChronical.join(', ') : 'Ninguno diagnosticado'}</p>
-                        <p style="margin: 0;"><strong>Salud Neurodivergente / Enfoque Cognitivo:</strong> ${selections.mental || 'Ninguna'}</p>
-                    </div>
+                        <!-- 2. PARÁMETROS BIOMÉTRICOS Y ESTILO DE VIDA -->
+                        <h3 style="color: #52796F; font-size: 11px; border-bottom: 1.5px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: 900; display: flex; align-items: center;"><span style="margin-right: 6px;">📊</span> II. Parámetros Biométricos y Estilo de Vida</h3>
+                        <div style="font-size: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin-bottom: 20px; color: #4A5568; background-color: white; padding: 15px; border-radius: 16px; border: 1px solid #E2E8F0;">
+                            <div><strong>Estatura (Talla):</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.height} cm</span></div>
+                            <div><strong>Peso Corporal:</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.weight} kg</span></div>
+                            <div><strong>Índice de Masa Corporal (IMC):</strong> <span style="color: #2F3E46; font-weight: bold;">${imcVal} (${imcCatVal})</span></div>
+                            <div><strong>Grasa Corporal Estimada:</strong> <span style="color: #2F3E46; font-weight: bold;">${selections.fat}%</span></div>
+                            <div><strong>Calidad de Sueño:</strong> <span style="color: #2F3E46; font-weight: bold;">${sleepMap[selections.sleep] || 'Normal'}</span></div>
+                            <div><strong>Nivel de Estrés:</strong> <span style="color: #2F3E46; font-weight: bold;">${stressMap[selections.stress] || 'Calma'}</span></div>
+                        </div>
+
+                        <!-- 3. DIAGNÓSTICO Y ANTECEDENTES CLÍNICOS -->
+                        <h3 style="color: #52796F; font-size: 11px; border-bottom: 1.5px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: 900; display: flex; align-items: center;"><span style="margin-right: 6px;">🩺</span> III. Diagnóstico y Antecedentes Clínicos</h3>
+                        <div style="font-size: 10px; margin-bottom: 20px; color: #4A5568; background-color: white; padding: 15px; border-radius: 16px; border: 1px solid #E2E8F0; line-height: 1.5;">
+                            <p style="margin: 0 0 4px 0;"><strong>Antecedentes Crónicos:</strong> ${selections.chronic ? selections.selectedChronical.join(', ') : 'Ninguno diagnosticado'}</p>
+                            <p style="margin: 0;"><strong>Salud Neurodivergente / Enfoque Cognitivo:</strong> ${selections.mental || 'Ninguna'}</p>
+                        </div>
             `;
 
             if (isFreeOnly) {
                 contentHtml += `
-                    <div style="background-color: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; border-radius: 12px; margin-top: 10px;">
-                        <span style="color: #2B6CB0; font-size: 10px; font-weight: bold; display: block; margin-bottom: 3px; text-transform: uppercase;">📋 Pauta Preventiva Autoguiada de Fitoterapia:</span>
-                        <p style="font-size: 10px; margin: 0; color: #2D3748; font-weight: 600; line-height: 1.4;">Se recomienda incorporar infusiones preventivas de Melisa para el sistema nervioso y Boldo con naranja asada después de las comidas principales para desinflamar el tracto digestivo de forma natural de manera segura.</p>
-                    </div>
+                        <!-- 4. PAUTA PREVENTIVA AUTOGUIADA -->
+                        <h3 style="color: #52796F; font-size: 11px; border-bottom: 1.5px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: 900; display: flex; align-items: center;"><span style="margin-right: 6px;">🍃</span> IV. Pauta Preventiva de Fitoterapia</h3>
+                        <div style="background-color: #EBF8FF; border-left: 5px solid #3182CE; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 10px; color: #2D3748; font-weight: 600; line-height: 1.5;">
+                            Se recomienda incorporar infusiones preventivas de Melisa para el sistema nervioso y Boldo con naranja asada después de las comidas principales para desinflamar el tracto digestivo de forma natural de manera segura.
+                        </div>
                 `;
             } else {
                 const specialistName = selections.selectedSpecialist ? selections.selectedSpecialist.name : 'No asignado';
                 const specialistSpec = selections.selectedSpecialist ? selections.selectedSpecialist.spec : 'Especialista de Turno';
                 contentHtml += `
-                    <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #84A59D; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 800;">📍 Derivaciones y Convenios Activados</h3>
-                    <div style="font-size: 10px; margin-bottom: 10px; color: #4A5568; line-height: 1.4;">
-                        <p style="margin: 0 0 3px 0;"><strong>Especialista Asignado de LAWENMOLL:</strong> ${specialistName} (${specialistSpec})</p>
-                        <p style="margin: 0 0 3px 0;"><strong>Pase de Convenio B2B Recomendado:</strong> Pase de Bienestar para Gimnasio SportLife o Yoga Postural</p>
-                        <p style="margin: 0;"><strong>Código de Descuento en Alimentación:</strong> 15% DCTO en Restaurante "Huerto Orgánico" con tu receta digital.</p>
-                    </div>
+                        <!-- 4. DERIVACIONES Y CONVENIOS ACTIVADOS -->
+                        <h3 style="color: #52796F; font-size: 11px; border-bottom: 1.5px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: 900; display: flex; align-items: center;"><span style="margin-right: 6px;">📍</span> IV. Derivaciones y Convenios Activados</h3>
+                        <div style="font-size: 10px; margin-bottom: 15px; color: #4A5568; background-color: white; padding: 15px; border-radius: 12px; border: 1px solid #E2E8F0; line-height: 1.5;">
+                            <p style="margin: 0 0 4px 0;"><strong>Especialista Asignado de LAWENMOLL:</strong> <span style="color: #2F3E46; font-weight: bold;">${specialistName} (${specialistSpec})</span></p>
+                            <p style="margin: 0 0 4px 0;"><strong>Pase de Convenio B2B Recomendado:</strong> Pase de Bienestar para Gimnasio SportLife o Yoga Postural</p>
+                            <p style="margin: 0;"><strong>Código de Descuento en Alimentación:</strong> 15% DCTO en Restaurante "Huerto Orgánico" con tu receta digital.</p>
+                        </div>
 
-                    <div style="background-color: #FFF5F5; border-left: 4px solid #F28482; padding: 12px; border-radius: 12px; margin-top: 10px;">
-                        <span style="color: #C53030; font-size: 10px; font-weight: bold; display: block; margin-bottom: 3px; text-transform: uppercase;">⚠️ Información Importante sobre tu Cita:</span>
-                        <p style="font-size: 10px; margin: 0; color: #2D3748; font-weight: 600; line-height: 1.4;">Tu reserva ha sido registrada en Supabase con éxito. El profesional completará tu ficha clínica SOAP de forma privada durante la atención presencial o en tu sala de telemedicina.</p>
-                    </div>
+                        <div style="background-color: #FFF5F5; border-left: 5px solid #F28482; padding: 12px; border-radius: 12px; margin-bottom: 15px; font-size: 10px; color: #2D3748; font-weight: 600; line-height: 1.5;">
+                            <strong>⚠️ Información Importante sobre tu Cita:</strong> Tu reserva ha sido registrada en Supabase con éxito. El profesional completará tu ficha clínica SOAP de forma privada durante la atención presencial o en tu sala de telemedicina.
+                        </div>
                 `;
             }
 
             contentHtml += `
-                    <div style="text-align: center; border-top: 1px dashed #E2E8F0; padding-top: 10px; margin-top: 15px; font-size: 8px; color: #A0AEC0;">
+                    </div>
+                    <!-- Footer Centrado -->
+                    <div style="text-align: center; border-top: 1.5px dashed #CBD5E0; padding-top: 15px; font-size: 9px; color: #A0AEC0; line-height: 1.5;">
                         <p style="margin: 0; font-weight: bold; color: #52796F;">© 2026 LAWENMOLL Chile. Registro Clínico y Ecosistema de Salud Integrativa Protegido.</p>
-                        <p style="margin: 2px 0 0 0;">Documento emitido y encriptado bajo la Ley Marco de Ciberseguridad N° 21.663.</p>
+                        <p style="margin: 3px 0 0 0; font-weight: 600;">Documento emitido y encriptado bajo la Ley Marco de Ciberseguridad N° 21.663.</p>
                     </div>
                 </div>
             `;
@@ -1651,18 +1667,16 @@
             const filenameText = isFreeOnly ? `LAWENMOLL_Plan_Preventivo_${selections.firstName}_${selections.lastName}.pdf` : `LAWENMOLL_Pauta_Clinica_${selections.firstName}_${selections.lastName}.pdf`;
 
             const opt = {
-                margin:       10,
+                margin:       [10, 10, 10, 10], // standard 10mm margins for A4
                 filename:     filenameText,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+                html2canvas:  { scale: 2, useCORS: true, scrollY: 0, scrollX: 0 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            wrapper.appendChild(element);
-            document.body.appendChild(wrapper);
-
+            document.body.appendChild(element);
             html2pdf().from(element).set(opt).save().then(() => {
-                document.body.removeChild(wrapper);
+                document.body.removeChild(element);
             });
         }
 
