@@ -1559,16 +1559,16 @@
                 severe: 'Agotamiento Extremo 💥'
             };
 
-            // Contenedor invisible posicionado detras del viewport para renderizado sin cortes ni parpadeos
+            // Contenedor invisible posicionado de forma absoluta al inicio del documento para evitar desfases de scroll
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'fixed';
+            wrapper.style.position = 'absolute';
             wrapper.style.top = '0';
-            wrapper.style.left = '0';
+            wrapper.style.left = '-9999px'; // Ocultar horizontalmente fuera de la pantalla
             wrapper.style.width = '794px';
-            wrapper.style.height = 'auto'; // Permitir expansion completa del DOM para captura
+            wrapper.style.height = 'auto';
             wrapper.style.overflow = 'hidden';
             wrapper.style.opacity = '1';
-            wrapper.style.zIndex = '-99999'; // Renderizar detras de todo el sitio de forma segura (Ley 21.663)
+            wrapper.style.zIndex = '99999'; // Mantener sobre todo pero fuera del area visual
             wrapper.style.background = '#FAF8F5';
 
             const element = document.createElement('div');
@@ -1583,7 +1583,7 @@
             const metabolicAge = selections.age + 3;
 
             let contentHtml = `
-                <div style="width: 794px; height: 1123px; padding: 50px; box-sizing: border-box; background-color: #FAF8F5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2F3E46; display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="width: 794px; height: 1100px; padding: 40px; box-sizing: border-box; background-color: #FAF8F5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2F3E46; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <!-- Bordered Box Container -->
                         <div style="border: 2px solid #52796F; border-radius: 20px; padding: 30px; background-color: #FAF8F5; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
