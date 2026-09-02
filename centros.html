@@ -347,7 +347,10 @@
                     <input type="email" id="localEmail" placeholder="Ej: contacto@huertoorganico.cl" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold">
                 </div>
                 <div>
-                    <label class="block text-[9px] font-bold text-gray-500 uppercase tracking-wider mb-1">Contraseña Privada</label>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-[9px] font-bold text-gray-500 uppercase tracking-wider">Contraseña Privada</label>
+                        <a href="#" onclick="alert('🔑 ¿Olvidaste tu contraseña?\n\nPor favor, contacta con el área comercial de LAWENMOLL (soporte@lawenmoll.cl) para restablecer tus credenciales previa verificación de identidad de tu comercio B2B.');" class="text-[8px] text-forest font-bold hover:underline focus:outline-none">¿La olvidaste?</a>
+                    </div>
                     <input type="password" id="localPassword" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold font-mono">
                 </div>
             </div>
@@ -2937,7 +2940,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             element.innerHTML = `
                 <div style="border: 2px dashed #52796F; border-radius: 24px; padding: 25px; background-color: #FAF8F5; text-align: center; box-sizing: border-box;">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 15px;">
-                        <img src="${activeClaimB2B.logo || 'lawenmoll_logo.jpg'}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='lawenmoll_logo.jpg'">
+                        <img src="${activeClaimB2B.logo || 'lawenmoll_logo.jpg'}" crossorigin="anonymous" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='lawenmoll_logo.jpg'">
                         <div style="text-align: left;">
                             <h4 style="font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 800; color: #52796F; margin: 0; text-transform: uppercase;">${activeClaimB2B.name}</h4>
                             <p style="font-size: 8px; font-weight: bold; color: #84A59D; margin: 1px 0 0 0; letter-spacing: 1px; text-transform: uppercase;">Ecosistema LAWENMOLL</p>
@@ -2949,7 +2952,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                         <p style="font-size: 10px; color: #4A5568; font-weight: bold;">Paciente: ${activeClaimPatientName}</p>
                     </div>
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: white; padding: 10px; border-radius: 12px; border: 1px solid #E2E8F0; width: 140px; margin: 10px auto;">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(activeClaimMsg)}" style="width: 110px; height: 110px; object-fit: contain;">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(activeClaimMsg)}" crossorigin="anonymous" style="width: 110px; height: 110px; object-fit: contain;">
                         <span style="font-size: 10px; font-weight: bold; color: #52796F; font-family: monospace; margin-top: 5px;">${activeClaimB2B.code}</span>
                     </div>
                     <div style="font-size: 7.5px; color: #A0AEC0; margin-top: 15px;">
@@ -2968,8 +2971,23 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             };
 
             document.body.appendChild(element);
-            html2pdf().from(element).set(opt).save().then(() => {
-                document.body.removeChild(element);
+
+            // Wait until all images are fully loaded by browser to prevent blank spaces on mobile devices
+            const imgs = element.querySelectorAll('img');
+            const promises = Array.from(imgs).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            });
+
+            Promise.all(promises).then(() => {
+                setTimeout(() => {
+                    html2pdf().from(element).set(opt).save().then(() => {
+                        document.body.removeChild(element);
+                    });
+                }, 250);
             });
         }
     
