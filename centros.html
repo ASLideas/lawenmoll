@@ -1570,6 +1570,7 @@
             grid.innerHTML = '';
 
             allClinicsData.forEach(c => {
+                const safeName = c.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1616,7 +1617,7 @@
                                 <span>Trazar Ruta 🗺️</span>
                             </button>
                         </div>
-                        <button onclick="openCouponClaimModal('${c.nombre.replace(/'/g, "\\'")}', '${c.codigo_descuento || 'LAWEN-CLINIC'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
+                        <button onclick="openCouponClaimModal('${safeName}', '${c.codigo_descuento || 'LAWEN-CLINIC'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
                             <i class="fa-solid fa-ticket-simple"></i>
                             <span>Obtener Cupón de Bienestar 🎫</span>
                         </button>
@@ -1633,6 +1634,7 @@
             grid.innerHTML = '';
 
             allRestaurantsData.forEach(c => {
+                const safeName = c.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1682,7 +1684,7 @@
                                 <span>Trazar Ruta 🗺️</span>
                             </button>
                         </div>
-                        <button onclick="openCouponClaimModal('${c.nombre.replace(/'/g, "\\'")}', '${promoCode}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
+                        <button onclick="openCouponClaimModal('${safeName}', '${promoCode}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
                             <i class="fa-solid fa-ticket-simple"></i>
                             <span>Obtener Cupón de Descuento 🎫</span>
                         </button>
@@ -1699,6 +1701,7 @@
             grid.innerHTML = '';
 
             allGymsData.forEach(c => {
+                const safeName = c.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1743,7 +1746,7 @@
                                 <span>Trazar Ruta 🗺️</span>
                             </button>
                         </div>
-                        <button onclick="openCouponClaimModal('${c.nombre.replace(/'/g, "\\'")}', '${c.codigo_descuento || 'LAWEN-GYM'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5 focus:outline-none">
+                        <button onclick="openCouponClaimModal('${safeName}', '${c.codigo_descuento || 'LAWEN-GYM'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5 focus:outline-none">
                             <i class="fa-solid fa-ticket-simple"></i>
                             <span>Obtener Cupón de Bienestar 🎫</span>
                         </button>
@@ -1886,7 +1889,7 @@
                                 <span>Cancelar ❌</span>
                             </button>
                         </div>
-                        <button onclick="openCouponClaimModal('${t.nombre.replace(/'/g, "\\'")}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="w-full bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5 focus:outline-none">
+                        <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="w-full bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5 focus:outline-none">
                             <i class="fa-solid fa-ticket-simple"></i>
                             <span>Obtener Cupón de Bienestar 🎫</span>
                         </button>
