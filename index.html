@@ -1559,14 +1559,17 @@
                 severe: 'Agotamiento Extremo 💥'
             };
 
-            // Contenedor invisible (altura 0 y desbordamiento oculto) para que el navegador lo dibuje sin mostrarlo al usuario
+            // Contenedor invisible posicionado detras del viewport para renderizado sin cortes ni parpadeos
             const wrapper = document.createElement('div');
-            wrapper.style.height = '0';
-            wrapper.style.overflow = 'hidden';
-            wrapper.style.position = 'absolute';
+            wrapper.style.position = 'fixed';
             wrapper.style.top = '0';
             wrapper.style.left = '0';
             wrapper.style.width = '794px';
+            wrapper.style.height = 'auto'; // Permitir expansion completa del DOM para captura
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.opacity = '1';
+            wrapper.style.zIndex = '-99999'; // Renderizar detras de todo el sitio de forma segura (Ley 21.663)
+            wrapper.style.background = '#FAF8F5';
 
             const element = document.createElement('div');
             element.className = "p-0 font-sans text-xs text-gray-700 leading-relaxed";
@@ -1668,7 +1671,7 @@
                 margin:       0,
                 filename:     filenameText,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0 }, // Forzar renderizado desde coordenada y=0 ignorando scroll de pantalla
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
