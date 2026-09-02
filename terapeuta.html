@@ -955,16 +955,20 @@
             const therapistName = activeTherapist ? activeTherapist.nombre : 'Klgo. Carlos Mendoza';
             const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
 
+            // Contenedor invisible (altura 0 y desbordamiento oculto) para que el navegador lo dibuje sin mostrarlo al usuario
+            const wrapper = document.createElement('div');
+            wrapper.style.height = '0';
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.position = 'absolute';
+            wrapper.style.top = '0';
+            wrapper.style.left = '0';
+            wrapper.style.width = '780px';
+
             const element = document.createElement('div');
-            element.className = "p-8 bg-[#FAF8F5] font-sans text-xs text-gray-700 leading-relaxed";
+            element.className = "p-10 bg-white font-sans text-xs text-gray-700 leading-relaxed";
             element.style.color = "#2F3E46";
             element.style.width = "750px";
-            element.style.position = 'absolute';
-            element.style.top = '3000px';
-            element.style.left = '0';
-            element.style.opacity = '1';
-            element.style.visibility = 'visible';
-            element.style.display = 'block';
+            element.style.background = "#FAF8F5";
 
             let contentHtml = `
                 <div style="padding: 10px; display: flex; flex-direction: column; gap: 15px; background-color: #FAF8F5;">
@@ -1032,7 +1036,7 @@
                         </div>
 
                         <div style="background-color: #EBF8FF; padding: 15px; border-radius: 12px; border-left: 5px solid #3182CE; border-top: 1px solid #BEE3F8; border-right: 1px solid #BEE3F8; border-bottom: 1px solid #BEE3F8; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
-                            <strong style="color: #2B6CB0; font-size: 11px; text-transform: uppercase; display: flex; align-items: center; margin-bottom: 6px;"><span style="margin-right: 6px;">💊</span> [P] Plan de Tratamiento y Prescripción Fitoterapéutica:</strong>
+                            <strong style="color: #2B6CB0; font-size: 11px; text-transform: uppercase; display: flex; align-items: center; margin-bottom: 6px;">💊 [P] Plan de Tratamiento y Prescripción Fitoterapéutica:</strong>
                             <p style="margin: 0; color: #2D3748; font-weight: bold; font-size: 10.5px; white-space: pre-line; line-height: 1.6;">${p || 'No prescrita.'}</p>
                         </div>
                         </div>
@@ -1063,17 +1067,19 @@
             element.innerHTML = contentHtml;
 
             const opt = {
-                margin:       12,
-                filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\\s+/g, '_')}.pdf`,
+                margin:       10,
+                filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2.5, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' },
                 pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
             };
 
-                        document.body.appendChild(element);
+            wrapper.appendChild(element);
+            document.body.appendChild(wrapper);
+
             html2pdf().from(element).set(opt).save().then(() => {
-                document.body.removeChild(element);
+                document.body.removeChild(wrapper);
             });
         }
         function startVideoCall() {
