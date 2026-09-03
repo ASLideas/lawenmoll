@@ -1980,35 +1980,51 @@
                     </div>
                 ` : '';
 
+                const galleryUrls = getTherapistGallery(t);
+                const galleryHtml = `
+                    <div class="mt-1 bg-sage/5 p-2 rounded-2xl border border-sage/10 w-full">
+                        <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-1 flex items-center">
+                            <i class="fa-solid fa-images mr-1 text-forest text-[8px]"></i> Galería Profesional de Servicios 📸
+                        </span>
+                        <div class="flex space-x-2 overflow-x-auto pb-1 scrollbar-none">
+                            ${galleryUrls.map(imgUrl => `
+                                <div onclick="openPhotoViewerModal('${imgUrl}')" class="w-12 h-12 rounded-xl overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 cursor-pointer hover:opacity-90 transition">
+                                    <img src="${imgUrl}" class="w-full h-full object-cover">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
                 const buttonsHtml = isBlocked ? `
-                    <div class="flex flex-col sm:flex-row gap-1.5 pt-1 w-full">
-                        <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1.5 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
+                    <div class="flex flex-col sm:flex-row gap-1 pt-1 w-full">
+                        <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
                             <i class="fa-solid fa-ban text-gray-400"></i>
                             <span>🚫 Horas Bloqueadas (En Clínica)</span>
                         </button>
                     </div>
                 ` : `
-                    <div class="space-y-1.5 pt-1 w-full">
-                        <div class="grid grid-cols-3 gap-1.5">
-                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="col-span-2 bg-forest hover:bg-forest/95 text-white font-extrabold py-1.5 rounded-xl text-[9px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
+                    <div class="space-y-1 pt-1 w-full">
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-1 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-calendar-check animate-pulse"></i>
                                 <span>Agendar 📅</span>
                             </button>
-                            <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="col-span-1 bg-accent hover:bg-accent/90 text-white font-extrabold py-1.5 rounded-xl text-[9px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
+                            <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="bg-accent hover:bg-accent/90 text-white font-extrabold py-1 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-ticket-simple"></i>
                                 <span>Cupón 🎫</span>
                             </button>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5">
-                            <button data-lat="${lat}" data-lon="${lon}" data-name="${t.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
+                            <button data-lat="${lat}" data-lon="${lon}" data-name="${t.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
                                 <i class="fa-solid fa-route"></i>
                                 <span>Mapa 🗺️</span>
                             </button>
-                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
+                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
                                 <i class="fa-solid fa-star"></i>
                                 <span>Reseñas ⭐</span>
                             </button>
-                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[9px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Cancelar Mi Cita">
+                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Anular mi Cita">
                                 <i class="fa-solid fa-ban"></i>
                                 <span>Anular ❌</span>
                             </button>
@@ -2054,6 +2070,7 @@
                             </div>
                         </div>
 
+                        ${galleryHtml}
                         ${buttonsHtml}
                         
                         <!-- Lógica de Bloqueo Clínico -->
