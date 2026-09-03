@@ -1569,9 +1569,10 @@
                                     codeVal: allTherapistsData[idx].codeVal
                                 };
                             } else {
+                                const dbName = dbTher.nombre || 'Especialista Registrado';
                                 allTherapistsData.push({
                                     ...dbTher,
-                                    codeVal: `CLINIC-${dbTher.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}`
+                                    codeVal: `CLINIC-${dbName.split(' ').map(n => n ? n[0] : '').join('').substring(0,4).toUpperCase()}`
                                 });
                             }
                         });
@@ -3084,14 +3085,16 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         }
 
                 function downloadCouponImage() {
-            // Temporarily scroll to top of document to prevent html2canvas clipping/scroll offsets on mobile
+            // Temporarily scroll to top of document and disable smooth scroll to prevent html2canvas clipping
             const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
             const currentScrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            const htmlStyle = document.documentElement.style.scrollBehavior;
+            document.documentElement.style.scrollBehavior = 'auto';
             window.scrollTo(0, 0);
 
             // Generar un elemento temporal optimizado para descargar como PDF tamaño tarjeta/cupón
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'absolute';
+            wrapper.style.position = 'fixed';
             wrapper.style.left = '0';
             wrapper.style.top = '0';
             wrapper.style.width = '400px';
@@ -3154,6 +3157,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 html2pdf().from(element).set(opt).save().then(() => {
                     document.body.removeChild(wrapper);
                     window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
+                    document.documentElement.style.scrollBehavior = htmlStyle;
                 });
             }, 250);
         }

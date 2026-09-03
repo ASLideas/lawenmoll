@@ -1130,6 +1130,9 @@
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
                         document.body.removeChild(wrapper);
+                        // Restaurar el scroll original y scrollBehavior
+                        window.scrollTo(currentScrollX, currentScrollY);
+                        document.documentElement.style.scrollBehavior = htmlStyle;
                     });
                 }, 250);
             });
