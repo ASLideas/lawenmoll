@@ -1940,6 +1940,8 @@
             grid.innerHTML = '';
 
             allTherapistsData.forEach(t => {
+                if (!t) return;
+                const tName = t.nombre || 'Especialista de la Red';
                 const region = t.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1947,7 +1949,7 @@
                 const spec = t.especialidad || 'Consejería Herbal Pura y Fitoterapia';
                 const sis = t.registro_sis || 'SIS-948201';
                 const phone = t.telefono_contacto || '+56 9 8271 0938';
-                const cleanPhone = phone.replace(/\s+/g, '').replace('+', '');
+                const cleanPhone = (phone || '').replace(/\\s+/g, '').replace('+', '');
                 const inst = t.instagram || '@lawenmoll.cl';
                 const lnk = t.linkedin || 'https://linkedin.com';
                 const tel = t.telegram || 'lawenmoll_soporte';
@@ -1957,14 +1959,14 @@
                 const photo = t.foto_profesional || 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop';
                 
                 // Escape quotes for HTML onclick safety
-                const safeName = t.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
+                const safeName = tName.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const safeAddress = address.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 
                 // Lógica de bloqueo si atiende en clínica o contiene palabras clave prohibidas de centros/consultorios
                 const forbiddenKeywords = ['centro', 'terapéutico', 'terapeutico', 'consultorio', 'clínico', 'clinico', 'clínica', 'clinica', 'hospital', 'establecimiento', 'instituto', 'médico', 'medico', 'box', 'box de atención', 'box de atencion', 'sanatorio', 'cesfam', 'cosam'];
                 const addressLower = (t.direccion_box || '').toLowerCase();
-                const specLower = (t.especialidad || '').toLowerCase();
-                const nameLower = (t.nombre || '').toLowerCase();
+                const specLower = (spec || '').toLowerCase();
+                const nameLower = (tName || '').toLowerCase();
                 let hasForbiddenKeyword = false;
                 for (const kw of forbiddenKeywords) {
                     if (addressLower.includes(kw) || specLower.includes(kw) || nameLower.includes(kw)) {
@@ -1997,6 +1999,8 @@
                     </div>
                 `;
 
+                const couponCode = `COUPON-${tName.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0,4).toUpperCase()}`;
+
                 const buttonsHtml = isBlocked ? `
                     <div class="flex flex-col sm:flex-row gap-1.5 pt-1 w-full">
                         <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1.5 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
@@ -2007,25 +2011,25 @@
                 ` : `
                     <div class="space-y-1.5 pt-1 w-full">
                         <div class="grid grid-cols-5 gap-1.5">
-                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="col-span-2 bg-forest hover:bg-forest/95 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
+                            <button data-name="${tName.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="col-span-2 bg-forest hover:bg-forest/95 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-calendar-check animate-pulse"></i>
                                 <span>Agendar 📅</span>
                             </button>
-                            <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="col-span-3 bg-accent hover:bg-accent/90 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
+                            <button onclick="openCouponClaimModal('${safeName}', '${couponCode}', '${photo}', '10% DCTO en Cita Privada')" class="col-span-3 bg-accent hover:bg-accent/90 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-ticket-simple"></i>
                                 <span>Cupón 🎫</span>
                             </button>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5">
-                            <button data-lat="${lat}" data-lon="${lon}" data-name="${t.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
+                            <button data-lat="${lat}" data-lon="${lon}" data-name="${tName.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
                                 <i class="fa-solid fa-route"></i>
                                 <span>Mapa 🗺️</span>
                             </button>
-                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
+                            <button data-name="${tName.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
                                 <i class="fa-solid fa-star"></i>
                                 <span>Reseñas ⭐</span>
                             </button>
-                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Cancelar Mi Cita">
+                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal || 'CLINIC-' + tName.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0,4).toUpperCase()}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Cancelar Mi Cita">
                                 <i class="fa-solid fa-ban"></i>
                                 <span>Anular ❌</span>
                             </button>
@@ -2039,12 +2043,12 @@
                         <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
                             <div class="flex items-center space-x-4">
                                 <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sage/40 shadow-md flex-shrink-0">
-                                    <img src="${photo}" class="w-full h-full object-cover" alt="${t.nombre}">
+                                    <img src="${photo}" class="w-full h-full object-cover" alt="${tName}">
                                 </div>
                                 <div class="flex-grow">
                                     <span class="text-[8px] bg-sage/20 text-forest font-bold px-2 py-0.5 rounded-full uppercase">Independiente Certificado</span>
-                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full uppercase ml-1">🇨🇱 ${t.region_chile || 'Región Metropolitana'}</span>
-                                    <h3 class="font-extrabold text-xs text-slateDark mt-1">${t.nombre}</h3>
+                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full uppercase ml-1">🇨🇱 ${region}</span>
+                                    <h3 class="font-extrabold text-xs text-slateDark mt-1">${tName}</h3>
                                     <p class="text-[10px] text-gray-500 font-semibold">${spec}</p>
                                     <p class="text-[9px] text-forest font-bold flex items-center mt-1"><i class="fa-solid fa-house mr-1"></i> ${address}</p>
                                     <p class="text-[9px] text-gray-400 font-medium flex items-center mt-0.5"><i class="fa-solid fa-phone mr-1"></i> ${phone}</p>
@@ -2065,7 +2069,7 @@
                                 <div class="flex items-center space-x-2.5 mt-2 ${isBlocked ? 'opacity-40 pointer-events-none' : ''}">
                                     <a href="https://instagram.com/${inst.replace('@', '')}" target="_blank" class="text-pink-600 hover:text-pink-700 transition" title="Instagram"><i class="fa-brands fa-instagram text-base"></i></a>
                                     <a href="${lnk}" target="_blank" class="text-blue-600 hover:text-blue-700 transition" title="LinkedIn"><i class="fa-brands fa-linkedin text-base"></i></a>
-                                    <a href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Hola%20${encodeURIComponent(t.nombre)},%20vengo%20desde%20LAWENMOLL%20y%20me%20gustar%C3%ADa%20agendar%20una%20consulta." target="_blank" class="text-green-600 hover:text-green-700 transition" title="WhatsApp"><i class="fa-brands fa-whatsapp text-base"></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Hola%20${encodeURIComponent(tName)},%20vengo%20desde%20LAWENMOLL%20y%20me%20gustar%C3%ADa%20agendar%20una%20consulta." target="_blank" class="text-green-600 hover:text-green-700 transition" title="WhatsApp"><i class="fa-brands fa-whatsapp text-base"></i></a>
                                     <a href="https://t.me/${tel}" target="_blank" class="text-sky-500 hover:text-sky-600 transition" title="Telegram"><i class="fa-brands fa-telegram text-base"></i></a>
                                 </div>
                             </div>
@@ -2083,6 +2087,7 @@
                 grid.insertAdjacentHTML('beforeend', cardHtml);
             });
         }
+
         function viewEstablishmentDetail(type, id) {
             const modal = document.getElementById('establishmentDetailModal');
             const title = document.getElementById('estModalTitle');
@@ -3084,17 +3089,57 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             window.open(`https://api.whatsapp.com/send?phone=${activeClaimPhone}&text=${encodeURIComponent(activeClaimMsg)}`, '_blank');
         }
 
-                function downloadCouponImage() {
-            // Temporarily scroll to top of document and disable smooth scroll to prevent html2canvas clipping
+        function downloadCouponImage() {
+            // 1. Mostrar hermoso overlay herbolario de carga LAWENMOLL
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = 'rgba(250, 248, 245, 0.98)';
+            overlay.style.zIndex = '9999999';
+            overlay.style.display = 'flex';
+            overlay.style.flexDirection = 'column';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+            overlay.innerHTML = `
+                <div style="text-align: center; max-width: 320px; padding: 20px;">
+                    <span style="font-size: 56px; display: block; margin-bottom: 15px; animation: pulse 1.5s infinite ease-in-out;">🎫</span>
+                    <h4 style="color: #2F3E46; font-size: 15px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
+                    <p style="color: #52796F; font-size: 11px; font-weight: 600; margin: 0 0 20px 0;">Preparando cupón digital centrado...</p>
+                    <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; position: relative;">
+                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #52796F; border-radius: 2px; animation: loading-bar 1.5s infinite linear;"></div>
+                    </div>
+                </div>
+                <style>
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.15); }
+                        100% { transform: scale(1); }
+                    }
+                    @keyframes loading-bar {
+                        0% { left: -50%; }
+                        100% { left: 100%; }
+                    }
+                </style>
+            `;
+            document.body.appendChild(overlay);
+
+            // 2. Apagar scroll suave y guardar posición actual
             const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
             const currentScrollX = window.pageXOffset || document.documentElement.scrollLeft;
             const htmlStyle = document.documentElement.style.scrollBehavior;
             document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+
+            // 3. Saltar al tope (0,0) de forma instantánea
             window.scrollTo(0, 0);
 
-            // Generar un elemento temporal optimizado para descargar como PDF tamaño tarjeta/cupón
+            // 4. Crear contenedor temporal absoluto posicionado en top: 0
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'fixed';
+            wrapper.style.position = 'absolute';
             wrapper.style.left = '0';
             wrapper.style.top = '0';
             wrapper.style.width = '400px';
@@ -3104,7 +3149,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             wrapper.style.margin = '0';
             wrapper.style.padding = '0';
             wrapper.style.background = '#FAF8F5';
-            wrapper.style.zIndex = '999999';
+            wrapper.style.zIndex = '999998';
 
             const element = document.createElement('div');
             element.className = "p-6 bg-white font-sans text-xs text-gray-700 leading-relaxed";
@@ -3156,10 +3201,12 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             setTimeout(() => {
                 html2pdf().from(element).set(opt).save().then(() => {
                     document.body.removeChild(wrapper);
-                    window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
+                    document.body.removeChild(overlay);
+                    window.scrollTo(currentScrollX, currentScrollY);
                     document.documentElement.style.scrollBehavior = htmlStyle;
+                    document.body.style.scrollBehavior = htmlStyle;
                 });
-            }, 250);
+            }, 500);
         }
 
         function focusCancelBooking(inputId, codeVal) {

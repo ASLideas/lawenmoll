@@ -1620,12 +1620,54 @@
                 severe: 'Agotamiento Extremo 💥'
             };
 
-            // Temporarily scroll to top of document to prevent html2canvas clipping/scroll offsets on mobile
+            // 1. Mostrar hermoso overlay herbolario de carga LAWENMOLL
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.backgroundColor = 'rgba(250, 248, 245, 0.98)';
+            overlay.style.zIndex = '9999999';
+            overlay.style.display = 'flex';
+            overlay.style.flexDirection = 'column';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+            overlay.innerHTML = `
+                <div style="text-align: center; max-width: 320px; padding: 20px;">
+                    <span style="font-size: 56px; display: block; margin-bottom: 15px; animation: pulse 1.5s infinite ease-in-out;">🌿</span>
+                    <h4 style="color: #2F3E46; font-size: 15px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
+                    <p style="color: #52796F; font-size: 11px; font-weight: 600; margin: 0 0 20px 0;">Preparando pauta de salud digital centrado...</p>
+                    <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; position: relative;">
+                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #52796F; border-radius: 2px; animation: loading-bar 1.5s infinite linear;"></div>
+                    </div>
+                </div>
+                <style>
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.15); }
+                        100% { transform: scale(1); }
+                    }
+                    @keyframes loading-bar {
+                        0% { left: -50%; }
+                        100% { left: 100%; }
+                    }
+                </style>
+            `;
+            document.body.appendChild(overlay);
+
+            // 2. Apagar scroll suave y guardar posición actual
             const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
             const currentScrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            const htmlStyle = document.documentElement.style.scrollBehavior;
+            document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+
+            // 3. Saltar al tope (0,0) de forma instantánea
             window.scrollTo(0, 0);
 
-            // Contenedor invisible posicionado en absolute a (0,0) para garantizar que html2canvas capture todo sin cortes ni desfasamientos de scroll
+            // 4. Crear contenedor temporal absoluto posicionado en top: 0
             const wrapper = document.createElement('div');
             wrapper.style.position = 'absolute';
             wrapper.style.left = '0';
@@ -1638,7 +1680,7 @@
             wrapper.style.padding = '0';
             wrapper.style.textAlign = 'left';
             wrapper.style.background = '#FAF8F5';
-            wrapper.style.zIndex = '999999';
+            wrapper.style.zIndex = '999998';
 
             const element = document.createElement('div');
             element.className = "p-0 font-sans text-xs text-gray-700 leading-relaxed";
@@ -1658,7 +1700,7 @@
                         <!-- Header Oficial Epicrisis con Logo Circular -->
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 5px;">
                             <div style="display: flex; align-items: center; gap: 12px;">
-                                <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                                <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
                                 <div style="text-align: left;">
                                     <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
                                     <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
@@ -1768,9 +1810,12 @@
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
                         document.body.removeChild(wrapper);
+                        document.body.removeChild(overlay);
                         window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
+                        document.documentElement.style.scrollBehavior = htmlStyle;
+                        document.body.style.scrollBehavior = htmlStyle;
                     });
-                }, 250);
+                }, 500);
             });
         }
 
