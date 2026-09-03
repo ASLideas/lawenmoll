@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAWENMOLL - Test de Bienestar Inteligente v55</title>
+    <title>LAWENMOLL - Test de Bienestar Inteligente v57</title>
     <!-- Tailwind CSS para diseño moderno -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -2071,60 +2071,66 @@
             const clientPasarela = `Flow-TX-${Math.floor(100000 + Math.random() * 900000)}`;
 
             // Guardar en Supabase en la tabla terapeutas con contraseña cifrada (hashing)
-            try {
-                if (supabaseKey !== '') {
-                    hashPassword(passVal).then(hashedPassVal => {
-                        _supabase
-                            .from('terapeutas')
-                            .insert([
-                                {
-                                    nombre: nameVal,
-                                    especialidad: specVal,
-                                    registro_sis: sisVal,
-                                    email: emailVal,
-                                    password: hashedPassVal, // Secure Hashed Password!
-                                    estado_suscripcion: 'activo',
-                                    foto_profesional: document.getElementById('joinPhotoBase64').value || null,
-                                    foto_titulo: document.getElementById('joinDocBase64').value || null,
-                                    documento_acreditacion: document.getElementById('joinDocBase64').value || null,
-                                    id_cliente_pasarela: clientPasarela
-                                }
-                            ])
-                            .then(({ error }) => {
-                                if (error) {
-                                    console.error("❌ Error al registrar terapeuta en Supabase:", error.message);
-                                } else {
-                                    console.log("✅ Terapeuta registrado exitosamente en la base de datos.");
-                                }
-                            });
-                    });
-                }
-            } catch (err) {
-                console.error("❌ Error de red o conexión al guardar en Supabase:", err);
+            if (supabaseKey !== '') {
+                hashPassword(passVal).then(hashedPassVal => {
+                    _supabase
+                        .from('terapeutas')
+                        .insert([
+                            {
+                                nombre: nameVal,
+                                especialidad: specVal,
+                                registro_sis: sisVal,
+                                email: emailVal.toLowerCase(),
+                                password: hashedPassVal, // Secure Hashed Password!
+                                estado_suscripcion: 'activo',
+                                foto_profesional: document.getElementById('joinPhotoBase64').value || null,
+                                foto_titulo: document.getElementById('joinDocBase64').value || null,
+                                documento_acreditacion: document.getElementById('joinDocBase64').value || null,
+                                id_cliente_pasarela: clientPasarela
+                            }
+                        ])
+                        .then(({ error }) => {
+                            if (error) {
+                                console.error("❌ Error al registrar terapeuta en Supabase:", error.message);
+                                alert(`⚠️ ERROR DE INSCRIPCIÓN: El correo electrónico "${emailVal}" o el Registro SIS "${sisVal}" ya se encuentran registrados en nuestro sistema.\n\nPor favor utiliza credenciales diferentes o inicia sesión directamente en el Portal del Terapeuta.`);
+                                btnText.innerHTML = `<i class="fa-solid fa-lock"></i> <span>Pagar Membresía</span>`;
+                            } else {
+                                console.log("✅ Terapeuta registrado exitosamente en la base de datos.");
+                                finalizeRegistration(clientPasarela, emailVal);
+                            }
+                        });
+                }).catch(err => {
+                    console.error("❌ Error de hashing:", err);
+                    alert("⚠️ Ocurrió un error de seguridad al procesar la contraseña.");
+                    btnText.innerHTML = `<i class="fa-solid fa-lock"></i> <span>Pagar Membresía</span>`;
+                });
+            } else {
+                // Modo sin Supabase (Demo local)
+                finalizeRegistration(clientPasarela, emailVal);
             }
+        }
 
-            setTimeout(() => {
-                closePaymentModal();
-                alert(`🎉 ¡PAGO EXITOSO Y MEMBRESÍA ACTIVADA!\n\n` +
-                      `• Plan contratado: Plan \${selections.selectedPlan.toUpperCase()}\n` +
-                      `• Estado de Cuenta: ACTIVADO (SaaS B2B)\n` +
-                      `• Código de Transacción: \${clientPasarela}\n` +
-                      `• Credenciales de Acceso: Usa tu correo (\${emailVal}) y contraseña para ingresar a tu panel clínico.\n\n` +
-                      `Se ha generado tu cuenta de especialista en LAWENMOLL. Ya tienes acceso al portal clínico SOAP, la vitrina geolocalizada y el chat herbolario con tus credenciales de seguridad. ¡Bienvenido a LAWENMOLL!`);
-                
-                // Limpiar campos del registro
-                document.querySelector('#stepJoin input[placeholder="Ej: Dr. Francisco Mora"]').value = "";
-                document.querySelector('#stepJoin input[placeholder="Ej: Registro SIS N° 483920"]').value = "";
-                document.getElementById('joinEmail').value = "";
-                document.getElementById('joinPassword').value = "";
-                document.getElementById('joinPhotoBase64').value = "";
-                document.getElementById('joinDocBase64').value = "";
-                document.getElementById('joinPhotoFileName').innerText = "Mín 150x150px";
-                document.getElementById('joinDocFileName').innerText = "PDF, PNG, JPG";
-                document.getElementById('joinPhotoPreview').innerHTML = "📷";
-                document.getElementById('joinDocPreview').innerHTML = "📄";
-                nextStep(1);
-            }, 2000);
+        function finalizeRegistration(clientPasarela, emailVal) {
+            closePaymentModal();
+            alert(`🎉 ¡PAGO EXITOSO Y MEMBRESÍA ACTIVADA!\n\n` +
+                  `• Plan contratado: Plan ${selections.selectedPlan.toUpperCase()}\n` +
+                  `• Estado de Cuenta: ACTIVADO (SaaS B2B)\n` +
+                  `• Código de Transacción: ${clientPasarela}\n` +
+                  `• Credenciales de Acceso: Usa tu correo (${emailVal}) y contraseña para ingresar a tu panel clínico.\n\n` +
+                  `Se ha generado tu cuenta de especialista en LAWENMOLL. Ya tienes acceso al portal clínico SOAP, la vitrina geolocalizada y el chat herbolario con tus credenciales de seguridad. ¡Bienvenido a LAWENMOLL!`);
+            
+            // Limpiar campos del registro
+            document.querySelector('#stepJoin input[placeholder="Ej: Dr. Francisco Mora"]').value = "";
+            document.querySelector('#stepJoin input[placeholder="Ej: Registro SIS N° 483920"]').value = "";
+            document.getElementById('joinEmail').value = "";
+            document.getElementById('joinPassword').value = "";
+            document.getElementById('joinPhotoBase64').value = "";
+            document.getElementById('joinDocBase64').value = "";
+            document.getElementById('joinPhotoFileName').innerText = "Mín 150x150px";
+            document.getElementById('joinDocFileName').innerText = "PDF, PNG, JPG";
+            document.getElementById('joinPhotoPreview').innerHTML = "📷";
+            document.getElementById('joinDocPreview').innerHTML = "📄";
+            nextStep(1);
         }
 
     
