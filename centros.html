@@ -1625,7 +1625,7 @@
             grid.innerHTML = '';
 
             allClinicsData.forEach(c => {
-                const safeName = c.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeName = c.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1689,7 +1689,7 @@
             grid.innerHTML = '';
 
             allRestaurantsData.forEach(c => {
-                const safeName = c.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeName = c.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1756,7 +1756,7 @@
             grid.innerHTML = '';
 
             allGymsData.forEach(c => {
-                const safeName = c.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeName = c.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
 
@@ -1946,7 +1946,7 @@
                 const spec = t.especialidad || 'Consejería Herbal Pura y Fitoterapia';
                 const sis = t.registro_sis || 'SIS-948201';
                 const phone = t.telefono_contacto || '+56 9 8271 0938';
-                const cleanPhone = phone.replace(/\s/g, '').replace('+', '');
+                const cleanPhone = phone.replace(/\s+/g, '').replace('+', '');
                 const inst = t.instagram || '@lawenmoll.cl';
                 const lnk = t.linkedin || 'https://linkedin.com';
                 const tel = t.telegram || 'lawenmoll_soporte';
@@ -1956,8 +1956,8 @@
                 const photo = t.foto_profesional || 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop';
                 
                 // Escape quotes for HTML onclick safety
-                const safeName = t.nombre.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-                const safeAddress = address.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const safeName = t.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
+                const safeAddress = address.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 
                 // Lógica de bloqueo si atiende en clínica o contiene palabras clave prohibidas de centros/consultorios
                 const forbiddenKeywords = ['centro', 'terapéutico', 'terapeutico', 'consultorio', 'clínico', 'clinico', 'clínica', 'clinica', 'hospital', 'establecimiento', 'instituto', 'médico', 'medico', 'box', 'box de atención', 'box de atencion', 'sanatorio', 'cesfam', 'cosam'];
@@ -1982,13 +1982,13 @@
 
                 const galleryUrls = getTherapistGallery(t);
                 const galleryHtml = `
-                    <div class="mt-1 bg-sage/5 p-2 rounded-2xl border border-sage/10 w-full text-center">
-                        <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-1 flex items-center justify-center">
-                            <i class="fa-solid fa-images mr-1 text-forest text-[8px]"></i> Galería de Fotos Profesional 📸
+                    <div class="mt-1.5 bg-sage/5 p-2 rounded-2xl border border-sage/10 w-full text-center">
+                        <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-1.5 flex items-center justify-center">
+                            <i class="fa-solid fa-images mr-1.5 text-forest text-[8px]"></i> Galería de Fotos Profesional 📸
                         </span>
-                        <div class="grid grid-cols-4 gap-1.5 w-full px-0.5 justify-center">
+                        <div class="grid grid-cols-4 gap-2 w-full px-0.5 justify-center">
                             ${galleryUrls.slice(0, 4).map(imgUrl => `
-                                <div onclick="openPhotoViewerModal('${imgUrl}')" class="w-full aspect-[4/3] rounded-lg overflow-hidden border border-gray-150 shadow-sm cursor-pointer hover:scale-105 hover:opacity-95 transition duration-200">
+                                <div onclick="openPhotoViewerModal('${imgUrl}')" class="w-full aspect-[4/3] rounded-xl overflow-hidden border border-gray-150 shadow-sm cursor-pointer hover:scale-105 hover:opacity-95 transition duration-200">
                                     <img src="${imgUrl}" class="w-full h-full object-cover" alt="Servicio">
                                 </div>
                             `).join('')}
@@ -1997,34 +1997,34 @@
                 `;
 
                 const buttonsHtml = isBlocked ? `
-                    <div class="flex flex-col sm:flex-row gap-1 pt-1 w-full">
-                        <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
+                    <div class="flex flex-col sm:flex-row gap-1.5 pt-1 w-full">
+                        <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1.5 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
                             <i class="fa-solid fa-ban text-gray-400"></i>
                             <span>🚫 Horas Bloqueadas (En Clínica)</span>
                         </button>
                     </div>
                 ` : `
                     <div class="space-y-1.5 pt-1 w-full">
-                        <div class="grid grid-cols-2 gap-1.5">
-                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-1 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
+                        <div class="grid grid-cols-5 gap-1.5">
+                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="col-span-2 bg-forest hover:bg-forest/95 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-calendar-check animate-pulse"></i>
                                 <span>Agendar 📅</span>
                             </button>
-                            <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="bg-accent hover:bg-accent/90 text-white font-extrabold py-1 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
+                            <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="col-span-3 bg-accent hover:bg-accent/90 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-ticket-simple"></i>
                                 <span>Cupón 🎫</span>
                             </button>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5">
-                            <button data-lat="${lat}" data-lon="${lon}" data-name="${t.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
+                            <button data-lat="${lat}" data-lon="${lon}" data-name="${t.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
                                 <i class="fa-solid fa-route"></i>
                                 <span>Mapa 🗺️</span>
                             </button>
-                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
+                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
                                 <i class="fa-solid fa-star"></i>
                                 <span>Reseñas ⭐</span>
                             </button>
-                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Anular mi Cita">
+                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Cancelar Mi Cita">
                                 <i class="fa-solid fa-ban"></i>
                                 <span>Anular ❌</span>
                             </button>
@@ -2040,7 +2040,7 @@
                                 <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sage/40 shadow-md flex-shrink-0">
                                     <img src="${photo}" class="w-full h-full object-cover" alt="${t.nombre}">
                                 </div>
-                                <div>
+                                <div class="flex-grow">
                                     <span class="text-[8px] bg-sage/20 text-forest font-bold px-2 py-0.5 rounded-full uppercase">Independiente Certificado</span>
                                     <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full uppercase ml-1">🇨🇱 ${t.region_chile || 'Región Metropolitana'}</span>
                                     <h3 class="font-extrabold text-xs text-slateDark mt-1">${t.nombre}</h3>
@@ -2082,9 +2082,6 @@
                 grid.insertAdjacentHTML('beforeend', cardHtml);
             });
         }
-
-
-        // --- DETALLE DE ESTABLECIMIENTO (FOTOS Y PERSONAL TRABAJADOR) v19 ---
         function viewEstablishmentDetail(type, id) {
             const modal = document.getElementById('establishmentDetailModal');
             const title = document.getElementById('estModalTitle');
@@ -2254,7 +2251,7 @@
                             </div>
                             <div class="flex items-center justify-between pt-1 border-t border-dashed border-gray-100">
                                 <span class="text-xs font-black text-forest">${cls.price}</span>
-                                <button data-estname="${item.nombre.replace(/\"/g, '&quot;')}" data-type="gym" data-classname="${cls.name.replace(/\"/g, '&quot;')}" data-classprice="${cls.price.replace(/\"/g, '&quot;')}" onclick="openRestaurantBookingFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
+                                <button data-estname="${item.nombre.replace(/"/g, '&quot;')}" data-type="gym" data-classname="${cls.name.replace(/"/g, '&quot;')}" data-classprice="${cls.price.replace(/"/g, '&quot;')}" onclick="openRestaurantBookingFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold px-3 py-1.5 rounded-xl text-[9px] uppercase transition shadow-sm focus:outline-none">
                                     Agendar Clase
                                 </button>
                             </div>
@@ -3087,6 +3084,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         }
 
                 function downloadCouponImage() {
+            // Temporarily scroll to top of document to prevent html2canvas clipping/scroll offsets on mobile
+            const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const currentScrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            window.scrollTo(0, 0);
+
             // Generar un elemento temporal optimizado para descargar como PDF tamaño tarjeta/cupón
             const wrapper = document.createElement('div');
             wrapper.style.position = 'absolute';
@@ -3099,7 +3101,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             wrapper.style.margin = '0';
             wrapper.style.padding = '0';
             wrapper.style.background = '#FAF8F5';
-            wrapper.style.zIndex = '-99999';
+            wrapper.style.zIndex = '999999';
 
             const element = document.createElement('div');
             element.className = "p-6 bg-white font-sans text-xs text-gray-700 leading-relaxed";
@@ -3141,7 +3143,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 margin:       0,
                 filename:     `LAWENMOLL_Cupon_${activeClaimB2B.code}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 400 },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 400, width: 400 },
                 jsPDF:        { unit: 'mm', format: [100, 150], orientation: 'portrait' }
             };
 
@@ -3151,6 +3153,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             setTimeout(() => {
                 html2pdf().from(element).set(opt).save().then(() => {
                     document.body.removeChild(wrapper);
+                    window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
                 });
             }, 250);
         }

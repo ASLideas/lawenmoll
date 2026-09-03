@@ -1620,17 +1620,25 @@
                 severe: 'Agotamiento Extremo 💥'
             };
 
-            // Contenedor invisible posicionado de forma que no cause parpadeo pero sea renderizado al 100%
+            // Temporarily scroll to top of document to prevent html2canvas clipping/scroll offsets on mobile
+            const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const currentScrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            window.scrollTo(0, 0);
+
+            // Contenedor invisible posicionado en absolute a (0,0) para garantizar que html2canvas capture todo sin cortes ni desfasamientos de scroll
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'fixed';
-            wrapper.style.top = '0';
+            wrapper.style.position = 'absolute';
             wrapper.style.left = '0';
+            wrapper.style.top = '0';
             wrapper.style.width = '794px';
             wrapper.style.height = 'auto';
             wrapper.style.overflow = 'hidden';
-            wrapper.style.opacity = '1';
-            wrapper.style.zIndex = '-99999';
+            wrapper.style.display = 'block';
+            wrapper.style.margin = '0';
+            wrapper.style.padding = '0';
+            wrapper.style.textAlign = 'left';
             wrapper.style.background = '#FAF8F5';
+            wrapper.style.zIndex = '999999';
 
             const element = document.createElement('div');
             element.className = "p-0 font-sans text-xs text-gray-700 leading-relaxed";
@@ -1739,7 +1747,7 @@
                 margin:       0,
                 filename:     filenameText,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0 },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794, width: 794 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
@@ -1760,6 +1768,7 @@
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
                         document.body.removeChild(wrapper);
+                        window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
                     });
                 }, 250);
             });

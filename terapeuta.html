@@ -980,11 +980,12 @@
             const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
             const emailVal = "No registrado"; // Safe fallback to prevent ReferenceError!
 
-            // Contenedor invisible posicionado en absolute a (0,0) para garantizar que html2canvas capture todo sin cortes ni desfasamientos de scroll
+            const scrollYVal = window.pageYOffset || document.documentElement.scrollTop;
+
             const wrapper = document.createElement('div');
             wrapper.style.position = 'absolute';
             wrapper.style.left = '0';
-            wrapper.style.top = '0';
+            wrapper.style.top = scrollYVal + 'px';
             wrapper.style.width = '794px';
             wrapper.style.height = 'auto';
             wrapper.style.overflow = 'hidden';
@@ -1108,7 +1109,7 @@
                 margin:       0,
                 filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794, width: 794 },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: scrollYVal, scrollX: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
