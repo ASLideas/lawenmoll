@@ -980,17 +980,20 @@
             const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
             const emailVal = "No registrado"; // Safe fallback to prevent ReferenceError!
 
-            // Contenedor invisible posicionado de forma que no cause parpadeo pero sea renderizado al 100%
+            // Fixed off-screen wrapper at top:0; left:0; and z-index: -99999 to guarantee centered rendering with 0-shift
             const wrapper = document.createElement('div');
             wrapper.style.position = 'fixed';
-            wrapper.style.top = '0';
             wrapper.style.left = '0';
+            wrapper.style.top = '0';
             wrapper.style.width = '794px';
             wrapper.style.height = 'auto';
             wrapper.style.overflow = 'hidden';
-            wrapper.style.opacity = '1';
-            wrapper.style.zIndex = '-99999';
+            wrapper.style.display = 'block';
+            wrapper.style.margin = '0';
+            wrapper.style.padding = '0';
+            wrapper.style.textAlign = 'left';
             wrapper.style.background = '#FAF8F5';
+            wrapper.style.zIndex = '-99999';
 
             const element = document.createElement('div');
             element.className = "p-0 font-sans text-xs text-gray-700 leading-relaxed";
@@ -1003,17 +1006,19 @@
                 <div style="width: 794px; padding: 45px; box-sizing: border-box; background-color: #FAF8F5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2F3E46;">
                     <!-- Bordered Box Container -->
                     <div style="border: 2px solid #52796F; border-radius: 20px; padding: 30px; background-color: #FAF8F5; box-shadow: 0 4px 6px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 15px;">
-                        <!-- Header Oficial Epicrisis con Logo Circular -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 5px;">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
-                                <div style="text-align: left;">
+                        <!-- Header Oficial Epicrisis con Logo Circular (Table-based layout to guarantee zero alignment issues) -->
+                        <div style="display: table; width: 100%; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 5px;">
+                            <div style="display: table-cell; vertical-align: middle; text-align: left;">
+                                <div style="display: inline-block; vertical-align: middle; margin-right: 12px;">
+                                    <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+                                </div>
+                                <div style="display: inline-block; vertical-align: middle; text-align: left;">
                                     <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
                                     <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
                                 </div>
                             </div>
-                            <div style="text-align: right; border-left: 1.5px solid #52796F; padding-left: 12px;">
-                                <span style="font-size: 8px; background-color: #F28482; color: white; font-weight: bold; padding: 3px 8px; border-radius: 6px; text-transform: uppercase;">EPICRISIS CLÍNICA</span>
+                            <div style="display: table-cell; vertical-align: middle; text-align: right; border-left: 1.5px solid #52796F; padding-left: 12px; width: 180px;">
+                                <span style="font-size: 8px; background-color: #F28482; color: white; font-weight: bold; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; display: inline-block;">EPICRISIS CLÍNICA</span>
                                 <p style="font-size: 8px; color: #718096; margin: 4px 0 0 0; font-weight: bold;">CÓDIGO: EPIC-LAWEN-${Math.floor(1000 + Math.random() * 9000)}</p>
                             </div>
                         </div>
@@ -1103,7 +1108,7 @@
                 margin:       0,
                 filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794 },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794, width: 794 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
