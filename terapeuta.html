@@ -100,7 +100,7 @@
     <header class="bg-white border-b border-gray-200 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
-                <img src="lawenmoll_logo.jpg" crossorigin="anonymous" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
+                <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop';">
                 <span class="font-bold text-lg md:text-xl tracking-wider text-forest font-sans">LAWENMOLL <span class="text-[9px] bg-forest/10 text-forest px-2 py-0.5 rounded-full ml-1 font-semibold">Especialistas 💼</span></span>
                 <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
             </div>
@@ -980,67 +980,17 @@
             const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
             const emailVal = "No registrado"; // Safe fallback to prevent ReferenceError!
 
-            // 1. Mostrar hermoso overlay herbolario de carga LAWENMOLL
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100vw';
-            overlay.style.height = '100vh';
-            overlay.style.backgroundColor = 'rgba(250, 248, 245, 0.98)';
-            overlay.style.zIndex = '9999999';
-            overlay.style.display = 'flex';
-            overlay.style.flexDirection = 'column';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
-            overlay.innerHTML = `
-                <div style="text-align: center; max-width: 320px; padding: 20px;">
-                    <span style="font-size: 56px; display: block; margin-bottom: 15px; animation: pulse 1.5s infinite ease-in-out;">🌿</span>
-                    <h4 style="color: #2F3E46; font-size: 15px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
-                    <p style="color: #52796F; font-size: 11px; font-weight: 600; margin: 0 0 20px 0;">Preparando epicrisis digital centrado...</p>
-                    <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; position: relative;">
-                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #52796F; border-radius: 2px; animation: loading-bar 1.5s infinite linear;"></div>
-                    </div>
-                </div>
-                <style>
-                    @keyframes pulse {
-                        0% { transform: scale(1); }
-                        50% { transform: scale(1.15); }
-                        100% { transform: scale(1); }
-                    }
-                    @keyframes loading-bar {
-                        0% { left: -50%; }
-                        100% { left: 100%; }
-                    }
-                </style>
-            `;
-            document.body.appendChild(overlay);
-
-            // 2. Apagar scroll suave y guardar posición actual
-            const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
-            const currentScrollX = window.pageXOffset || document.documentElement.scrollLeft;
-            const htmlStyle = document.documentElement.style.scrollBehavior;
-            document.documentElement.style.scrollBehavior = 'auto';
-            document.body.style.scrollBehavior = 'auto';
-
-            // 3. Saltar al tope (0,0) de forma instantánea
-            window.scrollTo(0, 0);
-
-            // 4. Crear contenedor temporal absoluto posicionado en top: 0
+            // Contenedor invisible fijo en (0,0) para garantizar que html2canvas capture todo sin cortes ni desfases de scroll
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'absolute';
-            wrapper.style.left = '0';
+            wrapper.style.position = 'fixed';
             wrapper.style.top = '0';
+            wrapper.style.left = '0';
             wrapper.style.width = '794px';
             wrapper.style.height = 'auto';
             wrapper.style.overflow = 'hidden';
-            wrapper.style.display = 'block';
-            wrapper.style.margin = '0';
-            wrapper.style.padding = '0';
-            wrapper.style.textAlign = 'left';
+            wrapper.style.opacity = '1';
+            wrapper.style.zIndex = '-99999';
             wrapper.style.background = '#FAF8F5';
-            wrapper.style.zIndex = '999998';
 
             const element = document.createElement('div');
             element.className = "p-0 font-sans text-xs text-gray-700 leading-relaxed";
@@ -1057,7 +1007,7 @@
                         <div style="display: table; width: 100%; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 5px;">
                             <div style="display: table-cell; vertical-align: middle; text-align: left;">
                                 <div style="display: inline-block; vertical-align: middle; margin-right: 12px;">
-                                    <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+                                    <img src="lawenmoll_logo.jpg" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
                                 </div>
                                 <div style="display: inline-block; vertical-align: middle; text-align: left;">
                                     <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
@@ -1153,9 +1103,9 @@
 
             const opt = {
                 margin:       0,
-                filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\\s+/g, '_')}.pdf`,
+                filename:     `LAWENMOLL_Epicrisis_${patientName.replace(/\s+/g, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794, width: 794 },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
@@ -1176,12 +1126,8 @@
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
                         document.body.removeChild(wrapper);
-                        document.body.removeChild(overlay);
-                        window.scrollTo(currentScrollX, currentScrollY);
-                        document.documentElement.style.scrollBehavior = htmlStyle;
-                        document.body.style.scrollBehavior = htmlStyle;
                     });
-                }, 500);
+                }, 250);
             });
         }
 
