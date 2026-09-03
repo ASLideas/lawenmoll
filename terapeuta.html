@@ -598,18 +598,42 @@
                 let loggedInUser = null;
                 let data = null;
 
-                // Verificar si existe la conexión con Supabase
+                // Verificar si existe la conexión con Supabase (Cifrado SHA-256 Backwards-Compatible)
                 if (supabaseKey !== '') {
-                    const response = await _supabase
+                    const hashedPassVal = await hashPassword(passVal);
+                    // Probar primero con contraseña cifrada (hash)
+                    let response = await _supabase
                         .from('terapeutas')
                         .select('*')
                         .eq('email', emailVal)
-                        .eq('password', passVal)
+                        .eq('password', hashedPassVal)
                         .eq('estado_suscripcion', 'activo')
                         .maybeSingle();
 
                     if (response.error) throw response.error;
                     data = response.data;
+
+                    // Compatibilidad con cuentas de texto plano antiguas: migrar al vuelo
+                    if (!data) {
+                        response = await _supabase
+                            .from('terapeutas')
+                            .select('*')
+                            .eq('email', emailVal)
+                            .eq('password', passVal)
+                            .eq('estado_suscripcion', 'activo')
+                            .maybeSingle();
+                        
+                        if (response.error) throw response.error;
+                        data = response.data;
+                        
+                        if (data) {
+                            // Actualizar contraseña a hash seguro de forma transparente
+                            await _supabase
+                                .from('terapeutas')
+                                .update({ password: hashedPassVal })
+                                .eq('id', data.id);
+                        }
+                    }
 
                     if (data) {
                         loggedInUser = {
