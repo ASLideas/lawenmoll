@@ -980,9 +980,9 @@
             const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
             const emailVal = "No registrado"; // Safe fallback to prevent ReferenceError!
 
-            // Fixed off-screen wrapper at top:0; left:0; and z-index: -99999 to guarantee centered rendering with 0-shift
+            // Contenedor invisible posicionado en absolute a (0,0) para garantizar que html2canvas capture todo sin cortes ni desfasamientos de scroll
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'fixed';
+            wrapper.style.position = 'absolute';
             wrapper.style.left = '0';
             wrapper.style.top = '0';
             wrapper.style.width = '794px';

@@ -1043,7 +1043,7 @@
                             
                             <!-- 📸 GALERÍA DE ESPACIO CLÍNICO / BOX (IDEA v61) -->
                             <div class="mt-4 bg-sage/5 p-3.5 rounded-2xl border border-sage/10 w-full">
-                                <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-2 flex items-center"><i class="fa-solid fa-images mr-1.5 text-forest text-[10px]"></i> Galería de Fotos Profesional 📸</span>
+                                <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-2 flex items-center"><i class="fa-solid fa-images mr-1.5 text-forest text-[10px]"></i> Espacio de Consulta & Gabinete de Herbolaria</span>
                                 <div class="flex space-x-2.5 overflow-x-auto pb-1 max-w-full">
                                     <div class="flex-shrink-0 w-28 h-20 rounded-xl overflow-hidden border border-gray-150 shadow-sm relative group">
                                         <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover" alt="Box de Aromaterapia">
@@ -1081,14 +1081,14 @@
                         </div>
 
                         <!-- Botones de Acción: Cómo Llegar y Cancelación -->
-                        <div class="flex flex-col sm:flex-row gap-1.5 pt-1">
-                            <button onclick="calculateIndependentRoute(-33.4250, -70.6120, 'Consulta Maite Soler', 'Av. Providencia 1450')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                        <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                            <button onclick="calculateIndependentRoute(-33.4250, -70.6120, 'Consulta Maite Soler', 'Av. Providencia 1450')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Mapa 🗺️</span>
+                                <span>Cómo Llegar (Mapa) 🗺️</span>
                             </button>
-                            <button onclick="focusCancelBooking('cancelBookingCode', 'CLINIC-MAITE')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                            <button onclick="focusCancelBooking('cancelBookingCode', 'CLINIC-MAITE')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-ban"></i>
-                                <span>Anular ❌</span>
+                                <span>Cancelar Mi Cita ❌</span>
                             </button>
                         </div>
                         
@@ -1154,14 +1154,14 @@
                         </div>
 
                         <!-- Botones de Acción: Cómo Llegar y Cancelación -->
-                        <div class="flex flex-col sm:flex-row gap-1.5 pt-1">
-                            <button onclick="calculateIndependentRoute(-33.4215, -70.6105, 'Oficina Ps. Tomás Araya', 'General Holley 142, Of. 304')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                        <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                            <button onclick="calculateIndependentRoute(-33.4215, -70.6105, 'Oficina Ps. Tomás Araya', 'General Holley 142, Of. 304')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Mapa 🗺️</span>
+                                <span>Cómo Llegar (Mapa) 🗺️</span>
                             </button>
-                            <button onclick="focusCancelBooking('cancelBookingCode', 'CLINIC-TOMAS')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                            <button onclick="focusCancelBooking('cancelBookingCode', 'CLINIC-TOMAS')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-ban"></i>
-                                <span>Anular ❌</span>
+                                <span>Cancelar Mi Cita ❌</span>
                             </button>
                         </div>
                         
@@ -1869,31 +1869,32 @@
             });
         }
 
-        // --- GALLERY AND PHOTO VIEWER HELPERS FOR INDEPENDENT PROFESSIONALS ---
+        // E. Profesionales Independientes
+                // --- GALLERY AND PHOTO VIEWER HELPERS FOR INDEPENDENT PROFESSIONALS ---
         function getTherapistGallery(t) {
             const defaultNaturopata = [
-                'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=150&auto=format&fit=crop'
+                'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=200&auto=format&fit=crop'
             ];
             const defaultPsicologo = [
-                'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=150&auto=format&fit=crop'
+                'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=200&auto=format&fit=crop'
             ];
             const defaultMedico = [
-                'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1579684389782-64d84b5e901a?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1611926653458-09294b3142bf?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1584515906207-52c48581ae7b?q=80&w=150&auto=format&fit=crop'
+                'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1579684389782-64d84b5e901a?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1611926653458-09294b3142bf?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1584515906207-52c48581ae7b?q=80&w=200&auto=format&fit=crop'
             ];
             const defaultKine = [
-                'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=150&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1519810755548-39cd217da494?q=80&w=150&auto=format&fit=crop'
+                'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1519810755548-39cd217da494?q=80&w=200&auto=format&fit=crop'
             ];
 
             const name = (t.nombre || '').toLowerCase();
@@ -1932,7 +1933,6 @@
             modal.classList.remove('hidden');
         }
 
-        // E. Profesionales Independientes
         function renderPublicTherapistsGrid() {
             const grid = document.getElementById('independentTherapistsGrid');
             if (!grid) return;
@@ -1946,7 +1946,7 @@
                 const spec = t.especialidad || 'Consejería Herbal Pura y Fitoterapia';
                 const sis = t.registro_sis || 'SIS-948201';
                 const phone = t.telefono_contacto || '+56 9 8271 0938';
-                const cleanPhone = phone.replace(/\s+/g, '').replace('+', '');
+                const cleanPhone = phone.replace(/\s/g, '').replace('+', '');
                 const inst = t.instagram || '@lawenmoll.cl';
                 const lnk = t.linkedin || 'https://linkedin.com';
                 const tel = t.telegram || 'lawenmoll_soporte';
@@ -1982,13 +1982,13 @@
 
                 const galleryUrls = getTherapistGallery(t);
                 const galleryHtml = `
-                    <div class="mt-1.5 bg-sage/5 p-2 rounded-2xl border border-sage/10 w-full text-center">
-                        <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-1.5 flex items-center justify-center">
-                            <i class="fa-solid fa-images mr-1.5 text-forest text-[8px]"></i> Galería de Fotos Profesional 📸
+                    <div class="mt-1 bg-sage/5 p-2 rounded-2xl border border-sage/10 w-full text-center">
+                        <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-1 flex items-center justify-center">
+                            <i class="fa-solid fa-images mr-1 text-forest text-[8px]"></i> Galería de Fotos Profesional 📸
                         </span>
-                        <div class="grid grid-cols-4 gap-2 w-full px-0.5 justify-center">
+                        <div class="grid grid-cols-4 gap-1.5 w-full px-0.5 justify-center">
                             ${galleryUrls.slice(0, 4).map(imgUrl => `
-                                <div onclick="openPhotoViewerModal('${imgUrl}')" class="w-full aspect-[4/3] rounded-xl overflow-hidden border border-gray-150 shadow-sm cursor-pointer hover:scale-105 hover:opacity-95 transition duration-200">
+                                <div onclick="openPhotoViewerModal('${imgUrl}')" class="w-full aspect-[4/3] rounded-lg overflow-hidden border border-gray-150 shadow-sm cursor-pointer hover:scale-105 hover:opacity-95 transition duration-200">
                                     <img src="${imgUrl}" class="w-full h-full object-cover" alt="Servicio">
                                 </div>
                             `).join('')}
@@ -1997,34 +1997,34 @@
                 `;
 
                 const buttonsHtml = isBlocked ? `
-                    <div class="flex flex-col sm:flex-row gap-1.5 pt-1 w-full">
-                        <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1.5 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
+                    <div class="flex flex-col sm:flex-row gap-1 pt-1 w-full">
+                        <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
                             <i class="fa-solid fa-ban text-gray-400"></i>
                             <span>🚫 Horas Bloqueadas (En Clínica)</span>
                         </button>
                     </div>
                 ` : `
                     <div class="space-y-1.5 pt-1 w-full">
-                        <div class="grid grid-cols-5 gap-1.5">
-                            <button data-name="\${t.nombre.replace(/"/g, '&quot;')}" data-rate="\${rate}" onclick="openIndependentBookingModalFromButton(this)" class="col-span-2 bg-forest hover:bg-forest/95 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-1 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-calendar-check animate-pulse"></i>
                                 <span>Agendar 📅</span>
                             </button>
-                            <button onclick="openCouponClaimModal('\${safeName}', 'COUPON-\${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '\${photo}', '10% DCTO en Cita Privada')" class="col-span-3 bg-accent hover:bg-accent/90 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
+                            <button onclick="openCouponClaimModal('${safeName}', 'COUPON-${t.nombre.split(' ').map(n => n[0]).join('').substring(0,4).toUpperCase()}', '${photo}', '10% DCTO en Cita Privada')" class="bg-accent hover:bg-accent/90 text-white font-extrabold py-1 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-ticket-simple"></i>
-                                <span>Cupón de Bienestar 🎫</span>
+                                <span>Cupón 🎫</span>
                             </button>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5">
-                            <button data-lat="\${lat}" data-lon="\${lon}" data-name="\${t.nombre.replace(/"/g, '&quot;')}" data-address="\${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
+                            <button data-lat="${lat}" data-lon="${lon}" data-name="${t.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
                                 <i class="fa-solid fa-route"></i>
                                 <span>Mapa 🗺️</span>
                             </button>
-                            <button data-name="\${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
+                            <button data-name="${t.nombre.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
                                 <i class="fa-solid fa-star"></i>
                                 <span>Reseñas ⭐</span>
                             </button>
-                            <button onclick="focusCancelBooking('cancelBookingCode', '\${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Cancelar Mi Cita">
+                            <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Anular mi Cita">
                                 <i class="fa-solid fa-ban"></i>
                                 <span>Anular ❌</span>
                             </button>
@@ -2033,51 +2033,57 @@
                 `;
 
                 const cardHtml = `
-                    <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 flex flex-col justify-between shadow-sm hover:border-forest/40 transition text-left animate-popIn">
-                        <div class="space-y-3.5">
-                            <div class="flex items-center space-x-3.5">
-                                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0">
-                                    <img src="${logo}" class="w-full h-full object-cover">
+                    <div class="p-5 border rounded-3xl shadow-sm transition space-y-4 text-left ${bgClass} animate-popIn">
+                        ${bannerBlockHtml}
+                        <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sage/40 shadow-md flex-shrink-0">
+                                    <img src="${photo}" class="w-full h-full object-cover" alt="${t.nombre}">
                                 </div>
                                 <div>
-                                    <h3 class="font-extrabold text-sm text-slateDark">${c.nombre}</h3>
-                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full inline-block">🇨🇱 ${c.region_chile || 'Región Metropolitana'}</span>
+                                    <span class="text-[8px] bg-sage/20 text-forest font-bold px-2 py-0.5 rounded-full uppercase">Independiente Certificado</span>
+                                    <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full uppercase ml-1">🇨🇱 ${t.region_chile || 'Región Metropolitana'}</span>
+                                    <h3 class="font-extrabold text-xs text-slateDark mt-1">${t.nombre}</h3>
+                                    <p class="text-[10px] text-gray-500 font-semibold">${spec}</p>
+                                    <p class="text-[9px] text-forest font-bold flex items-center mt-1"><i class="fa-solid fa-house mr-1"></i> ${address}</p>
+                                    <p class="text-[9px] text-gray-400 font-medium flex items-center mt-0.5"><i class="fa-solid fa-phone mr-1"></i> ${phone}</p>
                                 </div>
                             </div>
-                            <div class="w-full h-28 rounded-xl overflow-hidden shadow-inner border border-gray-150 relative">
-                                <img src="${banner}" class="w-full h-full object-cover">
-                            </div>
-                            <p class="text-[11px] text-gray-600 leading-relaxed font-semibold">${desc}</p>
-                            <div class="space-y-1 text-[10px] text-gray-500 font-medium border-t border-dashed border-gray-200 pt-3">
-                                <p><i class="fa-solid fa-location-dot text-accent mr-1.5"></i> ${address}</p>
-                                <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
-                                <p><i class="fa-solid fa-clock text-gray-400 mr-1.5"></i> ${hours}</p>
-                                <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
-                                <p class="text-slateDark font-extrabold mt-1 text-[9px] bg-amber-50 text-amber-800 px-2.5 py-1 rounded-xl inline-block border border-amber-100">
-                                    🩺 Pacientes Hoy: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
-                                </p>
+                            <div class="text-right flex flex-col items-end flex-shrink-0">
+                                <span class="text-xs font-black text-forest block">${rate} / sesión</span>
+                                <span class="text-[9px] text-gray-400 font-semibold font-sans">Tarifa Autónoma</span>
+                                
+                                <!-- Sello SIS con Enlace Directo -->
+                                <div class="flex items-center space-x-1.5 mt-1 bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-200 text-[8px] font-bold shadow-sm">
+                                    <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                                    <span>SIS N° ${sis}</span>
+                                    <a href="https://represtadores.superdesalud.gob.cl/consultas/buscar.aspx" target="_blank" class="text-forest hover:text-accent font-black ml-1 underline" title="Verificar en Superintendencia de Salud">Verificar</a>
+                                </div>
+
+                                <!-- Redes Sociales (Only active if not blocked!) -->
+                                <div class="flex items-center space-x-2.5 mt-2 ${isBlocked ? 'opacity-40 pointer-events-none' : ''}">
+                                    <a href="https://instagram.com/${inst.replace('@', '')}" target="_blank" class="text-pink-600 hover:text-pink-700 transition" title="Instagram"><i class="fa-brands fa-instagram text-base"></i></a>
+                                    <a href="${lnk}" target="_blank" class="text-blue-600 hover:text-blue-700 transition" title="LinkedIn"><i class="fa-brands fa-linkedin text-base"></i></a>
+                                    <a href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Hola%20${encodeURIComponent(t.nombre)},%20vengo%20desde%20LAWENMOLL%20y%20me%20gustar%C3%ADa%20agendar%20una%20consulta." target="_blank" class="text-green-600 hover:text-green-700 transition" title="WhatsApp"><i class="fa-brands fa-whatsapp text-base"></i></a>
+                                    <a href="https://t.me/${tel}" target="_blank" class="text-sky-500 hover:text-sky-600 transition" title="Telegram"><i class="fa-brands fa-telegram text-base"></i></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 mt-4">
-                            <button onclick="viewEstablishmentDetail('clínica', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
-                                Ver Personal 👥
-                            </button>
-                            <button data-lat="${c.latitud || -33.4285}" data-lon="${c.longitud || -70.6125}" data-name="${c.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
-                                <i class="fa-solid fa-route"></i>
-                                <span>Trazar Ruta 🗺️</span>
-                            </button>
+
+                        ${galleryHtml}
+                        ${buttonsHtml}
+                        
+                        <!-- Lógica de Bloqueo Clínico -->
+                        <div class="bg-yellow-50 p-3 rounded-xl border border-yellow-100 text-[9px] text-yellow-800 leading-relaxed font-semibold">
+                            <i class="fa-solid fa-triangle-exclamation text-accent mr-1"></i> <strong>Regla de Bloqueo por Establecimiento:</strong> ${isBlocked ? 'Este profesional está actualmente atendiendo en la clínica de la red. Sus horas independientes están bloqueadas según contrato B2B.' : 'Este profesional atiende bajo tarifa privada. Por contrato, sus horas privadas quedarán bloqueadas si atiende en clínicas de la red.'}
                         </div>
-                        <button onclick="openCouponClaimModal('${safeName}', '${c.codigo_descuento || 'LAWEN-CLINIC'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
-                            <i class="fa-solid fa-ticket-simple"></i>
-                            <span>Obtener Cupón de Bienestar 🎫</span>
-                        </button>
                     </div>
                 `;
                 grid.insertAdjacentHTML('beforeend', cardHtml);
             });
         }
 
-        // B. Restaurantes Saludables
+
         // --- DETALLE DE ESTABLECIMIENTO (FOTOS Y PERSONAL TRABAJADOR) v19 ---
         function viewEstablishmentDetail(type, id) {
             const modal = document.getElementById('establishmentDetailModal');
@@ -3080,23 +3086,38 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             window.open(`https://api.whatsapp.com/send?phone=${activeClaimPhone}&text=${encodeURIComponent(activeClaimMsg)}`, '_blank');
         }
 
-        function downloadCouponImage() {
+                function downloadCouponImage() {
             // Generar un elemento temporal optimizado para descargar como PDF tamaño tarjeta/cupón
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'absolute';
+            wrapper.style.left = '0';
+            wrapper.style.top = '0';
+            wrapper.style.width = '400px';
+            wrapper.style.height = 'auto';
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.display = 'block';
+            wrapper.style.margin = '0';
+            wrapper.style.padding = '0';
+            wrapper.style.background = '#FAF8F5';
+            wrapper.style.zIndex = '-99999';
+
             const element = document.createElement('div');
             element.className = "p-6 bg-white font-sans text-xs text-gray-700 leading-relaxed";
             element.style.color = "#2F3E46";
             element.style.width = "400px";
-            element.style.position = 'absolute';
-            element.style.top = '3000px';
-            element.style.left = '0';
-            element.style.display = 'block';
+            element.style.background = "#FAF8F5";
+            element.style.boxSizing = "border-box";
 
             element.innerHTML = `
                 <div style="border: 2px dashed #52796F; border-radius: 24px; padding: 25px; background-color: #FAF8F5; text-align: center; box-sizing: border-box;">
+                    <!-- Logo oficial de LAWENMOLL en el encabezado -->
+                    <div style="text-align: center; margin-bottom: 12px;">
+                        <img src="lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 45px; height: 45px; border-radius: 50%; display: block; margin: 0 auto; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+                    </div>
                     <div style="display: flex; align-items: center; justify-content: center; gap: 10px; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 15px;">
-                        <img src="${activeClaimB2B.logo || 'lawenmoll_logo.jpg'}" crossorigin="anonymous" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1.5px solid #52796F;" onerror="this.src='lawenmoll_logo.jpg'">
+                        <img src="${activeClaimB2B.logo || 'lawenmoll_logo.jpg'}" crossorigin="anonymous" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid #52796F;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
                         <div style="text-align: left;">
-                            <h4 style="font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 800; color: #52796F; margin: 0; text-transform: uppercase;">${activeClaimB2B.name}</h4>
+                            <h4 style="font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 800; color: #52796F; margin: 0; text-transform: uppercase;">${activeClaimB2B.name}</h4>
                             <p style="font-size: 8px; font-weight: bold; color: #84A59D; margin: 1px 0 0 0; letter-spacing: 1px; text-transform: uppercase;">Ecosistema LAWENMOLL</p>
                         </div>
                     </div>
@@ -3117,36 +3138,21 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             `;
 
             const opt = {
-                margin:       5,
+                margin:       0,
                 filename:     `LAWENMOLL_Cupon_${activeClaimB2B.code}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0 },
+                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 400 },
                 jsPDF:        { unit: 'mm', format: [100, 150], orientation: 'portrait' }
             };
 
-            document.body.appendChild(element);
+            wrapper.appendChild(element);
+            document.body.appendChild(wrapper);
 
-            // Wait until all images are fully loaded by browser to prevent blank spaces on mobile devices
-            const imgs = element.querySelectorAll('img');
-            const promises = Array.from(imgs).map(img => {
-                if (img.complete) return Promise.resolve();
-                return new Promise(resolve => {
-                    img.onload = resolve;
-                    img.onerror = resolve;
+            setTimeout(() => {
+                html2pdf().from(element).set(opt).save().then(() => {
+                    document.body.removeChild(wrapper);
                 });
-            });
-
-            Promise.all(promises).then(() => {
-                setTimeout(() => {
-                    html2pdf().from(element).set(opt).save().then(() => {
-                        document.body.removeChild(element);
-                    });
-                }, 250);
-            });
-        }
-    
-        function closeMapModal() {
-            document.getElementById('mapModal').classList.add('hidden');
+            }, 250);
         }
 
         function focusCancelBooking(inputId, codeVal) {
