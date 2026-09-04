@@ -1622,7 +1622,7 @@
 
             const svg_logo = `
                 <div style="display: inline-block; vertical-align: middle; margin-right: 12px; text-align: left;">
-                    <svg width="50" height="50" viewBox="0 0 100 100" style="display: block;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100" style="display: block;">
                         <circle cx="50" cy="50" r="46" fill="#FAF8F5" stroke="#52796F" stroke-width="3" />
                         <circle cx="50" cy="50" r="41" fill="none" stroke="#84A59D" stroke-dasharray="3 3" stroke-width="1" />
                         <path d="M50,80 Q48,50 50,25" fill="none" stroke="#52796F" stroke-width="2.5" stroke-linecap="round" />
@@ -1641,7 +1641,25 @@
                 </div>
             `;
 
-            
+            // Guardar anchos y estilos de body originales para restaurar después de la captura
+            const originalBodyWidth = document.body.style.width;
+            const originalBodyDisplay = document.body.style.display;
+            const originalHtmlWidth = document.documentElement.style.width;
+            const originalBodyMargin = document.body.style.margin;
+            const originalBodyPadding = document.body.style.padding;
+            const originalBodyPosition = document.body.style.position;
+            const originalBodyLeft = document.body.style.left;
+            const originalBodyTop = document.body.style.top;
+
+            // Forzar entorno de diseño de escritorio exacto de 794px para evitar desfasamientos y clipping móvil
+            document.body.style.width = '794px';
+            document.documentElement.style.width = '794px';
+            document.body.style.margin = '0';
+            document.body.style.padding = '0';
+            document.body.style.position = 'relative';
+            document.body.style.left = '0';
+            document.body.style.top = '0';
+            document.body.style.display = 'block';
 
             // 1. Mostrar hermoso overlay herbolario de carga LAWENMOLL
             const overlay = document.createElement('div');
@@ -1826,7 +1844,7 @@
             };
 
             wrapper.appendChild(element);
-            document.documentElement.appendChild(wrapper);
+            document.body.appendChild(wrapper);
 
             // Wait for all images to complete loading to prevent missing logo on mobile slow networks
             const imgs = element.querySelectorAll('img');
@@ -1841,9 +1859,20 @@
             Promise.all(promises).then(() => {
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
-                        document.documentElement.removeChild(wrapper);
+                        document.body.removeChild(wrapper);
                         document.body.removeChild(overlay);
-                        
+                        // Restaurar estilos de layout originales
+                        document.body.style.width = originalBodyWidth;
+                        document.documentElement.style.width = originalHtmlWidth;
+                        document.body.style.margin = originalBodyMargin;
+                        document.body.style.padding = originalBodyPadding;
+                        document.body.style.position = originalBodyPosition;
+                        document.body.style.left = originalBodyLeft;
+                        document.body.style.top = originalBodyTop;
+                        document.body.style.display = originalBodyDisplay;
+                        window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
+                        document.documentElement.style.scrollBehavior = htmlStyle;
+                        document.body.style.scrollBehavior = bodyStyle;
             });
                 }, 500);
             });

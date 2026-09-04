@@ -3092,7 +3092,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         function downloadCouponImage() {
             const svg_logo_coupon = `
                 <div style="text-align: center; margin-bottom: 12px; width: 100%;">
-                    <svg width="45" height="45" viewBox="0 0 100 100" style="display: block; margin: 0 auto 6px auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 100 100" style="display: block; margin: 0 auto 6px auto;">
                         <circle cx="50" cy="50" r="46" fill="#FAF8F5" stroke="#52796F" stroke-width="3" />
                         <circle cx="50" cy="50" r="41" fill="none" stroke="#84A59D" stroke-dasharray="3 3" stroke-width="1" />
                         <path d="M50,80 Q48,50 50,25" fill="none" stroke="#52796F" stroke-width="2.5" stroke-linecap="round" />
@@ -3109,7 +3109,25 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 </div>
             `;
 
-            
+            // Guardar anchos y estilos de body originales para restaurar después de la captura
+            const originalBodyWidth = document.body.style.width;
+            const originalBodyDisplay = document.body.style.display;
+            const originalHtmlWidth = document.documentElement.style.width;
+            const originalBodyMargin = document.body.style.margin;
+            const originalBodyPadding = document.body.style.padding;
+            const originalBodyPosition = document.body.style.position;
+            const originalBodyLeft = document.body.style.left;
+            const originalBodyTop = document.body.style.top;
+
+            // Forzar entorno de diseño de escritorio exacto de 400px para evitar desfasamientos y clipping móvil en cupones
+            document.body.style.width = '400px';
+            document.documentElement.style.width = '400px';
+            document.body.style.margin = '0';
+            document.body.style.padding = '0';
+            document.body.style.position = 'relative';
+            document.body.style.left = '0';
+            document.body.style.top = '0';
+            document.body.style.display = 'block';
 
             // 1. Mostrar hermoso overlay herbolario de carga LAWENMOLL
             const overlay = document.createElement('div');
@@ -3220,13 +3238,25 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             };
 
             wrapper.appendChild(element);
-            document.documentElement.appendChild(wrapper);
+            document.body.appendChild(wrapper);
 
             setTimeout(() => {
                 html2pdf().from(element).set(opt).save().then(() => {
-                    document.documentElement.removeChild(wrapper);
+                    document.body.removeChild(wrapper);
                     document.body.removeChild(overlay);
-                    
+                    // Restaurar estilos de layout originales
+                    document.body.style.width = originalBodyWidth;
+                    document.documentElement.style.width = originalHtmlWidth;
+                    document.body.style.margin = originalBodyMargin;
+                    document.body.style.padding = originalBodyPadding;
+                    document.body.style.position = originalBodyPosition;
+                    document.body.style.left = originalBodyLeft;
+                    document.body.style.display = originalBodyDisplay;
+                    document.body.style.top = originalBodyTop;
+                        document.body.style.display = originalBodyDisplay;
+                    window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
+                    document.documentElement.style.scrollBehavior = htmlStyle;
+                    document.body.style.scrollBehavior = bodyStyle;
             });
             }, 500);
         }
