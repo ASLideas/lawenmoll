@@ -1693,7 +1693,7 @@
 
             // 4. Crear contenedor temporal absoluto posicionado en top: 0 con ancho estricto de 794px para evitar achicamiento móvil
             const wrapper = document.createElement('div');
-            wrapper.style.position = 'fixed';
+            wrapper.style.position = 'absolute';
             wrapper.style.left = '0';
             wrapper.style.top = '0';
             wrapper.style.width = '794px';
@@ -1826,7 +1826,7 @@
             };
 
             wrapper.appendChild(element);
-            document.body.appendChild(wrapper);
+            document.documentElement.appendChild(wrapper);
 
             // Wait for all images to complete loading to prevent missing logo on mobile slow networks
             const imgs = element.querySelectorAll('img');
@@ -1841,12 +1841,9 @@
             Promise.all(promises).then(() => {
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
-                        document.body.removeChild(wrapper);
+                        document.documentElement.removeChild(wrapper);
                         document.body.removeChild(overlay);
                         
-                        window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
-                        document.documentElement.style.scrollBehavior = htmlStyle;
-                        document.body.style.scrollBehavior = bodyStyle;
             });
                 }, 500);
             });
