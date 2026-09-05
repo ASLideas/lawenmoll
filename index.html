@@ -1622,18 +1622,7 @@
 
             const svg_logo = `
                 <div style="display: inline-block; vertical-align: middle; margin-right: 12px; text-align: left;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100" style="display: block;">
-                        <circle cx="50" cy="50" r="46" fill="#FAF8F5" stroke="#52796F" stroke-width="3" />
-                        <circle cx="50" cy="50" r="41" fill="none" stroke="#84A59D" stroke-dasharray="3 3" stroke-width="1" />
-                        <path d="M50,80 Q48,50 50,25" fill="none" stroke="#52796F" stroke-width="2.5" stroke-linecap="round" />
-                        <path d="M50,45 Q65,30 60,18 Q45,25 50,45" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <path d="M50,45 Q35,30 40,18 Q55,25 50,45" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <path d="M50,58 Q68,48 65,38 Q48,42 50,58" fill="#52796F" stroke="#3A5F53" stroke-width="1" />
-                        <path d="M50,58 Q32,48 35,38 Q52,42 50,58" fill="#52796F" stroke="#3A5F53" stroke-width="1" />
-                        <path d="M50,70 Q62,65 60,55 Q48,58 50,70" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <path d="M50,70 Q38,65 40,55 Q52,58 50,70" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <circle cx="50" cy="20" r="3" fill="#F28482" />
-                    </svg>
+                    <img src="https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg" crossorigin="anonymous" style="width: 50px; height: 50px; border-radius: 50%; display: block; border: 2px solid #52796F;">
                 </div>
                 <div style="display: inline-block; vertical-align: middle; text-align: left;">
                     <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
@@ -1643,7 +1632,6 @@
 
             // Guardar anchos y estilos de body originales para restaurar después de la captura
             const originalBodyWidth = document.body.style.width;
-            const originalBodyDisplay = document.body.style.display;
             const originalHtmlWidth = document.documentElement.style.width;
             const originalBodyMargin = document.body.style.margin;
             const originalBodyPadding = document.body.style.padding;
@@ -1659,7 +1647,6 @@
             document.body.style.position = 'relative';
             document.body.style.left = '0';
             document.body.style.top = '0';
-            document.body.style.display = 'block';
 
             // 1. Mostrar hermoso overlay herbolario de carga LAWENMOLL
             const overlay = document.createElement('div');
@@ -1839,12 +1826,28 @@
                 margin:       0,
                 filename:     filenameText,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2.5, useCORS: true, scrollY: 0, scrollX: 0, windowWidth: 794, width: 794 },
+                html2canvas:  { 
+                    scale: 2.5, 
+                    useCORS: true, 
+                    scrollY: 0, 
+                    scrollX: 0, 
+                    windowWidth: 794, 
+                    width: 794,
+                    onclone: function(clonedDoc) {
+                        clonedDoc.body.style.width = '794px';
+                        clonedDoc.body.style.minWidth = '794px';
+                        clonedDoc.body.style.display = 'block';
+                        clonedDoc.body.style.margin = '0';
+                        clonedDoc.body.style.padding = '0';
+                        clonedDoc.documentElement.style.width = '794px';
+                        clonedDoc.documentElement.style.minWidth = '794px';
+                    }
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             wrapper.appendChild(element);
-            document.body.appendChild(wrapper);
+            document.documentElement.appendChild(wrapper);
 
             // Wait for all images to complete loading to prevent missing logo on mobile slow networks
             const imgs = element.querySelectorAll('img');
@@ -1859,7 +1862,7 @@
             Promise.all(promises).then(() => {
                 setTimeout(() => {
                     html2pdf().from(element).set(opt).save().then(() => {
-                        document.body.removeChild(wrapper);
+                        document.documentElement.removeChild(wrapper);
                         document.body.removeChild(overlay);
                         // Restaurar estilos de layout originales
                         document.body.style.width = originalBodyWidth;
@@ -1869,7 +1872,6 @@
                         document.body.style.position = originalBodyPosition;
                         document.body.style.left = originalBodyLeft;
                         document.body.style.top = originalBodyTop;
-                        document.body.style.display = originalBodyDisplay;
                         window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
                         document.documentElement.style.scrollBehavior = htmlStyle;
                         document.body.style.scrollBehavior = bodyStyle;
