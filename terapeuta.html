@@ -489,6 +489,12 @@
                             <span>Descargar Epicrisis (PDF) 📄</span>
                         </button>
                         
+                        <!-- BOTÓN DE GUARDADO EN OBSIDIAN (OPCIDIANA) -->
+                        <button onclick="saveToObsidian()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-book-medical"></i>
+                            <span>Sincronizar Obsidian 📓</span>
+                        </button>
+                        
 
                         
                         <!-- BOTÓN DE GUARDADO SEGURO -->
@@ -954,6 +960,78 @@
                     btn.classList.add('hidden');
                 }
             });
+        }
+
+        function saveToObsidian() {
+            const nameAndAge = document.getElementById('patientName').innerText;
+            const patientName = nameAndAge.split(" (")[0].trim();
+            const age = nameAndAge.split(" (")[1] ? nameAndAge.split(" (")[1].replace(")", "") : "30 años";
+            
+            const imcVal = document.getElementById('patientIMC').innerText;
+            const imcCatVal = document.getElementById('patientIMCCat').innerText;
+            const chronicVal = document.getElementById('patientChronic').innerText;
+            const dateTimeVal = document.getElementById('patientDateTime').innerText;
+            const mentalVal = document.getElementById('patientMental').innerText;
+            const phoneVal = document.getElementById('patientPhone').innerText;
+
+            const s = document.getElementById('soapS').value;
+            const o = document.getElementById('soapO').value;
+            const a = document.getElementById('soapA').value;
+            const p = document.getElementById('soapP').value;
+
+            const therapistName = activeTherapist ? activeTherapist.nombre : 'Klgo. Carlos Mendoza';
+            const therapistSis = activeTherapist ? activeTherapist.registro_sis : 'SIS N° 849204';
+
+            const markdownContent = `---
+type: clinical_soap
+patient: ${patientName}
+date: ${dateTimeVal}
+therapist: ${therapistName}
+---
+# 🌿 FICHA CLÍNICA SOAP - LAWENMOLL
+**Ecosistema de Salud Integrativa**
+
+## 📋 ANTECEDENTES DEL PACIENTE
+- **Nombre Completo:** ${patientName}
+- **Edad:** ${age}
+- **Teléfono:** ${phoneVal}
+- **Fecha de Atención:** ${dateTimeVal}
+
+## 📊 PARÁMETROS BIOMÉTRICOS
+- **IMC:** ${imcVal} (${imcCatVal})
+- **Condiciones Crónicas:** ${chronicVal}
+- **Enfoque Cognitivo/Neurodivergencia:** ${mentalVal}
+
+---
+
+## 🩺 DETALLE CLÍNICO SOAP
+
+### [S] SUBJETIVO (Anamnesis y Síntomas)
+${s || 'No registrado.'}
+
+### [O] OBJETIVO (Evaluación física e instrumental remota)
+${o || 'No registrado.'}
+
+### [A] APRECIACIÓN (Hipótesis clínica y Diagnóstico)
+${a || 'No registrado.'}
+
+### [P] PLAN DE TRATAMIENTO (Prescripción Fitoterapéutica)
+${p || 'No registrada.'}
+
+---
+**Firmado Digitalmente por:**
+*${therapistName}*
+*${therapistSis}*
+*LAWENMOLL Chile SpA*
+`;
+
+            const vaultName = "LAWENMOLL_Clinica";
+            const fileName = `Ficha_SOAP_${patientName.replace(/\s+/g, '_')}_${dateTimeVal.split(' ')[0].replace(/\//g, '-')}`;
+            
+            const obsidianUrl = `obsidian://new?vault=${encodeURIComponent(vaultName)}&name=${encodeURIComponent(fileName)}&content=${encodeURIComponent(markdownContent)}`;
+            
+            alert(`📓 ¡Sincronizando con Obsidian! Se creará la ficha clínica de ${patientName} en tu bóveda (vault) de Obsidian llamada "${vaultName}".\n\nRecuerda tener previamente abierta tu bóveda en Obsidian para que se cree automáticamente.`);
+            window.location.href = obsidianUrl;
         }
 
         function downloadSOAPPDF() {
