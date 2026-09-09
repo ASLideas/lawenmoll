@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASLIDEAS Bienestar - Super-App v5</title>
+    <title>ASLIDEAS Bienestar - Super-App v8</title>
     <!-- Tailwind CSS para un diseño moderno y fluido con paleta Teal Air -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons para una iconografía limpia y uniforme -->
@@ -47,7 +47,7 @@
 
         /* Estilo de paleta Teal Air de la imagen de referencia */
         :root {
-            --bg-linen: #FAF9F5;
+            --bg-linen: #FAF8EE;
             --teal-light: #E0F7F4;
             --teal-med: #33BCA9;
             --teal-dark: #2C7A7B;
@@ -56,13 +56,13 @@
         }
     </style>
 </head>
-<body class="bg-[#111C24] h-screen w-screen flex items-center justify-center font-sans antialiased text-[#2D3748]">
+<body class="bg-[#111C24] h-screen w-screen flex items-center justify-center font-sans antialiased text-[#4C5C77]">
 
     <!-- CONTENEDOR DEL TELÉFONO MÓVIL (PWA MOCKUP) -->
-    <div class="w-full max-w-md h-[840px] bg-[#FAF9F5] rounded-[45px] border-[10px] border-[#1E293B] shadow-2xl overflow-hidden flex flex-col relative select-none">
+    <div class="w-full max-w-md h-[840px] bg-[#FAF8EE] rounded-[45px] border-[10px] border-[#1E293B] shadow-2xl overflow-hidden flex flex-col relative select-none">
         
         <!-- Barra de Estado del Sistema -->
-        <div class="bg-[#FAF9F5] text-[#2D3748] text-xs px-6 py-2.5 flex justify-between items-center shrink-0 z-40 transition-colors duration-300" id="system-status-bar">
+        <div class="bg-[#FAF8EE] text-[#4C5C77] text-xs px-6 py-2.5 flex justify-between items-center shrink-0 z-40 transition-colors duration-300" id="system-status-bar">
             <span class="font-bold" id="live-clock">16:42</span>
             <div class="flex gap-1.5 items-center">
                 <i data-lucide="signal" class="w-3.5 h-3.5 text-[#5A738E]"></i>
@@ -82,7 +82,7 @@
                     <h4 class="text-xs font-black text-slate-800 leading-tight">Alerta de Cita Médica 🩺</h4>
                     <span class="text-[9px] text-[#2C7A7B] font-bold uppercase tracking-wider">Ahora</span>
                 </div>
-                <p class="text-[11px] text-[#2D3748] font-bold mt-1" id="toast-doctor">Dr. Aldo Licandeo</p>
+                <p class="text-[11px] text-[#4C5C77] font-bold mt-1" id="toast-doctor">Dr. Aldo Licandeo</p>
                 <p class="text-[10px] text-slate-500" id="toast-establishment">Centro: Particular</p>
                 <span class="text-[9px] text-[#33BCA9] font-semibold flex items-center gap-1 mt-1"><i data-lucide="clock" class="w-3 h-3"></i> Toca para ver detalles</span>
             </div>
@@ -93,77 +93,78 @@
         <div class="flex-1 flex flex-col overflow-hidden relative">
 
             <!-- ================= PANTALLA 1: BIENESTAR (CHATS, NOVEDADES Y LLAMADAS) ================= -->
-            <div id="screen-chats" class="flex-1 flex flex-col h-full overflow-hidden bg-[#FAF9F5]">
-                <header class="px-5 pt-3 pb-2 flex flex-col shrink-0 bg-[#FAF9F5] border-b border-[#33BCA9]/10 relative">
-                    <div class="flex items-center justify-between">
-                        <!-- Rediseño Cabecera con Nombre "Bienestar" y Logo circular oficial unificado -->
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden shrink-0 border border-[#33BCA9]/15">
-                                <!-- Logotipo Oficial Vectorizado (Meditador en loto, doble arco y hojas) -->
-                                <svg viewBox="0 0 120 120" class="w-7 h-7 stroke-[#2C7A7B] fill-none" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M 35 40 A 25 25 0 0 1 85 40" stroke="#33BCA9" stroke-width="2.5" />
-                                    <path d="M 28 35 A 32 32 0 0 1 92 35" stroke="#2C7A7B" stroke-width="3" />
-                                    <path d="M 21 30 A 39 32 0 0 1 99 30" stroke="#33BCA9" stroke-width="1.8" class="opacity-60" />
-                                    <circle cx="60" cy="46" r="7.5" fill="none" stroke="#2C7A7B" stroke-width="5" />
-                                    <path d="M 60 53 L 60 70" stroke="#2C7A7B" stroke-width="5" />
-                                    <path d="M 45 62 Q 52 56 60 56 Q 68 56 75 62 Q 68 80 60 80 Q 52 80 45 62 Z" fill="#33BCA9" fill-opacity="0.2" stroke="#2C7A7B" stroke-width="3" />
-                                    <path d="M 40 76 C 30 76 34 88 60 88 C 86 88 90 76 80 76 C 72 76 68 84 60 84 C 52 84 48 76 40 76 Z" fill="#33BCA9" fill-opacity="0.3" stroke="#2C7A7B" stroke-width="3" />
-                                    <path d="M 44 56 Q 30 45 28 58 Q 38 64 44 56 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                                    <path d="M 38 68 Q 22 62 18 73 Q 28 80 38 68 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                                    <path d="M 52 68 Q 45 64 46 72 Q 52 72 52 68 Z" fill="#33BCA9" fill-opacity="0.5" stroke="#2C7A7B" stroke-width="2" />
-                                    <path d="M 76 56 Q 90 45 92 58 Q 82 64 76 56 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                                    <path d="M 82 68 Q 98 62 102 73 Q 92 80 82 68 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                                    <path d="M 68 68 Q 75 64 74 72 Q 68 72 68 68 Z" fill="#33BCA9" fill-opacity="0.5" stroke="#2C7A7B" stroke-width="2" />
-                                </svg>
+            <div id="screen-chats" class="flex-1 flex flex-col h-full overflow-hidden bg-[#FAF8EE]">
+                <header class="px-5 pt-4 pb-3 flex flex-col shrink-0 bg-[#FAF8EE] border-b border-[#33BCA9]/20 relative shadow-xs">
+                    <!-- Rediseño Cabecera Centrada con Nombre "Bienestar" y Logo circular oficial ("al principio y al centro") -->
+                    <div class="relative flex items-center justify-between min-h-[64px]">
+                        <!-- Izquierda: Avatares -->
+                        <div class="flex -space-x-2 overflow-hidden items-center shrink-0">
+                            <img class="inline-block h-7 w-7 rounded-full ring-2 ring-[#FAF8EE] object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=60&h=60" alt="Médico">
+                            <img class="inline-block h-7 w-7 rounded-full ring-2 ring-[#FAF8EE] object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=60&h=60" alt="Terapeuta">
+                        </div>
+
+                        <!-- Centro: LOGO Y TÍTULO AL PRINCIPIO Y AL CENTRO -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-[#33BCA9]/30 p-1 shrink-0 hover:scale-105 transition-transform duration-300">
+                                <svg viewBox="0 0 120 120" class="w-full h-full stroke-[#33BCA9] fill-none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 32 36 A 30 30 0 0 1 88 36" stroke="#33BCA9" stroke-width="3" />
+    <path d="M 24 28 A 40 40 0 0 1 96 28" stroke="#7CD0B1" stroke-width="2.5" />
+    <path d="M 18 20 A 48 48 0 0 1 102 20" stroke="#B8F2EE" stroke-width="2" opacity="0.8" />
+    <circle cx="60" cy="62" r="52" stroke="#33BCA9" stroke-width="2.5" fill="none" />
+    <circle cx="60" cy="46" r="7.5" fill="none" stroke="#4C5C77" stroke-width="4" />
+    <path d="M 60 53.5 L 60 70" stroke="#4C5C77" stroke-width="4" />
+    <path d="M 38 82 C 30 82 34 92 60 92 C 86 92 90 82 82 82 C 74 82 68 88 60 88 C 52 88 46 82 38 82 Z" fill="#33BCA9" fill-opacity="0.18" stroke="#4C5C77" stroke-width="3" />
+    <path d="M 44 65 Q 52 58 60 58 Q 68 58 76 65 Q 68 80 60 80 Q 52 80 44 65 Z" fill="#7CD0B1" fill-opacity="0.2" stroke="#4C5C77" stroke-width="3" />
+    <path d="M 60 60 Q 64 65 60 72 Q 56 65 60 60 Z" fill="#7CD0B1" stroke="#33BCA9" stroke-width="1.8" />
+    <path d="M 40 52 Q 28 46 32 36 Q 42 40 40 52 Z" fill="#7CD0B1" stroke="#33BCA9" stroke-width="1.8" />
+    <path d="M 48 62 Q 36 58 40 48 Q 50 52 48 62 Z" fill="#33BCA9" stroke="#2C7A7B" stroke-width="1.8" />
+    <path d="M 80 52 Q 92 46 88 36 Q 78 40 80 52 Z" fill="#7CD0B1" stroke="#33BCA9" stroke-width="1.8" />
+    <path d="M 72 62 Q 84 58 80 48 Q 70 52 72 62 Z" fill="#33BCA9" stroke="#2C7A7B" stroke-width="1.8" />
+</svg>
                             </div>
-                            <h1 class="text-xl font-black text-[#2D3748] tracking-tight leading-none">Bienestar</h1>
+                            <h1 class="text-base font-black text-[#4C5C77] tracking-tight mt-1 leading-none">Bienestar</h1>
+                            <span class="text-[8px] font-extrabold uppercase tracking-widest text-[#33BCA9] mt-0.5">SALUD & ARMONÍA</span>
                         </div>
 
-                        <!-- Avatares de la cabecera -->
-                        <div class="flex -space-x-2 overflow-hidden">
-                            <img class="inline-block h-7 w-7 rounded-full ring-2 ring-[#FAF9F5] object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=60&h=60" alt="Médico">
-                            <img class="inline-block h-7 w-7 rounded-full ring-2 ring-[#FAF9F5] object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=60&h=60" alt="Terapeuta">
-                            <img class="inline-block h-7 w-7 rounded-full ring-2 ring-[#FAF9F5] object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=60&h=60" alt="Paciente">
-                        </div>
-
-                        <div class="flex items-center gap-4 text-[#5A738E] relative">
+                        <!-- Derecha: Acciones -->
+                        <div class="flex items-center gap-3 text-[#4C5C77] relative shrink-0">
                             <i data-lucide="search" class="w-5 h-5 cursor-pointer hover:text-[#33BCA9] transition"></i>
                             <i onclick="toggleMainMenu()" data-lucide="more-vertical" class="w-5 h-5 cursor-pointer hover:text-[#33BCA9] transition" id="three-dots-button"></i>
                         </div>
                     </div>
 
                     <!-- Menú unificado de 3 puntos (Imágenes 14 y 18) -->
-                    <div id="main-context-menu" class="absolute right-5 top-12 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-150/80 hidden z-50 py-1.5 divide-y divide-slate-100">
+                    <div id="main-context-menu" class="absolute right-5 top-16 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-150/80 hidden z-50 py-1.5 divide-y divide-slate-100">
                         <div class="py-1">
-                            <button onclick="triggerMenuAction('Anuncios publicitarios')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Anuncios publicitarios')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="megaphone" class="w-3.5 h-3.5 text-[#33BCA9]"></i> Anuncios publicitarios
                             </button>
-                            <button onclick="triggerMenuAction('Nuevo grupo')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Nuevo grupo')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="users" class="w-3.5 h-3.5 text-[#33BCA9]"></i> Nuevo grupo
                             </button>
-                            <button onclick="triggerMenuAction('Comunidades')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Comunidades')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="globe" class="w-3.5 h-3.5 text-blue-500"></i> Comunidades
                             </button>
-                            <button onclick="triggerMenuAction('Listas')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Listas')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="list-filter" class="w-3.5 h-3.5 text-slate-500"></i> Listas
                             </button>
                         </div>
                         <div class="py-1">
-                            <button onclick="triggerMenuAction('Dispositivos vinculados')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Dispositivos vinculados')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="laptop" class="w-3.5 h-3.5 text-indigo-500"></i> Dispositivos vinculados
                             </button>
-                            <button onclick="triggerMenuAction('Mensajes destacados')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Mensajes destacados')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500"></i> Mensajes destacados
                             </button>
-                            <button onclick="triggerMenuAction('Pedidos')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Pedidos')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="shopping-cart" class="w-3.5 h-3.5 text-emerald-500"></i> Pedidos
                             </button>
-                            <button onclick="triggerMenuAction('Bloqueo de aplicación')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Bloqueo de aplicación')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="fingerprint" class="w-3.5 h-3.5 text-red-500"></i> Bloqueo de aplicación
                             </button>
                         </div>
                         <div class="py-1">
-                            <button onclick="triggerMenuAction('Ajustes')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#E0F7F4]/50 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
+                            <button onclick="triggerMenuAction('Ajustes')" class="w-full text-left px-4 py-2 text-xs text-slate-700 hover:bg-[#B8F2EE]/40 hover:text-[#2C7A7B] font-semibold flex items-center gap-2">
                                 <i data-lucide="settings" class="w-3.5 h-3.5 text-slate-500"></i> Ajustes
                             </button>
                             <button onclick="triggerMenuAction('Cerrar sesión')" class="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-red-50 font-bold flex items-center gap-2">
@@ -174,11 +175,11 @@
                 </header>
 
                 <!-- Filtros Horizontales deslizables sin cápsulas/círculos (REQUERIMIENTO: SOLO LOS NOMBRES SIN CÍRCULO) -->
-                <div class="bg-[#FAF9F5] shrink-0">
+                <div class="bg-[#FAF8EE] shrink-0">
                     <div class="px-4 py-2">
                         <div class="bg-white/90 rounded-full px-4 py-2 flex items-center gap-2.5 border border-[#33BCA9]/10">
                             <i data-lucide="search" class="w-4.5 h-4.5 text-[#5A738E]"></i>
-                            <input type="text" placeholder="Preguntar a Meta AI o buscar" class="bg-transparent text-xs w-full focus:outline-none text-[#2D3748] font-medium placeholder-[#5A738E]/50">
+                            <input type="text" placeholder="Preguntar a Meta AI o buscar" class="bg-transparent text-xs w-full focus:outline-none text-[#4C5C77] font-medium placeholder-[#5A738E]/50">
                         </div>
                     </div>
                     
@@ -215,7 +216,7 @@
                 </div>
 
                 <!-- Lista Dinámica de Filtros -->
-                <div class="flex-1 overflow-y-auto no-scrollbar pb-20 bg-[#FAF9F5]">
+                <div class="flex-1 overflow-y-auto no-scrollbar pb-20 bg-[#FAF8EE]">
                     
                     <!-- VISTA DE CONVERSACIONES -->
                     <div id="chat-list-view" class="divide-y divide-[#33BCA9]/10">
@@ -223,11 +224,11 @@
                         <div id="chat-row-aldo" onclick="openIndividualChat('Aldo Numero Nuevo', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=80&h=80', 'jajajaj lo pensare jajajja', 'En línea')" class="px-4 py-3.5 flex items-center gap-3.5 hover:bg-[#E0F7F4]/20 cursor-pointer transition">
                             <div class="relative shrink-0">
                                 <img class="w-12 h-12 rounded-full object-cover border border-white shadow-sm" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=80&h=80" alt="Aldo">
-                                <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#33BCA9] border-2 border-[#FAF9F5] rounded-full"></span>
+                                <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#33BCA9] border-2 border-[#FAF8EE] rounded-full"></span>
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-baseline">
-                                    <h3 class="font-bold text-[13px] text-[#2D3748]">Aldo Numero Nuevo</h3>
+                                    <h3 class="font-bold text-[13px] text-[#4C5C77]">Aldo Numero Nuevo</h3>
                                     <span class="text-[10px] text-[#5A738E]">22:33</span>
                                 </div>
                                 <div class="flex items-center justify-between mt-0.5">
@@ -248,7 +249,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-baseline">
-                                    <h3 class="font-bold text-[13px] text-[#2D3748]">@licandeo30 (Tú)</h3>
+                                    <h3 class="font-bold text-[13px] text-[#4C5C77]">@licandeo30 (Tú)</h3>
                                     <span class="text-[10px] text-[#5A738E]">22:11</span>
                                 </div>
                                 <div class="flex items-center gap-1 mt-0.5 text-[#5A738E]">
@@ -281,7 +282,7 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-baseline">
-                                    <h3 class="font-bold text-[13px] text-[#2D3748]">Familia Silva 😎</h3>
+                                    <h3 class="font-bold text-[13px] text-[#4C5C77]">Familia Silva 😎</h3>
                                     <span class="text-[10px] text-[#5A738E]">21:48</span>
                                 </div>
                                 <p class="text-xs text-[#5A738E] truncate mt-0.5">siempre te amare a ti k: 😂...</p>
@@ -338,8 +339,8 @@
             </div>
 
             <!-- ================= PANTALLA 2: WELLNESS (REORDENADA: CALENDARIO ES LA PRIMERA SUBPESTAÑA - FOTO 3) ================= -->
-            <div id="screen-bienestar" class="flex-1 flex flex-col h-full overflow-hidden hidden bg-[#FAF9F5]">
-                <header class="px-5 pt-3 pb-1 flex flex-col shrink-0 bg-[#FAF9F5] border-b border-[#33BCA9]/15">
+            <div id="screen-bienestar" class="flex-1 flex flex-col h-full overflow-hidden hidden bg-[#FAF8EE]">
+                <header class="px-5 pt-3 pb-1 flex flex-col shrink-0 bg-[#FAF8EE] border-b border-[#33BCA9]/15">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2.5">
                             <!-- Logo Circular Oficial de Bienestar en Wellness (Imagen 4 y 5) -->
@@ -361,7 +362,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h1 class="text-xl font-black text-[#2D3748] tracking-tight">Wellness</h1>
+                                <h1 class="text-xl font-black text-[#4C5C77] tracking-tight">Wellness</h1>
                                 <span class="text-[9px] uppercase font-bold tracking-widest text-[#33BCA9] block mt-0.5">SALUD INTEGRAL Y ARMONÍA</span>
                             </div>
                         </div>
@@ -403,7 +404,7 @@
                             </h3>
                             
                             <!-- Widget de Calendario Mensual -->
-                            <div class="bg-[#FAF9F5] p-3 rounded-xl border border-slate-200">
+                            <div class="bg-[#FAF8EE] p-3 rounded-xl border border-slate-200">
                                 <div class="flex justify-between items-center mb-2.5">
                                     <span class="text-xs font-bold text-slate-800">Septiembre 2026</span>
                                     <div class="flex gap-1">
@@ -425,12 +426,12 @@
                                 <div class="space-y-2.5">
                                     <div>
                                         <label class="text-[9px] text-[#5A738E] font-bold uppercase block mb-1">Nombre del Doctor</label>
-                                        <input type="text" id="appt-doctor-input" placeholder="Ej: Dr. Aldo Licandeo" class="w-full bg-[#FAF9F5] border border-slate-200 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
+                                        <input type="text" id="appt-doctor-input" placeholder="Ej: Dr. Aldo Licandeo" class="w-full bg-[#FAF8EE] border border-slate-200 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
                                     </div>
                                     
                                     <div>
                                         <label class="text-[9px] text-[#5A738E] font-bold uppercase block mb-1">Establecimiento</label>
-                                        <select id="appt-establishment" class="w-full bg-[#FAF9F5] border border-slate-200 rounded px-3 py-1.5 text-xs font-bold text-slate-700">
+                                        <select id="appt-establishment" class="w-full bg-[#FAF8EE] border border-slate-200 rounded px-3 py-1.5 text-xs font-bold text-slate-700">
                                             <option value="Particular">Particular (Clínica o Centro)</option>
                                             <option value="Hospital">Hospital público / Red Salud</option>
                                             <option value="Posta">Posta rural / Consultorio</option>
@@ -440,16 +441,16 @@
                                     <div class="grid grid-cols-2 gap-2">
                                         <div>
                                             <label class="text-[9px] text-[#5A738E] font-bold uppercase block mb-1">Fecha</label>
-                                            <input type="date" id="appt-date" value="2026-09-07" class="w-full bg-[#FAF9F5] border rounded px-2 py-1 text-xs text-slate-700">
+                                            <input type="date" id="appt-date" value="2026-09-07" class="w-full bg-[#FAF8EE] border rounded px-2 py-1 text-xs text-slate-700">
                                         </div>
                                         <div>
                                             <label class="text-[9px] text-[#5A738E] font-bold uppercase block mb-1">Hora</label>
-                                            <input type="time" id="appt-time" value="10:30" class="w-full bg-[#FAF9F5] border rounded px-2 py-1 text-xs text-slate-700">
+                                            <input type="time" id="appt-time" value="10:30" class="w-full bg-[#FAF8EE] border rounded px-2 py-1 text-xs text-slate-700">
                                         </div>
                                     </div>
 
                                     <!-- Música y sonido de alarma descargable (REQUERIMIENTO: Sonido o música para descargar para la alarma) -->
-                                    <div class="space-y-1.5 bg-[#FAF9F5] p-3 rounded-xl border border-slate-200">
+                                    <div class="space-y-1.5 bg-[#FAF8EE] p-3 rounded-xl border border-slate-200">
                                         <label class="text-[9px] text-[#2C7A7B] font-black uppercase block">Música / Sonido de Alarma</label>
                                         <div class="flex gap-2">
                                             <select id="appt-sound-select" class="flex-1 bg-white border border-slate-200 rounded px-2.5 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:border-[#33BCA9]">
@@ -491,19 +492,19 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="text-[10px] text-[#5A738E] font-bold uppercase">Nombre</label>
-                                    <input type="text" id="bio-nombre" value="Fabiola" oninput="saveFichaLocal()" class="w-full bg-[#FAF9F5] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#2D3748] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
+                                    <input type="text" id="bio-nombre" value="Fabiola" oninput="saveFichaLocal()" class="w-full bg-[#FAF8EE] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#4C5C77] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="text-[10px] text-[#5A738E] font-bold uppercase">Edad (Años)</label>
-                                    <input type="number" id="bio-edad" value="28" oninput="saveFichaLocal()" class="w-full bg-[#FAF9F5] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#2D3748] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
+                                    <input type="number" id="bio-edad" value="28" oninput="saveFichaLocal()" class="w-full bg-[#FAF8EE] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#4C5C77] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="text-[10px] text-[#5A738E] font-bold uppercase">Peso (kg)</label>
-                                    <input type="number" id="bio-peso" value="62" oninput="calculateBMI()" class="w-full bg-[#FAF9F5] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#2D3748] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
+                                    <input type="number" id="bio-peso" value="62" oninput="calculateBMI()" class="w-full bg-[#FAF8EE] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#4C5C77] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
                                 </div>
                                 <div>
                                     <label class="text-[10px] text-[#5A738E] font-bold uppercase">Altura (cm)</label>
-                                    <input type="number" id="bio-altura" value="165" oninput="calculateBMI()" class="w-full bg-[#FAF9F5] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#2D3748] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
+                                    <input type="number" id="bio-altura" value="165" oninput="calculateBMI()" class="w-full bg-[#FAF8EE] border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-[#4C5C77] font-bold focus:ring-1 focus:ring-[#33BCA9] focus:outline-none">
                                 </div>
                             </div>
                             <div class="bg-[#E0F7F4]/40 p-3.5 rounded-xl flex justify-between items-center">
@@ -519,7 +520,7 @@
                     <!-- PASOS -->
                     <div id="salud-pasos" class="space-y-4 hidden">
                         <div class="bg-white p-6 rounded-2xl border border-slate-150 shadow-xs flex flex-col items-center text-center">
-                            <div class="w-36 h-36 flex items-center justify-center bg-[#FAF9F5] rounded-full border-8 border-[#E0F7F4] mb-3 relative">
+                            <div class="w-36 h-36 flex items-center justify-center bg-[#FAF8EE] rounded-full border-8 border-[#E0F7F4] mb-3 relative">
                                 <div>
                                     <span class="text-2xl font-black text-[#2C7A7B]" id="steps-val">4.520</span>
                                     <span class="block text-[9px] uppercase text-[#5A738E]">de 10.000 pasos</span>
@@ -534,15 +535,15 @@
                     <!-- ALIMENTOS -->
                     <div id="salud-calorias" class="space-y-4 hidden">
                         <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs space-y-3">
-                            <h3 class="font-bold text-xs text-[#2D3748] uppercase flex items-center gap-1.5"><i data-lucide="apple" class="w-4 h-4"></i> Escáner de Nutrientes</h3>
+                            <h3 class="font-bold text-xs text-[#4C5C77] uppercase flex items-center gap-1.5"><i data-lucide="apple" class="w-4 h-4"></i> Escáner de Nutrientes</h3>
                             <div class="relative w-full h-40 bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center">
                                 <img id="scan-img" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=300&h=200" class="absolute inset-0 w-full h-full object-cover opacity-65" alt="Comida">
                                 <div id="laser-bar" class="absolute left-0 w-full h-1 bg-[#33BCA9] scan-line hidden"></div>
                                 <div id="scan-status" class="absolute bg-slate-950/90 text-white text-[11px] px-3.5 py-1.5 rounded-full font-bold">Cámara lista</div>
                             </div>
                             <button onclick="runFoodScanner()" class="w-full bg-[#2C7A7B] text-white text-xs font-bold py-2 rounded-xl transition">Analizar Alimento</button>
-                            <div id="scan-result" class="bg-[#FAF9F5] border rounded-xl p-3 space-y-1 hidden">
-                                <span class="text-xs font-black text-[#2D3748]" id="scan-food-name">Ensalada de Hojas de Melisa</span>
+                            <div id="scan-result" class="bg-[#FAF8EE] border rounded-xl p-3 space-y-1 hidden">
+                                <span class="text-xs font-black text-[#4C5C77]" id="scan-food-name">Ensalada de Hojas de Melisa</span>
                                 <span class="text-[10px] text-[#2C7A7B] font-bold block" id="scan-food-cals">320 kcal • Induce relajación gástrica</span>
                             </div>
                         </div>
@@ -552,7 +553,7 @@
                     <div id="salud-ejercicios" class="space-y-4 hidden">
                         <div class="bg-white p-4 rounded-2xl border shadow-xs space-y-3">
                             <h3 class="font-bold text-xs flex items-center gap-1.5"><i data-lucide="dumbbell" class="w-4 h-4"></i> Pausas Activas de Meditación</h3>
-                            <button onclick="selectRoutine('Estiramiento Lumbar', 15, 'Estira la zona lumbar inclinando el torso.')" class="w-full text-left p-3 rounded-xl border flex justify-between items-center bg-[#FAF9F5]/50">
+                            <button onclick="selectRoutine('Estiramiento Lumbar', 15, 'Estira la zona lumbar inclinando el torso.')" class="w-full text-left p-3 rounded-xl border flex justify-between items-center bg-[#FAF8EE]/50">
                                 <div>
                                     <h4 class="text-xs font-bold">🧘‍♀️ Estiramiento Lumbar</h4>
                                     <span class="text-[10px] text-[#5A738E]">15 segundos</span>
@@ -570,7 +571,7 @@
             </div>
 
             <!-- ================= PANTALLA 3: TIENDA "EMPRENDE" (CON LOGO HISTÓRICO Y QR) ================= -->
-            <div id="screen-tienda" class="flex-1 flex flex-col h-full overflow-hidden hidden bg-[#FAF9F5]">
+            <div id="screen-tienda" class="flex-1 flex flex-col h-full overflow-hidden hidden bg-[#FAF8EE]">
                 <!-- Encabezado Emprende con Logo tipo "Emprende Natural" (Silueta meditador y hojas verdes) -->
                 <header class="bg-[#2C7A7B] text-white pt-4 pb-2 px-5 shadow-md shrink-0">
                     <div class="flex items-center gap-3">
@@ -596,13 +597,13 @@
                     </div>
                 </header>
 
-                <div class="flex-1 overflow-y-auto p-4 no-scrollbar pb-20 bg-[#FAF9F5]">
+                <div class="flex-1 overflow-y-auto p-4 no-scrollbar pb-20 bg-[#FAF8EE]">
                     <!-- VITRINA -->
                     <div id="view-vitrina" class="space-y-4">
                         <div id="wallet-coupon" class="bg-white p-4 rounded-2xl border border-[#33BCA9]/15 shadow-xs flex justify-between items-center">
                             <div>
                                 <span class="text-[9px] bg-slate-200 text-[#5A738E] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider" id="coupon-tag">Cerrado 🔒</span>
-                                <h3 class="font-bold text-xs mt-1.5 text-[#2D3748]">Cupón Salud Natural 15%</h3>
+                                <h3 class="font-bold text-xs mt-1.5 text-[#4C5C77]">Cupón Salud Natural 15%</h3>
                                 <p class="text-[10px] text-[#5A738E]">Suma 10.000 pasos para liberarlo.</p>
                             </div>
                             <i data-lucide="gift" class="w-7 h-7 text-[#5A738E]"></i>
@@ -948,7 +949,7 @@
         <!-- ================= MODALES Y PANTALLAS SUPERPUESTAS (OVERLAYS) ================= -->
 
         <!-- MODAL CÓDIGO QR PARA COMPARTIR CATÁLOGO -->
-        <div id="qr-modal" class="absolute inset-0 bg-slate-900/90 text-[#2D3748] z-50 flex flex-col justify-center items-center p-8 hidden">
+        <div id="qr-modal" class="absolute inset-0 bg-slate-900/90 text-[#4C5C77] z-50 flex flex-col justify-center items-center p-8 hidden">
             <div class="bg-white p-6 rounded-3xl w-full max-w-sm text-center space-y-4 shadow-2xl relative">
                 <button onclick="closeStoreQRCode()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 flex items-center justify-center"><i data-lucide="x" class="w-5 h-5"></i></button>
                 <div class="w-12 h-12 bg-[#E0F7F4] text-[#2C7A7B] rounded-full flex items-center justify-center mx-auto mb-1"><i data-lucide="qr-code" class="w-6 h-6"></i></div>
@@ -1041,7 +1042,7 @@
         </div>
 
         <!-- VISTA DE CHAT INDIVIDUAL (CON AJUNTAR MULTIPLES ARCHIVOS FOTOS DE REFERENCIA - IMAGEN 32, 33, 34) -->
-        <div id="individual-chat-view" class="absolute inset-0 bg-[#FAF9F5] z-50 flex flex-col hidden">
+        <div id="individual-chat-view" class="absolute inset-0 bg-[#FAF8EE] z-50 flex flex-col hidden">
             <header class="bg-[#2C7A7B] text-white px-4 py-3 flex items-center justify-between shadow-md shrink-0 relative">
                 <div class="flex items-center gap-2.5">
                     <button onclick="closeIndividualChat()" class="hover:bg-[#1E5D5E] p-1 rounded-full transition flex items-center justify-center">
@@ -1080,7 +1081,7 @@
                 <div class="flex justify-center"><span class="text-[9px] bg-slate-200 text-slate-500 px-3 py-1 rounded-full font-medium">HOY</span></div>
                 <div class="flex items-end gap-2 max-w-[85%]">
                     <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
-                        <p id="chat-received-text" class="text-xs text-[#2D3748]"></p>
+                        <p id="chat-received-text" class="text-xs text-[#4C5C77]"></p>
                     </div>
                 </div>
             </main>
@@ -1381,22 +1382,22 @@
         <div id="onboarding-screen" class="absolute inset-0 bg-gradient-to-br from-[#1E5D5E] via-[#2C7A7B] to-[#121E2B] text-white z-50 flex flex-col justify-between p-7">
             <div class="text-center space-y-3 mt-8">
                 <!-- Logo circular de onboarding de alta resolución (Meditador de la Imagen 4 y 5) -->
-                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-2xl">
-                    <svg viewBox="0 0 120 120" class="w-14 h-14 stroke-[#2C7A7B] fill-none" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M 35 40 A 25 25 0 0 1 85 40" stroke="#33BCA9" stroke-width="2.5" />
-                        <path d="M 28 35 A 32 32 0 0 1 92 35" stroke="#2C7A7B" stroke-width="3" />
-                        <path d="M 21 30 A 39 32 0 0 1 99 30" stroke="#33BCA9" stroke-width="1.8" class="opacity-60" />
-                        <circle cx="60" cy="46" r="7.5" fill="none" stroke="#2C7A7B" stroke-width="5" />
-                        <path d="M 60 53 L 60 70" stroke="#2C7A7B" stroke-width="5" />
-                        <path d="M 45 62 Q 52 56 60 56 Q 68 56 75 62 Q 68 80 60 80 Q 52 80 45 62 Z" fill="#33BCA9" fill-opacity="0.2" stroke="#2C7A7B" stroke-width="3" />
-                        <path d="M 40 76 C 30 76 34 88 60 88 C 86 88 90 76 80 76 C 72 76 68 84 60 84 C 52 84 48 76 40 76 Z" fill="#33BCA9" fill-opacity="0.3" stroke="#2C7A7B" stroke-width="3" />
-                        <path d="M 44 56 Q 30 45 28 58 Q 38 64 44 56 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                        <path d="M 38 68 Q 22 62 18 73 Q 28 80 38 68 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                        <path d="M 52 68 Q 45 64 46 72 Q 52 72 52 68 Z" fill="#33BCA9" fill-opacity="0.5" stroke="#2C7A7B" stroke-width="2" />
-                        <path d="M 76 56 Q 90 45 92 58 Q 82 64 76 56 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                        <path d="M 82 68 Q 98 62 102 73 Q 92 80 82 68 Z" fill="#33BCA9" fill-opacity="0.4" stroke="#2C7A7B" stroke-width="2.5" />
-                        <path d="M 68 68 Q 75 64 74 72 Q 68 72 68 68 Z" fill="#33BCA9" fill-opacity="0.5" stroke="#2C7A7B" stroke-width="2" />
-                    </svg>
+                <div class="w-24 h-24 bg-white/95 rounded-full flex items-center justify-center mx-auto shadow-2xl p-2 border-2 border-[#33BCA9]">
+                    <svg viewBox="0 0 120 120" class="w-full h-full stroke-[#33BCA9] fill-none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 32 36 A 30 30 0 0 1 88 36" stroke="#33BCA9" stroke-width="3" />
+    <path d="M 24 28 A 40 40 0 0 1 96 28" stroke="#7CD0B1" stroke-width="2.5" />
+    <path d="M 18 20 A 48 48 0 0 1 102 20" stroke="#B8F2EE" stroke-width="2" opacity="0.8" />
+    <circle cx="60" cy="62" r="52" stroke="#33BCA9" stroke-width="2.5" fill="none" />
+    <circle cx="60" cy="46" r="7.5" fill="none" stroke="#4C5C77" stroke-width="4" />
+    <path d="M 60 53.5 L 60 70" stroke="#4C5C77" stroke-width="4" />
+    <path d="M 38 82 C 30 82 34 92 60 92 C 86 92 90 82 82 82 C 74 82 68 88 60 88 C 52 88 46 82 38 82 Z" fill="#33BCA9" fill-opacity="0.18" stroke="#4C5C77" stroke-width="3" />
+    <path d="M 44 65 Q 52 58 60 58 Q 68 58 76 65 Q 68 80 60 80 Q 52 80 44 65 Z" fill="#7CD0B1" fill-opacity="0.2" stroke="#4C5C77" stroke-width="3" />
+    <path d="M 60 60 Q 64 65 60 72 Q 56 65 60 60 Z" fill="#7CD0B1" stroke="#33BCA9" stroke-width="1.8" />
+    <path d="M 40 52 Q 28 46 32 36 Q 42 40 40 52 Z" fill="#7CD0B1" stroke="#33BCA9" stroke-width="1.8" />
+    <path d="M 48 62 Q 36 58 40 48 Q 50 52 48 62 Z" fill="#33BCA9" stroke="#2C7A7B" stroke-width="1.8" />
+    <path d="M 80 52 Q 92 46 88 36 Q 78 40 80 52 Z" fill="#7CD0B1" stroke="#33BCA9" stroke-width="1.8" />
+    <path d="M 72 62 Q 84 58 80 48 Q 70 52 72 62 Z" fill="#33BCA9" stroke="#2C7A7B" stroke-width="1.8" />
+</svg>
                 </div>
                 <h2 class="text-lg font-black tracking-tight text-[#E0F7F4]">Bienvenido a Bienestar</h2>
                 <p class="text-[10px] text-teal-100 max-w-xs mx-auto leading-relaxed">Configuraremos tu ficha clínica personal tal como las aplicaciones de referencia para adecuar tu herbolaria, relajación y alarmas médicas.</p>
@@ -1561,7 +1562,7 @@
             if (tabName === 'relajacion') {
                 statusBar.className = "bg-[#0A1118] text-white text-xs px-6 py-2.5 flex justify-between items-center shrink-0 z-40 transition-colors duration-300";
             } else {
-                statusBar.className = "bg-[#FAF9F5] text-[#2D3748] text-xs px-6 py-2.5 flex justify-between items-center shrink-0 z-40 transition-colors duration-300";
+                statusBar.className = "bg-[#FAF8EE] text-[#4C5C77] text-xs px-6 py-2.5 flex justify-between items-center shrink-0 z-40 transition-colors duration-300";
             }
 
             const buttons = document.querySelectorAll('.tab-btn');
@@ -1872,7 +1873,7 @@
                 <div class="flex justify-center"><span class="text-[9px] bg-slate-200 text-slate-500 px-3 py-1 rounded-full font-medium">HOY</span></div>
                 <div class="flex items-end gap-2 max-w-[85%]">
                     <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
-                        <p class="text-xs text-[#2D3748]">${message}</p>
+                        <p class="text-xs text-[#4C5C77]">${message}</p>
                     </div>
                 </div>
             `;
@@ -1967,7 +1968,7 @@
                 reply.className = "flex items-end gap-2 max-w-[85%]";
                 reply.innerHTML = `
                     <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
-                        <p class="text-xs text-[#2D3748]">¡Recibido! Acabo de abrir el archivo (${type}) que me compartiste. Lo revisaremos en detalle en nuestra próxima sesión de bienestar. 🌿</p>
+                        <p class="text-xs text-[#4C5C77]">¡Recibido! Acabo de abrir el archivo (${type}) que me compartiste. Lo revisaremos en detalle en nuestra próxima sesión de bienestar. 🌿</p>
                     </div>
                 `;
                 stream.appendChild(reply);
@@ -2058,7 +2059,7 @@
                 docBubble.className = "flex items-end gap-2 max-w-[85%]";
                 docBubble.innerHTML = `
                     <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
-                        <p class="text-xs text-[#2D3748]">Mensaje de voz recibido. En un rato lo escucho detalladamente. ¡Muchas gracias! 🌿</p>
+                        <p class="text-xs text-[#4C5C77]">Mensaje de voz recibido. En un rato lo escucho detalladamente. ¡Muchas gracias! 🌿</p>
                     </div>
                 `;
                 stream.appendChild(docBubble);
@@ -2121,7 +2122,7 @@
                 docBubble.className = "flex items-end gap-2 max-w-[85%]";
                 docBubble.innerHTML = `
                     <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
-                        <p class="text-xs text-[#2D3748]">¡Excelente foto! Se nota el avance en el color del ungüento. Sigue así. 🌸</p>
+                        <p class="text-xs text-[#4C5C77]">¡Excelente foto! Se nota el avance en el color del ungüento. Sigue así. 🌸</p>
                     </div>
                 `;
                 stream.appendChild(docBubble);
@@ -2244,7 +2245,7 @@
                 coupon.innerHTML = `
                     <div>
                         <span class="text-[9px] bg-yellow-400 text-yellow-950 px-2.5 py-0.5 rounded-full font-black uppercase tracking-wider">¡Listo! 🎉</span>
-                        <h3 class="font-bold text-xs mt-1.5 text-[#2D3748]">Cupón 15% OFF Liberado</h3>
+                        <h3 class="font-bold text-xs mt-1.5 text-[#4C5C77]">Cupón 15% OFF Liberado</h3>
                         <p class="text-[10px] text-[#2C7A7B]">Utiliza el código: <strong class="bg-emerald-100 px-1 rounded font-mono">EMPRENDE10K</strong></p>
                     </div>
                     <i class="lucide-heart-pulse w-7 h-7 text-[#2C7A7B]"></i>
@@ -2402,7 +2403,7 @@
 
             activeAppts.forEach(appt => {
                 const el = document.createElement('div');
-                el.className = "bg-[#FAF9F5] p-3 rounded-xl border border-[#33BCA9]/20 text-xs flex justify-between items-center shadow-xs";
+                el.className = "bg-[#FAF8EE] p-3 rounded-xl border border-[#33BCA9]/20 text-xs flex justify-between items-center shadow-xs";
                 el.innerHTML = `
                     <div>
                         <p class="font-black text-slate-800">${appt.doctor}</p>
