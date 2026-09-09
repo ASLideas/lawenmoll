@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASLIDEAS Bienestar - Super-App v8</title>
+    <title>ASLIDEAS Bienestar - Super-App v9</title>
     <!-- Tailwind CSS para un diseño moderno y fluido con paleta Teal Air -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons para una iconografía limpia y uniforme -->
@@ -549,20 +549,81 @@
                         </div>
                     </div>
 
-                    <!-- EJERCICIOS -->
+                    <!-- EJERCICIOS Y RUTINAS ADAPTADAS -->
                     <div id="salud-ejercicios" class="space-y-4 hidden">
-                        <div class="bg-white p-4 rounded-2xl border shadow-xs space-y-3">
-                            <h3 class="font-bold text-xs flex items-center gap-1.5"><i data-lucide="dumbbell" class="w-4 h-4"></i> Pausas Activas de Meditación</h3>
-                            <button onclick="selectRoutine('Estiramiento Lumbar', 15, 'Estira la zona lumbar inclinando el torso.')" class="w-full text-left p-3 rounded-xl border flex justify-between items-center bg-[#FAF8EE]/50">
-                                <div>
-                                    <h4 class="text-xs font-bold">🧘‍♀️ Estiramiento Lumbar</h4>
-                                    <span class="text-[10px] text-[#5A738E]">15 segundos</span>
+                        <!-- Categorías Deslizables -->
+                        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-[10px]">
+                            <button onclick="filterExerciseCategory('todos', this)" class="ex-cat-btn bg-[#33BCA9] text-white font-bold px-3 py-1.5 rounded-full shrink-0 shadow-xs">Todos</button>
+                            <button onclick="filterExerciseCategory('cardio', this)" class="ex-cat-btn bg-white text-[#5A738E] border font-semibold px-3 py-1.5 rounded-full shrink-0">🏃‍♂️ Cardio Suave</button>
+                            <button onclick="filterExerciseCategory('hiit', this)" class="ex-cat-btn bg-white text-[#5A738E] border font-semibold px-3 py-1.5 rounded-full shrink-0">⚡ HIIT Movilidad</button>
+                            <button onclick="filterExerciseCategory('silla', this)" class="ex-cat-btn bg-white text-[#5A738E] border font-semibold px-3 py-1.5 rounded-full shrink-0">🪑 En Silla (Adaptado)</button>
+                            <button onclick="filterExerciseCategory('pausas', this)" class="ex-cat-btn bg-white text-[#5A738E] border font-semibold px-3 py-1.5 rounded-full shrink-0">🧘‍♀️ Yoga & Pausas</button>
+                        </div>
+
+                        <!-- Lista de Rutinas -->
+                        <div class="space-y-2.5" id="exercise-routines-list">
+                            <!-- Cardio Suave -->
+                            <div class="ex-card cardio bg-white p-3.5 rounded-2xl border border-[#33BCA9]/15 shadow-xs flex justify-between items-center hover:border-[#33BCA9] transition cursor-pointer" onclick="openExerciseModal('Cardio Quema Grasa Suave', '🏃‍♂️', 15, 'cardio', 90, 'Ejercicios coordinados de bajo impacto sin saltos para acelerar el metabolismo y proteger articulaciones.')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-[#E0F7F4] flex items-center justify-center text-xl">🏃‍♂️</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Cardio Quema Grasa Suave</h4>
+                                        <p class="text-[10px] text-[#5A738E]">Bajo impacto • Sin saltos</p>
+                                        <span class="text-[9px] text-[#33BCA9] font-semibold">🔥 ~90 kcal • 15 min</span>
+                                    </div>
                                 </div>
-                                <i data-lucide="play" class="w-4 h-4 text-[#33BCA9]"></i>
-                            </button>
-                            <div id="exercise-timer-card" class="bg-[#1E293B] text-white p-4 rounded-xl text-center space-y-1 hidden">
-                                <span class="text-[9px] bg-[#33BCA9] text-white px-2 py-0.5 rounded" id="timer-title">Estiramiento Lumbar</span>
-                                <div class="text-2xl font-black text-[#33BCA9]" id="timer-display">00:15</div>
+                                <button class="w-8 h-8 rounded-full bg-[#33BCA9] text-white flex items-center justify-center shadow-xs"><i data-lucide="play" class="w-4 h-4 fill-current"></i></button>
+                            </div>
+
+                            <!-- HIIT Movilidad -->
+                            <div class="ex-card hiit bg-white p-3.5 rounded-2xl border border-[#33BCA9]/15 shadow-xs flex justify-between items-center hover:border-[#33BCA9] transition cursor-pointer" onclick="openExerciseModal('HIIT Ligero de Movilidad Articular', '⚡', 10, 'hiit', 110, 'Intervalos de 30s de movimiento activo por 15s de pausa activa. Ideal para energizar a mitad del día.')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">⚡</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">HIIT Ligero de Movilidad</h4>
+                                        <p class="text-[10px] text-[#5A738E]">Intervalos 30s / 15s descanso</p>
+                                        <span class="text-[9px] text-amber-600 font-semibold">🔥 ~110 kcal • 10 min</span>
+                                    </div>
+                                </div>
+                                <button class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-xs"><i data-lucide="play" class="w-4 h-4 fill-current"></i></button>
+                            </div>
+
+                            <!-- Ejercicios en Silla -->
+                            <div class="ex-card silla bg-white p-3.5 rounded-2xl border border-[#33BCA9]/15 shadow-xs flex justify-between items-center hover:border-[#33BCA9] transition cursor-pointer" onclick="openExerciseModal('Gimnasia Adaptada en Silla', '🪑', 12, 'silla', 60, 'Gimnasia suave sentada para adultos mayores, movilidad de rodillas, brazos y elevación de talones.')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">🪑</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Gimnasia Adaptada en Silla</h4>
+                                        <p class="text-[10px] text-[#5A738E]">Adultos mayores & Oficina</p>
+                                        <span class="text-[9px] text-indigo-600 font-semibold">🔥 ~60 kcal • 12 min</span>
+                                    </div>
+                                </div>
+                                <button class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-xs"><i data-lucide="play" class="w-4 h-4 fill-current"></i></button>
+                            </div>
+
+                            <div class="ex-card silla bg-white p-3.5 rounded-2xl border border-[#33BCA9]/15 shadow-xs flex justify-between items-center hover:border-[#33BCA9] transition cursor-pointer" onclick="openExerciseModal('Fuerza Postural en Silla', '🧘‍♀️', 15, 'silla', 75, 'Fortalecimiento de espalda, zona lumbar y escápulas usando una banda elástica o toalla doblada.')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl">🏋️‍♀️</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Fuerza Postural en Silla</h4>
+                                        <p class="text-[10px] text-[#5A738E]">Banda elástica / Postura</p>
+                                        <span class="text-[9px] text-purple-600 font-semibold">🔥 ~75 kcal • 15 min</span>
+                                    </div>
+                                </div>
+                                <button class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-xs"><i data-lucide="play" class="w-4 h-4 fill-current"></i></button>
+                            </div>
+
+                            <!-- Pausas y Yoga -->
+                            <div class="ex-card pausas bg-white p-3.5 rounded-2xl border border-[#33BCA9]/15 shadow-xs flex justify-between items-center hover:border-[#33BCA9] transition cursor-pointer" onclick="openExerciseModal('Descompresión Lumbar y Cervical', '🧘‍♀️', 5, 'pausas', 25, 'Pausa activa de descompresión de cuello y columna lumbar para liberar tensión acumulada.')">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-xl">🧘‍♀️</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-800">Descompresión Lumbar & Cervical</h4>
+                                        <p class="text-[10px] text-[#5A738E]">Pausa activa antiestrés</p>
+                                        <span class="text-[9px] text-teal-700 font-semibold">🔥 ~25 kcal • 5 min</span>
+                                    </div>
+                                </div>
+                                <button class="w-8 h-8 rounded-full bg-[#33BCA9] text-white flex items-center justify-center shadow-xs"><i data-lucide="play" class="w-4 h-4 fill-current"></i></button>
                             </div>
                         </div>
                     </div>
@@ -932,6 +993,88 @@
                                 <p class="text-[8px] text-slate-400">Aceites Esenciales</p>
                             </div>
                         </button>
+                    </div>
+
+                    <!-- HISTORIAS Y CUENTOS DE SUEÑO CON VOZ SUAVE -->
+                    <div class="bg-[#121E2B]/90 p-4 rounded-3xl border border-white/5 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                                🎙️ Historias & Cuentos de Sueño (Voz Suave)
+                            </h3>
+                            <span class="text-[8px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold">Relatos Guiados</span>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div onclick="selectSpotifyTrack(3)" class="p-2.5 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition flex justify-between items-center cursor-pointer">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-lg">🌲</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-[11px]">El Sendero del Bosque Nativo</h4>
+                                        <p class="text-[9px] text-slate-400">Voz femenina suave • Susurros de la naturaleza</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] text-[#33BCA9] font-bold">12 mins</span>
+                            </div>
+
+                            <div onclick="selectSpotifyTrack(4)" class="p-2.5 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition flex justify-between items-center cursor-pointer">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-lg">🌌</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-[11px]">Noche Estrellada en Atacama</h4>
+                                        <p class="text-[9px] text-slate-400">Relato espacial guiado para detener la mente</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] text-[#33BCA9] font-bold">15 mins</span>
+                            </div>
+
+                            <div onclick="selectSpotifyTrack(5)" class="p-2.5 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition flex justify-between items-center cursor-pointer">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-lg">🌊</span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-[11px]">La Sinfonía del Mar de Chiloé</h4>
+                                        <p class="text-[9px] text-slate-400">Oleaje austral pacífico & Cuento de descanso</p>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] text-[#33BCA9] font-bold">18 mins</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MÓDULO MORFEO AI: AGENTE INTELIGENTE DE DESCANSO & ANSIEDAD -->
+                    <div class="bg-gradient-to-br from-[#121E2B] via-[#1A2E40] to-[#0D1824] p-4.5 rounded-3xl border border-[#33BCA9]/30 shadow-2xl space-y-3.5">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-[#33BCA9]/20 border border-[#33BCA9] flex items-center justify-center text-base">🦉</div>
+                                <div>
+                                    <h3 class="font-black text-xs text-white">Morfeo AI - Asistente de Sueño</h3>
+                                    <p class="text-[8px] text-[#33BCA9] font-bold">Inteligencia de Higiene del Sueño & Ansiedad</p>
+                                </div>
+                            </div>
+                            <span class="text-[8px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold">ONLINE</span>
+                        </div>
+
+                        <!-- Chat Interactivo de Morfeo -->
+                        <div id="morfeo-chat-box" class="bg-[#0A1118]/80 p-3 rounded-2xl border border-white/5 h-28 overflow-y-auto no-scrollbar space-y-2 text-[10px]">
+                            <div class="bg-[#121E2B] p-2 rounded-xl text-slate-200 border border-white/5">
+                                🦉 <strong class="text-[#33BCA9]">Morfeo AI:</strong> Hola, soy Morfeo. ¿Cómo te sientes esta noche? Puedo recomendarte un ejercicio de respiración 4-7-8, una infusión herbolaria o una historia con voz suave para dormir.
+                            </div>
+                        </div>
+
+                        <!-- Evaluación Emocional Diaria -->
+                        <div class="space-y-1.5">
+                            <span class="text-[9px] text-slate-400 font-bold uppercase block">¿Cómo te sientes en este momento?</span>
+                            <div class="grid grid-cols-4 gap-1.5 text-[9px] font-bold">
+                                <button onclick="askMorfeoMood('estres')" class="p-1.5 bg-red-500/10 text-red-300 border border-red-500/20 rounded-xl hover:bg-red-500/20 transition">🤯 Estrés</button>
+                                <button onclick="askMorfeoMood('rumiante')" class="p-1.5 bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded-xl hover:bg-amber-500/20 transition">🧠 Mente Aislada</button>
+                                <button onclick="askMorfeoMood('fatiga')" class="p-1.5 bg-blue-500/10 text-blue-300 border border-blue-500/20 rounded-xl hover:bg-blue-500/20 transition">🥱 Cansancio</button>
+                                <button onclick="askMorfeoMood('calma')" class="p-1.5 bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 rounded-xl hover:bg-emerald-500/20 transition">🧘‍♀️ En Calma</button>
+                            </div>
+                        </div>
+
+                        <!-- Input Rápido Morfeo -->
+                        <div class="flex gap-1.5">
+                            <input type="text" id="morfeo-input" placeholder="Pregúntale a Morfeo sobre insomnio, hierbas o relajación..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 text-[10px] text-white focus:outline-none focus:border-[#33BCA9]">
+                            <button onclick="sendMorfeoMessage()" class="bg-[#33BCA9] text-white px-3 py-1.5 rounded-xl font-bold text-[10px] hover:bg-[#2C7A7B] transition">Enviar</button>
+                        </div>
                     </div>
 
                     <!-- Detalle de la categoría seleccionada -->
@@ -2879,5 +3022,30 @@
         }
 
     </script>
+    <!-- MODAL REPRODUCTOR DE RUTINA DE EJERCICIOS -->
+    <div id="exercise-routine-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4 text-center relative border border-[#33BCA9]/20">
+            <button onclick="closeExerciseModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div id="ex-modal-icon" class="w-16 h-16 rounded-2xl bg-[#E0F7F4] flex items-center justify-center text-3xl mx-auto shadow-sm">🏃‍♂️</div>
+            <div>
+                <h3 class="font-black text-base text-slate-800" id="ex-modal-title">Cardio Quema Grasa Suave</h3>
+                <p class="text-[11px] text-[#5A738E] mt-1 px-2" id="ex-modal-desc">Ejercicios coordinados de bajo impacto sin saltos.</p>
+            </div>
+            
+            <!-- Temporizador y Barra -->
+            <div class="bg-[#FAF8EE] p-4 rounded-2xl border space-y-2">
+                <div class="text-3xl font-black text-[#2C7A7B]" id="ex-timer-display">15:00</div>
+                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div id="ex-timer-progress" class="bg-[#33BCA9] h-full w-0 transition-all duration-300"></div>
+                </div>
+                <span class="text-[10px] text-[#33BCA9] font-bold" id="ex-calories-target">🔥 Meta: ~90 kcal</span>
+            </div>
+
+            <div class="flex gap-2">
+                <button id="ex-play-btn" onclick="toggleExerciseTimer()" class="flex-1 bg-[#33BCA9] text-white py-2.5 rounded-xl font-bold text-xs hover:bg-[#2C7A7B] transition flex items-center justify-center gap-1.5"><i data-lucide="play" class="w-4 h-4 fill-current"></i> Iniciar Rutina</button>
+                <button onclick="completeExerciseRoutine()" class="bg-emerald-600 text-white px-4 py-2.5 rounded-xl font-bold text-xs hover:bg-emerald-700 transition">Completado ✓</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
