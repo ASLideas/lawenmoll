@@ -14,15 +14,15 @@
         /* Desactivar barras de scroll visuales para conservar la estética de app móvil */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
+
         /* Animación de barrido de cámara con IA */
         @keyframes scan { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }
         .scan-line { animation: scan 2s linear infinite; }
-        
+
         /* Barra de progreso animada para los Estados de los terapeutas */
         @keyframes progress { 0% { width: 0%; } 100% { width: 100%; } }
         .status-progress-bar { animation: progress 4s linear forwards; }
-        
+
         /* Ondas animadas de grabación de audio */
         @keyframes wave {
             0%, 100% { height: 4px; }
@@ -37,7 +37,7 @@
         /* Gráfica nocturna estrellada e inmersiva de Serenidad (Imagen anterior) */
         .starry-bg {
             background-color: #0B0F19;
-            background-image: 
+            background-image:
                 radial-gradient(white, rgba(255,255,255,0.2) 2px, transparent 40px),
                 radial-gradient(white, rgba(255,255,255,0.15) 1px, transparent 30px),
                 radial-gradient(white, rgba(255,255,255,0.1) 2px, transparent 40px);
@@ -60,7 +60,7 @@
 
     <!-- CONTENEDOR DEL TELÉFONO MÓVIL (PWA MOCKUP) -->
     <div class="w-full max-w-md h-[840px] bg-[#FAF8EE] rounded-[45px] border-[10px] border-[#1E293B] shadow-2xl overflow-hidden flex flex-col relative select-none">
-        
+
         <!-- Barra de Estado del Sistema -->
         <div class="bg-[#FAF8EE] text-[#4C5C77] text-xs px-6 py-2.5 flex justify-between items-center shrink-0 z-40 transition-colors duration-300" id="system-status-bar">
             <span class="font-bold" id="live-clock">16:42</span>
@@ -165,7 +165,7 @@
                             <input type="text" placeholder="Preguntar a Meta AI o buscar" class="bg-transparent text-xs w-full focus:outline-none text-[#4C5C77] font-medium placeholder-[#5A738E]/50">
                         </div>
                     </div>
-                    
+
                     <!-- Fila deslizable libre de círculos o contornos con drag suave y rueda de ratón (NUNCA QUEDA ESTÁTICO) -->
                     <div id="chat-filter-scroll-container" class="w-full overflow-x-auto whitespace-nowrap no-scrollbar scroll-smooth select-none">
                         <div class="px-6 py-2.5 flex gap-7 w-max items-center">
@@ -180,12 +180,12 @@
                                 Llamadas
                             </button>
                             <!-- REQUERIMIENTO INTERACTIVO NO LEÍDOS: EN VERDE AL HACER CLIC Y APARECE AL POSICIONARSE -->
-                            <button id="filter-btn-noleidos" 
-                                    onmouseover="showUnreadBadge()" 
-                                    onmouseout="hideUnreadBadge()" 
-                                    onclick="switchChatFilter('no-leidos', this)" 
+                            <button id="filter-btn-noleidos"
+                                    onmouseover="showUnreadBadge()"
+                                    onmouseout="hideUnreadBadge()"
+                                    onclick="switchChatFilter('no-leidos', this)"
                                     class="chat-filter-btn text-[#5A738E] text-[13px] font-bold transition shrink-0 flex items-center gap-1.5 relative py-1">
-                                No leídos 
+                                No leídos
                                 <span id="unread-badge" class="bg-[#33BCA9] text-white text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-black transition-all duration-300 opacity-0 transform scale-50">1</span>
                             </button>
                             <button id="filter-btn-favoritos" onclick="switchChatFilter('favoritos', this)" class="chat-filter-btn text-[#5A738E] text-[13px] font-bold transition shrink-0">
@@ -200,7 +200,7 @@
 
                 <!-- Lista Dinámica de Filtros -->
                 <div class="flex-1 overflow-y-auto no-scrollbar pb-20 bg-[#FAF8EE]">
-                    
+
                     <!-- VISTA DE CONVERSACIONES -->
                     <div id="chat-list-view" class="divide-y divide-[#33BCA9]/10">
                         <!-- Aldo Numero Nuevo -->
@@ -361,14 +361,14 @@
                 </header>
 
                 <div class="flex-1 overflow-y-auto p-4 no-scrollbar space-y-4 pb-20">
-                    
+
                     <!-- CALENDARIO DE ALARMAS MÉDICAS (REQUERIMIENTO: INTERACTIVO EN FOTO 3 PARA RECORDAR LAS HORAS - POR DEFECTO AL ENTRAR) -->
                     <div id="salud-calendario" class="space-y-4">
                         <div class="bg-white p-4.5 rounded-2xl border border-[#33BCA9]/15 shadow-xs space-y-4">
                             <h3 class="font-black text-xs text-[#2C7A7B] uppercase tracking-wider flex items-center gap-1.5">
                                 <i data-lucide="calendar" class="w-4.5 h-4.5"></i> Calendario de Citas (Septiembre 2026)
                             </h3>
-                            
+
                             <!-- Widget de Calendario Mensual -->
                             <div class="bg-[#FAF8EE] p-3 rounded-xl border border-slate-200">
                                 <div class="flex justify-between items-center mb-2.5">
@@ -394,7 +394,7 @@
                                         <label class="text-[9px] text-[#5A738E] font-bold uppercase block mb-1">Nombre del Doctor</label>
                                         <input type="text" id="appt-doctor-input" placeholder="Ej: Dr. Aldo Licandeo" class="w-full bg-[#FAF8EE] border border-slate-200 rounded px-3 py-1.5 text-xs font-bold text-slate-800">
                                     </div>
-                                    
+
                                     <div>
                                         <label class="text-[9px] text-[#5A738E] font-bold uppercase block mb-1">Establecimiento</label>
                                         <select id="appt-establishment" class="w-full bg-[#FAF8EE] border border-slate-200 rounded px-3 py-1.5 text-xs font-bold text-slate-700">
@@ -437,7 +437,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="bg-white p-4.5 rounded-2xl border border-slate-100 shadow-xs space-y-2">
                             <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-[#33BCA9]"></i> Horas Médicas del Día</h3>
                             <div id="appointment-list-container" class="space-y-2">
@@ -610,7 +610,7 @@
                             <p class="text-[10px] text-[#E0F7F4] leading-none">Cosmética e Higiene Natural</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex border-t border-[#33BCA9]/30 mt-3.5">
                         <button onclick="switchStoreView('vitrina')" id="store-tab-vitrina" class="flex-1 text-center py-2 text-xs font-bold border-b-2 border-white text-white">🛍️ Vitrina Virtual</button>
                         <button onclick="switchStoreView('herramientas')" id="store-tab-herramientas" class="flex-1 text-center py-2 text-xs font-semibold border-b-2 border-transparent text-[#E0F7F4]">⚙️ Herramientas Business</button>
@@ -628,7 +628,7 @@
                             </div>
                             <i data-lucide="gift" class="w-7 h-7 text-[#5A738E]"></i>
                         </div>
-                        
+
                         <div class="grid grid-cols-2 gap-3.5">
                             <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-xs flex flex-col justify-between">
                                 <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&q=80&w=150&h=150" class="w-full h-24 object-cover rounded-xl" alt="Aceite de Lavanda">
@@ -647,7 +647,7 @@
 
                     <!-- BUSINESS HUB (REQUERIMIENTO: HERRAMIENTAS COMPLETAS DE WHATSAPP BUSINESS - FOTOS 22, 23, 24) -->
                     <div id="view-herramientas" class="space-y-4.5 hidden">
-                        
+
                         <!-- Tarjetas de Rendimiento / Métricas Superiores (Foto 22) -->
                         <div id="biz-performance-scroll" class="w-full overflow-x-auto whitespace-nowrap no-scrollbar scroll-smooth select-none">
                             <div class="px-1 py-1 flex gap-2.5 w-max">
@@ -681,7 +681,7 @@
                         <!-- SECCIÓN 1: Haz crecer tu empresa (Foto 22) -->
                         <div class="bg-white rounded-2xl border border-slate-150 p-4 space-y-3.5 shadow-xs">
                             <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-0.5">Haz crecer tu empresa</h3>
-                            
+
                             <div class="space-y-4">
                                 <!-- Meta One -->
                                 <div onclick="alert('Meta One: Acceso premium configurado en tu cuenta de Lawen')" class="flex items-start gap-3 cursor-pointer group">
@@ -747,7 +747,7 @@
                         <!-- SECCIÓN 2: Organiza tus chats (Foto 23) -->
                         <div class="bg-white rounded-2xl border border-slate-150 p-4 space-y-3.5 shadow-xs">
                             <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-0.5">Organiza tus chats</h3>
-                            
+
                             <div class="space-y-4">
                                 <!-- Listas -->
                                 <div onclick="alert('Abriendo listas de etiquetas de pacientes')" class="flex items-start gap-3 cursor-pointer group">
@@ -798,7 +798,7 @@
                         <!-- SECCIÓN 3: Administra tu cuenta (Foto 24) -->
                         <div class="bg-white rounded-2xl border border-slate-150 p-4 space-y-3.5 shadow-xs">
                             <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-0.5">Administra tu cuenta</h3>
-                            
+
                             <div class="space-y-4">
                                 <!-- Perfil de empresa -->
                                 <div onclick="alert('Abriendo ficha de perfil: Emprende Natural, Maule, Chile')" class="flex items-start gap-3 cursor-pointer group">
@@ -843,7 +843,7 @@
                                 <i data-lucide="qr-code" class="w-4 h-4"></i> Compartir Catálogo de Emprende
                             </h3>
                             <p class="text-[11px] text-[#5A738E] text-left leading-relaxed">Comparte el enlace de tu catálogo de cosmética e higiene natural mediante enlace directo o código QR.</p>
-                            
+
                             <div class="flex gap-2.5 mt-2">
                                 <button onclick="copyCatalogLink()" class="flex-1 bg-[#E0F7F4] text-[#2C7A7B] text-[10px] font-black py-2 rounded-xl hover:bg-[#33BCA9] hover:text-white transition flex items-center justify-center gap-1">
                                     <i data-lucide="link" class="w-3.5 h-3.5"></i> Copiar Enlace
@@ -869,11 +869,11 @@
                 </header>
 
                 <div class="flex-1 overflow-y-auto p-4.5 no-scrollbar space-y-4 pb-24">
-                    
+
                     <!-- REPRODUCTOR DE MÚSICA ESTILO SPOTIFY -->
                     <div class="bg-[#121E2B]/95 p-4.5 rounded-3xl border border-white/5 shadow-2xl space-y-3.5 relative overflow-hidden">
                         <div class="absolute -right-12 -top-12 w-28 h-28 bg-[#33BCA9]/10 rounded-full blur-2xl"></div>
-                        
+
                         <div class="flex gap-4 items-center">
                             <div class="w-16 h-16 bg-[#172A3C] rounded-2xl flex items-center justify-center text-3xl shadow-md border border-white/10 shrink-0 relative overflow-hidden">
                                 <span id="spotify-disc-art">🌌</span>
@@ -1062,7 +1062,7 @@
                 <div class="w-12 h-12 bg-[#E0F7F4] text-[#2C7A7B] rounded-full flex items-center justify-center mx-auto mb-1"><i data-lucide="qr-code" class="w-6 h-6"></i></div>
                 <h3 class="font-black text-sm uppercase tracking-tight text-slate-800">Catálogo Emprende</h3>
                 <p class="text-xs text-slate-500">Escanea este código QR desde otro celular para compartir la vitrina de cosmética natural.</p>
-                
+
                 <div class="w-40 h-40 bg-[#E0F7F4] rounded-2xl mx-auto flex items-center justify-center border-4 border-[#33BCA9] relative overflow-hidden">
                     <svg viewBox="0 0 100 100" class="w-32 h-32 stroke-[#2C7A7B] fill-[#2C7A7B]">
                         <rect x="5" y="5" width="25" height="25" fill="none" stroke="#2C7A7B" stroke-width="6"/>
@@ -1086,7 +1086,7 @@
                         <circle cx="50" cy="50" r="6" fill="#33BCA9"/>
                     </svg>
                 </div>
-                
+
                 <p class="text-[10px] text-slate-400 font-mono select-all">lawenmoll.cl/emprende/vitrina_910</p>
                 <button onclick="closeStoreQRCode()" class="w-full bg-[#2C7A7B] text-white py-2 rounded-xl font-bold text-xs hover:bg-[#33BCA9] transition">Volver</button>
             </div>
@@ -1243,7 +1243,7 @@
                 <!-- Carrusel de fotos de tratamientos recientes estilo Telegram (Imagen 34) -->
                 <div class="space-y-1.5">
                     <span class="text-[9px] text-[#5A738E] font-bold uppercase tracking-wider flex justify-between items-center px-0.5">
-                        Tratamientos recientes 
+                        Tratamientos recientes
                         <button onclick="toggleRecentGallery()" class="text-[#2C7A7B] font-black lowercase text-[10px]">contraer/ver todo</button>
                     </span>
                     <div id="recent-photos-container" class="flex gap-2 overflow-x-auto pb-1.5 no-scrollbar select-none scroll-smooth">
@@ -1319,7 +1319,7 @@
                     </div>
                     <button onclick="toggleEmojiDrawer()" class="text-slate-400 hover:text-slate-600 flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
                 </div>
-                
+
                 <!-- Biblioteca robusta de emojis totalmente poblada -->
                 <div id="emoji-grid-faces" class="emoji-grid grid grid-cols-8 gap-3.5 text-xl py-1.5 h-36 overflow-y-auto no-scrollbar">
                     <span onclick="insertEmoji('😊')" class="cursor-pointer hover:scale-125 transition text-center">😊</span>
@@ -1347,7 +1347,7 @@
                     <span onclick="insertEmoji('🤯')" class="cursor-pointer hover:scale-125 transition text-center">🤯</span>
                     <span onclick="insertEmoji('👍')" class="cursor-pointer hover:scale-125 transition text-center">👍</span>
                 </div>
-                
+
                 <div id="emoji-grid-nature" class="emoji-grid grid grid-cols-8 gap-3.5 text-xl py-1.5 h-36 overflow-y-auto no-scrollbar hidden">
                     <span onclick="insertEmoji('🌿')" class="cursor-pointer hover:scale-125 transition text-center">🌿</span>
                     <span onclick="insertEmoji('🌱')" class="cursor-pointer hover:scale-125 transition text-center">🌱</span>
@@ -1419,9 +1419,9 @@
                     <button onclick="toggleMultimediaDrawer()" class="p-2 text-[#33BCA9] hover:bg-slate-100 rounded-full transition flex items-center justify-center" title="Adjuntar archivo"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
                     <button onclick="openCameraSimulation()" class="p-2 text-[#33BCA9] hover:bg-slate-100 rounded-full transition flex items-center justify-center" title="Cámara"><i data-lucide="camera" class="w-5 h-5"></i></button>
                     <button onclick="toggleEmojiDrawer()" class="p-2 text-[#33BCA9] hover:bg-slate-100 rounded-full transition flex items-center justify-center text-lg leading-none" title="Emojis">😀</button>
-                    
+
                     <input type="text" id="chat-input-text" placeholder="Escribe un mensaje..." class="bg-slate-100 text-xs w-full focus:outline-none rounded-full px-4 py-2 border border-slate-200 text-slate-700">
-                    
+
                     <button id="chat-voice-btn" onclick="startVoiceRecording()" class="p-2 text-[#33BCA9] hover:bg-slate-100 rounded-full transition flex items-center justify-center" title="Grabar audio"><i data-lucide="mic" class="w-5 h-5"></i></button>
                     <button id="chat-send-btn" onclick="sendSimulatedMessage()" class="bg-[#2C7A7B] text-white p-2.5 rounded-full hover:bg-[#33BCA9] transition flex items-center justify-center hidden"><i data-lucide="send" class="w-4 h-4"></i></button>
                 </div>
@@ -1448,7 +1448,7 @@
                     <p id="call-overlay-status" class="text-xs text-[#33BCA9] tracking-wider uppercase font-semibold mt-1">Llamando...</p>
                 </div>
             </div>
-            
+
             <!-- Recuadro de simulación de video -->
             <div id="video-sim-box" class="w-full h-44 bg-slate-900 rounded-2xl border border-[#33BCA9]/20 overflow-hidden relative hidden mb-4">
                 <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=250&h=180" class="w-full h-full object-cover opacity-80" alt="Video">
@@ -1568,7 +1568,7 @@
 
         // Estado del Calendario Interactivo
         let selectedDay = 7; // Día seleccionado por defecto (7 de Septiembre, coincidente con metadata)
-        
+
         // Base de Datos de Citas Médicas Inicializada
         const medicalAppointments = [
             { id: 1, doctor: "Dr. Aldo Licandeo", establishment: "Particular", date: "2026-09-08", time: "10:30", day: 8, triggered: false },
@@ -1598,12 +1598,12 @@
             // Quitar pantalla
             document.getElementById('onboarding-screen').classList.add('hidden');
             confetti({ particleCount: 50, spread: 60 });
-            
+
             // Cargar por defecto Plan Morfeo en la sección de Serenidad
             loadSerenityCategory('morfeo');
             renderCalendar();
             renderAppointments();
-            
+
             // Inicializar arrastres horizontales interactivos
             enableDragScroll('chat-filter-scroll-container');
             enableDragScroll('salud-sub-menu');
@@ -1623,7 +1623,7 @@
             renderAppointments();
             calculateBMI();
             loadSerenityCategory('morfeo');
-            
+
             // Inicializar el arrastre horizontal suave para prevenir estado estático (Cursor / Desktop)
             enableDragScroll('chat-filter-scroll-container');
             enableDragScroll('salud-sub-menu');
@@ -1715,7 +1715,7 @@
                 `;
                 setTimeout(() => {
                     // Cargar Calendario/Horas por defecto
-                    const calBtn = document.querySelector('.salud-sub-btn'); 
+                    const calBtn = document.querySelector('.salud-sub-btn');
                     if (calBtn) switchSaludSubTab('calendario', calBtn);
                 }, 50);
             } else if (tabName === 'tienda') {
@@ -1754,7 +1754,7 @@
             });
 
             button.className = "salud-sub-btn bg-[#33BCA9] text-white text-[11px] px-4 py-2 rounded-full font-bold transition flex items-center gap-1.5 shadow-sm shrink-0";
-            
+
             updateIndicator(button);
             if (tabName === 'calendario') {
                 renderCalendar();
@@ -1768,10 +1768,10 @@
             if (indicator && activeButton && menu) {
                 const menuRect = menu.getBoundingClientRect();
                 const btnRect = activeButton.getBoundingClientRect();
-                
+
                 const leftOffset = btnRect.left - menuRect.left + menu.scrollLeft;
                 const width = btnRect.width;
-                
+
                 indicator.style.left = leftOffset + "px";
                 indicator.style.width = width + "px";
             }
@@ -1784,7 +1784,7 @@
 
         // Lógica Interactiva del Botón "No Leídos" (REQUERIMIENTO: HOVER SACA EL NÚMERO Y CLIC PONE VERDE)
         let isNoLeidosActive = false;
-        
+
         function showUnreadBadge() {
             const badge = document.getElementById('unread-badge');
             badge.classList.remove('opacity-0', 'scale-50');
@@ -1807,9 +1807,9 @@
                 const line = b.querySelector('span.absolute');
                 if (line) line.remove();
             });
-            
+
             isNoLeidosActive = (filterType === 'no-leidos');
-            
+
             // Garantizar estado del badge según selección
             const badge = document.getElementById('unread-badge');
             if (isNoLeidosActive) {
@@ -1817,14 +1817,14 @@
             } else {
                 badge.className = "bg-[#33BCA9] text-white text-[8px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-black transition-all duration-300 opacity-0 scale-50";
             }
-            
+
             // Aplicar estilo de texto seleccionado en color de marca verde herbolario (sin círculos)
             btn.className = "chat-filter-btn text-[#2C7A7B] text-[13px] font-black transition relative shrink-0 flex items-center gap-1.5 py-1";
-            
+
             const underline = document.createElement('span');
             underline.className = "absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-[#2C7A7B] rounded-full";
             btn.appendChild(underline);
-            
+
             // Filtrar chats dinámicamente
             const rowAldo = document.getElementById('chat-row-aldo');
             const rowLicandeo = document.getElementById('chat-row-licandeo');
@@ -1836,7 +1836,7 @@
                 rowLicandeo.classList.remove('hidden');
                 rowTeno.classList.remove('hidden');
                 rowFamilia.classList.remove('hidden');
-                
+
                 document.getElementById('chat-list-view').classList.remove('hidden');
                 document.getElementById('novedades-list-view').classList.add('hidden');
                 document.getElementById('llamadas-list-view').classList.add('hidden');
@@ -1846,7 +1846,7 @@
                 rowTeno.classList.remove('hidden');
                 rowLicandeo.classList.add('hidden');
                 rowFamilia.classList.add('hidden');
-                
+
                 document.getElementById('chat-list-view').classList.remove('hidden');
                 document.getElementById('novedades-list-view').classList.add('hidden');
                 document.getElementById('llamadas-list-view').classList.add('hidden');
@@ -1955,7 +1955,7 @@
             document.getElementById('chat-avatar').src = avatar;
             document.getElementById('chat-received-text').innerText = message;
             document.getElementById('chat-status').innerText = status;
-            
+
             // Si abrimos el chat de Aldo, limpiar el punto de no leído
             if (name.includes('Aldo')) {
                 const dot = document.getElementById('chat-unread-dot-aldo');
@@ -1973,12 +1973,12 @@
             `;
 
             document.getElementById('individual-chat-view').classList.remove('hidden');
-            
+
             // Alternar micrófono/enviar según escritura
             const inputEl = document.getElementById('chat-input-text');
             const voiceBtn = document.getElementById('chat-voice-btn');
             const sendBtn = document.getElementById('chat-send-btn');
-            
+
             inputEl.addEventListener('input', () => {
                 if (inputEl.value.trim().length > 0) {
                     voiceBtn.classList.add('hidden');
@@ -2022,11 +2022,11 @@
             const stream = document.getElementById('chat-messages-stream');
             const wrapper = document.createElement('div');
             wrapper.className = "flex justify-end";
-            
+
             let iconName = 'file-text';
             let colorClass = 'text-purple-600';
             let bgClass = 'bg-purple-100';
-            
+
             if (type === 'documento') { iconName = 'file-text'; colorClass = 'text-purple-600'; bgClass = 'bg-purple-100'; }
             else if (type === 'audio') { iconName = 'headphones'; colorClass = 'text-orange-500'; bgClass = 'bg-orange-100'; }
             else if (type === 'catalogo') { iconName = 'store'; colorClass = 'text-emerald-600'; bgClass = 'bg-emerald-100'; }
@@ -2035,7 +2035,7 @@
             else if (type === 'encuesta') { iconName = 'bar-chart-2'; colorClass = 'text-amber-500'; bgClass = 'bg-amber-100'; }
             else if (type === 'evento') { iconName = 'calendar'; colorClass = 'text-violet-500'; bgClass = 'bg-violet-100'; }
             else if (type === 'ia') { iconName = 'sparkles'; colorClass = 'text-cyan-600'; bgClass = 'bg-cyan-100'; }
-            
+
             wrapper.innerHTML = `
                 <div class="flex flex-col items-end gap-1 max-w-[85%] ml-auto">
                     <div class="bg-[#E0F7F4] p-3 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20 flex items-center gap-3">
@@ -2051,11 +2051,11 @@
             `;
             stream.appendChild(wrapper);
             lucide.createIcons();
-            
+
             setTimeout(() => {
                 stream.scrollTop = stream.scrollHeight;
             }, 50);
-            
+
             // Respuesta automática del terapeuta
             setTimeout(() => {
                 const reply = document.createElement('div');
@@ -2073,7 +2073,7 @@
         function switchEmojiCategory(catName) {
             const grids = document.querySelectorAll('.emoji-grid');
             grids.forEach(g => g.classList.add('hidden'));
-            
+
             const btns = document.querySelectorAll('.emoji-cat-btn');
             btns.forEach(b => {
                 b.className = "emoji-cat-btn font-semibold text-slate-500 pb-0.5";
@@ -2087,7 +2087,7 @@
             const textInput = document.getElementById('chat-input-text');
             textInput.value += emoji;
             textInput.focus();
-            
+
             document.getElementById('chat-voice-btn').classList.add('hidden');
             document.getElementById('chat-send-btn').classList.remove('hidden');
         }
@@ -2099,7 +2099,7 @@
             document.getElementById('audio-recording-overlay').classList.remove('hidden');
             recordingSeconds = 0;
             document.getElementById('voice-record-timer').innerText = "00:00";
-            
+
             clearInterval(recordingInterval);
             recordingInterval = setInterval(() => {
                 recordingSeconds++;
@@ -2117,11 +2117,11 @@
         function sendSimulatedVoiceMessage() {
             clearInterval(recordingInterval);
             document.getElementById('audio-recording-overlay').classList.add('hidden');
-            
+
             const stream = document.getElementById('chat-messages-stream');
             const wrapper = document.createElement('div');
             wrapper.className = "flex justify-end";
-            
+
             wrapper.innerHTML = `
                 <div class="flex flex-col items-end gap-1 max-w-[85%] ml-auto">
                     <div class="bg-[#E0F7F4] p-3 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20 flex items-center gap-3 w-48">
@@ -2139,10 +2139,10 @@
                     </div>
                 </div>
             `;
-            
+
             stream.appendChild(wrapper);
             lucide.createIcons();
-            
+
             setTimeout(() => {
                 stream.scrollTop = stream.scrollHeight;
             }, 50);
@@ -2190,7 +2190,7 @@
 
         function sendSimulatedPhoto(imgUrl, caption) {
             const stream = document.getElementById('chat-messages-stream');
-            
+
             const userPhotoBubble = `
                 <div class="flex flex-col items-end gap-1 max-w-[85%] ml-auto">
                     <div class="bg-[#E0F7F4] p-2 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20">
@@ -2199,14 +2199,14 @@
                     </div>
                 </div>
             `;
-            
+
             const wrapper = document.createElement('div');
             wrapper.className = "flex justify-end";
             wrapper.innerHTML = userPhotoBubble;
             stream.appendChild(wrapper);
 
             document.getElementById('chat-multimedia-drawer').classList.add('hidden');
-            
+
             setTimeout(() => {
                 stream.scrollTop = stream.scrollHeight;
             }, 100);
@@ -2334,7 +2334,7 @@
                 const badge = document.getElementById('coupon-tag');
                 badge.className = "text-[9px] bg-yellow-400 text-yellow-950 px-2.5 py-0.5 rounded-full font-black uppercase tracking-wider animate-bounce";
                 badge.innerText = "¡Liberado! 🎁";
-                
+
                 const coupon = document.getElementById('wallet-coupon');
                 coupon.innerHTML = `
                     <div>
@@ -2370,7 +2370,7 @@
             const card = document.getElementById('exercise-timer-card');
             card.classList.remove('hidden');
             document.getElementById('timer-title').innerText = title;
-            
+
             let timeLeft = seconds;
             document.getElementById('timer-display').innerText = "00:" + timeLeft.toString().padStart(2, '0');
 
@@ -2390,11 +2390,11 @@
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid-container');
             grid.innerHTML = '';
-            
+
             // Septiembre 2026 empieza el Martes (1 de Septiembre es Martes)
             // Por lo tanto, el Lunes anterior (vacío o deshabilitado) será 1 espacio en blanco
             const emptySpaces = 1;
-            
+
             // Renderizar espacios vacíos
             for (let i = 0; i < emptySpaces; i++) {
                 const emptyCell = document.createElement('div');
@@ -2405,13 +2405,13 @@
             // Renderizar los 30 días de Septiembre
             for (let day = 1; day <= 30; day++) {
                 const dayCell = document.createElement('div');
-                
+
                 // Comprobar si el día tiene cita programada
                 const hasAppt = medicalAppointments.some(appt => appt.day === day);
-                
+
                 // Clases básicas de Tailwind para los números del calendario
                 let cellClasses = "h-8 flex flex-col items-center justify-center text-xs font-bold rounded-lg cursor-pointer transition relative ";
-                
+
                 if (day === selectedDay) {
                     cellClasses += "bg-[#2C7A7B] text-white shadow-sm";
                 } else if (day === 7) {
@@ -2422,27 +2422,27 @@
                 }
 
                 dayCell.className = cellClasses;
-                
+
                 // Número del día
                 let innerHTML = `<span>${day}</span>`;
-                
+
                 // Si tiene cita médica, añadir un punto indicador debajo del número
                 if (hasAppt) {
                     const dotColor = day === selectedDay ? "bg-white" : "bg-red-500 animate-pulse";
                     innerHTML += `<span class="absolute bottom-1 w-1 h-1 rounded-full ${dotColor}"></span>`;
                 }
-                
+
                 dayCell.innerHTML = innerHTML;
-                
+
                 // Acción al cliquear un día
                 dayCell.onclick = () => {
                     selectedDay = day;
-                    
+
                     // Actualizar el label y el input de fecha en el formulario
                     document.getElementById('selected-calendar-date-label').innerText = day + " de Septiembre";
                     const formattedDay = day.toString().padStart(2, '0');
                     document.getElementById('appt-date').value = `2026-09-${formattedDay}`;;
-                    
+
                     renderCalendar();
                     renderAppointments();
                 };
@@ -2479,17 +2479,17 @@
             medicalAppointments.push(appt);
             renderCalendar();
             renderAppointments();
-            
+
             alert("Cita médica agendada exitosamente con el " + doc + " (" + establishment + ") para el día " + appt.day + " de Septiembre a las " + time + " Hrs.");
         }
 
         function renderAppointments() {
             const container = document.getElementById('appointment-list-container');
             container.innerHTML = '';
-            
+
             // Filtrar citas correspondientes al día seleccionado en el calendario
             const activeAppts = medicalAppointments.filter(appt => appt.day === selectedDay);
-            
+
             if (activeAppts.length === 0) {
                 container.innerHTML = `<p class="text-[11px] text-slate-400 text-center py-4">No hay citas médicas programadas para este día.</p>`;
                 return;
@@ -2517,7 +2517,7 @@
             // Mostrar Toast deslizable superior
             document.getElementById('toast-doctor').innerText = doctor;
             document.getElementById('toast-establishment').innerText = "Centro: " + establishment;
-            
+
             const toast = document.getElementById('medical-toast');
             toast.classList.remove('-translate-y-64');
             toast.classList.add('translate-y-0');
@@ -2574,7 +2574,7 @@
                 btnText.innerText = "Descargado";
                 status.innerText = `✓ Sonido "${selectedSoundName}" descargado localmente para tus alarmas médicas`;
                 status.classList.remove('hidden');
-                
+
                 // Guardar preferencia de descarga local
                 localStorage.setItem(`dl_alarm_sound_${select.value}`, 'true');
                 confetti({ particleCount: 20, spread: 35 });
@@ -2585,9 +2585,9 @@
             try {
                 const select = document.getElementById('appt-sound-select');
                 const soundVal = select ? select.value : 'melisa';
-                
+
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
+
                 if (soundVal === 'melisa') {
                     // Tono zen suave (Melisa) - Arpegio ascendente
                     const notes = [440, 554.37, 659.25, 880]; // A4, C#5, E5, A5
@@ -2608,19 +2608,19 @@
                     const osc1 = audioCtx.createOscillator();
                     const osc2 = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
-                    
+
                     osc1.type = 'sine';
                     osc1.frequency.setValueAtTime(110, audioCtx.currentTime); // 110Hz
                     osc2.type = 'sine';
                     osc2.frequency.setValueAtTime(114, audioCtx.currentTime); // 114Hz (binaural beat de 4Hz en Delta)
-                    
+
                     gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
-                    
+
                     osc1.connect(gain);
                     osc2.connect(gain);
                     gain.connect(audioCtx.destination);
-                    
+
                     osc1.start();
                     osc2.start();
                     osc1.stop(audioCtx.currentTime + 1.5);
@@ -2635,22 +2635,22 @@
                     }
                     const noise = audioCtx.createBufferSource();
                     noise.buffer = buffer;
-                    
+
                     const filter = audioCtx.createBiquadFilter();
                     filter.type = 'lowpass';
                     filter.frequency.setValueAtTime(400, audioCtx.currentTime);
                     filter.Q.setValueAtTime(1.0, audioCtx.currentTime);
-                    
+
                     const noiseGain = audioCtx.createGain();
                     noiseGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
                     noiseGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
-                    
+
                     noise.connect(filter);
                     filter.connect(noiseGain);
                     noiseGain.connect(audioCtx.destination);
                     noise.start();
                     noise.stop(audioCtx.currentTime + 1.2);
-                    
+
                     // Añadir un acorde de agua cristalina
                     [329.63, 392.00, 523.25].forEach((freq, idx) => { // E4, G4, C5
                         const osc = audioCtx.createOscillator();
@@ -2670,22 +2670,22 @@
                     const gain = audioCtx.createGain();
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5 (Armónicos de meditación)
-                    
+
                     gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.8);
-                    
+
                     const harmonic = audioCtx.createOscillator();
                     harmonic.type = 'sine';
                     harmonic.frequency.setValueAtTime(1046.50, audioCtx.currentTime); // C6 (armónico superior de octava)
                     const hGain = audioCtx.createGain();
                     hGain.gain.setValueAtTime(0.03, audioCtx.currentTime);
                     hGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
-                    
+
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
                     harmonic.connect(hGain);
                     hGain.connect(audioCtx.destination);
-                    
+
                     osc.start();
                     harmonic.start();
                     osc.stop(audioCtx.currentTime + 1.8);
@@ -2702,7 +2702,7 @@
         let spotifyTime = 0;
         let spotifyPlaying = false;
         let spotifyTrackIndex = 0;
-        
+
         const spotifyPlaylist = [
             { title: "Inducción de Morfeo", category: "Plan Morfeo", desc: "Frecuencias binaurales Delta (110 Hz)", art: "🌌", duration: 180 },
             { title: "Calma de Melisa y Romero", category: "Podcast Terapéutico", desc: "Consejos de higiene del sueño", art: "🍵", duration: 240 },
@@ -2716,16 +2716,16 @@
             document.getElementById('spotify-track-category').innerText = track.category;
             document.getElementById('spotify-track-desc').innerText = track.desc;
             document.getElementById('spotify-disc-art').innerText = track.art;
-            
+
             spotifyTime = 0;
             updateSpotifyProgressUI();
-            
+
             // Comprobar si está marcado como disponible offline
             const isDownloaded = localStorage.getItem("dl_track_" + spotifyTrackIndex);
             const dlBadge = document.getElementById('spotify-dl-badge');
             const dlStatus = document.getElementById('spotify-dl-status');
             const dlIcon = document.getElementById('spotify-dl-icon');
-            
+
             if (isDownloaded === 'true') {
                 dlBadge.classList.remove('hidden');
                 dlStatus.classList.remove('hidden');
@@ -2742,7 +2742,7 @@
             if (!spotifyPlaying) {
                 spotifyPlaying = true;
                 playIcon.setAttribute('data-lucide', 'pause');
-                
+
                 spotifyInterval = setInterval(() => {
                     spotifyTime++;
                     if (spotifyTime >= spotifyPlaylist[spotifyTrackIndex].duration) {
@@ -2763,11 +2763,11 @@
             const track = spotifyPlaylist[spotifyTrackIndex];
             const percent = (spotifyTime / track.duration) * 100;
             document.getElementById('spotify-progress-bar').style.width = percent + "%";
-            
+
             const elMins = Math.floor(spotifyTime / 60);
             const elSecs = (spotifyTime % 60).toString().padStart(2, '0');
             document.getElementById('spotify-time-elapsed').innerText = elMins + ":" + elSecs;
-            
+
             const totMins = Math.floor(track.duration / 60);
             const totSecs = (track.duration % 60).toString().padStart(2, '0');
             document.getElementById('spotify-time-total').innerText = totMins + ":" + totSecs;
@@ -2808,7 +2808,7 @@
             const dlIcon = document.getElementById('spotify-dl-icon');
             const dlBadge = document.getElementById('spotify-dl-badge');
             const dlStatus = document.getElementById('spotify-dl-status');
-            
+
             dlIcon.classList.add('animate-bounce');
             dlStatus.innerText = "Sincronizando pistas locales con el dispositivo...";
             dlStatus.classList.remove('hidden');
@@ -2831,7 +2831,7 @@
         function loadSerenityCategory(catName) {
             const title = document.getElementById('serenity-detail-title');
             const body = document.getElementById('serenity-detail-body');
-            
+
             if (catName === 'morfeo') {
                 title.innerText = "Plan Morfeo 🌙";
                 body.innerHTML = `
@@ -2911,11 +2911,11 @@
         function enableDragScroll(containerId) {
             const el = document.getElementById(containerId);
             if (!el) return;
-            
+
             let isDown = false;
             let startX;
             let scrollLeft;
-            
+
             // Arrastre por Mouse
             el.addEventListener('mousedown', (e) => {
                 isDown = true;
@@ -2923,17 +2923,17 @@
                 scrollLeft = el.scrollLeft;
                 el.style.cursor = 'grabbing';
             });
-            
+
             el.addEventListener('mouseleave', () => {
                 isDown = false;
                 el.style.cursor = 'grab';
             });
-            
+
             el.addEventListener('mouseup', () => {
                 isDown = false;
                 el.style.cursor = 'grab';
             });
-            
+
             el.addEventListener('mousemove', (e) => {
                 if(!isDown) return;
                 e.preventDefault();
@@ -2967,7 +2967,7 @@
                     el.scrollLeft += e.deltaY;
                 }
             }, { passive: false });
-            
+
             el.style.cursor = 'grab';
             el.style.touchAction = 'pan-x';
         }
@@ -2982,7 +2982,7 @@
                 <h3 class="font-black text-base text-slate-800" id="ex-modal-title">Cardio Quema Grasa Suave</h3>
                 <p class="text-[11px] text-[#5A738E] mt-1 px-2" id="ex-modal-desc">Ejercicios coordinados de bajo impacto sin saltos.</p>
             </div>
-            
+
             <!-- Temporizador y Barra -->
             <div class="bg-[#FAF8EE] p-4 rounded-2xl border space-y-2">
                 <div class="text-3xl font-black text-[#2C7A7B]" id="ex-timer-display">15:00</div>
