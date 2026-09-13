@@ -2085,43 +2085,139 @@
 
         // Abrir y Controlar Chat Individual
         function openIndividualChat(name, avatar, message, status) {
-            document.getElementById('chat-name').innerText = name;
-            document.getElementById('chat-avatar').src = avatar;
-            document.getElementById('chat-received-text').innerText = message;
-            document.getElementById('chat-status').innerText = status;
+            const chatNameEl = document.getElementById('chat-name');
+            const chatAvatarEl = document.getElementById('chat-avatar');
+            const chatStatusEl = document.getElementById('chat-status');
+            const stream = document.getElementById('chat-messages-stream');
+
+            if (chatNameEl) chatNameEl.innerText = name;
+            if (chatAvatarEl) chatAvatarEl.src = avatar;
+            if (chatStatusEl) chatStatusEl.innerText = status;
 
             // Si abrimos el chat de Aldo, limpiar el punto de no leído
-            if (name.includes('Aldo')) {
+            if (name && name.includes('Aldo')) {
                 const dot = document.getElementById('chat-unread-dot-aldo');
                 if (dot) dot.remove();
             }
 
-            const stream = document.getElementById('chat-messages-stream');
-            stream.innerHTML = `
-                <div class="flex justify-center"><span class="text-[9px] bg-slate-200 text-slate-500 px-3 py-1 rounded-full font-medium">HOY</span></div>
-                <div class="flex items-end gap-2 max-w-[85%]">
-                    <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
-                        <p class="text-xs text-[#4C5C77]">${message}</p>
-                    </div>
-                </div>
-            `;
+            // Generar hilo de mensajes personalizado y rico por contacto
+            let messagesHTML = `<div class="flex justify-center my-1"><span class="text-[9px] bg-slate-200 text-slate-500 px-3 py-1 rounded-full font-medium shadow-xs">HOY</span></div>`;
 
-            document.getElementById('individual-chat-view').classList.remove('hidden');
+            if (name && name.includes('Aldo')) {
+                messagesHTML += `
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs text-[#4C5C77]">Hola Fabiola, ¿cómo te ha ido con la infusión de melisa y el ungüento de romero?</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">14:20</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end my-1">
+                        <div class="bg-[#E0F7F4] p-3 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20 max-w-[85%]">
+                            <p class="text-xs text-slate-800">¡Hola Aldo! Excelente, he dormido mucho mejor estos días con el Plan Morfeo. 🌿</p>
+                            <span class="text-[8px] text-[#2C7A7B] block text-right mt-1 font-bold">14:22 ✓✓</span>
+                        </div>
+                    </div>
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs text-[#4C5C77]">${message || 'jajajaj lo pensare jajajja'}</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">14:25</span>
+                        </div>
+                    </div>
+                `;
+            } else if (name && (name.includes('licandeo') || name.includes('Tú'))) {
+                messagesHTML += `
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs text-[#4C5C77]">📌 Ficha Clínica Personal: Próxima cita de control herbolario agendada para el 15 de Septiembre a las 14:15 Hrs en Hospital Teno.</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">10:00</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end my-1">
+                        <div class="bg-[#E0F7F4] p-3 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20 max-w-[85%]">
+                            <p class="text-xs text-slate-800">Perfecto, ya quedó sincronizado en mi calendario médico con la alarma Melisa. 🔔</p>
+                            <span class="text-[8px] text-[#2C7A7B] block text-right mt-1 font-bold">10:05 ✓✓</span>
+                        </div>
+                    </div>
+                `;
+            } else if (name && name.includes('TENO')) {
+                messagesHTML += `
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs font-bold text-[#33BCA9] mb-0.5">Stefany Serrano</p>
+                            <p class="text-xs text-[#4C5C77]">¡Hola a todos! Teniendo disponibles plantines orgánicos de menta piperita, melisa y manzanilla en Teno centro. 🌿</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">11:15</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end my-1">
+                        <div class="bg-[#E0F7F4] p-3 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20 max-w-[85%]">
+                            <p class="text-xs text-slate-800">¿A qué valor tienes los plantines de melisa?</p>
+                            <span class="text-[8px] text-[#2C7A7B] block text-right mt-1 font-bold">11:18 ✓✓</span>
+                        </div>
+                    </div>
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs font-bold text-[#33BCA9] mb-0.5">Stefany Serrano</p>
+                            <p class="text-xs text-[#4C5C77]">${message || '📷 Foto - A $1.500 cada uno, entrego en la plaza.'}</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">11:20</span>
+                        </div>
+                    </div>
+                `;
+            } else if (name && name.includes('Familia')) {
+                messagesHTML += `
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs font-bold text-amber-600 mb-0.5">Mamá</p>
+                            <p class="text-xs text-[#4C5C77]">Hija, ¿ya te tomaste tu agüita de hierbas antes de acostarte?</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">21:00</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end my-1">
+                        <div class="bg-[#E0F7F4] p-3 rounded-2xl rounded-br-none shadow-xs border border-[#33BCA9]/20 max-w-[85%]">
+                            <p class="text-xs text-slate-800">Sí mamá, recién me preparé la melisa y activé las frecuencias de Morfeo AI 🌙</p>
+                            <span class="text-[8px] text-[#2C7A7B] block text-right mt-1 font-bold">21:05 ✓✓</span>
+                        </div>
+                    </div>
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs font-bold text-indigo-600 mb-0.5">Hermano</p>
+                            <p class="text-xs text-[#4C5C77]">${message || 'siempre te amare a ti k: 😂...'}</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">21:10</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messagesHTML += `
+                    <div class="flex items-end gap-2 max-w-[85%]">
+                        <div class="bg-white p-3.5 rounded-2xl rounded-bl-none shadow-xs border border-slate-200/50">
+                            <p class="text-xs text-[#4C5C77]">${message || '¡Hola! Bienvenido al chat de Bienestar.'}</p>
+                            <span class="text-[8px] text-slate-400 block text-right mt-1">Ahora</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (stream) stream.innerHTML = messagesHTML;
+
+            const chatView = document.getElementById('individual-chat-view');
+            if (chatView) chatView.classList.remove('hidden');
 
             // Alternar micrófono/enviar según escritura
             const inputEl = document.getElementById('chat-input-text');
             const voiceBtn = document.getElementById('chat-voice-btn');
             const sendBtn = document.getElementById('chat-send-btn');
 
-            inputEl.addEventListener('input', () => {
-                if (inputEl.value.trim().length > 0) {
-                    voiceBtn.classList.add('hidden');
-                    sendBtn.classList.remove('hidden');
-                } else {
-                    voiceBtn.classList.remove('hidden');
-                    sendBtn.classList.add('hidden');
-                }
-            });
+            if (inputEl) {
+                inputEl.value = '';
+                inputEl.oninput = () => {
+                    if (inputEl.value.trim().length > 0) {
+                        if (voiceBtn) voiceBtn.classList.add('hidden');
+                        if (sendBtn) sendBtn.classList.remove('hidden');
+                    } else {
+                        if (voiceBtn) voiceBtn.classList.remove('hidden');
+                        if (sendBtn) sendBtn.classList.add('hidden');
+                    }
+                };
+            }
         }
 
         function closeIndividualChat() {
