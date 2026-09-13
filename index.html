@@ -3061,6 +3061,318 @@
     </div>
 
     <!-- MODAL DE AJUSTES Y CONFIGURACIÓN DEL SISTEMA -->
+        <!-- ================= MODAL DE AJUSTES ESTILO WHATSAPP COMPLETO (v15) ================= -->
+    <div id="settings-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden">
+        <div class="bg-[#FAF8EE] w-full max-w-md rounded-3xl shadow-2xl max-h-[92vh] flex flex-col overflow-hidden relative border border-[#33BCA9]/30 text-slate-800">
+
+            <!-- Cabecera Superior Ajustes Estilo WhatsApp -->
+            <div class="bg-[#FAF8EE] px-5 py-3.5 border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-xs">
+                <div class="flex items-center gap-3">
+                    <button onclick="closeSettingsModal()" class="text-slate-600 hover:text-slate-800 p-1 rounded-full hover:bg-slate-200/60 transition">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                    <h2 class="font-black text-lg text-slate-800 tracking-tight">Ajustes</h2>
+                </div>
+                <div class="flex items-center gap-3 text-slate-600">
+                    <button onclick="alert('Buscar en Ajustes')" class="p-1 hover:text-[#33BCA9] transition"><i data-lucide="search" class="w-5 h-5"></i></button>
+                    <button onclick="openStoreQRCode()" class="p-1 hover:text-[#33BCA9] transition"><i data-lucide="qr-code" class="w-5 h-5"></i></button>
+                    <button onclick="alert('Editar perfil')" class="p-1 hover:text-[#33BCA9] transition"><i data-lucide="pencil" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+
+            <!-- Cuerpo Deslizable con Todas las Opciones de Ajustes de WhatsApp (Fotos 45-48) -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-4 divide-y divide-slate-200/60">
+
+                <!-- Tarjeta de Perfil Superior -->
+                <div class="flex flex-col items-center text-center pt-2 pb-1 space-y-2">
+                    <div class="relative">
+                        <img id="set-profile-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" alt="Avatar Perfil" class="w-20 h-20 rounded-full object-cover border-2 border-[#33BCA9] shadow-md">
+                        <button onclick="alert('Cambiar Foto de Perfil')" class="absolute bottom-0 right-0 bg-[#33BCA9] text-white p-1.5 rounded-full shadow-md hover:bg-[#2C7A7B] transition">
+                            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-base text-slate-800 leading-tight" id="set-profile-display-name">Fabiola / Andrea</h3>
+                        <p class="text-[11px] text-[#2C7A7B] font-bold">@licandeo30</p>
+                    </div>
+                    <!-- Estado / Frase de Perfil -->
+                    <div class="bg-white/80 border border-[#33BCA9]/20 rounded-2xl px-3.5 py-1.5 shadow-xs max-w-xs">
+                        <p class="text-[10px] text-slate-600 font-medium italic">"¿Qué canción escuchas una y otra vez? 🎧🌿"</p>
+                    </div>
+                </div>
+
+                <!-- Lista de Opciones Estilo WhatsApp (Fotos 45, 46, 47, 48) -->
+                <div class="pt-3 space-y-1">
+
+                    <!-- 1. Suscripciones -->
+                    <button onclick="alert('Suscripciones: Explorar beneficios premium de Bienestar y Lawenmoll')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="gem" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Suscripciones</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Explorar beneficios premium</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 2. Cuenta -->
+                    <button onclick="alert('Cuenta: Notificaciones de seguridad, verificación en dos pasos y cambio de número')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="key" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Cuenta</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Notificaciones de seguridad, cambiar número</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 3. Privacidad -->
+                    <button onclick="document.getElementById('biometric-lock-screen').classList.remove('hidden'); closeSettingsModal();" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-teal-100 text-[#2C7A7B] flex items-center justify-center shrink-0">
+                                <i data-lucide="lock" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Privacidad</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Cuentas bloqueadas, mensajes temporales, RLS Ley 19.628</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 4. Listas -->
+                    <button onclick="alert('Listas: Administrar personas y grupos de pacientes')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="folder" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Listas</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Administrar personas y grupos</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 5. Chats -->
+                    <button onclick="alert('Chats: Historial de mensajes y copia de seguridad en Supabase')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-[#E0F7F4] text-[#2C7A7B] flex items-center justify-center shrink-0">
+                                <i data-lucide="message-square" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Chats</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Historial de chat, copia de seguridad</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 6. Apariencia -->
+                    <button onclick="alert('Apariencia: Cambiar estilo del chat y paleta Teal { Air }')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="palette" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Apariencia</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Estilo del chat, ícono de la aplicación, estilo Teal { Air }</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 7. Difusiones -->
+                    <button onclick="alert('Difusiones: Enviar mensajes masivos a listas de contactos')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="megaphone" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Difusiones</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Administrar listas y enviar difusiones</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 8. Notificaciones -->
+                    <button onclick="alert('Notificaciones: Configurar tonos de alarmas médicas (Melisa, Delta) y avisos')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="bell" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Notificaciones</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Tonos de mensajes, grupos y llamadas</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 9. Almacenamiento y datos -->
+                    <button onclick="alert('Almacenamiento: Uso de red y almacenamiento en Supabase bienestar_adjuntos')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="database" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Almacenamiento y datos</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Uso de red, descarga automática de adjuntos</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 10. Controles parentales -->
+                    <button onclick="alert('Controles parentales: Ajustes de privacidad para tu familia')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="shield" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Controles parentales</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Ajustes para tu familia</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 11. Accesibilidad -->
+                    <button onclick="alert('Accesibilidad: Tamaño de fuente, mayor contraste y animación')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="accessibility" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Accesibilidad</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Aumentar contraste, animación</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 12. Idioma de la aplicación -->
+                    <button onclick="alert('Idioma: Español (idioma del dispositivo)')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="globe" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Idioma de la aplicación</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Español (idioma del dispositivo)</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 13. Ayuda y comentarios -->
+                    <button onclick="alert('Ayuda: Centro de soporte clínico y soporte de Bienestar')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="help-circle" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Ayuda y comentarios</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Centro de ayuda, contáctanos, política de privacidad</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 14. Invitar amigos -->
+                    <button onclick="alert('Invitar amigos: Compartir enlace de la Súper-App Bienestar')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="user-plus" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Invitar amigos</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Compartir Bienestar con familiares</span>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 15. Actualizaciones de la aplicación -->
+                    <button onclick="alert('Actualizaciones: Súper-App Bienestar v15 instalada y actualizada')" class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-white/80 transition text-left group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-9 h-9 rounded-full bg-teal-100 text-[#2C7A7B] flex items-center justify-center shrink-0">
+                                <i data-lucide="smartphone" class="w-4.5 h-4.5"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-800 block">Actualizaciones de la aplicación</span>
+                                <span class="text-[10px] text-[#2C7A7B] font-bold">Versión v15 instalada (Al día)</span>
+                            </div>
+                        </div>
+                        <i data-lucide="check-circle" class="w-4 h-4 text-[#33BCA9]"></i>
+                    </button>
+
+                    <!-- 16. Centro de Cuentas ASLIDEAS -->
+                    <div class="pt-2">
+                        <div class="p-3.5 bg-white rounded-2xl border border-[#33BCA9]/20 shadow-xs space-y-2">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="infinity" class="w-5 h-5 text-[#2C7A7B]"></i>
+                                <span class="text-xs font-black text-slate-800">Centro de cuentas</span>
+                            </div>
+                            <p class="text-[10px] text-slate-500 leading-relaxed">Controla tu experiencia conectada entre Súper-App Bienestar, Lawenmoll, Morfeo AI y redes sociales.</p>
+
+                            <!-- Ecosistema ASLIDEAS de Redes -->
+                            <div class="flex items-center gap-2.5 pt-1.5 border-t border-slate-100">
+                                <button onclick="alert('Instagram ASLIDEAS')" class="p-1.5 bg-slate-100 rounded-full hover:bg-pink-100 hover:text-pink-600 transition"><i data-lucide="instagram" class="w-4 h-4"></i></button>
+                                <button onclick="alert('Facebook ASLIDEAS')" class="p-1.5 bg-slate-100 rounded-full hover:bg-blue-100 hover:text-blue-600 transition"><i data-lucide="facebook" class="w-4 h-4"></i></button>
+                                <button onclick="alert('Threads ASLIDEAS')" class="p-1.5 bg-slate-100 rounded-full hover:bg-slate-200 hover:text-black transition"><i data-lucide="at-sign" class="w-4 h-4"></i></button>
+                                <button onclick="alert('Morfeo AI App')" class="p-1.5 bg-slate-100 rounded-full hover:bg-teal-100 hover:text-[#2C7A7B] transition"><i data-lucide="sparkles" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Pie del Modal con Guardar -->
+            <div class="p-3 bg-[#FAF8EE] border-t border-slate-200/80 shrink-0 text-center">
+                <button onclick="closeSettingsModal()" class="w-full bg-[#33BCA9] text-white py-2.5 rounded-2xl font-bold text-xs hover:bg-[#2C7A7B] transition shadow-sm">
+                    Guardar y Cerrar Ajustes
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+<!-- MODAL REPRODUCTOR DE RUTINA DE EJERCICIOS -->
+    <div id="exercise-routine-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4 text-center relative border border-[#33BCA9]/20">
+            <button onclick="closeExerciseModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <div id="ex-modal-icon" class="w-16 h-16 rounded-2xl bg-[#E0F7F4] flex items-center justify-center text-3xl mx-auto shadow-sm">🏃‍♂️</div>
+            <div>
+                <h3 class="font-black text-base text-slate-800" id="ex-modal-title">Cardio Quema Grasa Suave</h3>
+                <p class="text-[11px] text-[#5A738E] mt-1 px-2" id="ex-modal-desc">Ejercicios coordinados de bajo impacto sin saltos.</p>
+            </div>
+
+            <!-- Temporizador y Barra -->
+            <div class="bg-[#FAF8EE] p-4 rounded-2xl border space-y-2">
+                <div class="text-3xl font-black text-[#2C7A7B]" id="ex-timer-display">15:00</div>
+                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div id="ex-timer-progress" class="bg-[#33BCA9] h-full w-0 transition-all duration-300"></div>
+                </div>
+                <span class="text-[10px] text-[#33BCA9] font-bold" id="ex-calories-target">🔥 Meta: ~90 kcal</span>
+            </div>
+
+            <div class="flex gap-2">
+                <button id="ex-play-btn" onclick="toggleExerciseTimer()" class="flex-1 bg-[#33BCA9] text-white py-2.5 rounded-xl font-bold text-xs hover:bg-[#2C7A7B] transition flex items-center justify-center gap-1.5"><i data-lucide="play" class="w-4 h-4 fill-current"></i> Iniciar Rutina</button>
+                <button onclick="completeExerciseRoutine()" class="bg-emerald-600 text-white px-4 py-2.5 rounded-xl font-bold text-xs hover:bg-emerald-700 transition">Completado ✓</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE AJUSTES Y CONFIGURACIÓN DEL SISTEMA -->
     <div id="settings-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-[#FAF8EE] w-full max-w-md rounded-3xl p-5 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto relative border border-[#33BCA9]/30 text-slate-800">
             <div class="flex items-center justify-between border-b border-[#33BCA9]/20 pb-3">
