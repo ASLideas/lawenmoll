@@ -146,7 +146,7 @@
         <div class="lg:col-span-4 space-y-6">
             
             <!-- Tarjeta de Perfil y Métricas en Pesos Chilenos con Plan SaaS -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+            <div class="bg-white rounded-[28px] p-6 shadow-md border border-gray-150/70 hover:border-forest/20 transition-all duration-300 space-y-4">
                 <div class="flex justify-between items-center">
                     <h3 class="text-lg font-bold text-forest">Resumen Mensual</h3>
                     <span class="text-[9px] bg-forest text-white px-2 py-0.5 rounded-full font-bold">Plan SaaS Activo ($18.000 CLP/mes)</span>
@@ -1128,7 +1128,9 @@ ${p || 'No registrada.'}
             overlay.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
             overlay.innerHTML = `
                 <div style="text-align: center; max-width: 320px; padding: 20px;">
-                    <span style="font-size: 56px; display: block; margin-bottom: 15px; animation: pulse 1.5s infinite ease-in-out;">🌿</span>
+                    <div style="width: 80px; height: 80px; margin: 0 auto 20px auto; border-radius: 50%; border: 3px solid #52796F; box-shadow: 0 4px 12px rgba(82,121,111,0.15); overflow: hidden; animation: pulse 1.5s infinite ease-in-out;">
+                        <img src="lawenmoll_logo.jpg" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+                    </div>
                     <h4 style="color: #2F3E46; font-size: 15px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
                     <p style="color: #52796F; font-size: 11px; font-weight: 600; margin: 0 0 20px 0;">Preparando epicrisis digital centrado...</p>
                     <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; position: relative;">
@@ -1138,7 +1140,7 @@ ${p || 'No registrada.'}
                 <style>
                     @keyframes pulse {
                         0% { transform: scale(1); }
-                        50% { transform: scale(1.15); }
+                        50% { transform: scale(1.05); }
                         100% { transform: scale(1); }
                     }
                     @keyframes loading-bar {

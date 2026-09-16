@@ -172,6 +172,36 @@
                         <p class="text-[10px] text-gray-400">Transacción cifrada y protegida mediante Webpay Plus</p>
                     </div>
 
+                    <!-- Selector de Régimen de Pago -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-150 space-y-3 mb-4">
+                        <label class="block text-[9px] font-black text-gray-400 uppercase tracking-wider">Plan de Facturación Comercial</label>
+                        <div class="grid grid-cols-1 gap-2">
+                            <!-- Opción Con Convenio (Cupón) -->
+                            <label class="flex items-center justify-between p-3 bg-white border-2 border-forest rounded-xl cursor-pointer select-none" id="labelOptCoupon">
+                                <div class="flex items-center space-x-2.5">
+                                    <input type="radio" name="billing_option" value="coupon" checked onchange="updateBillingAmount('coupon')" class="accent-forest h-4 w-4">
+                                    <div>
+                                        <h5 class="text-xs font-black text-slateDark">Aplicar Cupón de Convenio B2B</h5>
+                                        <p class="text-[9px] text-gray-400 font-semibold">Descuento de Red de Derivación Activo</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-black text-forest">$47.530 CLP</span>
+                            </label>
+                            
+                            <!-- Opción Precio Real + IVA -->
+                            <label class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl cursor-pointer select-none" id="labelOptStandard">
+                                <div class="flex items-center space-x-2.5">
+                                    <input type="radio" name="billing_option" value="standard" onchange="updateBillingAmount('standard')" class="accent-forest h-4 w-4">
+                                    <div>
+                                        <h5 class="text-xs font-black text-slateDark">Membresía General (Sin Convenio)</h5>
+                                        <p class="text-[9px] text-gray-400 font-semibold">Cobro estándar + 19% IVA facturado</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-black text-gray-600">$58.310 CLP <span class="text-[8px] text-gray-400 font-normal">(con IVA)</span></span>
+                            </label>
+                        </div>
+                    </div>
+
                     <!-- Detalles del Cobro -->
                     <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex justify-between items-center">
                         <div>
@@ -181,7 +211,7 @@
                         </div>
                         <div class="text-right border-l border-gray-200 pl-4">
                             <span class="text-[10px] text-gray-400 font-bold uppercase">Total a Pagar</span>
-                            <div class="text-lg font-black text-forest mt-0.5">$47.530 CLP</div>
+                            <div class="text-lg font-black text-forest mt-0.5" id="b2bDisplayPriceText">$47.530 CLP</div>
                             <span class="text-[8px] text-gray-400 font-bold">Cobro Recurrente Mensual</span>
                         </div>
                     </div>
@@ -235,7 +265,7 @@
                     <!-- Botón de Confirmar Pago -->
                     <button id="btnConfirmB2BPayment" onclick="processB2BPayment()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl shadow-md transition text-xs flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-shield-halved"></i>
-                        <span>Confirmar y Pagar $47.530 CLP 🔒</span>
+                        <span id="btnConfirmB2BPaymentSpan">Confirmar y Pagar $47.530 CLP 🔒</span>
                     </button>
                 </div>
 
@@ -262,7 +292,7 @@
                         </div>
                         <div class="flex justify-between font-semibold text-gray-500">
                             <span>Monto Facturado:</span>
-                            <span class="text-slateDark font-bold">$47.530 CLP / mes</span>
+                            <span class="text-slateDark font-bold" id="successB2BAmountText">$47.530 CLP / mes</span>
                         </div>
                         <div class="flex justify-between font-semibold text-gray-500">
                             <span>Método de Pago:</span>
@@ -621,13 +651,27 @@
                 </h3>
                 
                 <!-- FILTRADO GEOGRÁFICO NACIONAL (CHILE) v19 -->
-                <div class="mb-4 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
+                <div class="mb-3 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
                     <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-map-location-dot mr-1"></i> Selecciona tu Región (Chile)</label>
                     <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
                         <option value="all">🇨🇱 Todas las Regiones</option>
                         <option value="Región Metropolitana">📍 Región Metropolitana (Santiago)</option>
                         <option value="Región de la Araucanía">🌲 Región de la Araucanía (Temuco)</option>
                         <option value="Región de Valparaíso">🌊 Región de Valparaíso (Viña/Valpo)</option>
+                    </select>
+                </div>
+
+                <!-- FILTRADO POR TERAPIAS Y ESPECIALIDADES v143 -->
+                <div class="mb-4 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
+                    <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-leaf mr-1"></i> Filtro por Terapia / Especialidad</label>
+                    <select id="globalTherapyFilter" onchange="filterAllByTherapy()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
+                        <option value="all">🌿 Todas las Especialidades</option>
+                        <option value="fitoterapia">🌱 Fitoterapia & Herbolaria</option>
+                        <option value="acupuntura">🪡 Acupuntura & MTC</option>
+                        <option value="quiropraxia">👐 Quiropraxia & Kine</option>
+                        <option value="magnetoterapia">🧲 Magnetoterapia</option>
+                        <option value="nutricion">🍎 Nutrición Consciente</option>
+                        <option value="psicologia">🧠 Psicología Integrativa</option>
                     </select>
                 </div>
                 
@@ -757,7 +801,35 @@
         </div>
 
         <!-- COLUMNA DERECHA: DIRECTORIO INTERACTIVO DINÁMICO -->
-        <div class="lg:col-span-8">
+        <div class="lg:col-span-8 space-y-4">
+            
+            <!-- BARRA DESLIZANTE DE TERAPIAS (PÍLDORAS VISUALES) v143 -->
+            <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100">
+                <span class="block text-[8px] font-black text-gray-400 uppercase tracking-wider mb-2.5 flex items-center"><i class="fa-solid fa-sliders mr-1 text-forest animate-pulse"></i> Filtrar Rápidamente por Especialidad / Terapia</span>
+                <div class="flex space-x-2 overflow-x-auto pb-1 scrollbar-none snap-x snap-mandatory">
+                    <button onclick="selectTherapyPill('all')" data-therapy="all" class="therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start">
+                        🌿 Todas
+                    </button>
+                    <button onclick="selectTherapyPill('fitoterapia')" data-therapy="fitoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🌱 Fitoterapia
+                    </button>
+                    <button onclick="selectTherapyPill('acupuntura')" data-therapy="acupuntura" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🪡 Acupuntura
+                    </button>
+                    <button onclick="selectTherapyPill('quiropraxia')" data-therapy="quiropraxia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        👐 Quiropraxia
+                    </button>
+                    <button onclick="selectTherapyPill('magnetoterapia')" data-therapy="magnetoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🧲 Magneto
+                    </button>
+                    <button onclick="selectTherapyPill('nutricion')" data-therapy="nutricion" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🍎 Nutrición
+                    </button>
+                    <button onclick="selectTherapyPill('psicologia')" data-therapy="psicologia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🧠 Psicología
+                    </button>
+                </div>
+            </div>
             
             <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
                         <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
@@ -1602,6 +1674,87 @@
 
                 // --- FILTRADO GLOBAL POR REGIONES (CHILE) v19 ---
         let activeRegion = 'all';
+        let activeTherapy = 'all';
+
+        function filterAllByRegion() {
+            const filterEl = document.getElementById('globalRegionFilter');
+            if (filterEl) {
+                activeRegion = filterEl.value;
+            }
+            renderAllGrids();
+            alert(`📍 Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion}`);
+        }
+
+        function filterAllByTherapy() {
+            const filterEl = document.getElementById('globalTherapyFilter');
+            if (filterEl) {
+                activeTherapy = filterEl.value;
+            }
+            // Sincronizar las píldoras deslizantes de la derecha
+            const pills = document.querySelectorAll('.therapy-pill-btn');
+            pills.forEach(p => {
+                if (p.getAttribute('data-therapy') === activeTherapy) {
+                    p.className = "therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start";
+                } else {
+                    p.className = "therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start";
+                }
+            });
+            renderAllGrids();
+        }
+
+        function selectTherapyPill(therapyValue) {
+            activeTherapy = therapyValue;
+            
+            // Actualizar selector visual de los botones píldora
+            const pills = document.querySelectorAll('.therapy-pill-btn');
+            pills.forEach(p => {
+                if (p.getAttribute('data-therapy') === therapyValue) {
+                    p.className = "therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start";
+                } else {
+                    p.className = "therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start";
+                }
+            });
+
+            // Sincronizar el dropdown si existe
+            const dropdown = document.getElementById('globalTherapyFilter');
+            if (dropdown) {
+                dropdown.value = therapyValue;
+            }
+
+            renderAllGrids();
+        }
+
+        function renderAllGrids() {
+            renderPublicClinicsGrid();
+            renderPublicRestaurantsGrid();
+            renderPublicGymsGrid();
+            renderPublicFarmaciasGrid();
+            renderPublicTherapistsGrid();
+        }
+
+        function matchesTherapy(item) {
+            if (activeTherapy === 'all') return true;
+            if (!item) return false;
+
+            const name = (item.nombre || '').toLowerCase();
+            const desc = (item.descripcion || item.especialidad || item.beneficio_detalle || '').toLowerCase();
+            const category = (item.tipo_establecimiento || '').toLowerCase();
+
+            // Mapeo de palabras clave para cada terapia
+            const keywords = {
+                fitoterapia: ['fitoterapia', 'herbolaria', 'ancestral', 'hierba', 'naturópata', 'naturopata', 'plantas', 'remedio', 'fitoterapéutico', 'fitoterapeutico', 'hoja', 'té', 'infusión', 'sabores'],
+                acupuntura: ['acupuntura', 'china', 'mtc', 'agujas', 'meridianos', 'auriculoterapia', 'puntos'],
+                quiropraxia: ['quiropraxia', 'quiropráctico', 'quiropractico', 'rehabilitación postural', 'kinesiología', 'kinesiologo', 'kine', 'mecánica postural', 'postura', 'columna', 'espalda'],
+                magnetoterapia: ['magnetoterapia', 'imán', 'iman', 'biomagnetismo', 'polaridad', 'magnético', 'magnetico', 'frecuencia'],
+                nutricion: ['nutrición', 'nutricion', 'dietética', 'dietetica', 'alimentación', 'alimentacion', 'orgánico', 'organico', 'celular activa', 'huerto', 'sopa', 'cocina', 'plato', 'tarta'],
+                psicologia: ['psicología', 'psicologia', 'terapia floral', 'emocional', 'salud mental', 'psicólogo', 'psicologo', 'psicóloga', 'psicologa', 'terapeuta integrativo', 'neurodivergencias', 'tdah', 'tea']
+            };
+
+            const searchKeys = keywords[activeTherapy] || [activeTherapy];
+            
+            // Si alguna palabra clave coincide en el nombre, descripción, especialidad o categoría, es un match!
+            return searchKeys.some(kw => name.includes(kw) || desc.includes(kw) || category.includes(kw));
+        }
 
         function filterAllByRegion() {
             const filterEl = document.getElementById('globalRegionFilter');
@@ -1629,6 +1782,7 @@
                 const safeName = c.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
+                if (!matchesTherapy(c)) return;
 
                 const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=150&auto=format&fit=crop';
                 const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop';
@@ -1693,6 +1847,8 @@
                 const safeName = c.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
+                if (!matchesTherapy(c)) return;
+                if (!matchesTherapy(c)) return;
 
                 const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150&auto=format&fit=crop';
                 const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop';
@@ -1760,6 +1916,8 @@
                 const safeName = c.nombre.replace(/'/g, "\'").replace(/"/g, "&quot;");
                 const region = c.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
+                if (!matchesTherapy(c)) return;
+                if (!matchesTherapy(c)) return;
 
                 const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=150&auto=format&fit=crop';
                 const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop';
@@ -1820,6 +1978,7 @@
 
             allFarmaciasData.forEach(c => {
                 if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
+                if (!matchesTherapy(c)) return;
 
                 const logo = c.foto_local_1 || 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop';
                 const banner = c.foto_local_2 || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=400&auto=format&fit=crop';
@@ -1944,6 +2103,7 @@
                 const tName = t.nombre || 'Especialista de la Red';
                 const region = t.region_chile || 'Región Metropolitana';
                 if (activeRegion !== 'all' && region !== activeRegion) return;
+                if (!matchesTherapy(t)) return;
 
                 const rate = t.tarifa_sesion || '$25.000';
                 const spec = t.especialidad || 'Consejería Herbal Pura y Fitoterapia';
@@ -3136,7 +3296,9 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             overlay.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
             overlay.innerHTML = `
                 <div style="text-align: center; max-width: 320px; padding: 20px;">
-                    <span style="font-size: 56px; display: block; margin-bottom: 15px; animation: pulse 1.5s infinite ease-in-out;">🎫</span>
+                    <div style="width: 70px; height: 70px; margin: 0 auto 20px auto; border-radius: 50%; border: 3px solid #52796F; box-shadow: 0 4px 12px rgba(82,121,111,0.25); overflow: hidden; animation: pulse 1.5s infinite ease-in-out;">
+                        <img src="lawenmoll_logo.jpg" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+                    </div>
                     <h4 style="color: #2F3E46; font-size: 15px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
                     <p style="color: #52796F; font-size: 11px; font-weight: 600; margin: 0 0 20px 0;">Preparando cupón digital centrado...</p>
                     <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; position: relative;">
@@ -3991,7 +4153,125 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             }
         }
 
-                        async function processB2BPayment() {
+                        let fintocSimData = {};
+
+        function openFintocSimulator(name, type, rut, address) {
+            fintocSimData = { name, type, rut, address };
+            // Resetear inputs
+            document.getElementById('fintocSimRut').value = '';
+            document.getElementById('fintocSimPass').value = '';
+            document.getElementById('fintocSimOtp').value = '';
+            const payBtn = document.getElementById('fintocSimBtnPay');
+            payBtn.removeAttribute('disabled');
+            const formattedPrice = `$${currentB2BAmount.toLocaleString('es-CL')}`;
+            payBtn.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <span>Aprobar Transferencia de ${formattedPrice}</span>`;
+
+            // Mostrar el modal
+            document.getElementById('fintocSimModal').classList.remove('hidden');
+            showFintocSimScreen(1);
+        }
+
+        function closeFintocSimulator() {
+            document.getElementById('fintocSimModal').classList.add('hidden');
+        }
+
+        function showFintocSimScreen(screenNum) {
+            for (let i = 1; i <= 5; i++) {
+                const screen = document.getElementById(`fintocSimScreen${i}`);
+                if (screen) {
+                    if (i === screenNum) {
+                        screen.classList.remove('hidden');
+                    } else {
+                        screen.classList.add('hidden');
+                    }
+                }
+            }
+        }
+
+        function selectFintocSimBank(bankName) {
+            fintocSimData.bank = bankName;
+            document.getElementById('fintocSimSelectedBankText').innerText = bankName;
+            document.getElementById('fintocSimSelectedBankText2').innerText = bankName;
+            showFintocSimScreen(2);
+        }
+
+        function submitFintocSimCredentials() {
+            const rut = document.getElementById('fintocSimRut').value.trim();
+            const pass = document.getElementById('fintocSimPass').value.trim();
+            if (!rut || !pass) {
+                alert("⚠️ Por favor ingresa tu RUT y contraseña de simulación.");
+                return;
+            }
+            showFintocSimScreen(3);
+        }
+
+        function submitFintocSimAccount() {
+            showFintocSimScreen(4);
+        }
+
+        async function submitFintocSimOtp() {
+            const otp = document.getElementById('fintocSimOtp').value.trim();
+            if (!otp) {
+                alert("⚠️ Ingresa el código de transferencia.");
+                return;
+            }
+            const btn = document.getElementById('fintocSimBtnPay');
+            btn.setAttribute('disabled', 'true');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando Transferencia...`;
+            
+            setTimeout(() => {
+                showFintocSimScreen(5);
+                setTimeout(async () => {
+                    closeFintocSimulator();
+                    await finishFintocSimulatedPayment();
+                }, 1800);
+            }, 1500);
+        }
+
+        async function finishFintocSimulatedPayment() {
+            const btn = document.getElementById('btnConfirmB2BPayment');
+            btn.setAttribute('disabled', 'true');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Activando Suscripción...`;
+
+            // Registro real en Supabase con contraseña cifrada (hashing) para Fintoc
+            try {
+                if (supabaseKey !== '') {
+                    const emailVal = document.getElementById('b2bEmail').value.trim();
+                    const passwordVal = document.getElementById('b2bPassword').value.trim();
+                    const hashedPassVal = await hashPassword(passwordVal);
+                    const { error } = await _supabase
+                        .from('centros_convenios')
+                        .insert([
+                            {
+                                tipo_establecimiento: fintocSimData.type,
+                                nombre: fintocSimData.name,
+                                descripcion: `Socio B2B registrado de la red Lawenmoll. RUT: ${fintocSimData.rut} (Pago Fintoc Sandbox)`,
+                                beneficio_detalle: '15% DCTO en servicios seleccionados',
+                                direccion: fintocSimData.address,
+                                estado_suscripcion: 'activo',
+                                foto_local_1: document.getElementById('b2bLogoBase64').value || null,
+                                id_cliente_pasarela: `FINTOC-${Math.floor(100000 + Math.random() * 900000)}-TX`,
+                                email: emailVal,
+                                password: hashedPassVal
+                            }
+                        ]);
+
+                    if (error) throw error;
+                }
+            } catch (err) {
+                console.error("❌ Error al registrar local en Supabase desde Fintoc Sim:", err.message);
+            }
+
+            // Success flow final
+            document.getElementById('successB2BTitle').innerText = fintocSimData.name;
+            document.getElementById('successB2BMethod').innerText = `Fintoc (${fintocSimData.bank})`;
+            document.getElementById('successB2BAuth').innerText = "FINTOC-" + Math.floor(1000000 + Math.random() * 9000000) + "-TX";
+            
+            document.getElementById('b2bStepCheckout').classList.add('hidden');
+            document.getElementById('b2bStepSuccess').classList.remove('hidden');
+        }
+
+        async function processB2BPayment() {
             const nameVal = document.getElementById('b2bName').value.trim();
             const typeVal = document.getElementById('b2bType').value;
             const rutVal = document.getElementById('b2bRut').value.trim();
@@ -4008,49 +4288,53 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     alert("⚠️ Por favor completa todos los datos de tu tarjeta de crédito o débito.");
                     return;
                 }
-            }
 
-            btn.setAttribute('disabled', 'true');
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
+                btn.setAttribute('disabled', 'true');
+                btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Procesando transacción B2B con Webpay...`;
 
-            // Registro real en Supabase con contraseña cifrada (hashing)
-            try {
-                if (supabaseKey !== '') {
-                    const emailVal = document.getElementById('b2bEmail').value.trim();
-                    const passwordVal = document.getElementById('b2bPassword').value.trim();
-                    const hashedPassVal = await hashPassword(passwordVal);
-                    const { error } = await _supabase
-                        .from('centros_convenios')
-                        .insert([
-                            {
-                                tipo_establecimiento: typeVal,
-                                nombre: nameVal,
-                                descripcion: `Socio B2B registrado de la red Lawenmoll. RUT: ${rutVal}`,
-                                beneficio_detalle: '15% DCTO en servicios seleccionados',
-                                direccion: addressVal,
-                                estado_suscripcion: 'activo',
-                                foto_local_1: document.getElementById('b2bLogoBase64').value || null,
-                                id_cliente_pasarela: `FLOW-${Math.floor(1000 + Math.random() * 9000)}-TX`,
-                                email: emailVal,
-                                password: hashedPassVal
-                            }
-                        ]);
+                // Registro real en Supabase con contraseña cifrada (hashing)
+                try {
+                    if (supabaseKey !== '') {
+                        const emailVal = document.getElementById('b2bEmail').value.trim();
+                        const passwordVal = document.getElementById('b2bPassword').value.trim();
+                        const hashedPassVal = await hashPassword(passwordVal);
+                        const { error } = await _supabase
+                            .from('centros_convenios')
+                            .insert([
+                                {
+                                    tipo_establecimiento: typeVal,
+                                    nombre: nameVal,
+                                    descripcion: `Socio B2B registrado de la red Lawenmoll. RUT: ${rutVal}`,
+                                    beneficio_detalle: '15% DCTO en servicios seleccionados',
+                                    direccion: addressVal,
+                                    estado_suscripcion: 'activo',
+                                    foto_local_1: document.getElementById('b2bLogoBase64').value || null,
+                                    id_cliente_pasarela: `WEBPAY-${Math.floor(100000 + Math.random() * 900000)}-TX`,
+                                    email: emailVal,
+                                    password: hashedPassVal
+                                }
+                            ]);
 
-                    if (error) throw error;
+                        if (error) throw error;
+                    }
+                } catch (err) {
+                    console.error("❌ Error al registrar local en Supabase:", err.message);
                 }
-            } catch (err) {
-                console.error("❌ Error al registrar local en Supabase:", err.message);
-            }
 
-            setTimeout(() => {
-                // Success flow
-                document.getElementById('successB2BTitle').innerText = nameVal;
-                document.getElementById('successB2BMethod').innerText = b2bPaymentMethod === 'webpay' ? 'Webpay Plus (Transbank)' : 'Fintoc (Banco Chile/Santander)';
-                document.getElementById('successB2BAuth').innerText = "FLOW-" + Math.floor(1000000 + Math.random() * 9000000) + "-TX";
-                
-                document.getElementById('b2bStepCheckout').classList.add('hidden');
-                document.getElementById('b2bStepSuccess').classList.remove('hidden');
-            }, 2000);
+                setTimeout(() => {
+                    // Success flow
+                    document.getElementById('successB2BTitle').innerText = nameVal;
+                    document.getElementById('successB2BMethod').innerText = 'Webpay Plus (Transbank)';
+                    document.getElementById('successB2BAuth').innerText = "WEBPAY-" + Math.floor(1000000 + Math.random() * 9000000) + "-TX";
+                    
+                    document.getElementById('b2bStepCheckout').classList.add('hidden');
+                    document.getElementById('b2bStepSuccess').classList.remove('hidden');
+                }, 2000);
+
+            } else if (b2bPaymentMethod === 'fintoc') {
+                // Abrir el simulador virtual interactivo de Fintoc
+                openFintocSimulator(nameVal, typeVal, rutVal, addressVal);
+            }
         }
 
         async function bookClinicalAppointment() {
@@ -4430,6 +4714,37 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
 
         // Auto-initialize slide verify on load
         setTimeout(initSlideVerify, 300);
+
+        // --- SISTEMA DE SELECCIÓN DINÁMICA DE PRECIOS B2B (CUPÓN VS PRECIO REAL + IVA) ---
+        let currentB2BAmount = 47530; // Valor inicial por defecto (Cupón)
+
+        function updateBillingAmount(type) {
+            const labelCoupon = document.getElementById('labelOptCoupon');
+            const labelStandard = document.getElementById('labelOptStandard');
+            const textAmount = document.getElementById('b2bDisplayPriceText');
+            const btnSpan = document.getElementById('btnConfirmB2BPaymentSpan');
+            const receiptSpan = document.getElementById('successB2BAmountText');
+            const simDisplaySpan = document.getElementById('fintocSimDisplayPriceText');
+            const simBtnSpan = document.getElementById('fintocSimBtnPaySpan');
+            
+            if (type === 'coupon') {
+                currentB2BAmount = 47530;
+                if(labelCoupon) labelCoupon.className = "flex items-center justify-between p-3 bg-white border-2 border-forest rounded-xl cursor-pointer select-none animate-scaleIn";
+                if(labelStandard) labelStandard.className = "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl cursor-pointer select-none";
+            } else {
+                currentB2BAmount = 58310;
+                if(labelCoupon) labelCoupon.className = "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl cursor-pointer select-none";
+                if(labelStandard) labelStandard.className = "flex items-center justify-between p-3 bg-white border-2 border-forest rounded-xl cursor-pointer select-none animate-scaleIn";
+            }
+            
+            const formattedPrice = `$${currentB2BAmount.toLocaleString('es-CL')} CLP`;
+            
+            if(textAmount) textAmount.innerText = formattedPrice;
+            if(btnSpan) btnSpan.innerText = `Confirmar y Pagar ${formattedPrice} 🔒`;
+            if(receiptSpan) receiptSpan.innerText = `${formattedPrice} / mes`;
+            if(simDisplaySpan) simDisplaySpan.innerText = formattedPrice;
+            if(simBtnSpan) simBtnSpan.innerText = `Aprobar Transferencia de $${currentB2BAmount.toLocaleString('es-CL')}`;
+        }
     </script>
 
     
@@ -4876,5 +5191,176 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         </div>
     </div>
 
-</body>
+
+    <!-- ========================================== -->
+    <!-- MODAL INTERACTIVO: SIMULADOR FINTOC SANDBOX -->
+    <!-- ========================================== -->
+    <div id="fintocSimModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-[#F9FAFB] text-gray-800 w-full max-w-sm rounded-3xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-fadeIn font-sans">
+            <!-- Header Fintoc -->
+            <div class="bg-[#101827] text-white p-4 flex items-center justify-between border-b border-gray-800">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-blue-600 text-white font-black tracking-widest text-[9px] px-2 py-0.5 rounded shadow-sm">FINTOC</span>
+                    <span class="text-[9px] text-amber-500 font-bold bg-amber-500/10 px-2 py-0.5 rounded-full"><i class="fa-solid fa-flask mr-1"></i> Sandbox</span>
+                </div>
+                <button onclick="closeFintocSimulator()" class="text-gray-400 hover:text-white transition"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Detalles del Cobro -->
+            <div class="bg-[#1F2937] text-white px-5 py-4 flex justify-between items-center">
+                <div>
+                    <p class="text-[8px] text-gray-400 uppercase font-black tracking-wider">Comercio Receptor</p>
+                    <h4 class="text-xs font-black text-emerald-400 uppercase tracking-wide">LAWENMOLL SpA</h4>
+                </div>
+                <div class="text-right">
+                    <p class="text-[8px] text-gray-400 uppercase font-black tracking-wider">Total a Transferir</p>
+                    <h4 class="text-sm font-black text-blue-400" id="fintocSimDisplayPriceText">$47.530 CLP</h4>
+                </div>
+            </div>
+
+            <!-- PANTALLA 1: SELECCIONAR BANCO -->
+            <div id="fintocSimScreen1" class="p-5 space-y-4">
+                <div class="text-center">
+                    <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">Paso 1 de 4</p>
+                    <h4 class="text-xs font-extrabold text-slateDark mt-0.5">Selecciona tu Banco</h4>
+                    <p class="text-[9px] text-gray-400 leading-normal">Escoge tu banco para autorizar la transferencia directa.</p>
+                </div>
+                <div class="grid grid-cols-1 gap-2 max-h-[220px] overflow-y-auto pr-1">
+                    <button onclick="selectFintocSimBank('Banco de Chile')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 font-extrabold text-xs">BC</div>
+                            <span class="text-xs font-bold text-gray-700">Banco de Chile</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-blue-500 transition"></i>
+                    </button>
+                    <button onclick="selectFintocSimBank('Banco Santander')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-red-500 hover:bg-red-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-xl bg-red-100 flex items-center justify-center text-red-600 font-extrabold text-xs">BS</div>
+                            <span class="text-xs font-bold text-gray-700">Banco Santander</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-red-500 transition"></i>
+                    </button>
+                    <button onclick="selectFintocSimBank('BancoEstado')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-orange-500 hover:bg-orange-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-extrabold text-xs">BE</div>
+                            <span class="text-xs font-bold text-gray-700">BancoEstado</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-orange-500 transition"></i>
+                    </button>
+                    <button onclick="selectFintocSimBank('BCI')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-green-500 hover:bg-green-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center text-green-700 font-extrabold text-xs">BCI</div>
+                            <span class="text-xs font-bold text-gray-700">BCI</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-green-500 transition"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 2: CREDENCIALES DE ACCESO -->
+            <div id="fintocSimScreen2" class="p-5 space-y-4 hidden">
+                <div class="text-center">
+                    <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">Paso 2 de 4</p>
+                    <h4 class="text-xs font-extrabold text-slateDark mt-0.5">Conectando a <span id="fintocSimSelectedBankText" class="text-blue-600">Banco</span></h4>
+                    <p class="text-[9px] text-gray-400 leading-normal">Ingresa tus credenciales de simulación para verificar tu cuenta.</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-150 text-amber-800 rounded-xl p-2.5 text-[9px] font-semibold flex items-start space-x-2 leading-relaxed shadow-sm">
+                    <i class="fa-solid fa-circle-info mt-0.5 text-amber-600"></i>
+                    <span><strong>Simulador Virtual:</strong> Puedes ingresar cualquier RUT y clave ficticia para avanzar la prueba.</span>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[8px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">RUT del Titular</label>
+                        <input type="text" id="fintocSimRut" placeholder="Ej: 19.876.543-K" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-bold text-gray-700 shadow-inner">
+                    </div>
+                    <div>
+                        <label class="block text-[8px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Contraseña de Internet</label>
+                        <input type="password" id="fintocSimPass" placeholder="••••••••" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-bold text-gray-700 shadow-inner">
+                    </div>
+                    <button onclick="submitFintocSimCredentials()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition focus:outline-none mt-2">
+                        Iniciar Sesión Segura
+                    </button>
+                    <button onclick="showFintocSimScreen(1)" class="w-full text-gray-400 hover:text-gray-500 text-[10px] font-bold py-1 focus:outline-none">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Cambiar de Banco
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 3: SELECCIÓN DE CUENTA -->
+            <div id="fintocSimScreen3" class="p-5 space-y-4 hidden">
+                <div class="text-center">
+                    <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">Paso 3 de 4</p>
+                    <h4 class="text-xs font-extrabold text-slateDark mt-0.5">Selecciona la Cuenta de Origen</h4>
+                    <p class="text-[9px] text-gray-400 leading-normal font-medium">Escoge una de tus cuentas con saldo disponible.</p>
+                </div>
+                <div class="space-y-2">
+                    <label class="w-full flex items-center justify-between p-3 bg-white border-2 border-blue-500 rounded-2xl cursor-pointer select-none shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="fintocAccountType" checked class="accent-blue-600">
+                            <div>
+                                <span class="text-xs font-extrabold text-gray-700 block">Cuenta Corriente</span>
+                                <span class="text-[9px] text-gray-400 font-semibold">Saldo Disponible</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-black text-gray-600">$450.000</span>
+                    </label>
+                    <label class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 rounded-2xl cursor-pointer select-none shadow-sm opacity-60">
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="fintocAccountType" class="accent-blue-600" disabled>
+                            <div>
+                                <span class="text-xs font-extrabold text-gray-700 block">Cuenta RUT / Vista</span>
+                                <span class="text-[9px] text-gray-400 font-semibold">Saldo Disponible</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-black text-gray-600">$8.200</span>
+                    </label>
+                </div>
+                <div class="space-y-2 pt-2">
+                    <button onclick="submitFintocSimAccount()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition focus:outline-none">
+                        Continuar con Cuenta Corriente
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 4: AUTORIZAR / OTP -->
+            <div id="fintocSimScreen4" class="p-5 space-y-4 hidden">
+                <div class="text-center">
+                    <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">Paso 4 de 4</p>
+                    <h4 class="text-xs font-extrabold text-slateDark mt-0.5">Autorizar Transferencia</h4>
+                    <p class="text-[9px] text-gray-400 leading-normal">Ingresa el código dinámico (MFA) enviado por SMS o App de <span id="fintocSimSelectedBankText2" class="text-blue-600 font-bold">Banco</span>.</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-100 text-blue-800 rounded-xl p-2.5 text-[9px] font-semibold text-center shadow-sm">
+                    <span>Escribe el código de prueba: <strong class="text-xs text-blue-600 font-mono tracking-wider ml-1">123456</strong></span>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <input type="text" id="fintocSimOtp" placeholder="123456" maxlength="6" class="w-full bg-white border border-gray-200 p-3 rounded-2xl text-lg focus:outline-none focus:border-blue-500 font-black tracking-[0.5em] text-center text-gray-700 shadow-inner">
+                    </div>
+                    <button id="fintocSimBtnPay" onclick="submitFintocSimOtp()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition focus:outline-none flex items-center justify-center space-x-2 mt-2">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span id="fintocSimBtnPaySpan">Aprobar Transferencia de $47.530</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 5: ÉXITO -->
+            <div id="fintocSimScreen5" class="p-8 space-y-4 text-center hidden">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                    <i class="fa-solid fa-circle-check text-3xl animate-bounce"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-black text-slateDark">¡Transferencia Exitosa!</h4>
+                    <p class="text-[10px] text-gray-400 mt-1">El cobro ha sido procesado de forma segura.</p>
+                    <p class="text-[9px] text-emerald-600 font-bold mt-2 animate-pulse">Sincronizando licencia y retornando a LAWENMOLL...</p>
+                </div>
+            </div>
+            
+            <!-- Footer de Seguridad -->
+            <div class="bg-gray-100 p-3.5 text-center text-[8px] text-gray-400 font-bold border-t border-gray-150 flex items-center justify-center space-x-1.5 leading-none">
+                <i class="fa-solid fa-lock text-[10px] text-gray-400"></i>
+                <span>Conexión encriptada de extremo a extremo por protocolo TLS 1.3</span>
+            </div>
+        </div>
+    </div>
+\n</body>
 </html>
