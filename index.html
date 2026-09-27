@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Configuración PWA para Lawenmoll -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2e7d32">
+
+<!-- Compatibilidad para iPhone y iPad (iOS Safari) -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lawenmoll">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
+<!-- Vista adecuada en celulares -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAWENMOLL - Test de Bienestar Inteligente v57</title>
@@ -2852,4 +2864,14 @@
     </div>
 
 </body>
+<!-- Activador de la App Lawenmoll -->
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('PWA activada con éxito'))
+          .catch(err => console.error('Error PWA:', err));
+      });
+    }
+  </script>
 </html>
