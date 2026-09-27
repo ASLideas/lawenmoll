@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
    <!-- ========================================== -->
-<!-- PANTALLA DE INTRODUCCIÓN CON LOGO REAL     -->
+<!-- PANTALLA DE INTRODUCCIÓN - LOGO CIRCULAR   -->
 <!-- ========================================== -->
 <div id="lawenmoll-splash" class="splash-screen">
     <div class="splash-content">
-      <!-- Logo oficial de Lawenmoll -->
+      <!-- Logo oficial circular y destacado -->
       <img src="lawenmoll_logo.jpg" alt="Lawenmoll Logo" class="splash-logo-img">
       <h1 class="splash-title">LAWENMOLL</h1>
       <p class="splash-subtitle">Bienestar & Salud Natural</p>
@@ -39,17 +39,21 @@
       font-family: system-ui, -apple-system, sans-serif;
     }
   
-    /* Tamaño y animación para el logo oficial */
+    /* Logo circular, más grande y con suave sombra verde */
     .splash-logo-img {
-      width: 100px;
-      height: auto;
-      margin-bottom: 12px;
+      width: 140px;            /* Aumentamos el tamaño */
+      height: 140px;           /* Misma medida para que sea un círculo perfecto */
+      border-radius: 50%;      /* Recorte circular */
+      object-fit: cover;       /* Ajusta la imagen sin deformarla */
+      border: 3px solid #e8f5e9; /* Borde verde suave */
+      box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15); /* Sombra elegante */
+      margin-bottom: 16px;
       animation: splashPulse 1.5s infinite ease-in-out;
     }
   
     .splash-title {
       color: #2e7d32;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 800;
       letter-spacing: 3px;
       margin: 0 0 6px 0;
@@ -57,7 +61,7 @@
   
     .splash-subtitle {
       color: #666666;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
       margin: 0 0 30px 0;
     }
@@ -79,7 +83,7 @@
   
     @keyframes splashPulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
+      50% { transform: scale(1.05); }
     }
   </style>
   
