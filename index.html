@@ -2862,6 +2862,188 @@
             </div>
         </div>
     </div>
+    <!-- ========================================== -->
+<!-- 1. BARRA DE NAVEGACIÓN INFERIOR (MÓVIL)     -->
+<!-- ========================================== -->
+<nav class="lawenmoll-bottom-nav">
+    <a href="#inicio" class="nav-item active">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Inicio</span>
+    </a>
+    <a href="#terapeutas" class="nav-item">
+      <span class="nav-icon">🌿</span>
+      <span class="nav-label">Terapeutas</span>
+    </a>
+    <a href="#test" class="nav-item">
+      <span class="nav-icon">📋</span>
+      <span class="nav-label">Test Bienestar</span>
+    </a>
+    <a href="#agendar" class="nav-item">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">Agendar</span>
+    </a>
+  </nav>
+  
+  <!-- ========================================== -->
+  <!-- 2. BANNER DE INSTALACIÓN PWA                -->
+  <!-- ========================================== -->
+  <div id="pwa-install-banner" class="pwa-banner" style="display: none;">
+    <div class="pwa-banner-content">
+      <span class="pwa-app-icon">📲</span>
+      <div>
+        <strong>Instala App Lawenmoll</strong>
+        <p>Acceso rápido a tu bienestar desde la pantalla de inicio</p>
+      </div>
+    </div>
+    <div class="pwa-banner-actions">
+      <button id="pwa-install-btn" class="btn-install">Instalar</button>
+      <button id="pwa-close-btn" class="btn-close">✕</button>
+    </div>
+  </div>
+  
+  <!-- ========================================== -->
+  <!-- 3. ESTILOS Y LÓGICA DE LA PWA               -->
+  <!-- ========================================== -->
+  <style>
+    /* Barra de Navegación Inferior Móvil */
+    .lawenmoll-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    }
+  
+    .lawenmoll-bottom-nav .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #666666;
+      font-size: 11px;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+  
+    .lawenmoll-bottom-nav .nav-item.active {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+  
+    .lawenmoll-bottom-nav .nav-icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+  
+    /* Mostrar solo en dispositivos móviles */
+    @media (min-width: 768px) {
+      .lawenmoll-bottom-nav {
+        display: none;
+      }
+    }
+  
+    /* Banner Flotante de Instalación */
+    .pwa-banner {
+      position: fixed;
+      bottom: 70px;
+      left: 15px;
+      right: 15px;
+      background: #ffffff;
+      border: 1px solid #2e7d32;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      z-index: 10000;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+  
+    .pwa-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  
+    .pwa-banner-content strong {
+      font-size: 14px;
+      color: #2e7d32;
+    }
+  
+    .pwa-banner-content p {
+      margin: 0;
+      font-size: 11px;
+      color: #555555;
+    }
+  
+    .pwa-app-icon {
+      font-size: 24px;
+    }
+  
+    .pwa-banner-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  
+    .btn-install {
+      background-color: #2e7d32;
+      color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  
+    .btn-close {
+      background: none;
+      border: none;
+      color: #888888;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+  
+  <script>
+    let deferredPrompt;
+    const banner = document.getElementById('pwa-install-banner');
+    const installBtn = document.getElementById('pwa-install-btn');
+    const closeBtn = document.getElementById('pwa-close-btn');
+  
+    // Detectar si la app se puede instalar en el celular
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      banner.style.display = 'flex';
+    });
+  
+    // Evento del botón Instalar
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('El usuario instaló la App Lawenmoll');
+        }
+        deferredPrompt = null;
+        banner.style.display = 'none';
+      }
+    });
+  
+    // Cerrar banner
+    closeBtn.addEventListener('click', () => {
+      banner.style.display = 'none';
+    });
+  </script>
 
 </body>
 <!-- Activador de la App Lawenmoll -->
