@@ -1994,20 +1994,24 @@
         Promise.all(promises).then(() => {
             setTimeout(() => {
                 html2pdf().from(element).set(opt).save().then(() => {
-                    document.documentElement.removeChild(wrapper);
-                    document.body.removeChild(overlay);
-                    document.body.style.width = originalBodyWidth;
-                    document.documentElement.style.width = originalHtmlWidth;
-                    document.body.style.margin = originalBodyMargin;
-                    document.body.style.padding = originalBodyPadding;
-                    document.body.style.position = originalBodyPosition;
-                    document.body.style.left = originalBodyLeft;
-                    document.body.style.top = originalBodyTop;
-                    window.scrollTo(currentScrollX, currentScrollY);
-                    document.documentElement.style.scrollBehavior = htmlStyle;
-                    document.body.style.scrollBehavior = bodyStyle;
+                    overlay.style.transition = 'opacity 0.4s ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        if (wrapper && wrapper.parentNode) document.documentElement.removeChild(wrapper);
+                        if (overlay && overlay.parentNode) document.body.removeChild(overlay);
+                        document.body.style.width = originalBodyWidth;
+                        document.documentElement.style.width = originalHtmlWidth;
+                        document.body.style.margin = originalBodyMargin;
+                        document.body.style.padding = originalBodyPadding;
+                        document.body.style.position = originalBodyPosition;
+                        document.body.style.left = originalBodyLeft;
+                        document.body.style.top = originalBodyTop;
+                        window.scrollTo(currentScrollX, currentScrollY);
+                        document.documentElement.style.scrollBehavior = htmlStyle;
+                        document.body.style.scrollBehavior = bodyStyle;
+                    }, 400);
                 });
-            }, 500);
+            }, 2200);
         });
     }
 
