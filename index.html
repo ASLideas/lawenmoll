@@ -2760,7 +2760,7 @@
     setTimeout(initSlideVerify, 300);
 </script>
 
-<!-- SCRIPT DE DESAPARICIÓN SEGURO DE PANTALLA SPLASH -->
+<!-- SCRIPT DE DESAPARICIÓN SEGURO DE PANTALLA SPLASH (CON TIEMPO MÍNIMO DE VISIBILIDAD) -->
 <script>
   (function() {
     function cerrarSplash() {
@@ -2772,17 +2772,19 @@
           if (splash && splash.parentNode) {
             splash.parentNode.removeChild(splash);
           }
-        }, 400);
+        }, 500);
       }
     }
 
+    // Mínimo de 2.5 segundos (2500 ms) para que se aprecie el logo y la marca de LAWENMOLL al iniciar
+    window.addEventListener('load', function() {
+      setTimeout(cerrarSplash, 2500);
+    });
     if (document.readyState === 'complete') {
-      cerrarSplash();
+      setTimeout(cerrarSplash, 2500);
     } else {
-      window.addEventListener('load', cerrarSplash);
-      document.addEventListener('DOMContentLoaded', cerrarSplash);
+      setTimeout(cerrarSplash, 3000);
     }
-    setTimeout(cerrarSplash, 1200);
   })();
 </script>
 
