@@ -894,6 +894,41 @@
                 </button>
             </div>
 
+            <!-- TARJETA SECRETOS MILENARIOS Y SABIDURÍA ANCESTRAL -->
+            <div class="mt-5 border border-forest/20 bg-forest/5 rounded-2xl p-4 text-left space-y-3 shadow-sm">
+                <div class="flex items-center space-x-3 border-b border-forest/15 pb-2.5">
+                    <img src="secrtos acentral  logo.png" alt="Secretos Milenarios" class="w-10 h-10 object-contain rounded-full bg-white p-1 border border-forest/30 shadow-sm" onerror="this.src='secrtos acentral logo.png'; this.onerror=function(){this.src='lawenmoll_logo.jpg'};">
+                    <div>
+                        <h4 class="font-extrabold text-xs text-forest uppercase tracking-wider">Sabiduría Ancestral & Secretos Milenarios</h4>
+                        <p class="text-[9px] text-gray-500 font-semibold">Resguardo de la Herbolaria Nativa LAWENMOLL</p>
+                    </div>
+                </div>
+                
+                <p class="text-[10px] text-gray-600 leading-relaxed font-medium">
+                    En LAWENMOLL creemos que la tecnología debe reconectar a las personas con la sabiduría de la tierra. Este diario es un espacio comunitario interactivo protegido para salvaguardar y transferir de generación en generación aquellas pautas y recetas de origen natural que nos sanaron desde la infancia.
+                </p>
+
+                <!-- Selector de Temporalidad de la Pauta (Agente Secretos Milenarios) -->
+                <div class="space-y-1.5 pt-1">
+                    <label class="block text-[9px] font-extrabold uppercase tracking-wider text-forest">Selecciona el Período de tu Pauta (Nutrición & Ejercicios):</label>
+                    <div class="grid grid-cols-3 gap-1.5">
+                        <button type="button" onclick="selectPlanPeriod('semanal', this)" class="period-btn border-2 border-forest bg-forest text-white font-bold p-2 rounded-xl text-[10px] text-center transition shadow-sm" id="btnPeriodSemanal">
+                            <span class="block text-[8px] opacity-80 uppercase">7 Días</span>
+                            <span>Semanal</span>
+                        </button>
+                        <button type="button" onclick="selectPlanPeriod('mensual', this)" class="period-btn border border-gray-200 bg-white text-slateDark font-bold p-2 rounded-xl text-[10px] text-center hover:border-forest transition shadow-sm" id="btnPeriodMensual">
+                            <span class="block text-[8px] text-gray-400 uppercase">30 Días</span>
+                            <span>Mensual</span>
+                        </button>
+                        <button type="button" onclick="selectPlanPeriod('trimestral', this)" class="period-btn border border-gray-200 bg-white text-slateDark font-bold p-2 rounded-xl text-[10px] text-center hover:border-forest transition shadow-sm" id="btnPeriodTrimestral">
+                            <span class="block text-[8px] text-gray-400 uppercase">90 Días</span>
+                            <span>Trimestral</span>
+                        </button>
+                    </div>
+                    <input type="hidden" id="inputPlanPeriod" value="semanal">
+                </div>
+            </div>
+
             <!-- BIFURCACIÓN DE ACCIÓN -->
             <div class="mt-6 p-4 rounded-2xl bg-slateDark text-white text-center space-y-3">
                 <h4 class="font-bold text-sm mb-1">¿Cómo deseas continuar?</h4>
@@ -1346,7 +1381,8 @@
         mental: 'Ninguna',
         bypass: false,
         sleep: 'radiant',
-        stress: 'calm'
+        stress: 'calm',
+        planPeriod: 'semanal'
     };
 
     const specialists = [
@@ -1605,7 +1641,18 @@
         btn.className = "time-slot border border-forest bg-forest/5 text-forest font-bold py-2 rounded-xl text-xs transition focus:outline-none";
     }
 
-    function initBookingPanel() {
+    
+    function selectPlanPeriod(period, btn) {
+        selections.planPeriod = period;
+        document.getElementById('inputPlanPeriod').value = period;
+        document.querySelectorAll('.period-btn').forEach(b => {
+            b.className = "period-btn border border-gray-200 bg-white text-slateDark font-bold p-2 rounded-xl text-[10px] text-center hover:border-forest transition shadow-sm";
+        });
+        btn.className = "period-btn border-2 border-forest bg-forest text-white font-bold p-2 rounded-xl text-[10px] text-center transition shadow-sm";
+    }
+
+
+function initBookingPanel() {
         const listContainer = document.getElementById('specialistList');
         const bookingDerivationText = document.getElementById('bookingDerivationText');
         listContainer.innerHTML = '';
@@ -1742,7 +1789,23 @@
     }
 
     function downloadEvaluationPDF(isFreeOnly) {
-        const sleepMap = {
+        
+        const period = selections.planPeriod || 'semanal';
+        let periodTitle = 'PAUTA SEMANAL (7 DÍAS)';
+        let periodBadge = 'PLAN EXPRESS (7 DÍAS)';
+        let periodDesc = 'Rutina Semanal de Nutrición Limpia, Herbolaria y Movimiento Adaptado';
+
+        if (period === 'mensual') {
+            periodTitle = 'PAUTA MENSUAL (30 DÍAS)';
+            periodBadge = 'PLAN EQUILIBRIO (30 DÍAS)';
+            periodDesc = 'Programa Mensual de Equilibrio Metabólico y Secretos Milenarios';
+        } else if (period === 'trimestral') {
+            periodTitle = 'PAUTA TRIMESTRAL (90 DÍAS)';
+            periodBadge = 'PLAN PROFUNDO (90 DÍAS)';
+            periodDesc = 'Transformación Integral de 90 Días con Herbolaria Nativa y Salud Activa';
+        }
+
+const sleepMap = {
             radiant: 'Energía Radiante 🌅',
             fatigue: 'Fatiga Media 🥱',
             insomnia: 'Insomnio severo 🛌'
