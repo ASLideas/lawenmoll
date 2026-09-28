@@ -198,17 +198,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<!-- ========================================== -->
-<!-- PANTALLA DE CARGA / SPLASH SCREEN          -->
-<!-- ========================================== -->
-<div id="lawenmoll-splash" class="lawenmoll-splash-container">
-  <div class="lawenmoll-splash-content">
-    <img src="lawenmoll_logo.jpg" alt="Lawenmoll Logo" class="lawenmoll-splash-logo">
-    <h1 class="lawenmoll-splash-title">LAWENMOLL</h1>
-    <p class="lawenmoll-splash-subtitle">Bienestar & Salud Natural</p>
-    <div class="lawenmoll-splash-loader"></div>
-  </div>
-</div>
+    <div id="lawenmoll-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.4s ease;">
+        <img src="lawenmoll_logo.jpg" alt="Logo" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #e8f5e9; margin-bottom: 15px;">
+        <h2 style="color: #2e7d32; font-family: sans-serif; font-weight: 800; margin: 0;">LAWENMOLL</h2>
+        <p style="color: #666; font-family: sans-serif; font-size: 13px; margin-top: 5px;">Bienestar & Salud Natural</p>
+ 
+  <!-- 🟢 1. EL DIV DEL SPLASH VA JUSTO DEBAJO DE <body> -->
+    <div id="lawenmoll-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.4s ease;">
+        <img src="lawenmoll_logo.jpg" alt="Lawenmoll Logo" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #e8f5e9; margin-bottom: 15px;">
+        <h2 style="color: #2e7d32; font-family: sans-serif; font-weight: 800; margin: 0;">LAWENMOLL</h2>
+        <p style="color: #666; font-family: sans-serif; font-size: 13px; margin-top: 5px;">Bienestar & Salud Natural</p>
+      </div>
+    
+      <!-- 🟢 2. SI TIENES ETIQUETA <style>, VA DESPUÉS (FUERA DEL DIV) -->
+      <style>
+        /* ⚠️ DENTRO DE <style> LOS COMENTARIOS SE ESCRIBEN ASÍ CON BARRAS Y ASTERISCOS */
+      </style>
+    
+      <!-- Resto de tu código de 3.199 líneas... -->
 
 <style>
   .lawenmoll-splash-container {
@@ -3295,7 +3302,16 @@ class="text-slateDark min-h-screen flex flex-col justify-between">
     // TEMPORIZADOR DE SEGURIDAD: Oculta la pantalla sí o sí a los 2 segundos
     setTimeout(ocultarSplash, 2000);
   </script>
-  </body>
+ setTimeout(function() {
+    var splash = document.getElementById('lawenmoll-splash');
+    if (splash) {
+      splash.style.opacity = '0';
+      setTimeout(function() { splash.remove(); }, 400);
+    }
+  }, 1200);
+</script>
+
+</body>
   </html>
 </body>
  <!-- (Pantalla Splash, Sección Secretos Milenarios, etc.) -->
