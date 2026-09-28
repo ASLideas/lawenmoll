@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lawenmoll - Bienestar & Salud Natural</title>
+
+  <!-- Etiquetas para PWA y App Móvil -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2e7d32">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="lawenmoll_logo.jpg">
 <head>
 <!-- ========================================== -->
 <!-- PANTALLA DE INTRODUCCIÓN - CENTRADO TOTAL  -->
@@ -3151,8 +3161,31 @@
       banner.style.display = 'none';
     });
   </script>
-
+<!-- Pégalo aquí, al final de tu index.html -->
+<nav class="lawenmoll-bottom-nav">
+    <a href="#inicio" class="nav-item active">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Inicio</span>
+    </a>
+    <a href="#terapeutas" class="nav-item">
+      <span class="nav-icon">🧘</span>
+      <span class="nav-label">Terapeutas</span>
+    </a>
+    <a href="#secretos" class="nav-item">
+      <span class="nav-icon">📜</span>
+      <span class="nav-label">Secretos</span>
+    </a>
+    <a href="#test" class="nav-item">
+      <span class="nav-icon">💚</span>
+      <span class="nav-label">Test</span>
+    </a>
+    <a href="#agendar" class="nav-item">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">Agendar</span>
+    </a>
+  </nav>
 </body>
+ <!-- (Pantalla Splash, Sección Secretos Milenarios, etc.) -->
 <!-- Activador de la App Lawenmoll -->
 <script>
     if ('serviceWorker' in navigator) {
