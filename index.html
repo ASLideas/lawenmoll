@@ -3309,8 +3309,8 @@ class="text-slateDark min-h-screen flex flex-col justify-between">
 
 </body>
   </html>
-  <!-- SCRIPT DE DESAPARICIÓN AUTOMÁTICA DE PANTALLA SPLASH -->
-<script>
+ <!-- SCRIPT DE DESAPARICIÓN SEGURO DE PANTALLA SPLASH -->
+ <script>
     (function() {
       function cerrarSplash() {
         var splash = document.getElementById('lawenmoll-splash');
@@ -3324,28 +3324,16 @@ class="text-slateDark min-h-screen flex flex-col justify-between">
           }, 400);
         }
       }
-  
+
       if (document.readyState === 'complete') {
         cerrarSplash();
       } else {
         window.addEventListener('load', cerrarSplash);
         document.addEventListener('DOMContentLoaded', cerrarSplash);
       }
-      // Temporizador de seguridad: Cierra a los 1.2 segundos sí o sí
       setTimeout(cerrarSplash, 1200);
     })();
   </script>
-  
+
 </body>
- <!-- (Pantalla Splash, Sección Secretos Milenarios, etc.) -->
-<!-- Activador de la App Lawenmoll -->
-<script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('PWA activada con éxito'))
-          .catch(err => console.error('Error PWA:', err));
-      });
-    }
-  </script>
 </html>
