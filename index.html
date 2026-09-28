@@ -197,7 +197,7 @@
     <!-- Supabase JS Library para conectar tu Base de Datos en tiempo real -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body 
+<body>
 <!-- ========================================== -->
 <!-- PANTALLA DE CARGA / SPLASH SCREEN          -->
 <!-- ========================================== -->
@@ -3275,6 +3275,28 @@ class="text-slateDark min-h-screen flex flex-col justify-between">
       <span class="nav-label">Agendar</span>
     </a>
   </nav>
+  <!-- SCRIPT DE SEGURIDAD PARA PANTALLA SPLASH -->
+<script>
+    function ocultarSplash() {
+      const splash = document.getElementById('lawenmoll-splash');
+      if (splash) {
+        splash.style.opacity = '0';
+        splash.style.visibility = 'hidden';
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 500);
+      }
+    }
+  
+    // Intenta ocultarlo apenas cargue la página
+    document.addEventListener('DOMContentLoaded', ocultarSplash);
+    window.addEventListener('load', ocultarSplash);
+  
+    // TEMPORIZADOR DE SEGURIDAD: Oculta la pantalla sí o sí a los 2 segundos
+    setTimeout(ocultarSplash, 2000);
+  </script>
+  </body>
+  </html>
 </body>
  <!-- (Pantalla Splash, Sección Secretos Milenarios, etc.) -->
 <!-- Activador de la App Lawenmoll -->
