@@ -2037,76 +2037,102 @@ function initBookingPanel() {
                         </div>
                     </div>
 
-                    <!-- IV. PAUTA O DERIVACIÓN -->
-                    ${isFreeOnly ? `
-                    <div>
-                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 900;">🌿 IV. GUÍA VISUAL DE DIETA Y EJERCICIOS (${period.toUpperCase()})</h3>
+                    <!-- IV. GUÍA VISUAL DE DIETA Y EJERCICIOS -->
+                    <div style="margin-bottom: 16px; font-family: Arial, Helvetica, sans-serif;">
+                        <h3 style="color: #52796F; font-size: 14px; border-bottom: 2px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: bold; font-family: Arial, sans-serif;">🌿 IV. GUÍA VISUAL DE DIETA Y EJERCICIOS ADAPTADOS (${period.toUpperCase()})</h3>
                         
-                        <!-- Tabla 1: Malla Semanal de Nutrición (Inspirada en calendario dieta.jpg y alimentos.jpg) -->
-                        <div style="margin-bottom: 8px;">
-                            <strong style="color: #52796F; font-size: 8.5px; display: block; margin-bottom: 3px;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
-                            <table style="width: 100%; border-collapse: collapse; font-size: 7.5px; color: #4A5568; background-color: white; border-radius: 6px; border: 1px solid #CBD5E0; box-sizing: border-box;">
+                        <!-- Tabla 1: Malla Semanal de Nutrición -->
+                        <div style="margin-bottom: 16px;">
+                            <strong style="color: #52796F; font-size: 12px; display: block; margin-bottom: 6px; font-weight: bold; font-family: Arial, sans-serif;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 11px; color: #2F3E46; background-color: white; border-radius: 8px; border: 1.5px solid #52796F; font-family: Arial, sans-serif; box-sizing: border-box;">
                                 <thead>
                                     <tr style="background-color: #52796F; color: white;">
-                                        <th style="padding: 3px; text-align: left; width: 14%;">Día</th>
-                                        <th style="padding: 3px; text-align: left; width: 26%;">Desayuno 🌅</th>
-                                        <th style="padding: 3px; text-align: left; width: 35%;">Almuerzo 🥗</th>
-                                        <th style="padding: 3px; text-align: left; width: 25%;">Cena & Infusión 🌙</th>
+                                        <th style="padding: 6px 8px; text-align: left; width: 14%; font-size: 11px; font-weight: bold;">Día</th>
+                                        <th style="padding: 6px 8px; text-align: left; width: 26%; font-size: 11px; font-weight: bold;">Desayuno 🌅</th>
+                                        <th style="padding: 6px 8px; text-align: left; width: 35%; font-size: 11px; font-weight: bold;">Almuerzo 🥗</th>
+                                        <th style="padding: 6px 8px; text-align: left; width: 25%; font-size: 11px; font-weight: bold;">Cena & Infusión 🌙</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Lunes</td><td style="padding: 2.5px 3px;">Avena con manzana y chía</td><td style="padding: 2.5px 3px;">Plato verde: Pollo y quinua</td><td style="padding: 2.5px 3px;">Crema zapallo + Melisa</td></tr>
-                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Martes</td><td style="padding: 2.5px 3px;">Omelette con espinaca</td><td style="padding: 2.5px 3px;">Pescado con verduras salteadas</td><td style="padding: 2.5px 3px;">Sopa clara + Boldo</td></tr>
-                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Miércoles</td><td style="padding: 2.5px 3px;">Smoothie verde detox</td><td style="padding: 2.5px 3px;">Guiso de lentejas con tomate</td><td style="padding: 2.5px 3px;">Tarta verdura + Menta</td></tr>
-                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Jueves</td><td style="padding: 2.5px 3px;">Tostadas palta y té</td><td style="padding: 2.5px 3px;">Pavo al jugo con camote</td><td style="padding: 2.5px 3px;">Sopa repollo + Cedrón</td></tr>
-                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Viernes</td><td style="padding: 2.5px 3px;">Huevos revueltos cherry</td><td style="padding: 2.5px 3px;">Salmón u atún con ensalada</td><td style="padding: 2.5px 3px;">Crema espárragos + Melisa</td></tr>
-                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Sábado</td><td style="padding: 2.5px 3px;">Bowl fruta de bajo IG</td><td style="padding: 2.5px 3px;">Charquicán saludable carne magra</td><td style="padding: 2.5px 3px;">Tortilla verdura + Infusión</td></tr>
-                                    <tr><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Domingo</td><td style="padding: 2.5px 3px;">Infusión digestiva + palta</td><td style="padding: 2.5px 3px;">Pollo arvejado con verdes</td><td style="padding: 2.5px 3px;">Consomé + Té ancestral</td></tr>
+                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Lunes</td><td style="padding: 5px 8px;">Avena con manzana y chía</td><td style="padding: 5px 8px;">Plato verde: Pollo y quinua</td><td style="padding: 5px 8px;">Crema zapallo + Melisa</td></tr>
+                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Martes</td><td style="padding: 5px 8px;">Omelette con espinaca</td><td style="padding: 5px 8px;">Pescado con verduras salteadas</td><td style="padding: 5px 8px;">Sopa clara + Boldo</td></tr>
+                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Miércoles</td><td style="padding: 5px 8px;">Smoothie verde detox</td><td style="padding: 5px 8px;">Guiso de lentejas con tomate</td><td style="padding: 5px 8px;">Tarta verdura + Menta</td></tr>
+                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Jueves</td><td style="padding: 5px 8px;">Tostadas palta y té</td><td style="padding: 5px 8px;">Pavo al jugo con camote</td><td style="padding: 5px 8px;">Sopa repollo + Cedrón</td></tr>
+                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Viernes</td><td style="padding: 5px 8px;">Huevos revueltos cherry</td><td style="padding: 5px 8px;">Salmón u atún con ensalada</td><td style="padding: 5px 8px;">Crema espárragos + Melisa</td></tr>
+                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Sábado</td><td style="padding: 5px 8px;">Bowl fruta de bajo IG</td><td style="padding: 5px 8px;">Charquicán saludable carne magra</td><td style="padding: 5px 8px;">Tortilla verdura + Infusión</td></tr>
+                                    <tr><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Domingo</td><td style="padding: 5px 8px;">Infusión digestiva + palta</td><td style="padding: 5px 8px;">Pollo arvejado con verdes</td><td style="padding: 5px 8px;">Consomé + Té ancestral</td></tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <!-- Tabla 2: Guía de Ejercicios en 4 Fases (Inspirada en guia de ejersicios.jpg) -->
-                        <div>
-                            <strong style="color: #52796F; font-size: 8.5px; display: block; margin-bottom: 3px;">🏋️‍♀️ GUÍA VISUAL DE EJERCICIOS (4 FASES ADAPTADAS):</strong>
-                            <table style="width: 100%; border-collapse: collapse; font-size: 7.5px; color: #4A5568; background-color: #FAF8F5; border-radius: 6px; border: 1px solid #84A59D; box-sizing: border-box;">
-                                <tr>
-                                    <td style="padding: 4px; width: 50%; vertical-align: top; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
-                                        <strong style="color: #52796F; font-size: 8px;">1. Calentamiento (5 Min)</strong>
-                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">Rotación articular de hombros, tobillos y cuello + caminata suave en el lugar.</p>
-                                    </td>
-                                    <td style="padding: 4px; width: 50%; vertical-align: top; border-bottom: 1px solid #E2E8F0;">
-                                        <strong style="color: #52796F; font-size: 8px;">2. Circuito Principal (15-20 Min)</strong>
-                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">4 rondas adaptadas: Sentadillas libres / en silla, flexiones en pared/mat y plancha isométrica (30s).</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 4px; width: 50%; vertical-align: top; border-right: 1px solid #E2E8F0;">
-                                        <strong style="color: #52796F; font-size: 8px;">3. Core & Estabilidad (8 Min)</strong>
-                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">3 series de 12 puentes de glúteo + activación abdominal con respiración diafragmática.</p>
-                                    </td>
-                                    <td style="padding: 4px; width: 50%; vertical-align: top;">
-                                        <strong style="color: #52796F; font-size: 8px;">4. Enfriamiento & Estiramiento (5 Min)</strong>
-                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">Estiramiento sostenido de isquiotibiales, cuadriceps y zona lumbar (20s por postura).</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    ` : `
-                    <div style="margin-bottom: 10px;">
-                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 900;">📍 IV. Derivaciones y Convenios Activados</h3>
-                        <div style="font-size: 9.5px; margin-bottom: 8px; color: #4A5568; background-color: white; padding: 10px; border-radius: 10px; border: 1px solid #E2E8F0; line-height: 1.4; box-sizing: border-box;">
-                            <p style="margin: 0 0 3px 0;"><strong>Especialista Asignado de LAWENMOLL:</strong> ${selections.selectedSpecialist ? selections.selectedSpecialist.name : 'No asignado'} (${selections.selectedSpecialist ? selections.selectedSpecialist.spec : 'Especialista de Turno'})</p>
-                            <p style="margin: 0 0 3px 0;"><strong>Pase de Convenio B2B Recomendado:</strong> Pase de Bienestar para Gimnasio SportLife o Yoga Postural</p>
-                            <p style="margin: 0;"><strong>Código de Descuento en Alimentación:</strong> 15% DCTO en Restaurante "Huerto Orgánico" con tu receta digital.</p>
-                        </div>
-                        <div style="background-color: #FFF5F5; border-left: 4px solid #F28482; padding: 10px; border-radius: 10px; font-size: 9.5px; color: #2D3748; font-weight: 600; line-height: 1.4; box-sizing: border-box;">
-                            <strong>⚠️ Información Importante sobre tu Cita:</strong> Tu reserva ha sido registrada en Supabase con éxito. El profesional completará tu ficha clínica SOAP de forma privada durante la atención presencial o en tu sala de telemedicina.
-                        </div>
-                    </div>
-                    `}
+                        <!-- Fichas Visuales de Ejercicio en PDF (Inspiradas en guia de ejersicios.jpg) -->
+                        <div style="margin-top: 16px;">
+                            <strong style="color: #52796F; font-size: 12px; display: block; margin-bottom: 8px; font-weight: bold; font-family: Arial, sans-serif;">🏋️‍♀️ GUÍA VISUAL DE EJERCICIOS ADAPTADOS (4 FASES):</strong>
+                            
+                            <!-- FASE 1 -->
+                            <div style="background-color: #F0F7F4; border: 1.5px solid #52796F; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
+                                <div style="display: table; width: 100%; border-bottom: 1px solid #84A59D; padding-bottom: 4px; margin-bottom: 6px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #2F3E46;">
+                                        🌅 1️⃣ CALENTAMIENTO & MOVILIDAD (5 MIN)
+                                    </div>
+                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #52796F;">
+                                        FASE 1 • PREPARACIÓN
+                                    </div>
+                                </div>
+                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5;">
+                                    <b>• Movilidad Articular:</b> Rotación suave de hombros, cuello y tobillos (10 giros por lado).<br>
+                                    <b>• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas al ritmo corporal.
+                                </p>
+                            </div>
 
+                            <!-- FASE 2 -->
+                            <div style="background-color: #EBF8FF; border: 1.5px solid #3182CE; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
+                                <div style="display: table; width: 100%; border-bottom: 1px solid #63B3ED; padding-bottom: 4px; margin-bottom: 6px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #1A365D;">
+                                        🏋️‍♀️ 2️⃣ CIRCUITO PRINCIPAL — ${rutinaTipo.toUpperCase()}
+                                    </div>
+                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #2B6CB0;">
+                                        ${rutinaBadgeText.toUpperCase()}
+                                    </div>
+                                </div>
+                                <p style="font-size: 11px; color: #1A202C; margin: 0; line-height: 1.5;">
+                                    ${rutinaTipo.includes('Silla') ? '<b>🪑 Ejercicios Adaptados en Silla (4 Series):</b><br>• 12 Elevaciones de rodilla sentado erguido<br>• 10 Press de hombros con mancuernas ligeras o botellas de agua<br>• 12 Giros de tronco suaves para movilidad lumbar<br>• 10 Extensiones de pierna asistida en silla' : rutinaTipo.includes('Metabólica') || rutinaTipo.includes('Adaptada') ? '<b>🩺 Cardio & Fuerza Adaptada (4 Rondas):</b><br>• 12 Sentadillas asistidas en silla o barra<br>• 10 Flexiones de brazos apoyado en pared<br>• 30 Segundos de caminata activa con elevación de rodillas<br>• 12 Extensiones de cadera de pie con sostén' : rutinaTipo.includes('HIIT') ? '<b>⚡ Cardio HIIT Alto Rendimiento (4 Rondas):</b><br>• 30s Mountain Climbers (Escaladores en suelo)<br>• 30s Jumping Jacks (Saltos de títere)<br>• 30s Zancadas alternadas estables<br>• 30s Descanso activo con respiración' : '<b>🪵 Plancha & Fuerza Core Intermedio (4 Rondas):</b><br>• 15 Sentadillas libres profundas a 90°<br>• 10 Flexiones de brazos en pared o mat<br>• 30 Segundos de plancha isométrica abdominal<br>• 12 Zancadas estáticas por pierna'}
+                                </p>
+                            </div>
+
+                            <!-- FASE 3 -->
+                            <div style="background-color: #F0F7F4; border: 1.5px solid #52796F; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
+                                <div style="display: table; width: 100%; border-bottom: 1px solid #84A59D; padding-bottom: 4px; margin-bottom: 6px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #2F3E46;">
+                                        🪵 3️⃣ CORE & ESTABILIDAD (8 MIN)
+                                    </div>
+                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #52796F;">
+                                        FASE 3 • ZONA MEDIA
+                                    </div>
+                                </div>
+                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5;">
+                                    <b>• Puente de Glúteos:</b> 3 series de 12 repeticiones en mat o colchoneta.<br>
+                                    <b>• Activación Abdominal:</b> Contracción isométrica de transverso abdominal con respiración diafragmática.
+                                </p>
+                            </div>
+
+                            <!-- FASE 4 -->
+                            <div style="background-color: #F0F7F4; border: 1.5px solid #52796F; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
+                                <div style="display: table; width: 100%; border-bottom: 1px solid #84A59D; padding-bottom: 4px; margin-bottom: 6px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #2F3E46;">
+                                        🧘‍♀️ 4️⃣ ENFRIAMIENTO & FLEXIBILIDAD (5 MIN)
+                                    </div>
+                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #52796F;">
+                                        FASE 4 • RECUPERACIÓN
+                                    </div>
+                                </div>
+                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5;">
+                                    <b>• Estiramiento Sostenido:</b> Isquiotibiales, cuadriceps y zona lumbar.<br>
+                                    <b>• Instrucción Técnica:</b> Mantener cada postura durante 20 segundos sin rebotar para liberar tensión muscular.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <!-- FOOTER LEGAL CENTRADO -->
                     <div style="text-align: center; border-top: 1.5px dashed #CBD5E0; padding-top: 10px; font-size: 8px; color: #A0AEC0; line-height: 1.4; margin-top: 10px;">
                         <p style="margin: 0; font-weight: bold; color: #52796F;">© 2026 LAWENMOLL Chile. Registro Clínico y Ecosistema de Salud Integrativa Protegido.</p>
@@ -2273,9 +2299,9 @@ function initBookingPanel() {
 
             if (selections.chronic === true) {
                 document.getElementById('resEmoji').innerText = "🩺";
-                document.getElementById('resTitle').innerText = "Plan Clínico Asistido";
-                document.getElementById('resBiometricsCard').classList.add('hidden');
-                document.getElementById('resultsBlockContainer').classList.add('hidden');
+                document.getElementById('resTitle').innerText = "Plan Clínico Adaptado";
+                document.getElementById('resBiometricsCard').classList.remove('hidden');
+                document.getElementById('resultsBlockContainer').classList.remove('hidden');
                 document.getElementById('chronicBlock').classList.remove('hidden');
                 
                 let textExplanation = "Al presentar antecedentes activos de **" + selections.selectedChronical.join(' e ') + "**, tu pauta de ejercicio automático ha sido bloqueada por motivos éticos de salud. ";
@@ -2359,6 +2385,9 @@ function initBookingPanel() {
                 if (selections.age >= 60 || selections.weight > 95 || selections.selectedChronical.includes('Hipertensión')) {
                     rutinaTipo = "Silla y Bajo Impacto";
                     rutinaBadgeText = "Cuidado Articular";
+                } else if (selections.selectedChronical.includes('Diabetes') || selections.selectedChronical.includes('Hipotiroidismo')) {
+                    rutinaTipo = "Cardio Aeróbico y Fuerza Adaptada";
+                    rutinaBadgeText = "Salud Metabólica";
                 } else if (selections.goal === 'activate' || selections.stress === 'burnout') {
                     rutinaTipo = "Cardio HIIT Metabólico";
                     rutinaBadgeText = "Alto Rendimiento";
@@ -2368,38 +2397,91 @@ function initBookingPanel() {
                 if (badgeEl) { badgeEl.innerText = rutinaTipo; }
 
                 let movCardsHtml = `
-                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-xs text-blue-900">1️⃣ Calentamiento (5 Min)</span>
-                            <span class="text-[9px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">Fase 1</span>
+                    <!-- FASE 1 -->
+                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
+                            <span class="font-extrabold text-xs text-emerald-900 flex items-center gap-1.5">
+                                <span>🌅</span> 1️⃣ Calentamiento & Movilidad (5 Min)
+                            </span>
+                            <span class="text-[9.5px] bg-emerald-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 1</span>
                         </div>
-                        <p class="text-[10px] text-gray-600 leading-relaxed">Rotación articular de hombros, tobillos y cuello + 3 minutos de caminata suave en el lugar para elevar la temperatura corporal.</p>
+                        <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
+                            <li><b>• Movilidad Articular:</b> Rotación suave de hombros, cuello y tobillos (10 giros por lado).</li>
+                            <li><b>• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas al ritmo del cuerpo.</li>
+                        </ul>
                     </div>
 
-                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-xs text-blue-900">2️⃣ Circuito Principal (${rutinaTipo})</span>
-                            <span class="text-[9px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">${rutinaBadgeText}</span>
+                    <!-- FASE 2: CIRCUITO PRINCIPAL -->
+                    <div class="border-2 border-blue-200 bg-blue-50/60 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-blue-200/80 pb-1.5">
+                            <span class="font-extrabold text-xs text-blue-950 flex items-center gap-1.5">
+                                <span>🏋️‍♀️</span> 2️⃣ Circuito Principal (${rutinaTipo})
+                            </span>
+                            <span class="text-[9.5px] bg-blue-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">${rutinaBadgeText}</span>
                         </div>
-                        <p class="text-[10px] text-gray-600 leading-relaxed">
-                            ${rutinaTipo.includes('Silla') ? '4 series de: 12 elevaciones de rodilla sentado, 10 press de hombros con botellas de agua y 12 giros de tronco suaves.' : rutinaTipo.includes('HIIT') ? '4 rondas de: 30s Mountain Climbers, 30s Jumping Jacks, 30s Zancadas alternadas y 30s Descanso.' : '4 rondas de: 15 sentadillas libres a 90°, 10 flexiones en pared/mat y 30 segundos de plancha abdominal.'}
-                        </p>
+                        <div class="text-[11px] text-gray-800 font-medium leading-relaxed space-y-1">
+                            ${rutinaTipo.includes('Silla') ? `
+                                <p class="font-bold text-blue-900 mb-1">🪑 Rutina Adaptada en Silla (4 Series):</p>
+                                <ul class="list-disc list-inside space-y-0.5">
+                                    <li><b>12 Elevaciones de rodilla</b> sentado erguido.</li>
+                                    <li><b>10 Press de hombros</b> con mancuernas ligeras o botellas.</li>
+                                    <li><b>12 Giros de tronco suaves</b> para liberar tensión lumbar.</li>
+                                    <li><b>10 Extensiones de pierna</b> asistida en silla.</li>
+                                </ul>
+                            ` : rutinaTipo.includes('Metabólica') || rutinaTipo.includes('Adaptada') ? `
+                                <p class="font-bold text-blue-900 mb-1">🩺 Cardio & Fuerza Adaptada (4 Rondas):</p>
+                                <ul class="list-disc list-inside space-y-0.5">
+                                    <li><b>12 Sentadillas asistidas</b> en silla o barra.</li>
+                                    <li><b>10 Flexiones de brazos</b> apoyado en pared.</li>
+                                    <li><b>30s Caminata activa</b> con elevación de rodillas.</li>
+                                    <li><b>12 Extensiones de cadera</b> de pie con sostén.</li>
+                                </ul>
+                            ` : rutinaTipo.includes('HIIT') ? `
+                                <p class="font-bold text-blue-900 mb-1">⚡ Cardio HIIT Alto Rendimiento (4 Rondas):</p>
+                                <ul class="list-disc list-inside space-y-0.5">
+                                    <li><b>30s Mountain Climbers</b> (Escaladores en suelo).</li>
+                                    <li><b>30s Jumping Jacks</b> (Saltos de títere).</li>
+                                    <li><b>30s Zancadas alternadas</b> estables.</li>
+                                    <li><b>30s Descanso activo</b> con respiración profunda.</li>
+                                </ul>
+                            ` : `
+                                <p class="font-bold text-blue-900 mb-1">🪵 Plancha & Fuerza Core Intermedio (4 Rondas):</p>
+                                <ul class="list-disc list-inside space-y-0.5">
+                                    <li><b>15 Sentadillas libres</b> profundas a 90°.</li>
+                                    <li><b>10 Flexiones de brazos</b> en pared o mat.</li>
+                                    <li><b>30s Plancha isométrica</b> abdominal.</li>
+                                    <li><b>12 Zancadas estáticas</b> por pierna.</li>
+                                </ul>
+                            `}
+                        </div>
                     </div>
 
-                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-xs text-blue-900">3️⃣ Core & Estabilidad (8 Min)</span>
-                            <span class="text-[9px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">Fase 3</span>
+                    <!-- FASE 3 -->
+                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
+                            <span class="font-extrabold text-xs text-emerald-900 flex items-center gap-1.5">
+                                <span>🪵</span> 3️⃣ Core & Estabilidad (8 Min)
+                            </span>
+                            <span class="text-[9.5px] bg-emerald-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 3</span>
                         </div>
-                        <p class="text-[10px] text-gray-600 leading-relaxed">3 series de 12 puentes de glúteo en colchoneta + activación abdominal isométrica con respiración diafragmática.</p>
+                        <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
+                            <li><b>• Puente de Glúteos:</b> 3 series de 12 repeticiones en mat o colchoneta.</li>
+                            <li><b>• Activación Abdominal:</b> Contracción isométrica de transverso abdominal con respiración diafragmática.</li>
+                        </ul>
                     </div>
 
-                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-xs text-blue-900">4️⃣ Estiramiento & Enfriamiento (5 Min)</span>
-                            <span class="text-[9px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">Fase 4</span>
+                    <!-- FASE 4 -->
+                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
+                            <span class="font-extrabold text-xs text-emerald-900 flex items-center gap-1.5">
+                                <span>🧘‍♀️</span> 4️⃣ Enfriamiento & Flexibilidad (5 Min)
+                            </span>
+                            <span class="text-[9.5px] bg-emerald-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 4</span>
                         </div>
-                        <p class="text-[10px] text-gray-600 leading-relaxed">Estiramiento sostenido de isquiotibiales, cuadriceps y zona lumbar. Mantener cada posición durante 20 segundos sin rebotar.</p>
+                        <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
+                            <li><b>• Estiramiento Sostenido:</b> Isquiotibiales, cuadriceps y zona lumbar.</li>
+                            <li><b>• Instrucción Técnica:</b> Mantener cada postura durante 20 segundos sin rebotar para liberar tensión muscular.</li>
+                        </ul>
                     </div>
                 `;
 
