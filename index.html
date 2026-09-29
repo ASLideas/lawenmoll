@@ -794,7 +794,33 @@
             </div>
         </div>
 
-        <!-- PANTALLA CARGA -->
+        
+        <!-- MODAL DE VIDEO ENTRENA EN CASA -->
+        <div id="exerciseVideoModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[999999] hidden flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl max-w-xl w-full p-5 shadow-2xl relative border border-emerald-100 flex flex-col space-y-4 animate-scaleUp">
+                <button onclick="closeExerciseVideo()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full w-9 h-9 flex items-center justify-center font-bold text-lg transition shadow-sm">✕</button>
+                <div class="flex items-center space-x-3 text-forest border-b border-gray-100 pb-3">
+                    <span class="text-3xl">🎥</span>
+                    <div>
+                        <h3 id="videoModalTitle" class="font-extrabold text-base text-gray-800">Entrena en Casa — Rutina Guiada</h3>
+                        <p id="videoModalSub" class="text-xs text-emerald-700 font-bold">LAWENMOLL • Demostración en Vivo</p>
+                    </div>
+                </div>
+                <div class="aspect-video bg-slate-900 rounded-2xl overflow-hidden relative shadow-inner flex items-center justify-center border border-gray-200">
+                    <iframe id="videoIframe" class="w-full h-full border-0" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-900 font-semibold flex items-start space-x-2.5">
+                    <span class="text-lg">💡</span>
+                    <p id="videoModalTips" class="leading-relaxed">Sigue la postura demostrada en el video a tu propio ritmo. Mantén una respiración profunda e hidratación constante.</p>
+                </div>
+                <button onclick="closeExerciseVideo()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-check-circle text-base"></i>
+                    <span>Entendido / Cerrar Video</span>
+                </button>
+            </div>
+        </div>
+
+<!-- PANTALLA CARGA -->
         <div id="stepLoading" class="step-panel flex flex-col justify-center items-center h-full flex-grow text-center">
             <div class="relative w-20 h-20 mb-6">
                 <div class="absolute inset-0 rounded-full border-4 border-gray-100"></div>
@@ -1872,12 +1898,12 @@ function initBookingPanel() {
 
         // Logo oficial de LAWENMOLL en alta definición para PDF
         const header_logo_html = `
-            <div style="display: table-cell; vertical-align: middle; width: 55px; text-align: left;">
-                <img src="lawenmoll_logo.jpg" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #52796F; display: block;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+            <div style="display: table-cell; vertical-align: middle; width: 65px; text-align: left;">
+                <img src="lawenmoll_logo.jpg" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2.5px solid #52796F; display: block;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
             </div>
-            <div style="display: table-cell; vertical-align: middle; padding-left: 8px; text-align: left;">
-                <h2 style="font-size: 8.5px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.2px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
-                <h1 style="font-size: 17px; font-weight: 900; color: #52796F; margin: 2px 0 0 0; letter-spacing: 0.5px;">LAWENMOLL CHILE</h1>
+            <div style="display: table-cell; vertical-align: middle; padding-left: 10px; text-align: left;">
+                <h2 style="font-size: 11px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase; font-family: Arial, sans-serif;">Ecosistema de Salud Integrativa</h2>
+                <h1 style="font-size: 22px; font-weight: 900; color: #52796F; margin: 2px 0 0 0; letter-spacing: 0.5px; font-family: Arial, sans-serif;">LAWENMOLL CHILE</h1>
             </div>
         `;
 
@@ -1889,8 +1915,8 @@ function initBookingPanel() {
         const originalBodyLeft = document.body.style.left;
         const originalBodyTop = document.body.style.top;
 
-        document.body.style.width = '750px';
-        document.documentElement.style.width = '750px';
+        document.body.style.width = '794px';
+        document.documentElement.style.width = '794px';
         document.body.style.margin = '0';
         document.body.style.padding = '0';
         document.body.style.position = 'relative';
@@ -1909,14 +1935,14 @@ function initBookingPanel() {
         overlay.style.flexDirection = 'column';
         overlay.style.alignItems = 'center';
         overlay.style.justifyContent = 'center';
-        overlay.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+        overlay.style.fontFamily = "Arial, sans-serif";
         overlay.innerHTML = `
-            <div style="text-align: center; max-width: 320px; padding: 20px;">
-                <div style="width: 70px; height: 70px; margin: 0 auto 20px auto; border-radius: 50%; border: 3px solid #52796F; box-shadow: 0 4px 12px rgba(82,121,111,0.25); overflow: hidden; animation: pulse 1.5s infinite ease-in-out;">
+            <div style="text-align: center; max-width: 340px; padding: 20px;">
+                <div style="width: 75px; height: 75px; margin: 0 auto 20px auto; border-radius: 50%; border: 3px solid #52796F; box-shadow: 0 4px 12px rgba(82,121,111,0.25); overflow: hidden; animation: pulse 1.5s infinite ease-in-out;">
                     <img src="lawenmoll_logo.jpg" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
                 </div>
-                <h4 style="color: #2F3E46; font-size: 15px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
-                <p style="color: #52796F; font-size: 11px; font-weight: 600; margin: 0 0 20px 0;">Preparando pauta de salud digital centrado...</p>
+                <h4 style="color: #2F3E46; font-size: 16px; font-weight: 800; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">LAWENMOLL</h4>
+                <p style="color: #52796F; font-size: 12px; font-weight: 600; margin: 0 0 20px 0;">Generando PDF en alta definición y letra ampliada...</p>
                 <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; position: relative;">
                     <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50%; background: #52796F; border-radius: 2px; animation: loading-bar 1.5s infinite linear;"></div>
                 </div>
@@ -1948,7 +1974,7 @@ function initBookingPanel() {
         wrapper.style.position = 'absolute';
         wrapper.style.left = '0';
         wrapper.style.top = '0';
-        wrapper.style.width = '750px';
+        wrapper.style.width = '794px';
         wrapper.style.height = 'auto';
         wrapper.style.overflow = 'hidden';
         wrapper.style.display = 'block';
@@ -1959,11 +1985,11 @@ function initBookingPanel() {
         wrapper.style.zIndex = '99999998';
 
         const element = document.createElement('div');
-        element.className = "p-0 font-sans text-xs text-gray-700 leading-relaxed";
-        element.style.color = "#2F3E46";
-        element.style.width = "750px";
-        element.style.minWidth = "750px";
-        element.style.maxWidth = "750px";
+        element.className = "p-0 font-sans text-sm text-gray-800 leading-relaxed";
+        element.style.color = "#1A202C";
+        element.style.width = "794px";
+        element.style.minWidth = "794px";
+        element.style.maxWidth = "794px";
         element.style.background = "#FAF8F5";
         element.style.boxSizing = "border-box";
 
@@ -1971,172 +1997,187 @@ function initBookingPanel() {
         const imcCatVal = document.getElementById('resIMCCat') ? document.getElementById('resIMCCat').innerText : 'Normal';
         const metabolicAge = selections.age + 3;
 
+        let rutinaTipo = "Plancha y Fuerza Core";
+        let rutinaBadgeText = "Nivel Intermedio";
+
+        if (selections.age >= 60 || selections.weight > 95 || selections.selectedChronical.includes('Hipertensión')) {
+            rutinaTipo = "Silla y Bajo Impacto";
+            rutinaBadgeText = "Cuidado Articular";
+        } else if (selections.selectedChronical.includes('Diabetes') || selections.selectedChronical.includes('Hipotiroidismo')) {
+            rutinaTipo = "Cardio Aeróbico y Fuerza Adaptada";
+            rutinaBadgeText = "Salud Metabólica";
+        } else if (selections.goal === 'activate' || selections.stress === 'burnout') {
+            rutinaTipo = "Cardio HIIT Metabólico";
+            rutinaBadgeText = "Alto Rendimiento";
+        }
+
         let contentHtml = `
-            <div style="width: 750px !important; min-width: 750px !important; max-width: 750px !important; padding: 25px; box-sizing: border-box; background-color: #FAF8F5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #2F3E46;">
-                <div style="width: 700px !important; min-width: 700px !important; max-width: 700px !important; border: 2px solid #52796F; border-radius: 18px; padding: 24px; background-color: #FAF8F5; box-shadow: 0 4px 6px rgba(0,0,0,0.02); box-sizing: border-box;">
+            <div style="width: 794px !important; min-width: 794px !important; max-width: 794px !important; padding: 30px; box-sizing: border-box; background-color: #FAF8F5; font-family: Arial, Helvetica, sans-serif; color: #1A202C;">
+                <div style="width: 734px !important; min-width: 734px !important; max-width: 734px !important; margin: 0 auto; border: 2.5px solid #52796F; border-radius: 20px; padding: 28px; background-color: #FAF8F5; box-shadow: 0 4px 10px rgba(0,0,0,0.03); box-sizing: border-box;">
                     
                     <!-- ENCABEZADO CON LOGO OFICIAL LAWENMOLL -->
-                    <div style="display: table; width: 100%; border-bottom: 2px solid #52796F; padding-bottom: 12px; margin-bottom: 14px; table-layout: fixed;">
+                    <div style="display: table; width: 100%; border-bottom: 2.5px solid #52796F; padding-bottom: 14px; margin-bottom: 18px; table-layout: fixed;">
                         <div style="display: table-cell; vertical-align: middle; text-align: left;">
                             <div style="display: table; width: 100%;">
                                 ${header_logo_html}
                             </div>
                         </div>
-                        <div style="display: table-cell; vertical-align: middle; text-align: right; border-left: 1.5px solid #52796F; padding-left: 10px; width: 180px;">
-                            <span style="font-size: 8.5px; background-color: #52796F; color: white; font-weight: bold; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; display: inline-block;">${periodBadge}</span>
-                            <p style="font-size: 8px; color: #718096; margin: 4px 0 0 0; font-weight: bold;">CÓDIGO: EVAL-LAWEN-${Math.floor(1000 + Math.random() * 9000)}</p>
+                        <div style="display: table-cell; vertical-align: middle; text-align: right; border-left: 2px solid #52796F; padding-left: 14px; width: 210px;">
+                            <span style="font-size: 11px; background-color: #52796F; color: white; font-weight: bold; padding: 6px 12px; border-radius: 8px; text-transform: uppercase; display: inline-block; font-family: Arial, sans-serif;">${periodBadge}</span>
+                            <p style="font-size: 10px; color: #4A5568; margin: 6px 0 0 0; font-weight: bold; font-family: Arial, sans-serif;">CÓDIGO: EVAL-LAWEN-${Math.floor(1000 + Math.random() * 9000)}</p>
                         </div>
                     </div>
 
                     <!-- TÍTULO DE LA PAUTA -->
-                    <div style="text-align: center; margin-bottom: 14px;">
-                        <h2 style="font-size: 13px; font-weight: 800; color: #2F3E46; text-transform: uppercase; margin: 0; letter-spacing: 0.5px;">${periodTitle} • SECRETOS MILENARIOS</h2>
-                        <p style="font-size: 8.5px; color: #52796F; font-weight: 700; margin: 2px 0 0 0;">👵 Agente de Secretos Milenarios — ${periodDesc}</p>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h2 style="font-size: 18px; font-weight: 900; color: #1A202C; text-transform: uppercase; margin: 0; letter-spacing: 0.5px; font-family: Arial, sans-serif;">${periodTitle} • SECRETOS MILENARIOS</h2>
+                        <p style="font-size: 12px; color: #52796F; font-weight: bold; margin: 4px 0 0 0; font-family: Arial, sans-serif;">👵 Agente de Sabiduría Ancestral — ${periodDesc}</p>
                     </div>
 
                     <!-- I. ANTECEDENTES DEMOGRÁFICOS -->
-                    <div style="margin-bottom: 14px;">
-                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 6px; text-transform: uppercase; font-weight: 900;">📋 I. Antecedentes y Demográficos</h3>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 9.5px; color: #4A5568; background-color: white; border-radius: 10px; border: 1px solid #E2E8F0; table-layout: fixed;">
+                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                        <h3 style="color: #52796F; font-size: 15px; border-bottom: 2px solid #52796F; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">📋 I. Antecedentes y Demográficos</h3>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: #1A202C; background-color: white; border-radius: 12px; border: 1.5px solid #CBD5E0; table-layout: fixed; font-family: Arial, sans-serif;">
                             <tr>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: 1px solid #F0F2F5;"><strong>Nombre Completo:</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.firstName} ${selections.lastName}</span></td>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: 1px solid #F0F2F5;"><strong>Edad del Paciente:</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.age} años (Metabólica: ${metabolicAge} años)</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: 1px solid #E2E8F0;"><strong style="color: #2F3E46;">Nombre Completo:</strong> <span style="font-weight: 900; color: #000000;">${selections.firstName} ${selections.lastName}</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: 1px solid #E2E8F0;"><strong style="color: #2F3E46;">Edad del Paciente:</strong> <span style="font-weight: 900; color: #000000;">${selections.age} años (Metabólica: ${metabolicAge} años)</span></td>
                             </tr>
                             <tr>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: none;"><strong>Celular de Contacto:</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.phone || 'No registrado'}</span></td>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: none;"><strong>Correo Electrónico:</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.email || 'No registrado'}</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: none;"><strong style="color: #2F3E46;">Celular de Contacto:</strong> <span style="font-weight: 900; color: #000000;">${selections.phone || 'No registrado'}</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: none;"><strong style="color: #2F3E46;">Correo Electrónico:</strong> <span style="font-weight: 900; color: #000000;">${selections.email || 'No registrado'}</span></td>
                             </tr>
                         </table>
                     </div>
 
                     <!-- II. PARÁMETROS BIOMÉTRICOS -->
-                    <div style="margin-bottom: 14px;">
-                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 6px; text-transform: uppercase; font-weight: 900;">📊 II. Parámetros Biométricos y Estilo de Vida</h3>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 9.5px; color: #4A5568; background-color: white; border-radius: 10px; border: 1px solid #E2E8F0; table-layout: fixed;">
+                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                        <h3 style="color: #52796F; font-size: 15px; border-bottom: 2px solid #52796F; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">📊 II. Parámetros Biométricos y Estilo de Vida</h3>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: #1A202C; background-color: white; border-radius: 12px; border: 1.5px solid #CBD5E0; table-layout: fixed; font-family: Arial, sans-serif;">
                             <tr>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: 1px solid #F0F2F5;"><strong>Estatura (Talla):</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.height} cm</span></td>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: 1px solid #F0F2F5;"><strong>Peso Corporal:</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.weight} kg</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: 1px solid #E2E8F0;"><strong style="color: #2F3E46;">Estatura (Talla):</strong> <span style="font-weight: 900; color: #000000;">${selections.height} cm</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: 1px solid #E2E8F0;"><strong style="color: #2F3E46;">Peso Corporal:</strong> <span style="font-weight: 900; color: #000000;">${selections.weight} kg</span></td>
                             </tr>
                             <tr>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: 1px solid #F0F2F5;"><strong>Índice de Masa Corporal (IMC):</strong> <span style="font-weight: bold; color: #2F3E46;">${imcVal} (${imcCatVal})</span></td>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: 1px solid #F0F2F5;"><strong>Grasa Corporal Estimada:</strong> <span style="font-weight: bold; color: #2F3E46;">${selections.fat}%</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: 1px solid #E2E8F0;"><strong style="color: #2F3E46;">Índice de Masa Corporal (IMC):</strong> <span style="font-weight: 900; color: #000000;">${imcVal} (${imcCatVal})</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: 1px solid #E2E8F0;"><strong style="color: #2F3E46;">Grasa Corporal Estimada:</strong> <span style="font-weight: 900; color: #000000;">${selections.fat}%</span></td>
                             </tr>
                             <tr>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: none;"><strong>Calidad de Sueño:</strong> <span style="font-weight: bold; color: #2F3E46;">${sleepMap[selections.sleep] || 'Normal'}</span></td>
-                                <td style="width: 50%; padding: 6px 12px; border-bottom: none;"><strong>Nivel de Estrés:</strong> <span style="font-weight: bold; color: #2F3E46;">${stressMap[selections.stress] || 'Calma'}</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: none;"><strong style="color: #2F3E46;">Calidad de Sueño:</strong> <span style="font-weight: 900; color: #000000;">${sleepMap[selections.sleep] || 'Normal'}</span></td>
+                                <td style="width: 50%; padding: 10px 14px; border-bottom: none;"><strong style="color: #2F3E46;">Nivel de Estrés:</strong> <span style="font-weight: 900; color: #000000;">${stressMap[selections.stress] || 'Calma'}</span></td>
                             </tr>
                         </table>
                     </div>
 
-                    <!-- III. DIAGNÓSTICO Y CLÍNICA -->
-                    <div style="margin-bottom: 14px;">
-                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 6px; text-transform: uppercase; font-weight: 900;">🩺 III. Diagnóstico y Antecedentes Clínicos</h3>
-                        <div style="font-size: 9.5px; color: #4A5568; background-color: white; padding: 10px; border-radius: 10px; border: 1px solid #E2E8F0; line-height: 1.4; box-sizing: border-box;">
-                            <p style="margin: 0 0 3px 0;"><strong>Antecedentes Crónicos:</strong> ${selections.chronic ? selections.selectedChronical.join(', ') : 'Ninguno diagnosticado'}</p>
-                            <p style="margin: 0;"><strong>Salud Neurodivergente / Enfoque Cognitivo:</strong> ${selections.mental || 'Ninguna'}</p>
+                    <!-- III. DIAGNÓSTICO Y ANTECEDENTES CLÍNICOS -->
+                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                        <h3 style="color: #52796F; font-size: 15px; border-bottom: 2px solid #52796F; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">🩺 III. Diagnóstico y Antecedentes Clínicos</h3>
+                        <div style="font-size: 13px; color: #1A202C; background-color: white; padding: 12px 16px; border-radius: 12px; border: 1.5px solid #CBD5E0; line-height: 1.6; box-sizing: border-box; font-family: Arial, sans-serif;">
+                            <p style="margin: 0 0 6px 0;"><strong style="color: #2F3E46;">Antecedentes Crónicos:</strong> <span style="font-weight: 900; color: #000000;">${selections.chronic ? selections.selectedChronical.join(', ') : 'Ninguno diagnosticado'}</span></p>
+                            <p style="margin: 0;"><strong style="color: #2F3E46;">Salud Neurodivergente / Enfoque Cognitivo:</strong> <span style="font-weight: 900; color: #000000;">${selections.mental || 'Ninguna'}</span></p>
                         </div>
                     </div>
 
                     <!-- IV. GUÍA VISUAL DE DIETA Y EJERCICIOS -->
-                    <div style="margin-bottom: 16px; font-family: Arial, Helvetica, sans-serif;">
-                        <h3 style="color: #52796F; font-size: 14px; border-bottom: 2px solid #52796F; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; font-weight: bold; font-family: Arial, sans-serif;">🌿 IV. GUÍA VISUAL DE DIETA Y EJERCICIOS ADAPTADOS (${period.toUpperCase()})</h3>
+                    <div style="margin-bottom: 20px; font-family: Arial, Helvetica, sans-serif;">
+                        <h3 style="color: #52796F; font-size: 16px; border-bottom: 2.5px solid #52796F; padding-bottom: 6px; margin-bottom: 14px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">🌿 IV. GUÍA VISUAL DE DIETA Y EJERCICIOS ADAPTADOS (${period.toUpperCase()})</h3>
                         
                         <!-- Tabla 1: Malla Semanal de Nutrición -->
-                        <div style="margin-bottom: 16px;">
-                            <strong style="color: #52796F; font-size: 12px; display: block; margin-bottom: 6px; font-weight: bold; font-family: Arial, sans-serif;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
-                            <table style="width: 100%; border-collapse: collapse; font-size: 11px; color: #2F3E46; background-color: white; border-radius: 8px; border: 1.5px solid #52796F; font-family: Arial, sans-serif; box-sizing: border-box;">
+                        <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                            <strong style="color: #52796F; font-size: 14px; display: block; margin-bottom: 8px; font-weight: 900; font-family: Arial, sans-serif;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 12px; color: #1A202C; background-color: white; border-radius: 10px; border: 2px solid #52796F; font-family: Arial, sans-serif; box-sizing: border-box;">
                                 <thead>
                                     <tr style="background-color: #52796F; color: white;">
-                                        <th style="padding: 6px 8px; text-align: left; width: 14%; font-size: 11px; font-weight: bold;">Día</th>
-                                        <th style="padding: 6px 8px; text-align: left; width: 26%; font-size: 11px; font-weight: bold;">Desayuno 🌅</th>
-                                        <th style="padding: 6px 8px; text-align: left; width: 35%; font-size: 11px; font-weight: bold;">Almuerzo 🥗</th>
-                                        <th style="padding: 6px 8px; text-align: left; width: 25%; font-size: 11px; font-weight: bold;">Cena & Infusión 🌙</th>
+                                        <th style="padding: 8px 10px; text-align: left; width: 14%; font-size: 12px; font-weight: 900;">Día</th>
+                                        <th style="padding: 8px 10px; text-align: left; width: 26%; font-size: 12px; font-weight: 900;">Desayuno 🌅</th>
+                                        <th style="padding: 8px 10px; text-align: left; width: 35%; font-size: 12px; font-weight: 900;">Almuerzo 🥗</th>
+                                        <th style="padding: 8px 10px; text-align: left; width: 25%; font-size: 12px; font-weight: 900;">Cena & Infusión 🌙</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Lunes</td><td style="padding: 5px 8px;">Avena con manzana y chía</td><td style="padding: 5px 8px;">Plato verde: Pollo y quinua</td><td style="padding: 5px 8px;">Crema zapallo + Melisa</td></tr>
-                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Martes</td><td style="padding: 5px 8px;">Omelette con espinaca</td><td style="padding: 5px 8px;">Pescado con verduras salteadas</td><td style="padding: 5px 8px;">Sopa clara + Boldo</td></tr>
-                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Miércoles</td><td style="padding: 5px 8px;">Smoothie verde detox</td><td style="padding: 5px 8px;">Guiso de lentejas con tomate</td><td style="padding: 5px 8px;">Tarta verdura + Menta</td></tr>
-                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Jueves</td><td style="padding: 5px 8px;">Tostadas palta y té</td><td style="padding: 5px 8px;">Pavo al jugo con camote</td><td style="padding: 5px 8px;">Sopa repollo + Cedrón</td></tr>
-                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Viernes</td><td style="padding: 5px 8px;">Huevos revueltos cherry</td><td style="padding: 5px 8px;">Salmón u atún con ensalada</td><td style="padding: 5px 8px;">Crema espárragos + Melisa</td></tr>
-                                    <tr style="border-bottom: 1px solid #E2E8F0;"><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Sábado</td><td style="padding: 5px 8px;">Bowl fruta de bajo IG</td><td style="padding: 5px 8px;">Charquicán saludable carne magra</td><td style="padding: 5px 8px;">Tortilla verdura + Infusión</td></tr>
-                                    <tr><td style="padding: 5px 8px; font-weight: bold; color: #2F3E46;">Domingo</td><td style="padding: 5px 8px;">Infusión digestiva + palta</td><td style="padding: 5px 8px;">Pollo arvejado con verdes</td><td style="padding: 5px 8px;">Consomé + Té ancestral</td></tr>
+                                    <tr style="border-bottom: 1.5px solid #E2E8F0;"><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Lunes</td><td style="padding: 8px 10px; font-weight: 600;">Avena con manzana y chía</td><td style="padding: 8px 10px; font-weight: 600;">Plato verde: Pollo y quinua</td><td style="padding: 8px 10px; font-weight: 600;">Crema zapallo + Melisa</td></tr>
+                                    <tr style="border-bottom: 1.5px solid #E2E8F0;"><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Martes</td><td style="padding: 8px 10px; font-weight: 600;">Omelette con espinaca</td><td style="padding: 8px 10px; font-weight: 600;">Pescado con verduras salteadas</td><td style="padding: 8px 10px; font-weight: 600;">Sopa clara + Boldo</td></tr>
+                                    <tr style="border-bottom: 1.5px solid #E2E8F0;"><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Miércoles</td><td style="padding: 8px 10px; font-weight: 600;">Smoothie verde detox</td><td style="padding: 8px 10px; font-weight: 600;">Guiso de lentejas con tomate</td><td style="padding: 8px 10px; font-weight: 600;">Tarta verdura + Menta</td></tr>
+                                    <tr style="border-bottom: 1.5px solid #E2E8F0;"><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Jueves</td><td style="padding: 8px 10px; font-weight: 600;">Tostadas palta y té</td><td style="padding: 8px 10px; font-weight: 600;">Pavo al jugo con camote</td><td style="padding: 8px 10px; font-weight: 600;">Sopa repollo + Cedrón</td></tr>
+                                    <tr style="border-bottom: 1.5px solid #E2E8F0;"><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Viernes</td><td style="padding: 8px 10px; font-weight: 600;">Huevos revueltos cherry</td><td style="padding: 8px 10px; font-weight: 600;">Salmón u atún con ensalada</td><td style="padding: 8px 10px; font-weight: 600;">Crema espárragos + Melisa</td></tr>
+                                    <tr style="border-bottom: 1.5px solid #E2E8F0;"><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Sábado</td><td style="padding: 8px 10px; font-weight: 600;">Bowl fruta de bajo IG</td><td style="padding: 8px 10px; font-weight: 600;">Charquicán saludable carne magra</td><td style="padding: 8px 10px; font-weight: 600;">Tortilla verdura + Infusión</td></tr>
+                                    <tr><td style="padding: 8px 10px; font-weight: 900; color: #000000;">Domingo</td><td style="padding: 8px 10px; font-weight: 600;">Infusión digestiva + palta</td><td style="padding: 8px 10px; font-weight: 600;">Pollo arvejado con verdes</td><td style="padding: 8px 10px; font-weight: 600;">Consomé + Té ancestral</td></tr>
                                 </tbody>
                             </table>
                         </div>
 
                         <!-- Fichas Visuales de Ejercicio en PDF (Inspiradas en guia de ejersicios.jpg) -->
-                        <div style="margin-top: 16px;">
-                            <strong style="color: #52796F; font-size: 12px; display: block; margin-bottom: 8px; font-weight: bold; font-family: Arial, sans-serif;">🏋️‍♀️ GUÍA VISUAL DE EJERCICIOS ADAPTADOS (4 FASES):</strong>
+                        <div style="margin-top: 20px;">
+                            <strong style="color: #52796F; font-size: 14px; display: block; margin-bottom: 12px; font-weight: 900; font-family: Arial, sans-serif;">🏋️‍♀️ GUÍA VISUAL DE EJERCICIOS ADAPTADOS EN CASA (4 FASES):</strong>
                             
                             <!-- FASE 1 -->
-                            <div style="background-color: #F0F7F4; border: 1.5px solid #52796F; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
-                                <div style="display: table; width: 100%; border-bottom: 1px solid #84A59D; padding-bottom: 4px; margin-bottom: 6px;">
-                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #2F3E46;">
+                            <div style="background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                                <div style="display: table; width: 100%; border-bottom: 1.5px solid #84A59D; padding-bottom: 6px; margin-bottom: 8px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #1A202C;">
                                         🌅 1️⃣ CALENTAMIENTO & MOVILIDAD (5 MIN)
                                     </div>
-                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #52796F;">
+                                    <div style="display: table-cell; text-align: right; font-size: 11px; font-weight: 900; color: #52796F;">
                                         FASE 1 • PREPARACIÓN
                                     </div>
                                 </div>
-                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5;">
-                                    <b>• Movilidad Articular:</b> Rotación suave de hombros, cuello y tobillos (10 giros por lado).<br>
-                                    <b>• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas al ritmo corporal.
+                                <p style="font-size: 13px; color: #1A202C; margin: 0; line-height: 1.6; font-weight: 600;">
+                                    <b style="color: #000000;">• Movilidad Articular:</b> Rotación suave de hombros, cuello y tobillos (10 giros por lado).<br>
+                                    <b style="color: #000000;">• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas al ritmo corporal.
                                 </p>
                             </div>
 
                             <!-- FASE 2 -->
-                            <div style="background-color: #EBF8FF; border: 1.5px solid #3182CE; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
-                                <div style="display: table; width: 100%; border-bottom: 1px solid #63B3ED; padding-bottom: 4px; margin-bottom: 6px;">
-                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #1A365D;">
+                            <div style="background-color: #EBF8FF; border: 2px solid #3182CE; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                                <div style="display: table; width: 100%; border-bottom: 1.5px solid #63B3ED; padding-bottom: 6px; margin-bottom: 8px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #1A365D;">
                                         🏋️‍♀️ 2️⃣ CIRCUITO PRINCIPAL — ${rutinaTipo.toUpperCase()}
                                     </div>
-                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #2B6CB0;">
+                                    <div style="display: table-cell; text-align: right; font-size: 11px; font-weight: 900; color: #2B6CB0;">
                                         ${rutinaBadgeText.toUpperCase()}
                                     </div>
                                 </div>
-                                <p style="font-size: 11px; color: #1A202C; margin: 0; line-height: 1.5;">
-                                    ${rutinaTipo.includes('Silla') ? '<b>🪑 Ejercicios Adaptados en Silla (4 Series):</b><br>• 12 Elevaciones de rodilla sentado erguido<br>• 10 Press de hombros con mancuernas ligeras o botellas de agua<br>• 12 Giros de tronco suaves para movilidad lumbar<br>• 10 Extensiones de pierna asistida en silla' : rutinaTipo.includes('Metabólica') || rutinaTipo.includes('Adaptada') ? '<b>🩺 Cardio & Fuerza Adaptada (4 Rondas):</b><br>• 12 Sentadillas asistidas en silla o barra<br>• 10 Flexiones de brazos apoyado en pared<br>• 30 Segundos de caminata activa con elevación de rodillas<br>• 12 Extensiones de cadera de pie con sostén' : rutinaTipo.includes('HIIT') ? '<b>⚡ Cardio HIIT Alto Rendimiento (4 Rondas):</b><br>• 30s Mountain Climbers (Escaladores en suelo)<br>• 30s Jumping Jacks (Saltos de títere)<br>• 30s Zancadas alternadas estables<br>• 30s Descanso activo con respiración' : '<b>🪵 Plancha & Fuerza Core Intermedio (4 Rondas):</b><br>• 15 Sentadillas libres profundas a 90°<br>• 10 Flexiones de brazos en pared o mat<br>• 30 Segundos de plancha isométrica abdominal<br>• 12 Zancadas estáticas por pierna'}
+                                <p style="font-size: 13px; color: #1A202C; margin: 0; line-height: 1.6; font-weight: 600;">
+                                    ${rutinaTipo.includes('Silla') ? '<b style="color: #000000;">📌 Ejercicios Adaptados en Silla (4 Series):</b><br>• 12 Elevaciones de rodilla sentado.<br>• 10 Press de hombros con mancuernas ligeras o botellas de agua.<br>• 12 Giros de tronco suaves.<br>• 10 Extensiones de pierna asistida.' : rutinaTipo.includes('Metabólica') ? '<b style="color: #000000;">📌 Cardio & Fuerza Adaptada (4 Rondas):</b><br>• 12 Sentadillas asistidas.<br>• 10 Flexiones en pared.<br>• 30 Segundos de caminata activa con rodillas elevadas.<br>• 12 Extensiones de cadera.' : rutinaTipo.includes('HIIT') ? '<b style="color: #000000;">📌 HIIT Metabólico (4 Rondas):</b><br>• 30s Mountain Climbers.<br>• 30s Jumping Jacks.<br>• 30s Zancadas alternadas.<br>• 30s Descanso activo.' : '<b style="color: #000000;">📌 Plancha & Fuerza Core (4 Rondas):</b><br>• 15 Sentadillas libres a 90°.<br>• 10 Flexiones en pared o mat.<br>• 30 Segundos de plancha isométrica abdominal.<br>• 12 Zancadas estáticas.'}
                                 </p>
                             </div>
 
                             <!-- FASE 3 -->
-                            <div style="background-color: #F0F7F4; border: 1.5px solid #52796F; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
-                                <div style="display: table; width: 100%; border-bottom: 1px solid #84A59D; padding-bottom: 4px; margin-bottom: 6px;">
-                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #2F3E46;">
-                                        🪵 3️⃣ CORE & ESTABILIDAD (8 MIN)
+                            <div style="background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                                <div style="display: table; width: 100%; border-bottom: 1.5px solid #84A59D; padding-bottom: 6px; margin-bottom: 8px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #1A202C;">
+                                        🪵 3️⃣ CORE & ESTABILIDAD ZONA MEDIA (8 MIN)
                                     </div>
-                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #52796F;">
-                                        FASE 3 • ZONA MEDIA
+                                    <div style="display: table-cell; text-align: right; font-size: 11px; font-weight: 900; color: #52796F;">
+                                        FASE 3 • FORTALECIMIENTO
                                     </div>
                                 </div>
-                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5;">
-                                    <b>• Puente de Glúteos:</b> 3 series de 12 repeticiones en mat o colchoneta.<br>
-                                    <b>• Activación Abdominal:</b> Contracción isométrica de transverso abdominal con respiración diafragmática.
+                                <p style="font-size: 13px; color: #1A202C; margin: 0; line-height: 1.6; font-weight: 600;">
+                                    <b style="color: #000000;">• Puentes de Glúteo:</b> 3 series de 12 repeticiones en colchoneta o cama.<br>
+                                    <b style="color: #000000;">• Activación Abdominal:</b> Respiración diafragmática isométrica sosteniendo la contracción 5 segundos.
                                 </p>
                             </div>
 
                             <!-- FASE 4 -->
-                            <div style="background-color: #F0F7F4; border: 1.5px solid #52796F; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; font-family: Arial, sans-serif;">
-                                <div style="display: table; width: 100%; border-bottom: 1px solid #84A59D; padding-bottom: 4px; margin-bottom: 6px;">
-                                    <div style="display: table-cell; text-align: left; font-size: 12px; font-weight: bold; color: #2F3E46;">
-                                        🧘‍♀️ 4️⃣ ENFRIAMIENTO & FLEXIBILIDAD (5 MIN)
+                            <div style="background-color: #FFF5F5; border: 2px solid #E53E3E; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                                <div style="display: table; width: 100%; border-bottom: 1.5px solid #FEB2B2; padding-bottom: 6px; margin-bottom: 8px;">
+                                    <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #742A2A;">
+                                        🧘‍♀️ 4️⃣ ENFRIAMIENTO & ESTIRAMIENTO LUMBARR (5 MIN)
                                     </div>
-                                    <div style="display: table-cell; text-align: right; font-size: 10px; font-weight: bold; color: #52796F;">
+                                    <div style="display: table-cell; text-align: right; font-size: 11px; font-weight: 900; color: #C53030;">
                                         FASE 4 • RECUPERACIÓN
                                     </div>
                                 </div>
-                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5;">
-                                    <b>• Estiramiento Sostenido:</b> Isquiotibiales, cuadriceps y zona lumbar.<br>
-                                    <b>• Instrucción Técnica:</b> Mantener cada postura durante 20 segundos sin rebotar para liberar tensión muscular.
+                                <p style="font-size: 13px; color: #1A202C; margin: 0; line-height: 1.6; font-weight: 600;">
+                                    <b style="color: #000000;">• Estiramiento Sostenido:</b> Flexión suave hacia isquiotibiales, cuadriceps y zona lumbar sin rebotar.<br>
+                                    <b style="color: #000000;">• Duración:</b> Mantener cada postura durante 20 segundos acompañando con inhalación profunda.
                                 </p>
                             </div>
                         </div>
                     </div>
+
                     <!-- FOOTER LEGAL CENTRADO -->
-                    <div style="text-align: center; border-top: 1.5px dashed #CBD5E0; padding-top: 10px; font-size: 8px; color: #A0AEC0; line-height: 1.4; margin-top: 10px;">
-                        <p style="margin: 0; font-weight: bold; color: #52796F;">© 2026 LAWENMOLL Chile. Registro Clínico y Ecosistema de Salud Integrativa Protegido.</p>
-                        <p style="margin: 2px 0 0 0; font-weight: 600;">Documento emitido y encriptado bajo la Ley Marco de Ciberseguridad N° 21.663.</p>
+                    <div style="text-align: center; border-top: 2px dashed #CBD5E0; padding-top: 14px; font-size: 10px; color: #4A5568; line-height: 1.5; margin-top: 15px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                        <p style="margin: 0; font-weight: 900; color: #52796F;">© 2026 LAWENMOLL Chile. Registro Clínico y Ecosistema de Salud Integrativa Protegido.</p>
+                        <p style="margin: 3px 0 0 0; font-weight: bold;">Documento emitido y encriptado bajo la Ley Marco de Ciberseguridad N° 21.663.</p>
                     </div>
                 </div>
             </div>
@@ -2151,27 +2192,20 @@ function initBookingPanel() {
             filename:     filenameText,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { 
-                scale: 2, 
+                scale: 2.5, 
                 useCORS: true, 
-                logging: false,
-                letterRendering: true,
-                allowTaint: true,
                 scrollY: 0, 
                 scrollX: 0, 
-                windowWidth: 750, 
-                width: 750,
-                x: 0,
-                y: 0,
+                windowWidth: 794, 
+                width: 794,
                 onclone: function(clonedDoc) {
-                    clonedDoc.body.style.width = '750px';
-                    clonedDoc.body.style.minWidth = '750px';
-                    clonedDoc.body.style.maxWidth = '750px';
+                    clonedDoc.body.style.width = '794px';
+                    clonedDoc.body.style.minWidth = '794px';
                     clonedDoc.body.style.display = 'block';
                     clonedDoc.body.style.margin = '0';
                     clonedDoc.body.style.padding = '0';
-                    clonedDoc.documentElement.style.width = '750px';
-                    clonedDoc.documentElement.style.minWidth = '750px';
-                    clonedDoc.documentElement.style.maxWidth = '750px';
+                    clonedDoc.documentElement.style.width = '794px';
+                    clonedDoc.documentElement.style.minWidth = '794px';
                 }
             },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -2180,6 +2214,7 @@ function initBookingPanel() {
         wrapper.appendChild(element);
         document.documentElement.appendChild(wrapper);
 
+        // Wait for all images to complete loading to prevent missing logo on mobile slow networks
         const imgs = element.querySelectorAll('img');
         const promises = Array.from(imgs).map(img => {
             if (img.complete) return Promise.resolve();
@@ -2192,28 +2227,23 @@ function initBookingPanel() {
         Promise.all(promises).then(() => {
             setTimeout(() => {
                 html2pdf().from(element).set(opt).save().then(() => {
-                    overlay.style.transition = 'opacity 0.4s ease';
-                    overlay.style.opacity = '0';
-                    setTimeout(() => {
-                        if (wrapper && wrapper.parentNode) document.documentElement.removeChild(wrapper);
-                        if (overlay && overlay.parentNode) document.body.removeChild(overlay);
-                        document.body.style.width = originalBodyWidth;
-                        document.documentElement.style.width = originalHtmlWidth;
-                        document.body.style.margin = originalBodyMargin;
-                        document.body.style.padding = originalBodyPadding;
-                        document.body.style.position = originalBodyPosition;
-                        document.body.style.left = originalBodyLeft;
-                        document.body.style.top = originalBodyTop;
-                        window.scrollTo(currentScrollX, currentScrollY);
-                        document.documentElement.style.scrollBehavior = htmlStyle;
-                        document.body.style.scrollBehavior = bodyStyle;
-                    }, 400);
+                    document.documentElement.removeChild(wrapper);
+                    document.body.removeChild(overlay);
+                    // Restaurar estilos de layout originales
+                    document.body.style.width = originalBodyWidth;
+                    document.documentElement.style.width = originalHtmlWidth;
+                    document.body.style.margin = originalBodyMargin;
+                    document.body.style.padding = originalBodyPadding;
+                    document.body.style.position = originalBodyPosition;
+                    document.body.style.left = originalBodyLeft;
+                    document.body.style.top = originalBodyTop;
+                    window.scrollTo(currentScrollX, currentScrollY);
+                    document.documentElement.style.scrollBehavior = htmlStyle;
+                    document.body.style.scrollBehavior = bodyStyle;
                 });
-            }, 1800);
+            }, 500);
         });
-    }
-
-    async function saveTestData() {
+    }async function saveTestData() {
         if (supabaseKey === '') {
             console.warn('⚠️ Base de Datos: No se han guardado los datos porque no has pegado tu llave ANON de Supabase.');
             return;
@@ -2398,7 +2428,7 @@ function initBookingPanel() {
 
                 let movCardsHtml = `
                     <!-- FASE 1 -->
-                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
+                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-2 shadow-sm">
                         <div class="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
                             <span class="font-extrabold text-xs text-emerald-900 flex items-center gap-1.5">
                                 <span>🌅</span> 1️⃣ Calentamiento & Movilidad (5 Min)
@@ -2407,83 +2437,66 @@ function initBookingPanel() {
                         </div>
                         <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
                             <li><b>• Movilidad Articular:</b> Rotación suave de hombros, cuello y tobillos (10 giros por lado).</li>
-                            <li><b>• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas al ritmo del cuerpo.</li>
+                            <li><b>• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas.</li>
                         </ul>
+                        <button onclick="openExerciseVideo('${rutinaTipo}', 'Calentamiento')" class="w-full mt-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow-sm transition">
+                            <i class="fa-solid fa-circle-play text-sm"></i>
+                            <span>▶️ Ver Video: Calentamiento Guiado</span>
+                        </button>
                     </div>
 
                     <!-- FASE 2: CIRCUITO PRINCIPAL -->
-                    <div class="border-2 border-blue-200 bg-blue-50/60 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
+                    <div class="border-2 border-blue-200 bg-blue-50/60 p-3.5 rounded-2xl space-y-2 shadow-sm">
                         <div class="flex items-center justify-between border-b border-blue-200/80 pb-1.5">
                             <span class="font-extrabold text-xs text-blue-950 flex items-center gap-1.5">
                                 <span>🏋️‍♀️</span> 2️⃣ Circuito Principal (${rutinaTipo})
                             </span>
-                            <span class="text-[9.5px] bg-blue-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">${rutinaBadgeText}</span>
+                            <span class="text-[9.5px] bg-blue-700 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">${rutinaBadgeText}</span>
                         </div>
-                        <div class="text-[11px] text-gray-800 font-medium leading-relaxed space-y-1">
-                            ${rutinaTipo.includes('Silla') ? `
-                                <p class="font-bold text-blue-900 mb-1">🪑 Rutina Adaptada en Silla (4 Series):</p>
-                                <ul class="list-disc list-inside space-y-0.5">
-                                    <li><b>12 Elevaciones de rodilla</b> sentado erguido.</li>
-                                    <li><b>10 Press de hombros</b> con mancuernas ligeras o botellas.</li>
-                                    <li><b>12 Giros de tronco suaves</b> para liberar tensión lumbar.</li>
-                                    <li><b>10 Extensiones de pierna</b> asistida en silla.</li>
-                                </ul>
-                            ` : rutinaTipo.includes('Metabólica') || rutinaTipo.includes('Adaptada') ? `
-                                <p class="font-bold text-blue-900 mb-1">🩺 Cardio & Fuerza Adaptada (4 Rondas):</p>
-                                <ul class="list-disc list-inside space-y-0.5">
-                                    <li><b>12 Sentadillas asistidas</b> en silla o barra.</li>
-                                    <li><b>10 Flexiones de brazos</b> apoyado en pared.</li>
-                                    <li><b>30s Caminata activa</b> con elevación de rodillas.</li>
-                                    <li><b>12 Extensiones de cadera</b> de pie con sostén.</li>
-                                </ul>
-                            ` : rutinaTipo.includes('HIIT') ? `
-                                <p class="font-bold text-blue-900 mb-1">⚡ Cardio HIIT Alto Rendimiento (4 Rondas):</p>
-                                <ul class="list-disc list-inside space-y-0.5">
-                                    <li><b>30s Mountain Climbers</b> (Escaladores en suelo).</li>
-                                    <li><b>30s Jumping Jacks</b> (Saltos de títere).</li>
-                                    <li><b>30s Zancadas alternadas</b> estables.</li>
-                                    <li><b>30s Descanso activo</b> con respiración profunda.</li>
-                                </ul>
-                            ` : `
-                                <p class="font-bold text-blue-900 mb-1">🪵 Plancha & Fuerza Core Intermedio (4 Rondas):</p>
-                                <ul class="list-disc list-inside space-y-0.5">
-                                    <li><b>15 Sentadillas libres</b> profundas a 90°.</li>
-                                    <li><b>10 Flexiones de brazos</b> en pared o mat.</li>
-                                    <li><b>30s Plancha isométrica</b> abdominal.</li>
-                                    <li><b>12 Zancadas estáticas</b> por pierna.</li>
-                                </ul>
-                            `}
-                        </div>
+                        <ul class="text-[11px] text-gray-800 font-medium leading-relaxed space-y-1.5">
+                            ${rutinaTipo.includes('Silla') ? '<li><b>• Ejercicios en Silla:</b> 4 series de 12 elevaciones de rodilla sentado, 10 press de hombros con mancuernas/botellas de agua, 12 giros suaves de tronco y 10 extensiones de pierna asistidas.</li>' : rutinaTipo.includes('Metabólica') ? '<li><b>• Cardio & Fuerza Adaptada:</b> 4 rondas de 12 sentadillas asistidas, 10 flexiones de brazos en pared, 30 segundos de caminata con elevación de rodillas y 12 extensiones de cadera.</li>' : rutinaTipo.includes('HIIT') ? '<li><b>• HIIT Metabólico:</b> 4 rondas de 30s Mountain Climbers, 30s Jumping Jacks, 30s Zancadas alternadas y 30s Descanso activo.</li>' : '<li><b>• Plancha & Fuerza Core:</b> 4 rondas de 15 sentadillas libres a 90°, 10 flexiones en pared/mat, 30 segundos de plancha isométrica abdominal y 12 zancadas estáticas.</li>'}
+                        </ul>
+                        <button onclick="openExerciseVideo('${rutinaTipo}', 'Circuito Principal')" class="w-full mt-1 bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow transition">
+                            <i class="fa-solid fa-circle-play text-sm"></i>
+                            <span>▶️ Ver Video: Entrena en Casa (${rutinaBadgeText})</span>
+                        </button>
                     </div>
 
                     <!-- FASE 3 -->
-                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
-                        <div class="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
-                            <span class="font-extrabold text-xs text-emerald-900 flex items-center gap-1.5">
-                                <span>🪵</span> 3️⃣ Core & Estabilidad (8 Min)
+                    <div class="border-2 border-indigo-100 bg-indigo-50/50 p-3.5 rounded-2xl space-y-2 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-indigo-200/60 pb-1.5">
+                            <span class="font-extrabold text-xs text-indigo-950 flex items-center gap-1.5">
+                                <span>🪵</span> 3️⃣ Core & Estabilidad Postural (8 Min)
                             </span>
-                            <span class="text-[9.5px] bg-emerald-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 3</span>
+                            <span class="text-[9.5px] bg-indigo-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 3</span>
                         </div>
                         <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
-                            <li><b>• Puente de Glúteos:</b> 3 series de 12 repeticiones en mat o colchoneta.</li>
-                            <li><b>• Activación Abdominal:</b> Contracción isométrica de transverso abdominal con respiración diafragmática.</li>
+                            <li><b>• Puentes de Glúteo:</b> 3 series de 12 repeticiones en colchoneta o cama firme.</li>
+                            <li><b>• Control Abdominal:</b> Activación isométrica con respiración diafragmática profunda.</li>
                         </ul>
+                        <button onclick="openExerciseVideo('${rutinaTipo}', 'Core y Estabilidad')" class="w-full mt-1 bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow-sm transition">
+                            <i class="fa-solid fa-circle-play text-sm"></i>
+                            <span>▶️ Ver Video: Core & Postura</span>
+                        </button>
                     </div>
 
                     <!-- FASE 4 -->
-                    <div class="border-2 border-emerald-100 bg-emerald-50/50 p-3.5 rounded-2xl space-y-1.5 shadow-sm">
-                        <div class="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
-                            <span class="font-extrabold text-xs text-emerald-900 flex items-center gap-1.5">
-                                <span>🧘‍♀️</span> 4️⃣ Enfriamiento & Flexibilidad (5 Min)
+                    <div class="border-2 border-teal-100 bg-teal-50/50 p-3.5 rounded-2xl space-y-2 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-teal-200/60 pb-1.5">
+                            <span class="font-extrabold text-xs text-teal-950 flex items-center gap-1.5">
+                                <span>🧘‍♀️</span> 4️⃣ Enfriamiento & Estiramiento (5 Min)
                             </span>
-                            <span class="text-[9.5px] bg-emerald-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 4</span>
+                            <span class="text-[9.5px] bg-teal-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 4</span>
                         </div>
                         <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
-                            <li><b>• Estiramiento Sostenido:</b> Isquiotibiales, cuadriceps y zona lumbar.</li>
-                            <li><b>• Instrucción Técnica:</b> Mantener cada postura durante 20 segundos sin rebotar para liberar tensión muscular.</li>
+                            <li><b>• Estiramiento Lumbar e Isquiotibial:</b> Mantener cada postura durante 20 segundos.</li>
+                            <li><b>• Normalización del Pulso:</b> Respiración profunda guiada para volver a la calma.</li>
                         </ul>
-                    </div>
-                `;
+                        <button onclick="openExerciseVideo('${rutinaTipo}', 'Estiramiento')" class="w-full mt-1 bg-teal-700 hover:bg-teal-800 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow-sm transition">
+                            <i class="fa-solid fa-circle-play text-sm"></i>
+                            <span>▶️ Ver Video: Estiramientos Guiados</span>
+                        </button>
+                    </div>`;
 
                 const resMovCardsEl = document.getElementById('resMovCards');
                 if (resMovCardsEl) { resMovCardsEl.innerHTML = movCardsHtml; }
@@ -2491,6 +2504,44 @@ function initBookingPanel() {
             nextStep('Result');
     }, 1800);
     }
+
+    
+    function openExerciseVideo(type, phase) {
+        const modal = document.getElementById('exerciseVideoModal');
+        const iframe = document.getElementById('videoIframe');
+        const title = document.getElementById('videoModalTitle');
+        const tips = document.getElementById('videoModalTips');
+        
+        let videoUrl = "https://www.youtube.com/embed/ub36RUrX8lA?autoplay=1";
+        let tipText = "Sigue la postura demostrada en el video a tu propio ritmo. Mantén una respiración profunda e hidratación constante.";
+
+        if (type.includes('Silla')) {
+            videoUrl = "https://www.youtube.com/embed/5a2U9S4i1d0?autoplay=1";
+            tipText = "📌 Ejercicios en Silla: Mantén la espalda firme sobre el respaldo, levanta las rodillas suavemente y respira a ritmo controlado.";
+        } else if (type.includes('HIIT')) {
+            videoUrl = "https://www.youtube.com/embed/ml6cT4AZdqI?autoplay=1";
+            tipText = "⚡ HIIT Metabólico: Realiza los intervalos con energía, haciendo pausas activas cuando lo necesites.";
+        } else if (type.includes('Metabólica')) {
+            videoUrl = "https://www.youtube.com/embed/gC_L9qAHVJ8?autoplay=1";
+            tipText = "🩺 Cardio & Fuerza Adaptada: Mantén un ritmo sostenido de bajo impacto para proteger tus articulaciones.";
+        } else {
+            videoUrl = "https://www.youtube.com/embed/ub36RUrX8lA?autoplay=1";
+            tipText = "🪵 Plancha & Fuerza Core: Contrae el abdomen sin contener la respiración para mantener la columna alineada.";
+        }
+
+        if (title) title.innerText = `Rutina Guiada: ${type} (${phase})`;
+        if (tips) tips.innerText = tipText;
+        if (iframe) iframe.src = videoUrl;
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeExerciseVideo() {
+        const modal = document.getElementById('exerciseVideoModal');
+        const iframe = document.getElementById('videoIframe');
+        if (iframe) iframe.src = "";
+        if (modal) modal.classList.add('hidden');
+    }
+
 
     function showPartnerDetails(partnerType) {
         document.querySelectorAll('.partner-content').forEach(content => {
