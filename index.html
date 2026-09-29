@@ -1971,7 +1971,7 @@ function initBookingPanel() {
         window.scrollTo(0, 0);
 
         const wrapper = document.createElement('div');
-        wrapper.style.position = 'absolute';
+        wrapper.style.position = 'fixed';
         wrapper.style.left = '0';
         wrapper.style.top = '0';
         wrapper.style.width = '794px';
@@ -1980,7 +1980,7 @@ function initBookingPanel() {
         wrapper.style.display = 'block';
         wrapper.style.margin = '0';
         wrapper.style.padding = '0';
-        wrapper.style.textAlign = 'left';
+        wrapper.style.textAlign = 'center';
         wrapper.style.background = '#FAF8F5';
         wrapper.style.zIndex = '99999998';
 
@@ -1990,6 +1990,7 @@ function initBookingPanel() {
         element.style.width = "794px";
         element.style.minWidth = "794px";
         element.style.maxWidth = "794px";
+        element.style.margin = "0 auto";
         element.style.background = "#FAF8F5";
         element.style.boxSizing = "border-box";
 
@@ -2188,20 +2189,23 @@ function initBookingPanel() {
         const filenameText = isFreeOnly ? `LAWENMOLL_Pauta_${period.toUpperCase()}_SecretosMilenarios_${selections.firstName}_${selections.lastName}.pdf` : `LAWENMOLL_Pauta_Clinica_${selections.firstName}_${selections.lastName}.pdf`;
 
         const opt = {
-            margin:       [10, 10, 10, 10],
+            margin:       0,
             filename:     filenameText,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { 
-                scale: 2.5, 
+                scale: 2, 
                 useCORS: true, 
                 scrollY: 0, 
                 scrollX: 0, 
+                x: 0,
+                y: 0,
                 windowWidth: 794, 
                 width: 794,
                 onclone: function(clonedDoc) {
                     clonedDoc.body.style.width = '794px';
                     clonedDoc.body.style.minWidth = '794px';
-                    clonedDoc.body.style.display = 'block';
+                    clonedDoc.body.style.display = 'flex';
+                    clonedDoc.body.style.justifyContent = 'center';
                     clonedDoc.body.style.margin = '0';
                     clonedDoc.body.style.padding = '0';
                     clonedDoc.documentElement.style.width = '794px';
@@ -2643,7 +2647,7 @@ function initBookingPanel() {
         window.scrollTo(0, 0);
 
         const wrapper = document.createElement('div');
-        wrapper.style.position = 'absolute';
+        wrapper.style.position = 'fixed';
         wrapper.style.left = '0';
         wrapper.style.top = '0';
         wrapper.style.width = '400px';
@@ -2652,7 +2656,7 @@ function initBookingPanel() {
         wrapper.style.display = 'block';
         wrapper.style.margin = '0';
         wrapper.style.padding = '0';
-        wrapper.style.textAlign = 'left';
+        wrapper.style.textAlign = 'center';
         wrapper.style.background = '#FAF8F5';
         wrapper.style.zIndex = '99999998';
 
