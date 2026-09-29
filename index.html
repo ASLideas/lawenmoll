@@ -511,6 +511,21 @@
                                 <input type="checkbox" value="Enfermedad Autoinmune" onchange="updateSelectedChronical()" class="accent-forest w-4 h-4">
                                 <span>🛡️ Enfermedad Autoinmune</span>
                             </label>
+                            <label class="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-gray-100 cursor-pointer text-xs font-semibold shadow-sm">
+                                <input type="checkbox" value="Intolerancia a la Lactosa" onchange="updateSelectedChronical()" class="accent-forest w-4 h-4">
+                                <span>🥛 Intolerancia a la Lactosa</span>
+                            </label>
+                            <label class="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-gray-100 cursor-pointer text-xs font-semibold shadow-sm">
+                                <input type="checkbox" value="Celiaquía / Sin TACC" onchange="updateSelectedChronical()" class="accent-forest w-4 h-4">
+                                <span>🌾 Celiaquía (Sin Gluten / TACC)</span>
+                            </label>
+                            <label class="flex flex-col space-y-2 bg-white p-2.5 rounded-xl border border-gray-100 cursor-pointer text-xs font-semibold shadow-sm">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" id="otherChronicCheck" onchange="toggleOtherChronicInput(); updateSelectedChronical();" class="accent-forest w-4 h-4">
+                                    <span>✏️ Otra enfermedad o condición (Escribir)</span>
+                                </div>
+                                <input type="text" id="otherChronicInput" oninput="updateSelectedChronical()" placeholder="Ej: Fibromialgia, Psoriasis, Hígado Graso..." class="hidden w-full border border-gray-200 p-2 rounded-lg text-xs mt-1 focus:border-forest focus:outline-none">
+                            </label>
                         </div>
                     </div>
 
@@ -1589,9 +1604,30 @@
         document.getElementById('btnToStep4').style.opacity = 1;
     }
 
+    function toggleOtherChronicInput() {
+        const chk = document.getElementById('otherChronicCheck');
+        const inp = document.getElementById('otherChronicInput');
+        if (chk && inp) {
+            if (chk.checked) {
+                inp.classList.remove('hidden');
+            } else {
+                inp.classList.add('hidden');
+                inp.value = '';
+            }
+        }
+    }
+
     function updateSelectedChronical() {
         const checkboxes = document.querySelectorAll('#chronicOptionsContainer input:checked');
-        selections.selectedChronical = Array.from(checkboxes).map(c => c.value);
+        let vals = Array.from(checkboxes).map(c => c.value).filter(v => v !== 'on');
+        const chk = document.getElementById('otherChronicCheck');
+        const inp = document.getElementById('otherChronicInput');
+        if (chk && chk.checked && inp && inp.value.trim() !== '') {
+            vals = vals.filter(v => !v.includes('Otra enfermedad'));
+            vals.push(inp.value.trim());
+            selections.otherChronicText = inp.value.trim();
+        }
+        selections.selectedChronical = vals;
     }
 
     function setMentalOption(val, btn) {
