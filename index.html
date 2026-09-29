@@ -870,20 +870,38 @@
                         </a>
                     </div>
 
-                    <div class="border border-gray-100 rounded-2xl p-4 shadow-sm bg-white">
-                        <div class="flex items-center space-x-2 mb-2 text-forest">
-                            <span class="text-lg">🥗</span>
-                            <h4 class="font-bold text-sm">1. Nutrición y Alimentación Limpia</h4>
+                    <!-- Módulo Visual 1: Calendario de Dieta Semanal (inspirado en alimentos.jpg y calendario dieta.jpg) -->
+                    <div class="border border-emerald-200 rounded-2xl p-4 shadow-sm bg-white space-y-3">
+                        <div class="flex items-center justify-between border-b border-emerald-100 pb-2.5">
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg shadow-sm">📅</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-slateDark">1. Calendario Semanal de Nutrición Limpia</h4>
+                                    <p class="text-[10px] text-gray-400 font-semibold">Pauta Diaria Adaptada • Lunes a Domingo con Secretos Milenarios</p>
+                                </div>
+                            </div>
+                            <span class="text-[9px] bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-lg border border-emerald-200 uppercase tracking-wider">Malla Dieta</span>
                         </div>
-                        <p class="text-xs text-gray-600 leading-relaxed" id="resNut">Cargando...</p>
+                        <div id="resNutCalendar" class="space-y-2.5">
+                            <!-- JS inyectará las fichas de dieta -->
+                        </div>
                     </div>
 
-                    <div class="border border-gray-100 rounded-2xl p-4 shadow-sm bg-white">
-                        <div class="flex items-center space-x-2 mb-2 text-forest">
-                            <span class="text-lg">💪</span>
-                            <h4 class="font-bold text-sm">2. Movimiento, Fuerza y Postura</h4>
+                    <!-- Módulo Visual 2: Guía de Ejercicios en 4 Fases (inspirado en guia de ejersicios.jpg) -->
+                    <div class="border border-blue-200 rounded-2xl p-4 shadow-sm bg-white space-y-3">
+                        <div class="flex items-center justify-between border-b border-blue-100 pb-2.5">
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg shadow-sm">🏋️‍♀️</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-slateDark">2. Guía Visual de Ejercicios (4 Fases)</h4>
+                                    <p class="text-[10px] text-gray-400 font-semibold">Rutina en Casa • Calentamiento, Circuito, Core y Enfriamiento</p>
+                                </div>
+                            </div>
+                            <span class="text-[9px] bg-blue-50 text-blue-700 font-bold px-2.5 py-1 rounded-lg border border-blue-200 uppercase tracking-wider" id="badgeRutinaTipo">Adaptada</span>
                         </div>
-                        <p class="text-xs text-gray-600 leading-relaxed" id="resMov">Cargando...</p>
+                        <div id="resMovCards" class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                            <!-- JS inyectará las fichas de ejercicio -->
+                        </div>
                     </div>
                 </div>
 
@@ -2021,21 +2039,58 @@ function initBookingPanel() {
 
                     <!-- IV. PAUTA O DERIVACIÓN -->
                     ${isFreeOnly ? `
-                    <div style="margin-bottom: 10px;">
-                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 900;">🌿 IV. PAUTA DE NUTRICIÓN, EJERCICIOS Y SECRETOS MILENARIOS (${period.toUpperCase()})</h3>
-                        <div style="font-size: 9px; line-height: 1.4;">
-                            <div style="background-color: #FAF8F5; border: 1px solid #84A59D; border-radius: 10px; padding: 9px; margin-bottom: 8px;">
-                                <strong style="color: #52796F; font-size: 9.5px;">🥗 1. Plan de Nutrición y Alimentación Limpia:</strong>
-                                <p style="margin: 3px 0 0 0; color: #2F3E46;">${period === 'semanal' ? 'Menú antiinflamatorio de 7 días: Pauta de desintoxicación rápida con vegetales de hoja verde, proteína magra, hidratación continua (2L agua/día) y eliminación total de azúcares refinados.' : period === 'mensual' ? 'Programa de 30 días de Reequilibrio Metabólico: Estructura de 4 semanas rotativas con densidad nutricional alta, ayuno intermitente suave 12/12 y reemplazo de aceites procesados por grasas saludables.' : 'Protocolo de Transformación de 90 Días: Pauta nutricional integral en 3 fases (Semana 1-4 Detox, Semana 5-8 Fortalecimiento, Semana 9-12 Consolidación habitual).'}</p>
-                            </div>
-                            <div style="background-color: #FAF8F5; border: 1px solid #84A59D; border-radius: 10px; padding: 9px; margin-bottom: 8px;">
-                                <strong style="color: #52796F; font-size: 9.5px;">💪 2. Plan de Ejercicios y Salud Activa:</strong>
-                                <p style="margin: 3px 0 0 0; color: #2F3E46;">${period === 'semanal' ? 'Rutina Express de 7 días: Caminata activa de 25 minutos diarios + 10 minutos de movilidad articular al despertar y estiramientos antes de dormir.' : period === 'mensual' ? 'Plan de 30 días de Fuerza y Movimiento: 3 sesiones semanales de fuerza corporal funcional (sentadillas, flexiones adaptadas) + 2 días de yoga/pilates en centros asociados.' : 'Programa Trimestral de Acondicionamiento Físico: Incremento progresivo de carga y resistencia muscular, supervisado con seguimiento kinesiológico de LAWENMOLL.'}</p>
-                            </div>
-                            <div style="background-color: #F4F7F5; border: 1.5px solid #52796F; border-radius: 10px; padding: 9px;">
-                                <strong style="color: #3A5F53; font-size: 9.5px;">👵 3. Receta Ancestral y Herbolaria Nativa:</strong>
-                                <p style="margin: 3px 0 0 0; color: #2F3E46;">${period === 'semanal' ? 'Infusión de Melisa y Menta piperita 30 minutos antes de dormir para inducir el descanso profundo y reducir los niveles nocturnos de cortisol.' : period === 'mensual' ? 'Extracto concentrado de Boldo con rodaja de naranja asada post-almuerzo para desinflamar el hígado y optimizar la digestión de grasas.' : 'Protocolo Herbolario Trimestral Completo: Sincronización de tinturas nativas (Melisa, Boldo y Árnica) combinadas con el seguimiento del especialista en LAWENMOLL.'}</p>
-                            </div>
+                    <div>
+                        <h3 style="color: #52796F; font-size: 10px; border-bottom: 1.5px solid #52796F; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; font-weight: 900;">🌿 IV. GUÍA VISUAL DE DIETA Y EJERCICIOS (${period.toUpperCase()})</h3>
+                        
+                        <!-- Tabla 1: Malla Semanal de Nutrición (Inspirada en calendario dieta.jpg y alimentos.jpg) -->
+                        <div style="margin-bottom: 8px;">
+                            <strong style="color: #52796F; font-size: 8.5px; display: block; margin-bottom: 3px;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 7.5px; color: #4A5568; background-color: white; border-radius: 6px; border: 1px solid #CBD5E0; box-sizing: border-box;">
+                                <thead>
+                                    <tr style="background-color: #52796F; color: white;">
+                                        <th style="padding: 3px; text-align: left; width: 14%;">Día</th>
+                                        <th style="padding: 3px; text-align: left; width: 26%;">Desayuno 🌅</th>
+                                        <th style="padding: 3px; text-align: left; width: 35%;">Almuerzo 🥗</th>
+                                        <th style="padding: 3px; text-align: left; width: 25%;">Cena & Infusión 🌙</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Lunes</td><td style="padding: 2.5px 3px;">Avena con manzana y chía</td><td style="padding: 2.5px 3px;">Plato verde: Pollo y quinua</td><td style="padding: 2.5px 3px;">Crema zapallo + Melisa</td></tr>
+                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Martes</td><td style="padding: 2.5px 3px;">Omelette con espinaca</td><td style="padding: 2.5px 3px;">Pescado con verduras salteadas</td><td style="padding: 2.5px 3px;">Sopa clara + Boldo</td></tr>
+                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Miércoles</td><td style="padding: 2.5px 3px;">Smoothie verde detox</td><td style="padding: 2.5px 3px;">Guiso de lentejas con tomate</td><td style="padding: 2.5px 3px;">Tarta verdura + Menta</td></tr>
+                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Jueves</td><td style="padding: 2.5px 3px;">Tostadas palta y té</td><td style="padding: 2.5px 3px;">Pavo al jugo con camote</td><td style="padding: 2.5px 3px;">Sopa repollo + Cedrón</td></tr>
+                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Viernes</td><td style="padding: 2.5px 3px;">Huevos revueltos cherry</td><td style="padding: 2.5px 3px;">Salmón u atún con ensalada</td><td style="padding: 2.5px 3px;">Crema espárragos + Melisa</td></tr>
+                                    <tr style="border-bottom: 1px solid #EDF2F7;"><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Sábado</td><td style="padding: 2.5px 3px;">Bowl fruta de bajo IG</td><td style="padding: 2.5px 3px;">Charquicán saludable carne magra</td><td style="padding: 2.5px 3px;">Tortilla verdura + Infusión</td></tr>
+                                    <tr><td style="padding: 2.5px 3px; font-weight: bold; color: #2F3E46;">Domingo</td><td style="padding: 2.5px 3px;">Infusión digestiva + palta</td><td style="padding: 2.5px 3px;">Pollo arvejado con verdes</td><td style="padding: 2.5px 3px;">Consomé + Té ancestral</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Tabla 2: Guía de Ejercicios en 4 Fases (Inspirada en guia de ejersicios.jpg) -->
+                        <div>
+                            <strong style="color: #52796F; font-size: 8.5px; display: block; margin-bottom: 3px;">🏋️‍♀️ GUÍA VISUAL DE EJERCICIOS (4 FASES ADAPTADAS):</strong>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 7.5px; color: #4A5568; background-color: #FAF8F5; border-radius: 6px; border: 1px solid #84A59D; box-sizing: border-box;">
+                                <tr>
+                                    <td style="padding: 4px; width: 50%; vertical-align: top; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
+                                        <strong style="color: #52796F; font-size: 8px;">1. Calentamiento (5 Min)</strong>
+                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">Rotación articular de hombros, tobillos y cuello + caminata suave en el lugar.</p>
+                                    </td>
+                                    <td style="padding: 4px; width: 50%; vertical-align: top; border-bottom: 1px solid #E2E8F0;">
+                                        <strong style="color: #52796F; font-size: 8px;">2. Circuito Principal (15-20 Min)</strong>
+                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">4 rondas adaptadas: Sentadillas libres / en silla, flexiones en pared/mat y plancha isométrica (30s).</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px; width: 50%; vertical-align: top; border-right: 1px solid #E2E8F0;">
+                                        <strong style="color: #52796F; font-size: 8px;">3. Core & Estabilidad (8 Min)</strong>
+                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">3 series de 12 puentes de glúteo + activación abdominal con respiración diafragmática.</p>
+                                    </td>
+                                    <td style="padding: 4px; width: 50%; vertical-align: top;">
+                                        <strong style="color: #52796F; font-size: 8px;">4. Enfriamiento & Estiramiento (5 Min)</strong>
+                                        <p style="margin: 1.5px 0 0 0; color: #4A5568;">Estiramiento sostenido de isquiotibiales, cuadriceps y zona lumbar (20s por postura).</p>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     ` : `
@@ -2258,11 +2313,98 @@ function initBookingPanel() {
                 const resApproachEl = document.getElementById('resApproach');
                 if (resApproachEl) { resApproachEl.innerHTML = textApproach; }
 
-                let textNut = "Plan de alimentación equilibrada limpia de " + targetCal + " kcal. Consumirás un plato distribuido en 50% verduras, 25% proteína magra y 25% carbohidratos complejos.";
-                let textMov = "Entrenamiento de tonificación muscular en casa. 4 rondas de: 15 sentadillas libres, 10 flexiones de brazos completas y 30 segundos de plancha abdominal.";
+                // Generación de Calendario de Dieta Semanal Visual (inspirado en calendario dieta.jpg y alimentos.jpg)
+                const isGlutenFree = selections.selectedChronical.includes('Celiaquía') || (selections.otherChronic && selections.otherChronic.toLowerCase().includes('celiac'));
+                const isLactoseFree = selections.selectedChronical.includes('Intolerancia Lactosa') || (selections.otherChronic && selections.otherChronic.toLowerCase().includes('lactos'));
+                const isDiabetic = selections.selectedChronical.includes('Diabetes') || (selections.otherChronic && selections.otherChronic.toLowerCase().includes('diabet'));
+
+                let dietNote = isGlutenFree ? ' 🌾 [SIN GLUTEN / SIN TACC]' : (isLactoseFree ? ' 🥛 [SIN LACTOSA]' : '');
+
+                const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+                let nutCalendarHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">`;
                 
-                document.getElementById('resNut').innerText = textNut;
-                document.getElementById('resMov').innerText = textMov;
+                const menuTemplates = [
+                    { des: 'Avena con manzana, canela y chía', alm: 'Plato verde: 50% ensalada fresca, pollo a la plancha y quinua', cen: 'Crema de zapallo con semillas de calabaza y té de Melisa' },
+                    { des: 'Omelette de 2 huevos con espinacas y té', alm: 'Pescado/Merluza al horno con verduras salteadas y arroz integral', cen: 'Sopa clara de verduras con tofu/pavo y infusión de Boldo' },
+                    { des: 'Smoothie verde de espinaca, pepino y manzana', alm: 'Guiso de lentejas con verduras y ensalada de tomate', cen: 'Tarta de verduras sin masa/harina y infusión de Menta' },
+                    { des: 'Tostadas de masa madre/pan sin gluten con palta', alm: 'Pechuga de pavo al jugo con ensalada mixta y camote', cen: 'Sopa de repollo detox con hierbas nativas' },
+                    { des: 'Huevos revueltos con tomates cherry y infusión', alm: 'Salmón o atún con ensalada de hojas verdes y aceite de oliva', cen: 'Crema de espárragos con trozos de pollo y Melisa' },
+                    { des: 'Bowl de frutas de bajo índice glucémico y nueces', alm: 'Charquicán saludable de verduras y carne magra', cen: 'Tortilla de aceleras y zanahoria con té ancestral' },
+                    { des: 'Infusión digestiva con omelette y palta', alm: 'Pollo al arvejado con abundante ensalada verde', cen: 'Consomé reconfortante con verduras y infusión relajante' }
+                ];
+
+                daysOfWeek.forEach((day, idx) => {
+                    const m = menuTemplates[idx];
+                    nutCalendarHtml += `
+                        <div class="border border-gray-100 bg-emerald-50/40 p-2.5 rounded-xl text-left space-y-1">
+                            <div class="flex items-center justify-between border-b border-emerald-100 pb-1">
+                                <span class="font-bold text-xs text-emerald-800">${day}</span>
+                                <span class="text-[9px] font-bold text-emerald-600">${targetCal} kcal${dietNote}</span>
+                            </div>
+                            <p class="text-[10px] text-gray-700"><strong>🌅 Desayuno:</strong> ${m.des}</p>
+                            <p class="text-[10px] text-gray-700"><strong>🥗 Almuerzo:</strong> ${m.alm}</p>
+                            <p class="text-[10px] text-gray-700"><strong>🌙 Cena:</strong> ${m.cen}</p>
+                        </div>
+                    `;
+                });
+                nutCalendarHtml += `</div>`;
+
+                const resNutCalEl = document.getElementById('resNutCalendar');
+                if (resNutCalEl) { resNutCalEl.innerHTML = nutCalendarHtml; }
+
+                // Generación de Guía Visual de Ejercicios en 4 Fases (inspirado en guia de ejersicios.jpg)
+                let rutinaTipo = "Plancha y Fuerza Core";
+                let rutinaBadgeText = "Nivel Intermedio";
+
+                if (selections.age >= 60 || selections.weight > 95 || selections.selectedChronical.includes('Hipertensión')) {
+                    rutinaTipo = "Silla y Bajo Impacto";
+                    rutinaBadgeText = "Cuidado Articular";
+                } else if (selections.goal === 'activate' || selections.stress === 'burnout') {
+                    rutinaTipo = "Cardio HIIT Metabólico";
+                    rutinaBadgeText = "Alto Rendimiento";
+                }
+
+                const badgeEl = document.getElementById('badgeRutinaTipo');
+                if (badgeEl) { badgeEl.innerText = rutinaTipo; }
+
+                let movCardsHtml = `
+                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-blue-900">1️⃣ Calentamiento (5 Min)</span>
+                            <span class="text-[9px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">Fase 1</span>
+                        </div>
+                        <p class="text-[10px] text-gray-600 leading-relaxed">Rotación articular de hombros, tobillos y cuello + 3 minutos de caminata suave en el lugar para elevar la temperatura corporal.</p>
+                    </div>
+
+                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-blue-900">2️⃣ Circuito Principal (${rutinaTipo})</span>
+                            <span class="text-[9px] bg-blue-600 text-white font-bold px-1.5 py-0.5 rounded">${rutinaBadgeText}</span>
+                        </div>
+                        <p class="text-[10px] text-gray-600 leading-relaxed">
+                            ${rutinaTipo.includes('Silla') ? '4 series de: 12 elevaciones de rodilla sentado, 10 press de hombros con botellas de agua y 12 giros de tronco suaves.' : rutinaTipo.includes('HIIT') ? '4 rondas de: 30s Mountain Climbers, 30s Jumping Jacks, 30s Zancadas alternadas y 30s Descanso.' : '4 rondas de: 15 sentadillas libres a 90°, 10 flexiones en pared/mat y 30 segundos de plancha abdominal.'}
+                        </p>
+                    </div>
+
+                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-blue-900">3️⃣ Core & Estabilidad (8 Min)</span>
+                            <span class="text-[9px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">Fase 3</span>
+                        </div>
+                        <p class="text-[10px] text-gray-600 leading-relaxed">3 series de 12 puentes de glúteo en colchoneta + activación abdominal isométrica con respiración diafragmática.</p>
+                    </div>
+
+                    <div class="border border-blue-100 bg-blue-50/40 p-2.5 rounded-xl space-y-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-blue-900">4️⃣ Estiramiento & Enfriamiento (5 Min)</span>
+                            <span class="text-[9px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.5 rounded">Fase 4</span>
+                        </div>
+                        <p class="text-[10px] text-gray-600 leading-relaxed">Estiramiento sostenido de isquiotibiales, cuadriceps y zona lumbar. Mantener cada posición durante 20 segundos sin rebotar.</p>
+                    </div>
+                `;
+
+                const resMovCardsEl = document.getElementById('resMovCards');
+                if (resMovCardsEl) { resMovCardsEl.innerHTML = movCardsHtml; }
             }
             nextStep('Result');
     }, 1800);
