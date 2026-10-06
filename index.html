@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -53,11 +54,30 @@
 
 <body class="text-slateDark min-h-screen flex flex-col justify-between">
 
-  <!-- PANTALLA DE CARGA / SPLASH SCREEN -->
-  <div id="lawenmoll-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.4s ease, visibility 0.4s ease;">
-    <img src="lawenmoll_logo.jpg" alt="Lawenmoll Logo" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #e8f5e9; margin-bottom: 15px;">
-    <h2 style="color: #2e7d32; font-family: system-ui, -apple-system, sans-serif; font-weight: 800; margin: 0;">LAWENMOLL</h2>
-    <p style="color: #666666; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; margin-top: 5px;">Bienestar & Salud Natural</p>
+  <!-- PANTALLA DE CARGA / SPLASH SCREEN (LOGO EN CÍRCULO HERMOSO CON ANILLO Y SOMBRA) -->
+  <style>
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.08); opacity: 0.9; }
+    }
+  </style>
+  <div id="lawenmoll-splash" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(180deg, #ffffff 0%, #f4fbf7 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999999; transition: opacity 0.4s ease, visibility 0.4s ease;">
+    <div style="position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 22px;">
+      <!-- Anillo exterior giratorio -->
+      <div style="position: absolute; width: 160px; height: 160px; border-radius: 50%; border: 2px dashed #81c784; animation: spinRing 14s linear infinite; opacity: 0.7;"></div>
+      <!-- Resplandor pulsante -->
+      <div style="position: absolute; width: 146px; height: 146px; border-radius: 50%; background: radial-gradient(circle, rgba(46,125,50,0.15) 0%, rgba(255,255,255,0) 70%); animation: pulseGlow 2.5s ease-in-out infinite;"></div>
+      <!-- Contenedor Círculo Principal Elegante del Logo -->
+      <div style="width: 132px; height: 132px; border-radius: 50%; background: #ffffff; border: 3.5px solid #2e7d32; box-shadow: 0 12px 28px -6px rgba(46, 125, 50, 0.3); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 5px; z-index: 2; position: relative;">
+        <img src="lawenmoll_logo.jpg" alt="Lawenmoll Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
+      </div>
+    </div>
+    <h2 style="color: #2e7d32; font-family: system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 23px; margin: 0; letter-spacing: 0.8px;">LAWENMOLL</h2>
+    <p style="color: #4a5568; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; margin-top: 6px; margin-bottom: 0;">Bienestar & Salud Natural</p>
   </div>
 
   <!-- MODAL DE CONSENTIMIENTO Y CIBERSEGURIDAD (LEY N° 21.663 & LEY DE PROTECCIÓN DE DATOS) -->
@@ -130,17 +150,21 @@
             <span class="font-bold text-lg md:text-xl tracking-wider text-forest">LAWENMOLL</span>
             <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
         </div>
-        <!-- Botones de Conexión -->
+        <!-- Botones de Conexión con Wellness App -->
         <div class="flex flex-wrap justify-center gap-1.5 md:gap-2">
+            <a href="https://wellness-app-eight-kohl.vercel.app/" target="_blank" class="text-[9px] md:text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-2.5 py-1.5 rounded-full transition shadow-sm flex items-center space-x-1 border border-emerald-500">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Wellness App 🎥</span>
+            </a>
             <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-bold px-2 py-1.5 rounded-full transition shadow-sm flex items-center space-x-1">
                 <i class="fa-solid fa-leaf"></i>
                 <span>Secretos 👵</span>
             </a>
             <a href="centros.html" class="text-[9px] md:text-xs bg-slateDark text-white font-bold px-2 py-1.5 rounded-full transition shadow-sm">
-                <span>Servicios y Convenios 🏢</span>
+                <span>Servicios 🏢</span>
             </a>
             <a href="terapeuta.html" class="text-[9px] md:text-xs bg-forest text-white font-bold px-2.5 py-1.5 rounded-full transition shadow-sm">
-                <span>Portal Especialistas 💼</span>
+                <span>Especialistas 💼</span>
             </a>
         </div>
     </div>
@@ -169,11 +193,26 @@
                     </p>
                 </div>
 
+                <!-- Banner Destacado Wellness App Ecosistema -->
+                <div class="bg-gradient-to-r from-emerald-50 to-teal-50 p-3.5 rounded-2xl border border-emerald-200 text-left space-y-2 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[9px] uppercase font-extrabold text-emerald-800 tracking-wider flex items-center"><i class="fa-solid fa-video mr-1 text-emerald-600"></i> Plataforma Interactiva Wellness</span>
+                        <span class="text-[8px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">EN VIVO</span>
+                    </div>
+                    <p class="text-[10px] text-gray-600 leading-relaxed font-semibold">
+                        Accede a salas virtuales interactivas, videoteca de ejercicios adaptados sin impacto y cocina demostrativa en nuestra <strong>Wellness App</strong>.
+                    </p>
+                    <a href="https://wellness-app-eight-kohl.vercel.app/" target="_blank" class="inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white text-[10px] font-bold py-2 rounded-xl transition shadow-sm space-x-1.5">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <span>Explorar Wellness App & Salas Virtuales</span>
+                    </a>
+                </div>
+
                 <!-- Afiliación Rápida B2B -->
-                <div class="bg-sage/10 p-4 rounded-2xl border border-sage/20 text-left space-y-2">
+                <div class="bg-sage/10 p-3.5 rounded-2xl border border-sage/20 text-left space-y-1.5">
                     <span class="text-[9px] uppercase font-bold text-forest tracking-wider"><i class="fa-solid fa-graduation-cap"></i> ¿Eres Profesional Titulado?</span>
                     <p class="text-[10px] text-gray-600 leading-relaxed font-semibold">
-                        Si eres profesional de la salud alternativa, profesor de cuerpo, alma y mente, únete a LAWENMOLL para agendar tus pacientes y ofrecer convenios con gimnasios y restaurantes saludables de tu zona.
+                        Únete a LAWENMOLL para agendar tus pacientes, reservar salas virtuales con Webpay y ofrecer convenios locales.
                     </p>
                 </div>
             </div>
@@ -803,19 +842,27 @@
                     <span class="text-3xl">🎥</span>
                     <div>
                         <h3 id="videoModalTitle" class="font-extrabold text-base text-gray-800">Entrena en Casa — Rutina Guiada</h3>
-                        <p id="videoModalSub" class="text-xs text-emerald-700 font-bold">LAWENMOLL • Demostración en Vivo</p>
+                        <p id="videoModalSub" class="text-xs text-emerald-700 font-bold">LAWENMOLL • Demostración en Vivo & Podcast</p>
                     </div>
                 </div>
-                <div class="aspect-video bg-slate-900 rounded-2xl overflow-hidden relative shadow-inner flex items-center justify-center border border-gray-200">
+                
+                <!-- REPRODUCTOR DE VIDEO YOUTUBE -->
+                <div id="videoPlayerContainer" class="aspect-video bg-slate-900 rounded-2xl overflow-hidden relative shadow-inner flex items-center justify-center border border-gray-200">
                     <iframe id="videoIframe" class="w-full h-full border-0" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+
+                <!-- REPRODUCTOR DE AUDIO SPOTIFY -->
+                <div id="spotifyPlayerContainer" class="hidden rounded-2xl overflow-hidden shadow-sm border border-emerald-200 bg-emerald-50/50 p-1">
+                    <iframe id="spotifyIframe" src="" width="100%" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" class="rounded-xl"></iframe>
+                </div>
+
                 <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-900 font-semibold flex items-start space-x-2.5">
                     <span class="text-lg">💡</span>
                     <p id="videoModalTips" class="leading-relaxed">Sigue la postura demostrada en el video a tu propio ritmo. Mantén una respiración profunda e hidratación constante.</p>
                 </div>
                 <button onclick="closeExerciseVideo()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl text-xs uppercase tracking-wider transition shadow-md flex items-center justify-center space-x-2">
                     <i class="fa-solid fa-check-circle text-base"></i>
-                    <span>Entendido / Cerrar Video</span>
+                    <span>Entendido / Cerrar Reproductor</span>
                 </button>
             </div>
         </div>
@@ -2014,6 +2061,8 @@ function initBookingPanel() {
 
         let contentHtml = `
             <div style="width: 794px !important; min-width: 794px !important; max-width: 794px !important; padding: 30px; box-sizing: border-box; background-color: #FAF8F5; font-family: Arial, Helvetica, sans-serif; color: #1A202C;">
+                
+                <!-- HOJA 1: INFORME CLÍNICO & EVALUACIÓN BIOMÉTRICA -->
                 <div style="width: 734px !important; min-width: 734px !important; max-width: 734px !important; margin: 0 auto; border: 2.5px solid #52796F; border-radius: 20px; padding: 28px; background-color: #FAF8F5; box-shadow: 0 4px 10px rgba(0,0,0,0.03); box-sizing: border-box;">
                     
                     <!-- ENCABEZADO CON LOGO OFICIAL LAWENMOLL -->
@@ -2036,7 +2085,7 @@ function initBookingPanel() {
                     </div>
 
                     <!-- I. ANTECEDENTES DEMOGRÁFICOS -->
-                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                    <div style="margin-bottom: 20px;">
                         <h3 style="color: #52796F; font-size: 15px; border-bottom: 2px solid #52796F; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">📋 I. Antecedentes y Demográficos</h3>
                         <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: #1A202C; background-color: white; border-radius: 12px; border: 1.5px solid #CBD5E0; table-layout: fixed; font-family: Arial, sans-serif;">
                             <tr>
@@ -2051,7 +2100,7 @@ function initBookingPanel() {
                     </div>
 
                     <!-- II. PARÁMETROS BIOMÉTRICOS -->
-                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                    <div style="margin-bottom: 20px;">
                         <h3 style="color: #52796F; font-size: 15px; border-bottom: 2px solid #52796F; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">📊 II. Parámetros Biométricos y Estilo de Vida</h3>
                         <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: #1A202C; background-color: white; border-radius: 12px; border: 1.5px solid #CBD5E0; table-layout: fixed; font-family: Arial, sans-serif;">
                             <tr>
@@ -2070,7 +2119,7 @@ function initBookingPanel() {
                     </div>
 
                     <!-- III. DIAGNÓSTICO Y ANTECEDENTES CLÍNICOS -->
-                    <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                    <div style="margin-bottom: 20px;">
                         <h3 style="color: #52796F; font-size: 15px; border-bottom: 2px solid #52796F; padding-bottom: 5px; margin-bottom: 10px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">🩺 III. Diagnóstico y Antecedentes Clínicos</h3>
                         <div style="font-size: 13px; color: #1A202C; background-color: white; padding: 12px 16px; border-radius: 12px; border: 1.5px solid #CBD5E0; line-height: 1.6; box-sizing: border-box; font-family: Arial, sans-serif;">
                             <p style="margin: 0 0 6px 0;"><strong style="color: #2F3E46;">Antecedentes Crónicos:</strong> <span style="font-weight: 900; color: #000000;">${selections.chronic ? selections.selectedChronical.join(', ') : 'Ninguno diagnosticado'}</span></p>
@@ -2078,20 +2127,62 @@ function initBookingPanel() {
                         </div>
                     </div>
 
+                    <!-- CIERRE CORPORATIVO DE HOJA 1 -->
+                    <div style="margin-top: 25px; padding: 16px; background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 14px; text-align: left; font-family: Arial, sans-serif;">
+                        <div style="display: table; width: 100%;">
+                            <div style="display: table-cell; vertical-align: middle; width: 68%;">
+                                <strong style="color: #52796F; font-size: 13px; text-transform: uppercase; display: block; margin-bottom: 4px; font-weight: 900;">🏛️ VALIDACIÓN CLÍNICA & SELLO CORPORATIVO LAWENMOLL</strong>
+                                <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5; font-weight: 600;">
+                                    Pauta elaborada bajo protocolos de Medicina Integrativa y Fitoterapia Nativa Chilena.<br>
+                                    <b>Directriz:</b> Enfoque metabólico personalizado + Ejercicios "Entrena en Casa" + Malla de Nutrición Limpia.
+                                </p>
+                            </div>
+                            <div style="display: table-cell; vertical-align: middle; text-align: right; width: 32%; border-left: 1.5px solid #84A59D; padding-left: 12px;">
+                                <p style="font-size: 11px; font-weight: 900; color: #52796F; margin: 0;">FIRMA DIGITAL SANITARIA</p>
+                                <p style="font-size: 10px; font-weight: bold; color: #2F3E46; margin: 2px 0 0 0;">Dra. Inés Nathalia Aslideas</p>
+                                <p style="font-size: 9px; color: #718096; margin: 2px 0 0 0;">Reg. SIS N° 482.109 • Chile</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 15px; font-size: 10px; color: #718096; font-weight: bold; font-family: Arial, sans-serif;">
+                        — Hoja 1 de 2 • Ver siguiente página para la Guía Visual de Dieta y Ejercicios —
+                    </div>
+                </div>
+
+                <!-- SALTO DE PÁGINA OBLIGATORIO Y LIMPIO -->
+                <div style="page-break-before: always; break-before: page; clear: both; height: 1px;"></div>
+
+                <!-- HOJA 2: GUÍA VISUAL DE DIETA SEMANAL & EJERCICIOS ADAPTADOS EN CASA -->
+                <div style="width: 734px !important; min-width: 734px !important; max-width: 734px !important; margin: 0 auto; border: 2.5px solid #52796F; border-radius: 20px; padding: 28px; background-color: #FAF8F5; box-shadow: 0 4px 10px rgba(0,0,0,0.03); box-sizing: border-box;">
+                    
+                    <!-- ENCABEZADO HOJA 2 -->
+                    <div style="display: table; width: 100%; border-bottom: 2.5px solid #52796F; padding-bottom: 12px; margin-bottom: 18px; table-layout: fixed;">
+                        <div style="display: table-cell; vertical-align: middle; text-align: left;">
+                            <div style="display: table; width: 100%;">
+                                ${header_logo_html}
+                            </div>
+                        </div>
+                        <div style="display: table-cell; vertical-align: middle; text-align: right; border-left: 2px solid #52796F; padding-left: 14px; width: 210px;">
+                            <span style="font-size: 11px; background-color: #52796F; color: white; font-weight: bold; padding: 6px 12px; border-radius: 8px; text-transform: uppercase; display: inline-block; font-family: Arial, sans-serif;">HOJA 2 DE 2</span>
+                            <p style="font-size: 10px; color: #4A5568; margin: 6px 0 0 0; font-weight: bold; font-family: Arial, sans-serif;">PAUTA DE ACCIÓN DIARIA</p>
+                        </div>
+                    </div>
+
                     <!-- IV. GUÍA VISUAL DE DIETA Y EJERCICIOS -->
                     <div style="margin-bottom: 20px; font-family: Arial, Helvetica, sans-serif;">
                         <h3 style="color: #52796F; font-size: 16px; border-bottom: 2.5px solid #52796F; padding-bottom: 6px; margin-bottom: 14px; text-transform: uppercase; font-weight: 900; font-family: Arial, sans-serif;">🌿 IV. GUÍA VISUAL DE DIETA Y EJERCICIOS ADAPTADOS (${period.toUpperCase()})</h3>
                         
-                        <!-- Tabla 1: Malla Semanal de Nutrición -->
-                        <div style="margin-bottom: 20px; page-break-inside: avoid;">
-                            <strong style="color: #52796F; font-size: 14px; display: block; margin-bottom: 8px; font-weight: 900; font-family: Arial, sans-serif;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
+                        <!-- Tabla 1: Malla Semanal de Nutrición COMPLETA Lunes a Domingo -->
+                        <div style="margin-bottom: 22px;">
+                            <strong style="color: #52796F; font-size: 14px; display: block; margin-bottom: 10px; font-weight: 900; font-family: Arial, sans-serif;">📅 CALENDARIO DE DIETA SEMANAL (LUNES A DOMINGO):</strong>
                             <table style="width: 100%; border-collapse: collapse; font-size: 12px; color: #1A202C; background-color: white; border-radius: 10px; border: 2px solid #52796F; font-family: Arial, sans-serif; box-sizing: border-box;">
                                 <thead>
                                     <tr style="background-color: #52796F; color: white;">
-                                        <th style="padding: 8px 10px; text-align: left; width: 14%; font-size: 12px; font-weight: 900;">Día</th>
-                                        <th style="padding: 8px 10px; text-align: left; width: 26%; font-size: 12px; font-weight: 900;">Desayuno 🌅</th>
-                                        <th style="padding: 8px 10px; text-align: left; width: 35%; font-size: 12px; font-weight: 900;">Almuerzo 🥗</th>
-                                        <th style="padding: 8px 10px; text-align: left; width: 25%; font-size: 12px; font-weight: 900;">Cena & Infusión 🌙</th>
+                                        <th style="padding: 9px 10px; text-align: left; width: 14%; font-size: 12px; font-weight: 900;">Día</th>
+                                        <th style="padding: 9px 10px; text-align: left; width: 26%; font-size: 12px; font-weight: 900;">Desayuno 🌅</th>
+                                        <th style="padding: 9px 10px; text-align: left; width: 35%; font-size: 12px; font-weight: 900;">Almuerzo 🥗</th>
+                                        <th style="padding: 9px 10px; text-align: left; width: 25%; font-size: 12px; font-weight: 900;">Cena & Infusión 🌙</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -2106,12 +2197,12 @@ function initBookingPanel() {
                             </table>
                         </div>
 
-                        <!-- Fichas Visuales de Ejercicio en PDF (Inspiradas en guia de ejersicios.jpg) -->
+                        <!-- Fichas Visuales de Ejercicio en PDF -->
                         <div style="margin-top: 20px;">
                             <strong style="color: #52796F; font-size: 14px; display: block; margin-bottom: 12px; font-weight: 900; font-family: Arial, sans-serif;">🏋️‍♀️ GUÍA VISUAL DE EJERCICIOS ADAPTADOS EN CASA (4 FASES):</strong>
                             
                             <!-- FASE 1 -->
-                            <div style="background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                            <div style="background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif;">
                                 <div style="display: table; width: 100%; border-bottom: 1.5px solid #84A59D; padding-bottom: 6px; margin-bottom: 8px;">
                                     <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #1A202C;">
                                         🌅 1️⃣ CALENTAMIENTO & MOVILIDAD (5 MIN)
@@ -2127,7 +2218,7 @@ function initBookingPanel() {
                             </div>
 
                             <!-- FASE 2 -->
-                            <div style="background-color: #EBF8FF; border: 2px solid #3182CE; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                            <div style="background-color: #EBF8FF; border: 2px solid #3182CE; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif;">
                                 <div style="display: table; width: 100%; border-bottom: 1.5px solid #63B3ED; padding-bottom: 6px; margin-bottom: 8px;">
                                     <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #1A365D;">
                                         🏋️‍♀️ 2️⃣ CIRCUITO PRINCIPAL — ${rutinaTipo.toUpperCase()}
@@ -2142,7 +2233,7 @@ function initBookingPanel() {
                             </div>
 
                             <!-- FASE 3 -->
-                            <div style="background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                            <div style="background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif;">
                                 <div style="display: table; width: 100%; border-bottom: 1.5px solid #84A59D; padding-bottom: 6px; margin-bottom: 8px;">
                                     <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #1A202C;">
                                         🪵 3️⃣ CORE & ESTABILIDAD ZONA MEDIA (8 MIN)
@@ -2158,10 +2249,10 @@ function initBookingPanel() {
                             </div>
 
                             <!-- FASE 4 -->
-                            <div style="background-color: #FFF5F5; border: 2px solid #E53E3E; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                            <div style="background-color: #FFF5F5; border: 2px solid #E53E3E; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; font-family: Arial, sans-serif;">
                                 <div style="display: table; width: 100%; border-bottom: 1.5px solid #FEB2B2; padding-bottom: 6px; margin-bottom: 8px;">
                                     <div style="display: table-cell; text-align: left; font-size: 14px; font-weight: 900; color: #742A2A;">
-                                        🧘‍♀️ 4️⃣ ENFRIAMIENTO & ESTIRAMIENTO LUMBARR (5 MIN)
+                                        🧘‍♀️ 4️⃣ ENFRIAMIENTO & ESTIRAMIENTO LUMBAR (5 MIN)
                                     </div>
                                     <div style="display: table-cell; text-align: right; font-size: 11px; font-weight: 900; color: #C53030;">
                                         FASE 4 • RECUPERACIÓN
@@ -2176,7 +2267,7 @@ function initBookingPanel() {
                     </div>
 
                     <!-- FOOTER LEGAL CENTRADO -->
-                    <div style="text-align: center; border-top: 2px dashed #CBD5E0; padding-top: 14px; font-size: 10px; color: #4A5568; line-height: 1.5; margin-top: 15px; font-family: Arial, sans-serif; page-break-inside: avoid;">
+                    <div style="text-align: center; border-top: 2px dashed #CBD5E0; padding-top: 14px; font-size: 10px; color: #4A5568; line-height: 1.5; margin-top: 15px; font-family: Arial, sans-serif;">
                         <p style="margin: 0; font-weight: 900; color: #52796F;">© 2026 LAWENMOLL Chile. Registro Clínico y Ecosistema de Salud Integrativa Protegido.</p>
                         <p style="margin: 3px 0 0 0; font-weight: bold;">Documento emitido y encriptado bajo la Ley Marco de Ciberseguridad N° 21.663.</p>
                     </div>
@@ -2247,8 +2338,13 @@ function initBookingPanel() {
                 });
             }, 500);
         });
-    }async function saveTestData() {
-        if (supabaseKey === '') {
+    }
+
+    
+
+
+    async function saveTestData() {
+        if (typeof _supabase === 'undefined' || !supabaseKey) {
             console.warn('⚠️ Base de Datos: No se han guardado los datos porque no has pegado tu llave ANON de Supabase.');
             return;
         }
@@ -2338,9 +2434,9 @@ function initBookingPanel() {
                 document.getElementById('resultsBlockContainer').classList.remove('hidden');
                 document.getElementById('chronicBlock').classList.remove('hidden');
                 
-                let textExplanation = "Al presentar antecedentes activos de **" + selections.selectedChronical.join(' e ') + "**, tu pauta de ejercicio automático ha sido bloqueada por motivos éticos de salud. ";
+                let textExplanation = "Al presentar antecedentes activos de **" + selections.selectedChronical.join(' e ') + "**, tu pauta de ejercicio automático ha sido adaptada con enfoque de cuidado clínico. ";
                 if (selections.selectedChronical.includes("Hipertensión")) {
-                    textExplanation += "Estabilizaremos tu salud cardiovascular usando fitoterapeutas calificados que eviten plantas que puedan elevar la tensión.";
+                    textExplanation += "Estabilizaremos tu salud cardiovascular evitando ejercicios que eleven bruscamente la presión intratorácica.";
                 } else if (selections.selectedChronical.includes("Diabetes")) {
                     textExplanation += "Se recetará una pauta nutricional de bajo índice glicémico combinada con medicina herbolaria reguladora de glucosa.";
                 } else if (selections.selectedChronical.includes("Hipotiroidismo")) {
@@ -2365,7 +2461,7 @@ function initBookingPanel() {
                 }
 
                 if (selections.stress === 'burnout') {
-                    textApproach += "Dado tu nivel de **estrés crónico / burnout**, se priorizará la derivación a terapias mente-cuerpo como clases de **Yoga Restaurativo** o meditación guiada, además de recomendar una consulta preventiva con nuestro psicólogo **Ps. Tomás Araya**. ";
+                    textApproach += "Dado tu nivel de **estrés crónico / burnout**, se priorizará la derivación a terapias mente-cuerpo como clases de **Yoga Restaurativo** o meditación guiada. ";
                 } else if (selections.stress === 'moderate') {
                     textApproach += "Para mitigar tu **estrés moderado**, sugerimos incorporar infusiones relajantes a media tarde y breves pausas de desconexión activa. ";
                 }
@@ -2373,12 +2469,11 @@ function initBookingPanel() {
                 const resApproachEl = document.getElementById('resApproach');
                 if (resApproachEl) { resApproachEl.innerHTML = textApproach; }
 
-                // Generación de Calendario de Dieta Semanal Visual (inspirado en calendario dieta.jpg y alimentos.jpg)
+                // Generación de Calendario de Dieta Semanal Visual
                 const isGlutenFree = selections.selectedChronical.includes('Celiaquía') || (selections.otherChronic && selections.otherChronic.toLowerCase().includes('celiac'));
                 const isLactoseFree = selections.selectedChronical.includes('Intolerancia Lactosa') || (selections.otherChronic && selections.otherChronic.toLowerCase().includes('lactos'));
-                const isDiabetic = selections.selectedChronical.includes('Diabetes') || (selections.otherChronic && selections.otherChronic.toLowerCase().includes('diabet'));
 
-                let dietNote = isGlutenFree ? ' 🌾 [SIN GLUTEN / SIN TACC]' : (isLactoseFree ? ' 🥛 [SIN LACTOSA]' : '');
+                let dietNote = isGlutenFree ? ' 🌾 [SIN GLUTEN]' : (isLactoseFree ? ' 🥛 [SIN LACTOSA]' : '');
 
                 const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
                 let nutCalendarHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">`;
@@ -2412,7 +2507,7 @@ function initBookingPanel() {
                 const resNutCalEl = document.getElementById('resNutCalendar');
                 if (resNutCalEl) { resNutCalEl.innerHTML = nutCalendarHtml; }
 
-                // Generación de Guía Visual de Ejercicios en 4 Fases (inspirado en guia de ejersicios.jpg)
+                // Generación de Guía Visual de Ejercicios en 4 Fases con Videos de YouTube y Podcast Spotify
                 let rutinaTipo = "Plancha y Fuerza Core";
                 let rutinaBadgeText = "Nivel Intermedio";
 
@@ -2443,10 +2538,16 @@ function initBookingPanel() {
                             <li><b>• Movilidad Articular:</b> Rotación suave de hombros, cuello y tobillos (10 giros por lado).</li>
                             <li><b>• Activación Cardíaca:</b> 3 minutos de caminata suave en el lugar elevando rodillas.</li>
                         </ul>
-                        <button onclick="openExerciseVideo('${rutinaTipo}', 'Calentamiento')" class="w-full mt-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow-sm transition">
-                            <i class="fa-solid fa-circle-play text-sm"></i>
-                            <span>▶️ Ver Video: Calentamiento Guiado</span>
-                        </button>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                            <button onclick="openExerciseVideo('${rutinaTipo}', 'Calentamiento')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-1.5 shadow-sm transition">
+                                <i class="fa-solid fa-circle-play text-xs"></i>
+                                <span>▶️ Ver Video Guiado</span>
+                            </button>
+                            <button onclick="openSpotifyAudio('Podcast Bienestar: Pausa y Respiración', '3H5tmyhNNqQeRcmKPgX4DL')" class="bg-emerald-900 hover:bg-emerald-950 text-emerald-200 font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-1.5 shadow-sm transition">
+                                <i class="fa-brands fa-spotify text-emerald-400 text-xs"></i>
+                                <span>🎙️ Escuchar en Spotify</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- FASE 2: CIRCUITO PRINCIPAL -->
@@ -2458,12 +2559,18 @@ function initBookingPanel() {
                             <span class="text-[9.5px] bg-blue-700 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">${rutinaBadgeText}</span>
                         </div>
                         <ul class="text-[11px] text-gray-800 font-medium leading-relaxed space-y-1.5">
-                            ${rutinaTipo.includes('Silla') ? '<li><b>• Ejercicios en Silla:</b> 4 series de 12 elevaciones de rodilla sentado, 10 press de hombros con mancuernas/botellas de agua, 12 giros suaves de tronco y 10 extensiones de pierna asistidas.</li>' : rutinaTipo.includes('Metabólica') ? '<li><b>• Cardio & Fuerza Adaptada:</b> 4 rondas de 12 sentadillas asistidas, 10 flexiones de brazos en pared, 30 segundos de caminata con elevación de rodillas y 12 extensiones de cadera.</li>' : rutinaTipo.includes('HIIT') ? '<li><b>• HIIT Metabólico:</b> 4 rondas de 30s Mountain Climbers, 30s Jumping Jacks, 30s Zancadas alternadas y 30s Descanso activo.</li>' : '<li><b>• Plancha & Fuerza Core:</b> 4 rondas de 15 sentadillas libres a 90°, 10 flexiones en pared/mat, 30 segundos de plancha isométrica abdominal y 12 zancadas estáticas.</li>'}
+                            ${rutinaTipo.includes('Silla') ? '<li><b>• Ejercicios en Silla:</b> 4 series de 12 elevaciones de rodilla sentado, 10 press de hombros con mancuernas/botellas de agua, 12 giros suaves de tronco y 10 extensiones de pierna asistidas.</li>' : rutinaTipo.includes('Metabólica') ? '<li><b>• Cardio & Fuerza Adaptada:</b> 4 rondas de 12 sentadillas asistidas, 10 flexiones de brazos en pared, 30 segundos de caminata con elevación de rodillas y 12 extensiones de cadera.</li>' : rutinaTipo.includes('HIIT') ? '<li><b>• HIIT Metabólico:</b> 4 rondas de 30s Mountain Climbers, 30s Jumping Jacks, 30s Zancadas alternadas y 30s Descanso activo.</li>' : '<li><b>• Plancha & Fuerza Core (Rutina en Casa):</b> 4 rondas de 15 sentadillas libres a 90°, 10 flexiones en pared/mat, 30 segundos de plancha isométrica abdominal y 12 zancadas estáticas.</li>'}
                         </ul>
-                        <button onclick="openExerciseVideo('${rutinaTipo}', 'Circuito Principal')" class="w-full mt-1 bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow transition">
-                            <i class="fa-solid fa-circle-play text-sm"></i>
-                            <span>▶️ Ver Video: Entrena en Casa (${rutinaBadgeText})</span>
-                        </button>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                            <button onclick="openExerciseVideo('${rutinaTipo}', 'Circuito Principal')" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-1.5 shadow transition">
+                                <i class="fa-solid fa-circle-play text-xs"></i>
+                                <span>▶️ Ver Video: ${rutinaBadgeText}</span>
+                            </button>
+                            <button onclick="openSpotifyAudio('Podcast Salud & Movimiento Consciente', '3H5tmyhNNqQeRcmKPgX4DL')" class="bg-slate-900 hover:bg-black text-emerald-300 font-bold py-2.5 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-1.5 shadow transition">
+                                <i class="fa-brands fa-spotify text-emerald-400 text-xs"></i>
+                                <span>🎙️ Podcast Spotify</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- FASE 3 -->
@@ -2475,12 +2582,12 @@ function initBookingPanel() {
                             <span class="text-[9.5px] bg-indigo-600 text-white font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider">Fase 3</span>
                         </div>
                         <ul class="text-[11px] text-gray-700 font-medium leading-relaxed space-y-1">
-                            <li><b>• Puentes de Glúteo:</b> 3 series de 12 repeticiones en colchoneta o cama firme.</li>
+                            <li><b>• Puentes de Glúteo & Planchas:</b> 3 series de 12 repeticiones + 30s plancha abdominal.</li>
                             <li><b>• Control Abdominal:</b> Activación isométrica con respiración diafragmática profunda.</li>
                         </ul>
                         <button onclick="openExerciseVideo('${rutinaTipo}', 'Core y Estabilidad')" class="w-full mt-1 bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-3 rounded-xl text-[11px] flex items-center justify-center space-x-2 shadow-sm transition">
                             <i class="fa-solid fa-circle-play text-sm"></i>
-                            <span>▶️ Ver Video: Core & Postura</span>
+                            <span>▶️ Ver Video: Rutina de Planchas & Core en Casa</span>
                         </button>
                     </div>
 
@@ -2509,28 +2616,35 @@ function initBookingPanel() {
     }, 1800);
     }
 
-    
     function openExerciseVideo(type, phase) {
         const modal = document.getElementById('exerciseVideoModal');
         const iframe = document.getElementById('videoIframe');
+        const spotifyContainer = document.getElementById('spotifyPlayerContainer');
+        const videoContainer = document.getElementById('videoPlayerContainer');
         const title = document.getElementById('videoModalTitle');
         const tips = document.getElementById('videoModalTips');
         
-        let videoUrl = "https://www.youtube.com/embed/ub36RUrX8lA?autoplay=1";
+        if (spotifyContainer) spotifyContainer.classList.add('hidden');
+        if (videoContainer) videoContainer.classList.remove('hidden');
+
+        let videoUrl = "https://www.youtube.com/embed/y9-_6xBgJbE?autoplay=1";
         let tipText = "Sigue la postura demostrada en el video a tu propio ritmo. Mantén una respiración profunda e hidratación constante.";
 
-        if (type.includes('Silla')) {
-            videoUrl = "https://www.youtube.com/embed/5a2U9S4i1d0?autoplay=1";
-            tipText = "📌 Ejercicios en Silla: Mantén la espalda firme sobre el respaldo, levanta las rodillas suavemente y respira a ritmo controlado.";
+        if (phase === 'Core y Estabilidad' || type.includes('Core')) {
+            videoUrl = "https://www.youtube.com/embed/y9-_6xBgJbE?autoplay=1";
+            tipText = "🪵 Plancha & Fuerza Core: Mantén la columna recta, glúteos contraídos y no contengas la respiración durante la plancha.";
+        } else if (type.includes('Silla')) {
+            videoUrl = "https://www.youtube.com/embed/9eI4HjQ0tEQ?autoplay=1";
+            tipText = "📌 Ejercicios Guiados en Casa: Mantén la espalda firme sobre el respaldo y respira suavemente en cada movimiento.";
         } else if (type.includes('HIIT')) {
-            videoUrl = "https://www.youtube.com/embed/ml6cT4AZdqI?autoplay=1";
-            tipText = "⚡ HIIT Metabólico: Realiza los intervalos con energía, haciendo pausas activas cuando lo necesites.";
+            videoUrl = "https://www.youtube.com/embed/ksi-c8YgClY?autoplay=1";
+            tipText = "⚡ HIIT Metabólico: Realiza los intervalos de alta quema con intensidad, usando las pausas para recuperar la ventilación.";
         } else if (type.includes('Metabólica')) {
-            videoUrl = "https://www.youtube.com/embed/gC_L9qAHVJ8?autoplay=1";
-            tipText = "🩺 Cardio & Fuerza Adaptada: Mantén un ritmo sostenido de bajo impacto para proteger tus articulaciones.";
+            videoUrl = "https://www.youtube.com/embed/9eI4HjQ0tEQ?autoplay=1";
+            tipText = "🩺 Cardio & Fuerza Adaptada: Ritmo fluido de bajo impacto articular para estimular el metabolismo sin sobrecargar articulaciones.";
         } else {
-            videoUrl = "https://www.youtube.com/embed/ub36RUrX8lA?autoplay=1";
-            tipText = "🪵 Plancha & Fuerza Core: Contrae el abdomen sin contener la respiración para mantener la columna alineada.";
+            videoUrl = "https://www.youtube.com/embed/9eI4HjQ0tEQ?autoplay=1";
+            tipText = "🌅 Movilidad & Estiramientos: Acompaña cada extensión con una inhalación y exhalación profunda.";
         }
 
         if (title) title.innerText = `Rutina Guiada: ${type} (${phase})`;
@@ -2539,15 +2653,37 @@ function initBookingPanel() {
         if (modal) modal.classList.remove('hidden');
     }
 
+    function openSpotifyAudio(titleText, episodeId) {
+        const modal = document.getElementById('exerciseVideoModal');
+        const videoContainer = document.getElementById('videoPlayerContainer');
+        const spotifyContainer = document.getElementById('spotifyPlayerContainer');
+        const spotifyIframe = document.getElementById('spotifyIframe');
+        const title = document.getElementById('videoModalTitle');
+        const tips = document.getElementById('videoModalTips');
+
+        if (videoContainer) videoContainer.classList.add('hidden');
+        if (spotifyContainer) spotifyContainer.classList.remove('hidden');
+
+        if (title) title.innerText = `🎙️ ${titleText}`;
+        if (tips) tips.innerText = "Escucha esta sesión de meditación y salud integrativa para acompañar tu rutina diaria de autocuidado.";
+        
+        const epId = episodeId || '3H5tmyhNNqQeRcmKPgX4DL';
+        if (spotifyIframe) spotifyIframe.src = `https://open.spotify.com/embed/episode/${epId}?utm_source=generator`;
+        
+        if (modal) modal.classList.remove('hidden');
+    }
+
     function closeExerciseVideo() {
         const modal = document.getElementById('exerciseVideoModal');
         const iframe = document.getElementById('videoIframe');
+        const spotifyIframe = document.getElementById('spotifyIframe');
         if (iframe) iframe.src = "";
+        if (spotifyIframe) spotifyIframe.src = "";
         if (modal) modal.classList.add('hidden');
     }
 
 
-    function showPartnerDetails(partnerType) {
+function showPartnerDetails(partnerType) {
         document.querySelectorAll('.partner-content').forEach(content => {
             content.classList.add('hidden');
         });
