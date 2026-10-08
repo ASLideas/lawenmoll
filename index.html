@@ -601,7 +601,7 @@
                 <p class="text-gray-500 text-xs mb-6">LAWENMOLL valora y adapta el bienestar respetando la neurodiversidad y la salud mental.</p>
 
                 <div class="space-y-4">
-                    <label class="block text-sm font-semibold text-gray-700">¿Presentas alguna de estas condiciones o neurodivergencia?</label>
+                    <label class="block text-sm font-semibold text-gray-700">¿Presentas alguna de estas condiciones, neurodivergencia o padecimiento?</label>
 
                     <div class="grid grid-cols-1 gap-2.5">
                         <button onclick="setMentalOption('Ninguna', this)" class="mental-opt border border-forest bg-forest/5 p-3 rounded-2xl text-left text-xs font-bold transition flex justify-between items-center shadow-sm">
@@ -620,6 +620,15 @@
                             <span>♾️ Neurodivergente (TDAH / TEA / PAS)</span>
                             <i class="fa-solid fa-circle-check text-gray-100"></i>
                         </button>
+                        <button onclick="setMentalOption('Otros', this)" class="mental-opt border border-gray-200 p-3 rounded-2xl text-left text-xs font-bold hover:border-forest transition flex justify-between items-center shadow-sm bg-white">
+                            <span>🌀 Otro Padecimiento / Condición</span>
+                            <i class="fa-solid fa-circle-check text-gray-100"></i>
+                        </button>
+                    </div>
+
+                    <div id="otherMentalBox" class="hidden mt-3 p-3 bg-forest/5 border border-forest/20 rounded-2xl">
+                        <label class="block text-[10px] font-bold text-forest uppercase tracking-wider mb-1">Escribe tu Padecimiento o Condición de Salud Mental:</label>
+                        <input type="text" id="inputOtherMental" placeholder="Ej: Trastorno Bipolar, Crisis de Pánico, Fibromialgia, etc." oninput="updateOtherMentalText(this.value)" class="w-full bg-white border border-gray-200 p-3 rounded-xl text-xs font-semibold focus:outline-none focus:border-forest text-slateDark shadow-inner">
                     </div>
                 </div>
                 <input type="hidden" id="inputMental" value="Ninguna">
@@ -715,44 +724,56 @@
             </div>
         </div>
 
-        <!-- PANTALLA 7: PREGUNTA 3 - ÁREA DE APOYO (OBJETIVO) -->
+        <!-- PANTALLA 7: PREGUNTA 3 - ÁREA DE APOYO (OBJETIVOS) -->
         <div id="step7" class="step-panel flex flex-col justify-between h-full flex-grow">
             <div>
                 <div class="flex justify-between items-center mb-1">
                     <span class="text-[10px] font-bold uppercase tracking-wider text-forest/70">Pregunta 3 de 5</span>
-                    <span class="text-[10px] text-gray-400 font-bold">Objetivo de Bienestar</span>
+                    <span class="text-[10px] text-gray-400 font-bold">Objetivos de Bienestar</span>
                 </div>
-                <h2 class="text-2xl font-bold text-forest mb-2">Área de Apoyo</h2>
-                <p class="text-gray-500 text-xs mb-6 font-semibold">¿En qué área de tu vida sientes que necesitas mayor apoyo hoy?</p>
+                <h2 class="text-2xl font-bold text-forest mb-1">Áreas de Apoyo</h2>
+                <p class="text-gray-500 text-xs mb-4 font-semibold">Puedes seleccionar <strong>una o varias áreas</strong> en las que deseas enfocar tu bienestar hoy:</p>
 
                 <div class="space-y-3">
-                    <button onclick="setOption('goal', 'calm', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
-                        <span class="text-xl">🧠</span>
-                        <div>
-                            <h4 class="font-bold text-xs">Calmar mi mente</h4>
-                            <p class="text-[10px] text-gray-400 font-medium">Reducir estrés, ansiedad y dormir mejor</p>
+                    <button onclick="toggleGoal('activate', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center justify-between hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">💪</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Activar mi cuerpo / Bajar de Peso</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Ganar fuerza, vitalidad, entrenar y reducir grasa corporal</p>
+                            </div>
                         </div>
+                        <i class="check-icon fa-solid fa-circle-check text-gray-200 text-lg ml-2"></i>
                     </button>
-                    <button onclick="setOption('goal', 'pain', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
-                        <span class="text-xl">🤕</span>
-                        <div>
-                            <h4 class="font-bold text-xs">Aliviar un dolor</h4>
-                            <p class="text-[10px] text-gray-400 font-medium">Tensión muscular, dolor de espalda o cuello</p>
+                    <button onclick="toggleGoal('calm', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center justify-between hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">🧠</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Calmar mi mente / Descansar</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Reducir estrés, ansiedad, mejorar el sueño y descansar mejor</p>
+                            </div>
                         </div>
+                        <i class="check-icon fa-solid fa-circle-check text-gray-200 text-lg ml-2"></i>
                     </button>
-                    <button onclick="setOption('goal', 'activate', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
-                        <span class="text-xl">💪</span>
-                        <div>
-                            <h4 class="font-bold text-xs">Activar mi cuerpo / Bajar peso</h4>
-                            <p class="text-[10px] text-gray-400 font-medium">Ganar fuerza, vitalidad, entrenar y quemar grasa</p>
+                    <button onclick="toggleGoal('pain', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center justify-between hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">🤕</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Aliviar un dolor físico</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Tensión muscular, dolor de espalda, cuello o articulaciones</p>
+                            </div>
                         </div>
+                        <i class="check-icon fa-solid fa-circle-check text-gray-200 text-lg ml-2"></i>
                     </button>
-                    <button onclick="setOption('goal', 'nutrition', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
-                        <span class="text-xl">🥗</span>
-                        <div>
-                            <h4 class="font-bold text-xs">Nutrirme mejor (Alimentación)</h4>
-                            <p class="text-[10px] text-gray-400 font-medium">Aprender a comer sano y equilibrado</p>
+                    <button onclick="toggleGoal('nutrition', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center justify-between hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">🥗</span>
+                            <div>
+                                <h4 class="font-bold text-xs">Nutrirme mejor (Alimentación Limpia)</h4>
+                                <p class="text-[10px] text-gray-400 font-medium">Aprender a comer sano, desinflamar el cuerpo y equilibrarme</p>
+                            </div>
                         </div>
+                        <i class="check-icon fa-solid fa-circle-check text-gray-200 text-lg ml-2"></i>
                     </button>
                 </div>
                 <input type="hidden" id="inputGoal" value="">
@@ -1146,10 +1167,10 @@
                     </div>
 
                     <div class="pt-2 space-y-2">
-                        <span class="text-[9px] uppercase font-bold text-gray-400 block mb-2 text-center">Evaluaciones y Recomendaciones Clínicas</span>
+                        <span class="text-[9px] uppercase font-bold text-gray-400 block mb-2 text-center">Pauta Preventiva y Registro de Reserva</span>
                         <button onclick="downloadEvaluationPDF(false)" class="w-full bg-forest text-white py-2.5 px-3 rounded-xl text-[11px] font-bold hover:bg-forest/95 shadow-sm transition flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-file-arrow-down"></i>
-                            <span>Descargar Evaluaciones Médicas (PDF)</span>
+                            <span>Descargar Pauta Preventiva (PDF)</span>
                         </button>
                         <button onclick="addAppointmentToCalendar()" class="w-full bg-accent hover:bg-accent/90 text-white py-2.5 px-3 rounded-xl text-[11px] font-bold shadow-sm transition flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-clock-rotate-left"></i>
@@ -1487,6 +1508,7 @@
         selectedPlan: 'trimestral',
         planPriceUF: 1.25,
         goal: '',
+        selectedGoals: [],
         mode: 'online',
         time: '',
         bookingDate: 'Lunes 24 de Agosto',
@@ -1730,14 +1752,61 @@
     }
 
     function setMentalOption(val, btn) {
-        selections.mental = val;
-        document.getElementById('inputMental').value = val;
+        const box = document.getElementById('otherMentalBox');
+        if (val === 'Otros') {
+            if (box) box.classList.remove('hidden');
+            const customText = document.getElementById('inputOtherMental') ? document.getElementById('inputOtherMental').value.trim() : '';
+            selections.mental = customText ? ("Otros: " + customText) : "Otro Padecimiento";
+        } else {
+            if (box) box.classList.add('hidden');
+            selections.mental = val;
+        }
+        document.getElementById('inputMental').value = selections.mental;
         document.querySelectorAll('.mental-opt').forEach(b => {
             b.className = "mental-opt border border-gray-200 p-3 rounded-2xl text-left text-xs font-bold hover:border-forest transition flex justify-between items-center shadow-sm bg-white";
             b.querySelector('i').className = "fa-solid fa-circle-check text-gray-100";
         });
         btn.className = "mental-opt border-forest bg-forest/5 p-3 rounded-2xl text-left text-xs font-bold transition flex justify-between items-center shadow-sm";
         btn.querySelector('i').className = "fa-solid fa-circle-check text-forest";
+    }
+
+    function updateOtherMentalText(val) {
+        if (val.trim() !== '') {
+            selections.mental = "Otros: " + val.trim();
+        } else {
+            selections.mental = "Otro Padecimiento";
+        }
+        document.getElementById('inputMental').value = selections.mental;
+    }
+
+    function toggleGoal(val, btn) {
+        if (!selections.selectedGoals) selections.selectedGoals = [];
+        const idx = selections.selectedGoals.indexOf(val);
+        const icon = btn.querySelector('.check-icon');
+        
+        if (idx > -1) {
+            selections.selectedGoals.splice(idx, 1);
+            btn.className = "goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center justify-between hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white";
+            if (icon) icon.className = "check-icon fa-solid fa-circle-check text-gray-200 text-lg ml-2";
+        } else {
+            selections.selectedGoals.push(val);
+            btn.className = "goal-opt w-full text-left border-forest bg-forest/5 p-3 rounded-2xl flex items-center justify-between transition focus:outline-none shadow-sm text-forest font-bold";
+            if (icon) icon.className = "check-icon fa-solid fa-circle-check text-forest text-lg ml-2";
+        }
+        
+        selections.goal = selections.selectedGoals.join(',');
+        document.getElementById('inputGoal').value = selections.goal;
+        
+        const nextBtn = document.getElementById('btnToStep7');
+        if (nextBtn) {
+            if (selections.selectedGoals.length > 0) {
+                nextBtn.removeAttribute('disabled');
+                nextBtn.style.opacity = '1';
+            } else {
+                nextBtn.setAttribute('disabled', 'true');
+                nextBtn.style.opacity = '0.5';
+            }
+        }
     }
 
     function setOption(type, value, btn) {
@@ -2139,16 +2208,16 @@ function initBookingPanel() {
                     <div style="margin-top: 25px; padding: 16px; background-color: #F0F7F4; border: 2px solid #52796F; border-radius: 14px; text-align: left; font-family: Arial, sans-serif;">
                         <div style="display: table; width: 100%;">
                             <div style="display: table-cell; vertical-align: middle; width: 68%;">
-                                <strong style="color: #52796F; font-size: 13px; text-transform: uppercase; display: block; margin-bottom: 4px; font-weight: 900;">🏛️ VALIDACIÓN CLÍNICA & SELLO CORPORATIVO LAWENMOLL</strong>
+                                <strong style="color: #52796F; font-size: 13px; text-transform: uppercase; display: block; margin-bottom: 4px; font-weight: 900;">🌱 REGISTRO PREVENTIVO & SELLO CORPORATIVO LAWENMOLL</strong>
                                 <p style="font-size: 11px; color: #2F3E46; margin: 0; line-height: 1.5; font-weight: 600;">
-                                    Pauta elaborada bajo protocolos de Medicina Integrativa y Fitoterapia Nativa Chilena.<br>
-                                    <b>Directriz:</b> Enfoque metabólico personalizado + Ejercicios "Entrena en Casa" + Malla de Nutrición Limpia.
+                                    Pauta de ingreso elaborada bajo criterios de Medicina Integrativa y Herbolaria Nativa.<br>
+                                    <b>Estado de Reserva:</b> Registro Pre-Ingreso Generado • <i>Pendiente de Evaluación Presencial/Online con Especialista</i>.
                                 </p>
                             </div>
                             <div style="display: table-cell; vertical-align: middle; text-align: right; width: 32%; border-left: 1.5px solid #84A59D; padding-left: 12px;">
-                                <p style="font-size: 11px; font-weight: 900; color: #52796F; margin: 0;">FIRMA DIGITAL SANITARIA</p>
-                                <p style="font-size: 10px; font-weight: bold; color: #2F3E46; margin: 2px 0 0 0;">Dra. Inés Nathalia Aslideas</p>
-                                <p style="font-size: 9px; color: #718096; margin: 2px 0 0 0;">Reg. SIS N° 482.109 • Chile</p>
+                                <p style="font-size: 11px; font-weight: 900; color: #52796F; margin: 0;">VALIDACIÓN DE RESERVA</p>
+                                <p style="font-size: 10px; font-weight: bold; color: #2F3E46; margin: 2px 0 0 0;">Ecosistema LAWENMOLL</p>
+                                <p style="font-size: 9px; color: #718096; margin: 2px 0 0 0;">Plataforma de Salud Integrativa • Chile</p>
                             </div>
                         </div>
                     </div>
@@ -2419,7 +2488,7 @@ function initBookingPanel() {
             document.getElementById('resCalories').innerText = targetCal + " kcal";
 
             const isOverweight = imc >= 25;
-            const isWeightLossGoal = selections.goal === 'activate';
+            const isWeightLossGoal = (selections.selectedGoals && selections.selectedGoals.includes('activate')) || selections.goal.includes('activate');
             const gymAllianceCard = document.getElementById('gymAllianceCard');
             
             if (isWeightLossGoal || isOverweight) {
