@@ -2026,7 +2026,7 @@ function initBookingPanel() {
         window.scrollTo(0, 0);
 
         const wrapper = document.createElement('div');
-        wrapper.style.position = 'fixed';
+        wrapper.style.position = 'absolute';
         wrapper.style.left = '0';
         wrapper.style.top = '0';
         wrapper.style.width = '794px';
@@ -2035,7 +2035,7 @@ function initBookingPanel() {
         wrapper.style.display = 'block';
         wrapper.style.margin = '0';
         wrapper.style.padding = '0';
-        wrapper.style.textAlign = 'center';
+        wrapper.style.textAlign = 'left';
         wrapper.style.background = '#FAF8F5';
         wrapper.style.zIndex = '99999998';
 
@@ -2045,7 +2045,7 @@ function initBookingPanel() {
         element.style.width = "794px";
         element.style.minWidth = "794px";
         element.style.maxWidth = "794px";
-        element.style.margin = "0 auto";
+        element.style.margin = "0";
         element.style.background = "#FAF8F5";
         element.style.boxSizing = "border-box";
 
@@ -2303,8 +2303,8 @@ function initBookingPanel() {
                 onclone: function(clonedDoc) {
                     clonedDoc.body.style.width = '794px';
                     clonedDoc.body.style.minWidth = '794px';
-                    clonedDoc.body.style.display = 'flex';
-                    clonedDoc.body.style.justifyContent = 'center';
+                    clonedDoc.body.style.display = 'block';
+                    clonedDoc.body.style.position = 'relative';
                     clonedDoc.body.style.margin = '0';
                     clonedDoc.body.style.padding = '0';
                     clonedDoc.documentElement.style.width = '794px';
@@ -2791,7 +2791,7 @@ function showPartnerDetails(partnerType) {
         window.scrollTo(0, 0);
 
         const wrapper = document.createElement('div');
-        wrapper.style.position = 'fixed';
+        wrapper.style.position = 'absolute';
         wrapper.style.left = '0';
         wrapper.style.top = '0';
         wrapper.style.width = '400px';
@@ -2800,7 +2800,7 @@ function showPartnerDetails(partnerType) {
         wrapper.style.display = 'block';
         wrapper.style.margin = '0';
         wrapper.style.padding = '0';
-        wrapper.style.textAlign = 'center';
+        wrapper.style.textAlign = 'left';
         wrapper.style.background = '#FAF8F5';
         wrapper.style.zIndex = '99999998';
 
