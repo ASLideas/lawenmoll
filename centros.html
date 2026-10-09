@@ -85,6 +85,10 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <span><span class="hidden sm:inline">Portal </span>Especialistas 💼</span>
             </a>
+            <button onclick="openLocalLoginModal()" class="text-[9px] md:text-xs bg-slateDark hover:opacity-95 text-white font-bold px-2.5 py-1.5 md:px-3.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
+                <i class="fa-solid fa-store text-accent"></i>
+                <span><span class="hidden sm:inline">Portal </span>de Aliados 🏢</span>
+            </button>
             <button onclick="openB2BRegisterModal()" class="text-[9px] md:text-xs bg-accent hover:bg-accent/90 text-white font-extrabold px-3 py-1.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
                 <i class="fa-solid fa-plus-circle"></i>
                 <span>➕ Registrar Mi Local B2B</span>
@@ -94,18 +98,21 @@
 </header>
 
 <!-- CUERPO PRINCIPAL -->
+<main class="max-w-6xl mx-auto w-full p-4 lg:p-6 flex-grow font-sans space-y-6">
 
     <!-- HERO / BANNER PRINCIPAL & SALA PROMO B2B -->
     <div class="bg-gradient-to-r from-forest via-forest/90 to-slateDark text-white rounded-3xl p-6 md:p-8 shadow-md relative overflow-hidden mb-6">
-        <!-- LOGO WATERMARK ASL IDEAS SPA (PARTE INFERIOR IZQUIERDA DEL BANNER COMO IMAGEN DE AGUA) -->
-        <div class="absolute bottom-2 left-4 flex items-center space-x-2.5 opacity-30 hover:opacity-50 transition pointer-events-none z-10">
-            <img src="logoASLideas.jpeg" onerror="this.src='logo.png';" class="w-12 h-12 md:w-16 md:h-16 object-contain rounded-2xl bg-white/20 p-1 shadow-inner border border-white/30" alt="ASL Ideas SpA">
+        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl pointer-events-none">🏢</div>
+        
+        <!-- LOGO WATERMARK ASL IDEAS SPA (INFERIOR IZQUIERDA DEL BANNER) -->
+        <div class="absolute bottom-3 left-4 flex items-center space-x-2.5 opacity-35 hover:opacity-60 transition pointer-events-none z-10">
+            <img src="logoASLideas.jpeg" onerror="this.src='logo.png';" class="w-12 h-12 md:w-16 md:h-16 object-contain rounded-2xl bg-white/20 p-1 shadow-md border border-white/30" alt="ASL Ideas SpA">
             <div class="text-left hidden xs:block">
                 <span class="text-[8px] uppercase tracking-widest text-emerald-300 font-extrabold block">Sello de Tecnología & IA</span>
-                <strong class="text-xs font-black text-white tracking-wider font-sans">ASL Ideas SpA 💡</strong>
+                <strong class="text-xs font-black text-white tracking-wider">ASL Ideas SpA 💡</strong>
             </div>
         </div>
-        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl pointer-events-none">🏢</div><div class="absolute bottom-3 right-4 hidden sm:flex items-center space-x-2 bg-slateDark/80 backdrop-blur-md px-3 py-1.5 rounded-2xl border border-emerald-400/30 text-white z-20 shadow-lg"><span class="text-[9px] font-extrabold text-emerald-300 uppercase tracking-wider">Desarrollado por</span><strong class="text-xs font-black text-white tracking-wide flex items-center space-x-1"><span>ASL Ideas SpA</span><span class="text-amber-400 text-sm">💡</span></strong></div>
+
         <div class="relative z-10 max-w-3xl space-y-4 text-left">
             <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[10px] font-bold text-accent">
                 <i class="fa-solid fa-sparkles"></i>
@@ -192,292 +199,488 @@
                     <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Terapeuta / Psicólogo</span>
                     <h4 class="text-xs font-black text-slateDark mt-0.5">Plan Anual</h4>
                     <div class="text-base font-black text-forest mt-1">$155.000 <span class="text-[9px] font-normal text-gray-400">CLP/año</span></div>
-                    <p class="text-[8px] text-forest font-bold mb-1">Equivale a ~$12.900 CLP/mes (30% Ahorro)</p>
+                    <p class="text-[8px] text-gray-400 font-bold mb-1">Equivale a ~$12.900 CLP/mes</p>
                     <ul class="text-[9.5px] text-gray-500 font-semibold space-y-1.5 mt-2">
-                        <li class="flex items-center"><i class="fa-solid fa-check text-forest text-[8px] mr-1.5"></i> Acceso Anual Ilimitado</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-forest text-[8px] mr-1.5"></i> Integración Bot WhatsApp</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-forest text-[8px] mr-1.5"></i> Sello Verificado Preferente</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-forest text-[8px] mr-1.5"></i> Ficha SOAP + Telemedicina</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-forest text-[8px] mr-1.5"></i> Insignia Verificada Ley 21.663</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-forest text-[8px] mr-1.5"></i> Soporte VIP Preferente</li>
                     </ul>
                 </div>
-                <button onclick="openB2BRegisterModal()" class="w-full bg-white border border-forest text-forest hover:bg-forest/5 font-extrabold py-2 rounded-xl text-[9px] uppercase transition shadow-sm">Elegir Plan Anual 👑</button>
+                <button onclick="openB2BRegisterModal()" class="w-full bg-white border border-forest text-forest hover:bg-forest/5 font-extrabold py-2 rounded-xl text-[9px] uppercase transition shadow-sm">Elegir Plan Anual 💳</button>
             </div>
 
-            <!-- Plan 4: SaaS Establecimientos (Restaurantes / Gym / Clínicas) -->
-            <div class="border border-accent/40 bg-accent/5 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+            <!-- Plan 4: SaaS Establecimientos B2B -->
+            <div class="border border-accent/40 bg-accent/5 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
                 <div>
-                    <span class="text-[9px] font-bold text-accent uppercase tracking-wider block">Clínica / Gym / Restaurante</span>
-                    <h4 class="text-xs font-black text-slateDark mt-0.5">SaaS Establecimientos</h4>
+                    <span class="text-[9px] font-bold text-accent uppercase tracking-wider block">Local / Gimnasio / Clínica</span>
+                    <h4 class="text-xs font-black text-slateDark mt-0.5">SaaS B2B Establecimientos</h4>
                     <div class="text-base font-black text-accent mt-1">$45.000 <span class="text-[9px] font-normal text-gray-400">CLP/mes</span></div>
-                    <ul class="text-[9.5px] text-gray-600 font-semibold space-y-1.5 mt-2.5">
-                        <li class="flex items-center"><i class="fa-solid fa-check text-accent text-[8px] mr-1.5"></i> Vitrina Geolocalizada</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-accent text-[8px] mr-1.5"></i> Carta de Menú / Clases en Vivo</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-accent text-[8px] mr-1.5"></i> Canje de Cupones B2B</li>
+                    <ul class="text-[9.5px] text-gray-600 font-semibold space-y-1.5 mt-2">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-accent text-[8px] mr-1.5"></i> Geolocalización y Mapa B2B</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-accent text-[8px] mr-1.5"></i> Menú/Clases Interactivas</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-accent text-[8px] mr-1.5"></i> 5% Dcto por Cupones Validados</li>
                     </ul>
                 </div>
-                <button onclick="openB2BRegisterModal()" class="w-full bg-accent text-white hover:opacity-95 font-extrabold py-2 rounded-xl text-[9px] uppercase transition shadow-md">Registrar Mi Local 🏢</button>
+                <button onclick="openB2BRegisterModal()" class="w-full bg-accent text-white hover:opacity-95 font-extrabold py-2 rounded-xl text-[9px] uppercase transition shadow-md">Registrar Mi Local 🏪</button>
             </div>
         </div>
     </div>
 
-<main class="max-w-6xl mx-auto w-full p-4 lg:p-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 font-sans">
-    
-    <!-- COLUMNA IZQUIERDA: MENÚ DE NAVEGACIÓN Y REGIONES DE CHILE -->
-    <div class="lg:col-span-4 space-y-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Selector de Módulos y Regiones -->
-        <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 space-y-4">
-            <h3 class="text-sm font-bold text-forest uppercase tracking-wider flex items-center space-x-2">
-                <i class="fa-solid fa-magnifying-glass-location"></i>
-                <span>Buscar Servicios en Chile</span>
-            </h3>
+        <!-- COLUMNA IZQUIERDA: FILTROS & B2B -->
+        <div class="lg:col-span-4 space-y-6">
             
-            <!-- FILTRADO GEOGRÁFICO COMPLETO NACIONAL (DE ARICA A MAGALLANES + ISLA DE PASCUA) -->
-            <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/15 space-y-1.5">
-                <label class="block text-[9px] font-black text-forest uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Región de Chile (Arica a Magallanes)</label>
-                <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-xs font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
-                    <option value="all">🇨🇱 Todas las Regiones de Chile</option>
-                    <option value="Arica y Parinacota">⛰️ Región de Arica y Parinacota</option>
-                    <option value="Tarapacá">🏜️ Región de Tarapacá (Iquique)</option>
-                    <option value="Antofagasta">🌵 Región de Antofagasta</option>
-                    <option value="Atacama">🌸 Región de Atacama (Copiapó)</option>
-                    <option value="Coquimbo">🍇 Región de Coquimbo (La Serena / Coquimbo)</option>
-                    <option value="Valparaíso">🌊 Región de Valparaíso (Viña / Valpo)</option>
-                    <option value="Isla de Pascua">🗿 Isla de Pascua (Rapa Nui)</option>
-                    <option value="Región Metropolitana">📍 Región Metropolitana (Santiago)</option>
-                    <option value="O'Higgins">🍷 Región de O'Higgins (Rancagua)</option>
-                    <option value="Maule">🌾 Región del Maule (Talca / Curicó)</option>
-                    <option value="Ñuble">🪵 Región de Ñuble (Chillán)</option>
-                    <option value="Biobío">🌲 Región del Biobío (Concepción)</option>
-                    <option value="La Araucanía">🏞️ Región de la Araucanía (Temuco)</option>
-                    <option value="Los Ríos">🌊 Región de Los Ríos (Valdivia)</option>
-                    <option value="Los Lagos">🌋 Región de Los Lagos (Puerto Montt / Chiloé)</option>
-                    <option value="Aysén">❄️ Región de Aysén</option>
-                    <option value="Magallanes">🐧 Región de Magallanes y Antártica</option>
-                </select>
-            </div>
-
-            <!-- FILTRADO POR TERAPIAS Y ESPECIALIDADES -->
-            <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/15 space-y-1.5">
-                <label class="block text-[9px] font-black text-forest uppercase tracking-wider"><i class="fa-solid fa-leaf mr-1"></i> Especialidad o Terapia</label>
-                <select id="globalTherapyFilter" onchange="filterAllByTherapy()" class="w-full bg-white border border-gray-200 text-xs font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
-                    <option value="all">🌿 Todas las Especialidades</option>
-                    <option value="fitoterapia">🌱 Fitoterapia & Herbolaria</option>
-                    <option value="acupuntura">🪡 Acupuntura & Medicina China</option>
-                    <option value="quiropraxia">👐 Quiropraxia & Kinesiología</option>
-                    <option value="magnetoterapia">🧲 Magnetoterapia & Biomagnetismo</option>
-                    <option value="nutricion">🍎 Nutrición Consciente</option>
-                    <option value="psicologia">🧠 Psicología Integrativa & Mente</option>
-                </select>
-            </div>
-            
-            <div class="space-y-2 pt-1">
-                <button id="tab-centros" onclick="switchTab('centros', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm">
-                    <span class="text-2xl">🏢</span>
-                    <div>
-                        <h4 class="font-extrabold text-xs text-slateDark">Centros de Salud Natural</h4>
-                        <p class="text-[9px] text-gray-500 font-medium">Clínicas y boxes físicos asociados</p>
-                    </div>
-                </button>
-
-                <button id="tab-restaurantes" onclick="switchTab('restaurantes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                    <span class="text-2xl">🥑</span>
-                    <div>
-                        <h4 class="font-extrabold text-xs text-slateDark">Restaurantes Saludables</h4>
-                        <p class="text-[9px] text-gray-500 font-medium font-sans">Menús interactivos y reservas</p>
-                    </div>
-                </button>
-
-                <button id="tab-gimnasios" onclick="switchTab('gimnasios', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                    <span class="text-2xl">💪</span>
-                    <div>
-                        <h4 class="font-extrabold text-xs text-slateDark">Gimnasios y Yoga</h4>
-                        <p class="text-[9px] text-gray-500 font-medium font-sans">Instalaciones de movimiento y fuerza</p>
-                    </div>
-                </button>
-
-                <button id="tab-farmacias" onclick="switchTab('farmacias', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                    <span class="text-2xl">🌿</span>
-                    <div>
-                        <h4 class="font-extrabold text-xs text-slateDark">Farmacias Naturales</h4>
-                        <p class="text-[9px] text-gray-500 font-medium font-sans">Recetarios magistrales y herbolaria</p>
-                    </div>
-                </button>
-
-                <button id="tab-independientes" onclick="switchTab('independientes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                    <span class="text-2xl">🧑‍⚕️</span>
-                    <div>
-                        <h4 class="font-extrabold text-xs text-slateDark">Profesionales Independientes</h4>
-                        <p class="text-[9px] text-gray-500 font-medium font-sans">Terapeutas y Psicólogos (Casa/Oficina)</p>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <!-- EXPLICACIÓN Y BOTÓN DE REGISTRO B2B DE LOCALES -->
-        <div class="bg-slateDark text-white rounded-3xl p-6 shadow-md border border-gray-800 space-y-4">
-            <div class="flex items-center space-x-2.5">
-                <span class="text-2xl">🏪</span>
-                <div>
-                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-accent">Registrar Mi Local o Servicio</h3>
-                    <p class="text-[9px] text-gray-400">Publica tu información y recibe clientes en tu región</p>
-                </div>
-            </div>
-
-            <p class="text-[11px] text-gray-300 leading-relaxed font-semibold">
-                ¿Tienes una farmacia natural, centro médico, gimnasio, restaurante o atiendes como profesional independiente? Puedes registrar tu local fácilmente para figurar en el mapa interactivo de tu región.
-            </p>
-
-            <button onclick="openB2BRegisterModal()" class="w-full bg-accent hover:opacity-95 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider">
-                <i class="fa-solid fa-store"></i>
-                <span>➕ Registrar o Editar Mi Local B2B</span>
-            </button>
-        </div>
-
-    </div>
-
-    <!-- COLUMNA DERECHA: DIRECTORIO INTERACTIVO DINÁMICO -->
-    <div class="lg:col-span-8 space-y-4">
-        
-        <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
-        <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
-            <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-forest font-sans">🏢 Centros de Salud Natural y Clínicas</h2>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios clínicos acreditados y equipados para consultas integrativas y kinesiología.</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="clinicsListGrid"></div>
-        </div>
-
-        <!-- PESTAÑA 2: RESTAURANTES SALUDABLES -->
-        <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
-            <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-forest font-sans">🥑 Restaurantes Saludables y Alimentación Consciente</h2>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Ecosistema de gastronomía consciente y menús depurativos integrados.</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="restaurantsListGrid"></div>
-        </div>
-
-        <!-- PESTAÑA 3: GIMNASIOS Y YOGA -->
-        <div id="tabPanel-gimnasios" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
-            <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-forest font-sans">💪 Gimnasios y Centros de Movimiento</h2>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios de entrenamiento supervisado por kinesiólogos y entrenadores.</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="gymsListGrid"></div>
-        </div>
-
-        <!-- PESTAÑA 4: FARMACIAS NATURALES -->
-        <div id="tabPanel-farmacias" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
-            <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-forest font-sans">🌿 Farmacias Naturales y Magistrales</h2>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Preparados de origen natural, adaptógenos y botica de fitofármacos.</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="farmaciasListGrid"></div>
-        </div>
-
-        <!-- PESTAÑA 5: PROFESIONALES INDEPENDIENTES -->
-        <div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
-            <div class="flex justify-between items-start border-b border-gray-100 pb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-forest font-sans">🧑‍⚕️ Profesionales Independientes</h2>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Naturópatas, psicólogos clínicos y kinesiólogos que atienden en consulta privada o a domicilio.</p>
-                </div>
-            </div>
-            <div class="space-y-4" id="independentTherapistsGrid"></div>
-        </div>
-
-    </div>
-</main>
-
-<!-- MODAL INTERACTIVO REGISTRAR / EDITAR MI LOCAL B2B -->
-<div id="b2bRegisterModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden animate-fadeIn">
-        <div class="bg-forest text-white p-5 flex items-center justify-between">
-            <div class="flex items-center space-x-2.5">
-                <i class="fa-solid fa-store text-xl text-accent"></i>
-                <div>
-                    <h3 class="font-extrabold text-sm uppercase tracking-wider">Registrar / Editar Mi Local B2B</h3>
-                    <p class="text-[10px] text-emerald-100">Ingresa la información de tu comercio o servicio en LAWENMOLL</p>
-                </div>
-            </div>
-            <button onclick="closeB2BRegisterModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="p-6 overflow-y-auto space-y-4 text-xs font-sans text-gray-600">
-            <div>
-                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Nombre Comercial del Local o Profesional</label>
-                <input type="text" id="regLocalName" placeholder="Ej: Farmacia Herbolaria El Canelo" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Tipo de Local / Servicio</label>
-                    <select id="regLocalType" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
-                        <option value="clínica">Centro de Salud / Clínica</option>
-                        <option value="restaurante">Restaurante / Comida Sana</option>
-                        <option value="gym">Gimnasio / Yoga / Pilates</option>
-                        <option value="farmacia">Farmacia Natural / Herbolaria</option>
-                        <option value="terapeuta">Profesional Independiente</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Región de Chile</label>
-                    <select id="regLocalRegion" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+            <!-- Selector de Módulos (Tabs) -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 space-y-4">
+                <h3 class="text-sm font-bold text-forest uppercase tracking-wider flex items-center space-x-2">
+                    <i class="fa-solid fa-magnifying-glass-location"></i>
+                    <span>Buscar Servicios</span>
+                </h3>
+                
+                <!-- FILTRADO GEOGRÁFICO NACIONAL (CHILE COMPLETO) -->
+                <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
+                    <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-map-location-dot mr-1"></i> Selecciona tu Región (Chile)</label>
+                    <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
+                        <option value="all">🇨🇱 Todas las Regiones de Chile</option>
                         <option value="Arica y Parinacota">Arica y Parinacota</option>
                         <option value="Tarapacá">Tarapacá</option>
                         <option value="Antofagasta">Antofagasta</option>
                         <option value="Atacama">Atacama</option>
                         <option value="Coquimbo">Coquimbo</option>
                         <option value="Valparaíso">Valparaíso</option>
-                        <option value="Isla de Pascua">Isla de Pascua (Rapa Nui)</option>
-                        <option value="Región Metropolitana" selected>Región Metropolitana</option>
+                        <option value="Isla de Pascua">Isla de Pascua (Rapa Nui) 🗿</option>
+                        <option value="Región Metropolitana">Región Metropolitana (Santiago)</option>
                         <option value="O'Higgins">O'Higgins</option>
                         <option value="Maule">Maule</option>
                         <option value="Ñuble">Ñuble</option>
                         <option value="Biobío">Biobío</option>
-                        <option value="La Araucanía">La Araucanía</option>
+                        <option value="La Araucanía">La Araucanía (Temuco)</option>
                         <option value="Los Ríos">Los Ríos</option>
                         <option value="Los Lagos">Los Lagos</option>
                         <option value="Aysén">Aysén</option>
                         <option value="Magallanes">Magallanes y Antártica</option>
                     </select>
                 </div>
+
+                <!-- FILTRADO POR TERAPIAS Y ESPECIALIDADES -->
+                <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
+                    <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-leaf mr-1"></i> Filtro por Terapia / Especialidad</label>
+                    <select id="globalTherapyFilter" onchange="filterAllByTherapy()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
+                        <option value="all">🌿 Todas las Especialidades</option>
+                        <option value="fitoterapia">🌱 Fitoterapia & Herbolaria</option>
+                        <option value="acupuntura">🪡 Acupuntura & MTC</option>
+                        <option value="quiropraxia">👐 Quiropraxia & Kinesiología</option>
+                        <option value="magnetoterapia">🧲 Magnetoterapia</option>
+                        <option value="nutricion">🍎 Nutrición Consciente</option>
+                        <option value="psicologia">🧠 Psicología Integrativa & TDAH/TEA</option>
+                    </select>
+                </div>
+                
+                <div class="space-y-2">
+                    <button id="tab-centros" onclick="switchTab('centros', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm">
+                        <span class="text-2xl">🏢</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Centros de Salud Natural</h4>
+                            <p class="text-[9px] text-gray-500 font-medium">Clínicas y boxes físicos asociados</p>
+                        </div>
+                    </button>
+
+                    <button id="tab-restaurantes" onclick="switchTab('restaurantes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">🥑</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Restaurantes Saludables</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Menús interactivos y reservas</p>
+                        </div>
+                    </button>
+
+                    <button id="tab-gimnasios" onclick="switchTab('gimnasios', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">💪</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Gimnasios y Yoga</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Instalaciones de movimiento y fuerza</p>
+                        </div>
+                    </button>
+
+                    <button id="tab-farmacias" onclick="switchTab('farmacias', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">🌿</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Farmacias Naturales</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Recetarios magistrales y herbolaria</p>
+                        </div>
+                    </button>
+
+                    <button id="tab-independientes" onclick="switchTab('independientes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
+                        <span class="text-2xl">🧑‍⚕️</span>
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slateDark">Profesionales Independientes</h4>
+                            <p class="text-[9px] text-gray-500 font-medium font-sans">Terapeutas y Psicólogos Clínicos (Casa/Oficina)</p>
+                        </div>
+                    </button>
+                </div>
             </div>
+
+            <!-- EXPLICACIÓN DEL MODELO B2B -->
+            <div class="bg-slateDark text-white rounded-3xl p-6 shadow-md border border-gray-800 space-y-4">
+                <div class="flex items-center space-x-2.5">
+                    <span class="text-2xl">💼</span>
+                    <div>
+                        <h3 class="font-extrabold text-xs uppercase tracking-wider text-accent">Nuestros Clientes B2B</h3>
+                        <p class="text-[9px] text-gray-400">Cómo LAWENMOLL rentabiliza el ecosistema</p>
+                    </div>
+                </div>
+
+                <p class="text-[11px] text-gray-300 leading-relaxed font-semibold">
+                    En LAWENMOLL los establecimientos (gimnasios, centros holísticos y restaurantes orgánicos) son nuestros <strong>clientes de pago</strong> (SaaS B2B).
+                </p>
+
+                <button onclick="openB2BRegisterModal()" class="w-full bg-accent hover:opacity-95 text-white font-bold py-3 rounded-2xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
+                    <i class="fa-solid fa-store"></i>
+                    <span>➕ Registrar o Editar Mi Local B2B</span>
+                </button>
+            </div>
+
+            <!-- MÓDULO DE ANULACIÓN DE RESERVAS Y CITAS -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 space-y-4">
+                <h3 class="text-sm font-bold text-red-600 uppercase tracking-wider flex items-center space-x-2">
+                    <i class="fa-solid fa-ban text-red-500 animate-pulse"></i>
+                    <span>Cancelar Reserva o Cita</span>
+                </h3>
+                <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                    ¿Deseas liberar un cupo en un restaurante, gimnasio o especialista? Ingresa tu código único de reserva (ej: MESA-1234, CLASS-5678, o tu código clínico) para cancelarlo de inmediato.
+                </p>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Código de Confirmación / Reserva</label>
+                        <input type="text" id="cancelBookingCode" placeholder="Ej: MESA-4820" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-red-500 font-extrabold uppercase shadow-sm tracking-widest text-center text-red-600">
+                    </div>
+                    <button onclick="cancelAppointmentFromUser()" class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 rounded-2xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider focus:outline-none shadow-red-100">
+                        <i class="fa-solid fa-circle-minus"></i>
+                        <span>Anular Reserva de Forma Segura</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: PESTAÑAS Y DIRECTORIO -->
+        <div class="lg:col-span-8 space-y-4">
+            
+            <!-- BARRA DE PÍLDORAS VISUALES DE TERAPIAS -->
+            <div class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100">
+                <span class="block text-[8px] font-black text-gray-400 uppercase tracking-wider mb-2.5 flex items-center"><i class="fa-solid fa-sliders mr-1 text-forest animate-pulse"></i> Filtrar Rápidamente por Especialidad / Terapia</span>
+                <div class="flex space-x-2 overflow-x-auto pb-1 scrollbar-none snap-x snap-mandatory">
+                    <button onclick="selectTherapyPill('all')" data-therapy="all" class="therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start">
+                        🌿 Todas
+                    </button>
+                    <button onclick="selectTherapyPill('fitoterapia')" data-therapy="fitoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🌱 Fitoterapia
+                    </button>
+                    <button onclick="selectTherapyPill('acupuntura')" data-therapy="acupuntura" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🪡 Acupuntura
+                    </button>
+                    <button onclick="selectTherapyPill('quiropraxia')" data-therapy="quiropraxia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        👐 Quiropraxia
+                    </button>
+                    <button onclick="selectTherapyPill('magnetoterapia')" data-therapy="magnetoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🧲 Magneto
+                    </button>
+                    <button onclick="selectTherapyPill('nutricion')" data-therapy="nutricion" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🍎 Nutrición
+                    </button>
+                    <button onclick="selectTherapyPill('psicologia')" data-therapy="psicologia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                        🧠 Psicología
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
+            <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-forest font-sans">🏢 Centros de Salud Natural y Clínicas</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios clínicos acreditados y equipados para consultas integrativas, kinesiología y telemedicina.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="clinicsListGrid"></div>
+
+                <!-- Módulo de Agendamiento Clínico -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 space-y-3">
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 mb-1 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-calendar-check text-forest"></i>
+                        <span>Módulo de Agendamiento Clínico (Agendar Hora)</span>
+                    </h3>
+                    <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                        Selecciona el profesional, la fecha y hora de tu preferencia. El sistema te alertará automáticamente en tu celular 24 horas antes de la consulta.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 mb-3">
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Elegir Especialista</label>
+                            <select id="clinicalSpecialist" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                                <option value="Dra. Eliana Ruiz">Dra. Eliana Ruiz (Médico Integrativa)</option>
+                                <option value="Klgo. Carlos Mendoza">Klgo. Carlos Mendoza (Kinesiólogo)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Fecha de Consulta</label>
+                            <input type="date" id="clinicalDate" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Hora Disponible</label>
+                            <select id="clinicalTime" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                                <option value="09:00">09:00 hrs</option>
+                                <option value="10:30">10:30 hrs</option>
+                                <option value="12:00">12:00 hrs</option>
+                                <option value="15:00">15:00 hrs</option>
+                                <option value="16:30">16:30 hrs</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Nombre Paciente</label>
+                            <input type="text" id="clinicalPatientName" placeholder="Ej: Camila Silva" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
+                            <input type="text" id="clinicalPhone" value="+569" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left">
+                        <input type="checkbox" id="clinicalAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
+                        <label for="clinicalAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
+                            Consiento el tratamiento seguro de mis datos biométricos e información clínica bajo encriptación SSL, en conformidad con la Ley Marco de Ciberseguridad N° 21.663.
+                        </label>
+                    </div>
+
+                    <button onclick="bookClinicalAppointment()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Confirmar y Agendar Hora Clínica</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 2: RESTAURANTES SALUDABLES -->
+            <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-forest font-sans">🥑 Restaurantes Saludables y Alimentación Consciente</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Ecosistema de gastronomía consciente y menús depurativos integrados.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="restaurantsListGrid"></div>
+            </div>
+
+            <!-- PESTAÑA 3: GIMNASIOS Y YOGA -->
+            <div id="tabPanel-gimnasios" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-forest font-sans">💪 Gimnasios y Centros de Movimiento</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios de entrenamiento supervisado por kinesiólogos y entrenadores.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="gymsListGrid"></div>
+            </div>
+
+            <!-- PESTAÑA 4: FARMACIAS NATURALES -->
+            <div id="tabPanel-farmacias" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-forest font-sans">🌿 Farmacias Naturales y Magistrales</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Preparados de origen natural, adaptógenos y botica de fitofármacos.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="farmaciasListGrid"></div>
+
+                <!-- Módulo de Pedido y Receta por WhatsApp -->
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 space-y-4">
+                    <h3 class="font-extrabold text-xs uppercase tracking-wider text-gray-500 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-prescription text-forest text-sm"></i>
+                        <span>Módulo de Pedido y Canje de Receta Digital</span>
+                    </h3>
+                    <p class="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                        Si tu terapeuta te recetó alguna infusión o extracto natural, ingresa tu código, selecciona la farmacia y envía tu pedido directo por WhatsApp.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Código de Receta</label>
+                            <input type="text" id="pharmaRecipeCode" placeholder="Ej: LW-48392" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold uppercase">
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Farmacia</label>
+                            <select id="pharmaSelected" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold">
+                                <option value="canelo">Farmacia "El Canelo"</option>
+                                <option value="makewe">Farmacia "Makewe"</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Preparado / Hierba</label>
+                            <select id="pharmaProduct" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold">
+                                <option value="Melisa Ansiedad">Tintura de Melisa</option>
+                                <option value="Arnica Lumbalgia">Extracto de Árnica</option>
+                                <option value="Canela Glicemia">Té de Canela</option>
+                                <option value="Boldo Digestión">Extracto de Boldo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Tu Celular</label>
+                            <input type="text" id="pharmaPhone" value="+569" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold">
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-2 bg-white/70 p-2.5 rounded-xl border border-gray-150 text-left">
+                        <input type="checkbox" id="pharmaAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
+                        <label for="pharmaAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer select-none font-semibold">
+                            Consiento el envío encriptado de mi receta y datos de contacto en conformidad con la Ley N° 21.663.
+                        </label>
+                    </div>
+
+                    <button onclick="orderMedicine()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-xl text-xs shadow-md transition flex items-center justify-center space-x-2 uppercase tracking-wider">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Validar Receta y Enviar por WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 5: PROFESIONALES INDEPENDIENTES -->
+            <div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                <div class="flex justify-between items-start border-b border-gray-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-forest font-sans">🧑‍⚕️ Profesionales Independientes</h2>
+                        <p class="text-xs text-gray-400 font-medium mt-0.5">Naturópatas, psicólogos clínicos y kinesiólogos que atienden en consulta privada o a domicilio.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4" id="independentTherapistsGrid"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- MODAL CITA PRIVADA CON TERAPEUTA -->
+<div id="independentBookingModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-gray-100 p-6 space-y-4 text-left animate-fadeIn">
+        <div class="flex justify-between items-center border-b border-gray-100 pb-3">
             <div>
-                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Dirección Exacta / Comuna</label>
-                <input type="text" id="regLocalAddress" placeholder="Ej: Av. Providencia 1240, Providencia" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                <span class="text-[9px] uppercase font-bold text-forest block">Agendamiento Privado</span>
+                <h3 class="font-extrabold text-sm text-slateDark" id="indepBookingTitle">Nombre Terapeuta</h3>
             </div>
-            <div class="grid grid-cols-2 gap-3">
+            <span class="text-xs font-black text-forest" id="indepBookingPrice">$25.000 / Sesión</span>
+        </div>
+        <div class="space-y-3 text-xs">
+            <div>
+                <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Nombre Completo Paciente</label>
+                <input type="text" id="indepPatientName" placeholder="Ej: Francisco Mora" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Teléfono WhatsApp de Contacto</label>
-                    <input type="text" id="regLocalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Fecha</label>
+                    <input type="date" id="indepBookingDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Beneficio / Descuento Ofrecido</label>
-                    <input type="text" id="regLocalBenefit" placeholder="Ej: 15% DCTO con receta" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Hora</label>
+                    <select id="indepBookingTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+                        <option value="10:00">10:00 hrs</option>
+                        <option value="12:00">12:00 hrs</option>
+                        <option value="15:30">15:30 hrs</option>
+                        <option value="17:00">17:00 hrs</option>
+                    </select>
                 </div>
             </div>
-            <div>
-                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Descripción del Servicio / Especialidad</label>
-                <textarea id="regLocalDesc" placeholder="Describe los servicios que entregas a la comunidad..." class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest h-20 resize-none"></textarea>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Celular WhatsApp</label>
+                    <input type="text" id="indepPatientPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Correo Electrónico</label>
+                    <input type="email" id="indepPatientEmail" placeholder="correo@ejemplo.com" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+                </div>
             </div>
-            <button onclick="saveNewB2BLocal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-4 rounded-2xl text-xs shadow-md transition uppercase tracking-wider">
-                Guardar y Publicar Local 🚀
-            </button>
+            <div class="flex items-start space-x-2 pt-1">
+                <input type="checkbox" id="indepAgreeTerms" class="mt-0.5 accent-forest h-4 w-4">
+                <label for="indepAgreeTerms" class="text-[9px] text-gray-500 font-semibold">
+                    Consiento el tratamiento seguro de mis datos en conformidad con la Ley N° 21.663.
+                </label>
+            </div>
+        </div>
+        <div class="flex space-x-2 pt-2">
+            <button onclick="closeIndependentBookingModal()" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl text-xs">Cancelar</button>
+            <button onclick="bookIndependentAppointmentReal()" class="w-2/3 bg-forest text-white font-extrabold py-3 rounded-xl text-xs uppercase shadow-md">Confirmar Cita 📅</button>
         </div>
     </div>
 </div>
 
-<!-- MODAL DE MAPA INTERACTIVO (TRAZAR TU RUTA) CON BOTÓN DE RETORNO DESTACADO -->
+<!-- MODAL RESERVA DE RESTAURANTE Y GIMNASIO -->
+<div id="restaurantBookingModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-gray-100 p-6 space-y-4 text-left animate-fadeIn">
+        <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+            <div>
+                <span class="text-[9px] uppercase font-bold text-forest block" id="resBookingModalSub">Reserva B2B</span>
+                <h3 class="font-extrabold text-sm text-slateDark" id="resBookingModalTitle">Reservar Mesa / Hora</h3>
+            </div>
+            <div id="bookingEstName" class="text-right">
+                <span class="block text-slateDark font-extrabold">Establecimiento</span>
+            </div>
+        </div>
+        <div class="space-y-3 text-xs">
+            <div>
+                <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Nombre Completo</label>
+                <input type="text" id="resModalName" placeholder="Ej: Francisco Mora" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Fecha</label>
+                    <input type="date" id="resModalDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Hora</label>
+                    <select id="resModalTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+                        <option value="12:30">12:30 hrs</option>
+                        <option value="14:00">14:00 hrs</option>
+                        <option value="19:30">19:30 hrs</option>
+                        <option value="21:00">21:00 hrs</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Personas / Alumnos</label>
+                    <select id="resModalGuests" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+                        <option value="1">1 Persona</option>
+                        <option value="2" selected>2 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="6">6 Personas</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-[9px] font-bold text-gray-500 uppercase mb-1">Teléfono Celular WhatsApp</label>
+                <input type="text" id="resModalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl font-semibold">
+            </div>
+            <div class="flex items-start space-x-2 pt-1">
+                <input type="checkbox" id="resModalAgreeTerms" class="mt-0.5 accent-forest h-4 w-4">
+                <label for="resModalAgreeTerms" class="text-[9px] text-gray-500 font-semibold">
+                    Consiento el tratamiento seguro de mis datos en conformidad con la Ley N° 21.663.
+                </label>
+            </div>
+        </div>
+        <div class="flex space-x-2 pt-2">
+            <button onclick="closeRestaurantBookingModal()" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl text-xs">Cancelar</button>
+            <button onclick="bookRestaurantTableReal()" class="w-2/3 bg-forest text-white font-extrabold py-3 rounded-xl text-xs uppercase shadow-md">Confirmar Reserva 🍽️</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL MAPA TRAZAR RUTA (CON BOTÓN DESTACADO VOLVER A LA PÁGINA) -->
 <div id="mapModal" class="fixed inset-0 bg-slateDark/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col h-[85vh] overflow-hidden animate-fadeIn relative">
-        
-        <!-- Cabecera con Botón de Retorno Directo "Volver a la página" -->
         <div class="bg-forest text-white p-4 flex items-center justify-between flex-shrink-0">
             <div class="flex items-center space-x-2.5">
                 <i class="fa-solid fa-map-location-dot text-lg text-accent"></i>
@@ -486,27 +689,25 @@
                     <p class="text-[9px] text-white/80" id="mapModalSub">Calculando viaje en tiempo real...</p>
                 </div>
             </div>
+            <!-- BOTÓN DESTACADO DE RETORNO -->
             <button onclick="closeMapModal()" class="bg-white text-forest hover:bg-accent hover:text-white font-black px-4 py-2 rounded-2xl text-xs transition shadow-md flex items-center space-x-1.5 focus:outline-none">
                 <i class="fa-solid fa-arrow-left"></i>
                 <span>Volver a la Página / Cerrar Mapa ✖️</span>
             </button>
         </div>
 
-        <!-- Indicaciones de Ruta -->
         <div class="bg-yellow-50 p-3.5 border-b border-gray-100 text-[10px] text-yellow-800 font-semibold leading-relaxed flex-shrink-0" id="mapModalExplain">
             Trazando ruta de navegación óptima hacia el local...
         </div>
 
-        <!-- Contenedor del Mapa -->
         <div class="flex-grow w-full relative p-2">
             <div id="modalMapContainer" style="height: 100%; min-height: 380px; width: 100%; border-radius: 1.5rem; overflow: hidden;"></div>
         </div>
 
-        <!-- Footer con Botón de Retorno Adicional de Resguardo -->
         <div class="p-3 bg-gray-50 border-t border-gray-100 flex justify-center flex-shrink-0">
             <button onclick="closeMapModal()" class="w-full sm:w-auto bg-slateDark hover:bg-slateDark/90 text-white font-extrabold py-3 px-8 rounded-2xl text-xs transition shadow-md uppercase tracking-wider flex items-center justify-center space-x-2">
                 <i class="fa-solid fa-circle-xmark text-accent"></i>
-                <span>Volver a la Página Principal</span>
+                <span>Volver a la Página / Cerrar Mapa ✖️</span>
             </button>
         </div>
     </div>
@@ -517,7 +718,7 @@
     © 2026 LAWENMOLL Chile. Directorio y Ecosistema de Salud Protegido.
 </footer>
 
-<!-- INTERACTIVIDAD CON SUPABASE -->
+<!-- SCRIPT PRINCIPAL DE INTERACTIVIDAD -->
 <script>
     const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo';
@@ -527,26 +728,122 @@
     let activeTherapy = 'all';
 
     let allClinicsData = [
-        { id: 1, nombre: 'Centro Holístico "Lawen Ko"', direccion: 'Av. Providencia 1240, Providencia', descripcion: 'Coordinación de pautas, kinesiología y medicina integrativa.', beneficio_detalle: 'Matrícula costo cero y 15% DCTO.', telefono_contacto: '+56 2 2843 9201', region_chile: 'Región Metropolitana', latitud: -33.4285, longitud: -70.6125 },
-        { id: 10, nombre: 'Centro de Salud "Meli Rewe"', direccion: 'Av. Alemania 0850, Temuco', descripcion: 'Herbolaria tradicional ancestral Mapuche y kinesiología.', beneficio_detalle: '20% DCTO primera consulta.', telefono_contacto: '+56 45 2384 1029', region_chile: 'La Araucanía', latitud: -38.7396, longitud: -72.6028 }
+        {
+            id: 1,
+            nombre: 'Centro Holístico "Lawen Ko"',
+            direccion: 'Av. Providencia 1240, Providencia, Santiago',
+            descripcion: 'Nuestro centro clínico principal que coordina todas las pautas, kinesiología rehabilitadora, medicina general integrativa y telemedicina cifrada de la red LAWENMOLL.',
+            beneficio_detalle: 'Matrícula costo cero y 15% DCTO en consultas de evaluación.',
+            telefono_contacto: '+56 2 2843 9201',
+            foto_local_1: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=150&auto=format&fit=crop',
+            foto_local_2: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=400&auto=format&fit=crop',
+            tipo_establecimiento: 'clínica',
+            region_chile: 'Región Metropolitana',
+            latitud: -33.4285,
+            longitud: -70.6125,
+            horarios: 'Lun a Sáb: 08:30 - 20:30 hrs'
+        },
+        {
+            id: 10,
+            nombre: 'Centro de Salud Integrativa "Meli Rewe"',
+            direccion: 'Avenida Alemania 0850, Temuco',
+            descripcion: 'Centro especializado en herbolaria tradicional ancestral Mapuche combinada con tratamientos kinesiológicos integrales y pautas metabólicas limpias.',
+            beneficio_detalle: '20% DCTO en tu primera consulta presencial o telemática.',
+            telefono_contacto: '+56 45 2384 1029',
+            foto_local_1: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=150&auto=format&fit=crop',
+            foto_local_2: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=400&auto=format&fit=crop',
+            tipo_establecimiento: 'clínica',
+            region_chile: 'La Araucanía',
+            latitud: -38.7396,
+            longitud: -72.6028,
+            horarios: 'Lun a Vie: 09:00 - 19:00 hrs'
+        }
     ];
 
     let allRestaurantsData = [
-        { id: 4, nombre: 'Restaurante "Huerto Orgánico"', direccion: 'General Holley 142, Providencia', descripcion: 'Ingredientes 100% orgánicos libres de pesticidas.', beneficio_detalle: '15% DCTO con receta digital.', telefono_contacto: '+56 9 8472 1049', region_chile: 'Región Metropolitana', latitud: -33.4225, longitud: -70.6105 }
+        {
+            id: 4,
+            nombre: 'Restaurante "Huerto Orgánico"',
+            direccion: 'General Holley 142, Providencia, Santiago',
+            descripcion: 'Alimentación consciente y ecológica. Cocinamos con ingredientes 100% orgánicos libres de pesticidas, cosechados por agricultores locales de la Región Metropolitana.',
+            beneficio_detalle: '15% de descuento en el total de tu consumo o menús semanales presentando tu código LAWENMOLL.',
+            telefono_contacto: '+56 9 8472 1049',
+            foto_local_1: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150&auto=format&fit=crop',
+            foto_local_2: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400&auto=format&fit=crop',
+            tipo_establecimiento: 'restaurante',
+            region_chile: 'Región Metropolitana',
+            latitud: -33.4225,
+            longitud: -70.6105
+        }
     ];
 
     let allGymsData = [
-        { id: 5, nombre: 'Gimnasio "SportLife Integrativo"', direccion: 'Av. Vitacura 3568, Vitacura', descripcion: 'Fuerza terapéutica guiada por profesionales.', beneficio_detalle: 'Matrícula Gratis + 3 Días.', telefono_contacto: '+56 9 1234 5678', region_chile: 'Región Metropolitana', latitud: -33.4350, longitud: -70.6190 }
+        {
+            id: 5,
+            nombre: 'Gimnasio "SportLife Integrativo"',
+            direccion: 'Av. Vitacura 3568, Vitacura, Santiago',
+            descripcion: 'Espacio dedicado al movimiento y la fuerza terapéutica guiada por profesionales. Ideal para lumbago, acondicionamiento metabólico y reducción de grasa abdominal.',
+            beneficio_detalle: 'Matrícula 100% Gratis + Pase Libre de 3 días consecutivos.',
+            telefono_contacto: '+56 9 1234 5678',
+            foto_local_1: 'https://images.unsplash.com/photo-1571731956672-f2b94d7db0cb?q=80&w=150&auto=format&fit=crop',
+            foto_local_2: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop',
+            tipo_establecimiento: 'gym',
+            region_chile: 'Región Metropolitana',
+            latitud: -33.4350,
+            longitud: -70.6190
+        }
     ];
 
     let allFarmaciasData = [
-        { id: 2, nombre: 'Farmacia Herbolaria "El Canelo"', direccion: 'Av. Providencia 1240, Providencia', descripcion: 'Tinturas madre, adaptógenos y aceites esenciales.', beneficio_detalle: '20% DCTO en fitoterapéuticos.', telefono_contacto: '+56 2 2843 9201', region_chile: 'Región Metropolitana' },
-        { id: 3, nombre: 'Farmacia Mapuche "Makewe"', direccion: 'San Francisco 354, Santiago / Temuco', descripcion: 'Preparados herbales tradicionales y cosmética natural.', beneficio_detalle: 'Despacho gratis crónicos.', telefono_contacto: '+56 9 7482 1059', region_chile: 'La Araucanía' }
+        {
+            id: 2,
+            nombre: 'Farmacia Herbolaria "El Canelo"',
+            direccion: 'Av. Providencia 1240, Primer piso',
+            descripcion: 'Especialistas en tinturas madre, adaptógenos reguladores de cortisol, aceites esenciales puros y fitofármacos tradicionales chilenos.',
+            beneficio_detalle: '20% DCTO en fitoterapéuticos con tu receta digital.',
+            telefono_contacto: '+56 2 2843 9201',
+            foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop',
+            foto_local_2: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=400&auto=format&fit=crop',
+            region_chile: 'Región Metropolitana'
+        },
+        {
+            id: 3,
+            nombre: 'Farmacia Mapuche "Makewe"',
+            direccion: 'San Francisco 354, Santiago | Temuco',
+            descripcion: 'Preparados herbales tradicionales y cosmética natural elaborados de forma sostenible por recolectores y machis en comunidades de la Araucanía.',
+            beneficio_detalle: 'Despacho 100% GRATIS para pacientes crónicos.',
+            telefono_contacto: '+56 9 7482 1059',
+            foto_local_1: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=150&auto=format&fit=crop',
+            foto_local_2: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop',
+            region_chile: 'La Araucanía'
+        }
     ];
 
     let allTherapistsData = [
-        { nombre: 'Naturópata Maite Soler', especialidad: 'Consejería Herbal y Fitoterapia', telefono_contacto: '+56 9 8271 0938', tarifa_sesion: '$25.000', direccion_box: 'Av. Providencia 1450, Providencia', region_chile: 'Región Metropolitana' },
-        { nombre: 'Ps. Tomás Araya', especialidad: 'Psicólogo Clínico e Integrativo', telefono_contacto: '+56 9 7281 0948', tarifa_sesion: '$35.000', direccion_box: 'General Holley 142, Providencia', region_chile: 'Región Metropolitana' }
+        {
+            nombre: 'Naturópata Maite Soler',
+            especialidad: 'Consejería Herbal Pura, Fitoterapia y Remedios Ancestrales',
+            registro_sis: 'SIS-948201',
+            telefono_contacto: '+56 9 8271 0938',
+            tarifa_sesion: '$25.000',
+            direccion_box: 'Av. Providencia 1450, Providencia',
+            foto_profesional: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?q=80&w=200&auto=format&fit=crop',
+            region_chile: 'Región Metropolitana',
+            latitud: -33.4250,
+            longitud: -70.6120
+        },
+        {
+            nombre: 'Ps. Tomás Araya',
+            especialidad: 'Psicólogo Clínico Integrativo y Especialista en Neurodivergencias (TDAH/TEA)',
+            registro_sis: 'SIS-483921',
+            telefono_contacto: '+56 9 7281 0948',
+            tarifa_sesion: '$35.000',
+            direccion_box: 'General Holley 142, Providencia',
+            foto_profesional: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop',
+            region_chile: 'Región Metropolitana',
+            latitud: -33.4225,
+            longitud: -70.6105
+        }
     ];
 
     window.onload = function() {
@@ -560,6 +857,12 @@
 
     function filterAllByTherapy() {
         activeTherapy = document.getElementById('globalTherapyFilter').value;
+        renderAllGrids();
+    }
+
+    function selectTherapyPill(therapyValue) {
+        activeTherapy = therapyValue;
+        document.getElementById('globalTherapyFilter').value = therapyValue;
         renderAllGrids();
     }
 
@@ -579,9 +882,16 @@
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
                 <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                    <div class="flex items-center space-x-3">
+                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                        <div>
+                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                        </div>
+                    </div>
+                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
                     <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion} (${c.region_chile})</p>
+                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
                     <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="w-full bg-forest text-white font-extrabold py-2.5 rounded-xl text-[10px] uppercase">
                         Trazar Ruta (Mapa) 🗺️
                     </button>
@@ -598,12 +908,24 @@
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
                 <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                    <div class="flex items-center space-x-3">
+                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                        <div>
+                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                        </div>
+                    </div>
+                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
                     <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion} (${c.region_chile})</p>
-                    <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="w-full bg-forest text-white font-extrabold py-2.5 rounded-xl text-[10px] uppercase">
-                        Trazar Ruta (Mapa) 🗺️
-                    </button>
+                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="openRestaurantBookingModal('${c.nombre.replace(/'/g, '')}', 'restaurant')" class="bg-forest text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
+                            Reservar Mesa 🍽️
+                        </button>
+                        <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
+                            Trazar Ruta 🗺️
+                        </button>
+                    </div>
                 </div>
             `);
         });
@@ -617,12 +939,24 @@
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
                 <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                    <div class="flex items-center space-x-3">
+                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                        <div>
+                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                        </div>
+                    </div>
+                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
                     <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion} (${c.region_chile})</p>
-                    <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="w-full bg-forest text-white font-extrabold py-2.5 rounded-xl text-[10px] uppercase">
-                        Trazar Ruta (Mapa) 🗺️
-                    </button>
+                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="openRestaurantBookingModal('${c.nombre.replace(/'/g, '')}', 'gym')" class="bg-forest text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
+                            Agendar Clase 🏋️
+                        </button>
+                        <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
+                            Trazar Ruta 🗺️
+                        </button>
+                    </div>
                 </div>
             `);
         });
@@ -636,9 +970,16 @@
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
                 <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                    <div class="flex items-center space-x-3">
+                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                        <div>
+                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
+                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                        </div>
+                    </div>
+                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
                     <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion} (${c.region_chile})</p>
+                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
                 </div>
             `);
         });
@@ -652,9 +993,22 @@
             if (activeRegion !== 'all' && t.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
                 <div class="p-5 border border-gray-150 rounded-3xl bg-white shadow-sm space-y-3 text-left">
-                    <h3 class="font-bold text-xs text-slateDark">${t.nombre}</h3>
-                    <p class="text-[10px] text-gray-500">${t.especialidad}</p>
-                    <p class="text-[9px] text-forest font-bold"><i class="fa-solid fa-house"></i> ${t.direccion_box} (${t.region_chile})</p>
+                    <div class="flex items-center space-x-4">
+                        <img src="${t.foto_profesional}" class="w-14 h-14 rounded-full object-cover border-2 border-forest">
+                        <div>
+                            <h3 class="font-bold text-xs text-slateDark">${t.nombre}</h3>
+                            <p class="text-[10px] text-gray-500">${t.especialidad}</p>
+                            <p class="text-[9px] text-forest font-bold"><i class="fa-solid fa-house"></i> ${t.direccion_box} (${t.region_chile})</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 pt-2">
+                        <button onclick="openIndependentBookingModal('${t.nombre.replace(/'/g, '')}', '${t.tarifa_sesion}')" class="w-1/2 bg-forest text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
+                            Agendar Cita 📅
+                        </button>
+                        <button onclick="calculateIndependentRoute(${t.latitud}, ${t.longitud}, '${t.nombre.replace(/'/g, '')}', '${t.direccion_box.replace(/'/g, '')}')" class="w-1/2 bg-slateDark text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
+                            Cómo Llegar 🗺️
+                        </button>
+                    </div>
                 </div>
             `);
         });
@@ -666,7 +1020,9 @@
         document.querySelectorAll('.tab-btn').forEach(b => {
             b.className = "tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white";
         });
-        btn.className = "tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm";
+        if (btn) {
+            btn.className = "tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm";
+        }
     }
 
     function openB2BRegisterModal() {
@@ -677,56 +1033,109 @@
         document.getElementById('b2bRegisterModal').classList.add('hidden');
     }
 
-    function saveNewB2BLocal() {
-        const name = document.getElementById('regLocalName').value.trim();
-        const type = document.getElementById('regLocalType').value;
-        const region = document.getElementById('regLocalRegion').value;
-        const address = document.getElementById('regLocalAddress').value.trim();
-        const phone = document.getElementById('regLocalPhone').value.trim();
-        const benefit = document.getElementById('regLocalBenefit').value.trim();
-        const desc = document.getElementById('regLocalDesc').value.trim();
+    function openLocalLoginModal() {
+        alert("🏢 Acceso de Aliados B2B: Ingresa tu correo y contraseña comercial registrados para entrar a tu panel.");
+    }
 
-        if (!name || !address) {
-            alert("⚠️ Por favor ingresa el Nombre Comercial y la Dirección del Local.");
+    function openIndependentBookingModal(name, rate) {
+        document.getElementById('indepBookingTitle').innerText = name;
+        document.getElementById('indepBookingPrice').innerText = rate + ' / Sesión';
+        document.getElementById('independentBookingModal').classList.remove('hidden');
+    }
+
+    function closeIndependentBookingModal() {
+        document.getElementById('independentBookingModal').classList.add('hidden');
+    }
+
+    function bookIndependentAppointmentReal() {
+        const name = document.getElementById('indepPatientName').value.trim();
+        const date = document.getElementById('indepBookingDate').value;
+        const time = document.getElementById('indepBookingTime').value;
+        const phone = document.getElementById('indepPatientPhone').value;
+
+        if (!name || !date || phone === '+569') {
+            alert('⚠️ Por favor ingresa tu Nombre, Fecha y Teléfono celular.');
             return;
         }
 
-        const newObj = {
-            id: Date.now(),
-            nombre: name,
-            direccion: address,
-            descripcion: desc || 'Local afiliado a la red LAWENMOLL.',
-            beneficio_detalle: benefit || 'Beneficios exclusivos LAWENMOLL',
-            telefono_contacto: phone,
-            region_chile: region,
-            latitud: -33.4285,
-            longitud: -70.6125
-        };
+        alert(`🎉 ¡CITA AGENDADA CON ÉXITO!
 
-        if (type === 'clínica') allClinicsData.unshift(newObj);
-        else if (type === 'restaurante') allRestaurantsData.unshift(newObj);
-        else if (type === 'gym') allGymsData.unshift(newObj);
-        else if (type === 'farmacia') allFarmaciasData.unshift(newObj);
-        else if (type === 'terapeuta') allTherapistsData.unshift({
-            nombre: name,
-            especialidad: desc || 'Especialista Registrado',
-            telefono_contacto: phone,
-            tarifa_sesion: benefit || '$25.000',
-            direccion_box: address,
-            region_chile: region
-        });
+• Terapeuta: ${document.getElementById('indepBookingTitle').innerText}
+• Paciente: ${name}
+• Fecha/Hora: ${date} - ${time} hrs`);
+        closeIndependentBookingModal();
+    }
 
-        renderAllGrids();
-        closeB2BRegisterModal();
-        alert(`🎉 ¡Local "${name}" registrado con éxito en ${region}!`);
+    function openRestaurantBookingModal(name, type) {
+        document.getElementById('resBookingModalTitle').innerText = type === 'gym' ? 'Inscripción a Clase 🏋️' : 'Reservar Mesa 🍽️';
+        document.getElementById('bookingEstName').innerText = name;
+        document.getElementById('restaurantBookingModal').classList.remove('hidden');
+    }
+
+    function closeRestaurantBookingModal() {
+        document.getElementById('restaurantBookingModal').classList.add('hidden');
+    }
+
+    function bookRestaurantTableReal() {
+        const name = document.getElementById('resModalName').value.trim();
+        const date = document.getElementById('resModalDate').value;
+        const time = document.getElementById('resModalTime').value;
+
+        if (!name || !date) {
+            alert('⚠️ Por favor completa tu Nombre y Fecha.');
+            return;
+        }
+
+        alert(`🎉 ¡RESERVA CONFIRMADA CON ÉXITO!
+
+• Nombre: ${name}
+• Fecha/Hora: ${date} - ${time} hrs`);
+        closeRestaurantBookingModal();
+    }
+
+    function bookClinicalAppointment() {
+        const spec = document.getElementById('clinicalSpecialist').value;
+        const date = document.getElementById('clinicalDate').value;
+        const time = document.getElementById('clinicalTime').value;
+        const name = document.getElementById('clinicalPatientName').value.trim();
+
+        if (!name || !date) {
+            alert('⚠️ Por favor completa el Nombre del Paciente y la Fecha.');
+            return;
+        }
+
+        alert(`🎉 ¡HORA CLÍNICA AGENDADA CON ÉXITO!
+
+• Especialista: ${spec}
+• Paciente: ${name}
+• Fecha/Hora: ${date} - ${time} hrs`);
+    }
+
+    function orderMedicine() {
+        const code = document.getElementById('pharmaRecipeCode').value.trim();
+        if (!code) {
+            alert('⚠️ Por favor ingresa tu Código de Receta.');
+            return;
+        }
+        alert('🎉 ¡PEDIDO DE RECETA ENVIADO POR WHATSAPP CON ÉXITO!');
+    }
+
+    function cancelAppointmentFromUser() {
+        const code = document.getElementById('cancelBookingCode').value.trim();
+        if (!code) {
+            alert('⚠️ Por favor ingresa el Código de Confirmación.');
+            return;
+        }
+        alert(`🎉 ¡RESERVA ${code.toUpperCase()} ANULADA Y LIBERADA CON ÉXITO!`);
+        document.getElementById('cancelBookingCode').value = '';
     }
 
     let modalMap = null;
+
     function calculateIndependentRoute(lat, lon, name, address) {
         document.getElementById('mapModalTitle').innerText = `Ruta hacia: ${name}`;
         document.getElementById('mapModalSub').innerText = `Ubicación: ${address}`;
         document.getElementById('mapModal').classList.remove('hidden');
-        document.body.classList.add('overflow-hidden');
 
         setTimeout(() => {
             if (!modalMap) {
@@ -736,146 +1145,12 @@
                 modalMap.setView([lat, lon], 15);
             }
             L.marker([lat, lon]).addTo(modalMap).bindPopup(`<b>${name}</b><br>${address}`).openPopup();
-            modalMap.invalidateSize();
         }, 200);
     }
 
     function closeMapModal() {
-        const modal = document.getElementById('mapModal');
-        if (modal) modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
+        document.getElementById('mapModal').classList.add('hidden');
     }
 </script>
-
-<!-- MODAL DE AGENDAMIENTO INDEPENDIENTE / CLINICO / CLASES / MESAS -->
-<div id="independentBookingModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col p-6 space-y-4 animate-fadeIn text-left">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-            <div class="flex items-center space-x-2.5">
-                <span class="text-2xl">📅</span>
-                <div>
-                    <h3 class="font-extrabold text-sm text-forest uppercase tracking-wider" id="indepBookingTitle">Agendar Cita Privada / Evaluación</h3>
-                    <p class="text-[9px] text-gray-400 font-semibold" id="indepBookingPrice">Atención en red LAWENMOLL</p>
-                </div>
-            </div>
-            <button onclick="closeIndependentBookingModal()" class="text-gray-400 hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-
-        <div class="space-y-3">
-            <div>
-                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre Completo del Paciente / Cliente</label>
-                <input type="text" id="indepPatientName" placeholder="Ej: María Silva" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-            </div>
-            <div class="grid grid-cols-2 gap-2.5">
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha de Reserva</label>
-                    <input type="date" id="indepBookingDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                </div>
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Hora de Reserva</label>
-                    <select id="indepBookingTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                        <option value="09:30">09:30 hrs</option>
-                        <option value="11:00">11:00 hrs</option>
-                        <option value="15:30">15:30 hrs</option>
-                        <option value="17:00">17:00 hrs</option>
-                        <option value="18:30">18:30 hrs</option>
-                    </select>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2.5">
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Teléfono WhatsApp 📱</label>
-                    <input type="text" id="indepPatientPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                </div>
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Electrónico 📧</label>
-                    <input type="email" id="indepPatientEmail" placeholder="tu@correo.cl" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                </div>
-            </div>
-
-            <div class="flex items-start space-x-2 bg-forest/5 p-3 rounded-xl border border-forest/10">
-                <input type="checkbox" id="indepAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
-                <label for="indepAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer font-semibold">
-                    Consiento el tratamiento de mis datos personales e información de cita bajo la Ley Marco de Ciberseguridad N° 21.663.
-                </label>
-            </div>
-        </div>
-
-        <button onclick="bookIndependentAppointmentReal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition uppercase tracking-wider flex items-center justify-center space-x-2">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span>Confirmar Cita / Reserva & Notificar por WhatsApp</span>
-        </button>
-    </div>
-</div>
-
-<!-- MODAL RESERVA DE RESTAURANTE Y CLASE DE GIMNASIO -->
-<div id="restaurantBookingModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col p-6 space-y-4 animate-fadeIn text-left">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-            <div class="flex items-center space-x-3">
-                <img id="bookingEstLogo" src="lawenmoll_logo.jpg" class="w-10 h-10 rounded-full object-cover border border-forest/20 shadow-sm">
-                <div>
-                    <h3 class="font-extrabold text-sm text-forest uppercase tracking-wider" id="resBookingModalTitle">Reservar Mesa / Hora</h3>
-                    <p class="text-[9px] text-gray-400 font-semibold" id="resBookingModalSub">Reserva de mesa con descuento exclusivo B2B</p>
-                </div>
-            </div>
-            <button onclick="closeRestaurantBookingModal()" class="text-gray-400 hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-
-        <div class="bg-gray-50 border border-gray-200 p-3 rounded-2xl flex justify-between items-center" id="bookingEstName">
-            <span class="text-xs font-bold text-slateDark">Establecimiento Seleccionado</span>
-        </div>
-
-        <div class="space-y-3">
-            <div>
-                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Tu Nombre Completo</label>
-                <input type="text" id="resModalName" placeholder="Ej: María Silva" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-            </div>
-            <div class="grid grid-cols-3 gap-2">
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha</label>
-                    <input type="date" id="resModalDate" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                </div>
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Hora</label>
-                    <select id="resModalTime" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                        <option value="12:30">12:30 hrs</option>
-                        <option value="13:30">13:30 hrs</option>
-                        <option value="15:00">15:00 hrs</option>
-                        <option value="19:30">19:30 hrs</option>
-                        <option value="20:30">20:30 hrs</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Personas</label>
-                    <select id="resModalGuests" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-                        <option value="1">1 Persona</option>
-                        <option value="2" selected>2 Personas</option>
-                        <option value="3">3 Personas</option>
-                        <option value="4">4 Personas</option>
-                        <option value="5+">5+ Personas</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Teléfono Celular WhatsApp 📱</label>
-                <input type="text" id="resModalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
-            </div>
-
-            <div class="flex items-start space-x-2 bg-forest/5 p-3 rounded-xl border border-forest/10">
-                <input type="checkbox" id="resModalAgreeTerms" class="mt-0.5 accent-forest cursor-pointer h-3.5 w-3.5 flex-shrink-0">
-                <label for="resModalAgreeTerms" class="text-[9px] text-gray-500 leading-snug cursor-pointer font-semibold">
-                    Consiento la transmisión segura de mis datos de reserva bajo encriptación Ley Marco N° 21.663.
-                </label>
-            </div>
-        </div>
-
-        <button onclick="bookRestaurantTableReal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition uppercase tracking-wider flex items-center justify-center space-x-2">
-            <i class="fa-solid fa-check-circle"></i>
-            <span>Confirmar Reserva & Enviar por WhatsApp</span>
-        </button>
-    </div>
-</div>
-
 </body>
 </html>
