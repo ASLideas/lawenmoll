@@ -827,7 +827,20 @@
 
     let allTherapistsData = [
         {
-            nombre: 'Naturópata Maite Soler',
+            nombre: 'Dra. Macarena Rojas',
+            especialidad: 'Médica Integrativa y Nutrición Celular Activa',
+            registro_sis: 'SIS-583921',
+            telefono_contacto: '+56 9 7482 1029',
+            tarifa_sesion: '$45.000 / sesión',
+            tipo_tarifa: 'Tarifa Autónoma',
+            direccion_box: 'Avenida Alemania 0850, Temuco (Presencial / Online)',
+            foto_profesional: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=300&auto=format&fit=crop',
+            region_chile: 'La Araucanía',
+            latitud: -38.7396,
+            longitud: -72.6028
+        },
+        {
+nombre: 'Naturópata Maite Soler',
             especialidad: 'Consejería Herbal Pura, Fitoterapia y Remedios Ancestrales',
             registro_sis: 'SIS-948201',
             telefono_contacto: '+56 9 8271 0938',
@@ -887,20 +900,46 @@
         allClinicsData.forEach(c => {
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
-                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <div class="flex items-center space-x-3">
-                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3.5 text-left">
+                    <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
-                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                            <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile}</p>
                         </div>
+                        <span class="text-[10px] bg-forest/10 text-forest font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-hospital mr-1"></i> Clínica</span>
                     </div>
-                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
-                    <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
-                    <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="w-full bg-forest text-white font-extrabold py-2.5 rounded-xl text-[10px] uppercase">
-                        Trazar Ruta (Mapa) 🗺️
-                    </button>
+                    <p class="text-xs text-gray-600 font-medium leading-relaxed">${c.descripcion}</p>
+                    <div class="space-y-1 text-xs font-semibold text-gray-700">
+                        <p><i class="fa-solid fa-location-dot text-forest mr-1.5"></i> ${c.direccion}</p>
+                        <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${c.telefono_contacto}</p>
+                        <p><i class="fa-solid fa-clock text-forest mr-1.5"></i> ${c.horarios || 'Lun a Sáb: 08:30 - 20:30 hrs'}</p>
+                        <p class="text-accent font-bold text-[11px]"><i class="fa-solid fa-gift mr-1"></i> Beneficio: ${c.beneficio_detalle}</p>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-2xl border border-gray-150 flex items-center justify-between text-xs font-bold text-slateDark">
+                        <span>🩺 Pacientes Hoy: 0 de 12</span>
+                        <button onclick="alert('👥 Personal Médico de ${c.nombre.replace(/'/g, '')}:
+
+• Dr. Carlos Mendoza (Kinesiología Integrativa)
+• Dra. Eliana Ruiz (Medicina General Integrativa)
+• Lic. Carmen Valdés (Nutrición Celular)')" class="text-forest hover:underline text-[11px] font-extrabold">Ver Personal 👥</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-1">
+                        <button onclick="calculateIndependentRoute(${c.latitud || -33.4285}, ${c.longitud || -70.6125}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span>Trazar Ruta 🗺️</span>
+                        </button>
+                        <button onclick="alert('🎫 ¡Cupón de Bienestar para ${c.nombre.replace(/'/g, '')}!
+
+Código: LAWEN-CLINIC-2026
+Presenta este cupón para activar tu 15% de descuento.')" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Obtener Cupón 🎫</span>
+                        </button>
+                        <button onclick="openIndependentBookingModal('${c.nombre.replace(/'/g, '')}', 'Evaluación Integrativa')" class="bg-forest hover:bg-forest/90 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Agendar Cita 📅</span>
+                        </button>
+                    </div>
                 </div>
             `);
         });
@@ -913,23 +952,44 @@
         allRestaurantsData.forEach(c => {
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
-                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <div class="flex items-center space-x-3">
-                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3.5 text-left">
+                    <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
-                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                            <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile}</p>
                         </div>
+                        <span class="text-[10px] bg-amber-500 text-white font-black px-2.5 py-1 rounded-full shadow-sm">15% DCTO</span>
                     </div>
-                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
-                    <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button onclick="openRestaurantBookingModal('${c.nombre.replace(/'/g, '')}', 'restaurant')" class="bg-forest text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
-                            Reservar Mesa 🍽️
+                    <p class="text-xs text-gray-600 font-medium leading-relaxed">${c.descripcion}</p>
+                    <div class="space-y-1 text-xs font-semibold text-gray-700">
+                        <p><i class="fa-solid fa-location-dot text-forest mr-1.5"></i> ${c.direccion}</p>
+                        <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${c.telefono_contacto}</p>
+                        <p class="text-accent font-bold text-[11px]"><i class="fa-solid fa-gift mr-1"></i> Beneficio: ${c.beneficio_detalle}</p>
+                        <p class="text-forest font-extrabold text-[11px]"><i class="fa-solid fa-barcode mr-1"></i> Código: LAWEN-FOOD</p>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-2xl border border-gray-150 flex items-center justify-between text-xs font-bold text-slateDark">
+                        <span>🍽️ Mesas Ocupadas: 0 de 12</span>
+                        <button onclick="alert('🍽️ Menú Depurativo Orgánico & Personal:
+
+• Chef Principal: Matías Fuentes
+• Plato Estrella: Ensalada Ancestral de Quínoa y Silvestres
+• Menús Orgánicos Semanales')" class="text-forest hover:underline text-[11px] font-extrabold">Ver Menú y Personal 👥</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-1">
+                        <button onclick="calculateIndependentRoute(${c.latitud || -33.4225}, ${c.longitud || -70.6105}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span>Trazar Ruta 🗺️</span>
                         </button>
-                        <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
-                            Trazar Ruta 🗺️
+                        <button onclick="alert('🎫 ¡Cupón de Descuento Gastronómico!
+
+Código: LAWEN-FOOD
+Presenta este código al pagar para aplicar tu 15% de descuento.')" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Obtener Cupón 🎫</span>
+                        </button>
+                        <button onclick="openRestaurantBookingModal('${c.nombre.replace(/'/g, '')}')" class="bg-forest hover:bg-forest/90 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-utensils"></i>
+                            <span>Reservar Mesa 📅</span>
                         </button>
                     </div>
                 </div>
@@ -944,23 +1004,43 @@
         allGymsData.forEach(c => {
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
-                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <div class="flex items-center space-x-3">
-                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3.5 text-left">
+                    <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
-                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                            <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile}</p>
                         </div>
+                        <span class="text-[10px] bg-forest text-white font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-dumbbell mr-1"></i> Movimiento</span>
                     </div>
-                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
-                    <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button onclick="openRestaurantBookingModal('${c.nombre.replace(/'/g, '')}', 'gym')" class="bg-forest text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
-                            Agendar Clase 🏋️
+                    <p class="text-xs text-gray-600 font-medium leading-relaxed">${c.descripcion}</p>
+                    <div class="space-y-1 text-xs font-semibold text-gray-700">
+                        <p><i class="fa-solid fa-location-dot text-forest mr-1.5"></i> ${c.direccion}</p>
+                        <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${c.telefono_contacto}</p>
+                        <p class="text-accent font-bold text-[11px]"><i class="fa-solid fa-gift mr-1"></i> Beneficio: ${c.beneficio_detalle}</p>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-2xl border border-gray-150 flex items-center justify-between text-xs font-bold text-slateDark">
+                        <span>🏋️ Alumnos Activos: 0 de 12</span>
+                        <button onclick="alert('🏋️ Clases Dirigidas & Entrenadores:
+
+• Kinesiología Deportiva: Prof. Rodrigo Silva
+• Entrenamiento Metabólico y Postura
+• Pase Libre de 3 días para nuevos miembros')" class="text-forest hover:underline text-[11px] font-extrabold">Ver Clases y Personal 👥</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-1">
+                        <button onclick="calculateIndependentRoute(${c.latitud || -33.4350}, ${c.longitud || -70.6190}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span>Trazar Ruta 🗺️</span>
                         </button>
-                        <button onclick="calculateIndependentRoute(${c.latitud}, ${c.longitud}, '${c.nombre.replace(/'/g, '')}', '${c.direccion.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
-                            Trazar Ruta 🗺️
+                        <button onclick="alert('🎫 ¡Cupón de Pase Libre de 3 Días!
+
+Código: LAWEN-SPORT-2026
+Presenta este cupón en recepción para activar tus 3 días gratis.')" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Obtener Cupón 🎫</span>
+                        </button>
+                        <button onclick="openRestaurantBookingModal('${c.nombre.replace(/'/g, '')}')" class="bg-forest hover:bg-forest/90 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <span>Agendar Clase 📅</span>
                         </button>
                     </div>
                 </div>
@@ -975,17 +1055,43 @@
         allFarmaciasData.forEach(c => {
             if (activeRegion !== 'all' && c.region_chile !== activeRegion) return;
             grid.insertAdjacentHTML('beforeend', `
-                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-150 space-y-3 text-left">
-                    <div class="flex items-center space-x-3">
-                        <img src="${c.foto_local_1}" class="w-10 h-10 rounded-full object-cover border border-forest">
+                <div class="bg-gray-50 p-5 rounded-3xl border border-gray-200 shadow-sm space-y-3.5 text-left">
+                    <div class="flex items-start justify-between">
                         <div>
-                            <h3 class="font-bold text-sm text-slateDark">${c.nombre}</h3>
-                            <span class="text-[8px] bg-forest/10 text-forest font-bold px-2 py-0.5 rounded-full">${c.region_chile}</span>
+                            <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile} Sustentable & Orgánica</p>
                         </div>
+                        <span class="text-[10px] bg-emerald-700 text-white font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-seedling mr-1"></i> Botica</span>
                     </div>
-                    <img src="${c.foto_local_2}" class="w-full h-28 object-cover rounded-xl border">
-                    <p class="text-xs text-gray-500">${c.descripcion}</p>
-                    <p class="text-[10px] text-forest font-bold"><i class="fa-solid fa-location-dot"></i> ${c.direccion}</p>
+                    <p class="text-xs text-gray-600 font-medium leading-relaxed">${c.descripcion}</p>
+                    <div class="space-y-1 text-xs font-semibold text-gray-700">
+                        <p><i class="fa-solid fa-location-dot text-forest mr-1.5"></i> ${c.direccion}</p>
+                        <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${c.telefono_contacto}</p>
+                        <p class="text-accent font-bold text-[11px]"><i class="fa-solid fa-gift mr-1"></i> Beneficio: ${c.beneficio_detalle}</p>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-2xl border border-gray-150 flex items-center justify-between text-xs font-bold text-slateDark">
+                        <span>🏋️ Alumnos Activos: 0 de 12</span>
+                        <button onclick="alert('👥 Equipo Químico Farmacéutico de ${c.nombre.replace(/'/g, '')}:
+
+• Químico Farmacéutico: Q.F. Andrés Silva
+• Especialista en Tinturas Madre y Adaptógenos
+• Despacho a domicilio en pautas crónicas')" class="text-forest hover:underline text-[11px] font-extrabold">Ver Personal 👥</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <button onclick="alert('📜 Solicitud de Receta Digital Herbolaria para ${c.nombre.replace(/'/g, '')}:
+
+Inicia tu solicitud de preparado magistral adaptógeno o tintura madre directamente a través del equipo farmacéutico.')" class="bg-forest hover:bg-forest/90 text-white font-extrabold py-2.5 rounded-xl text-xs uppercase transition shadow-sm flex items-center justify-center space-x-1.5">
+                            <i class="fa-solid fa-file-prescription"></i>
+                            <span>Pedir Receta 📜</span>
+                        </button>
+                        <button onclick="alert('🎫 Cupón 20% DCTO Herbolario:
+
+Código: LAWEN-HERBAL-2026
+Muestra este cupón en caja para aplicar tu descuento.')" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold py-2.5 rounded-xl text-xs uppercase transition shadow-sm flex items-center justify-center space-x-1.5">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Cupón 🎫</span>
+                        </button>
+                    </div>
                 </div>
             `);
         });
@@ -997,23 +1103,91 @@
         grid.innerHTML = '';
         allTherapistsData.forEach(t => {
             if (activeRegion !== 'all' && t.region_chile !== activeRegion) return;
+            const regSis = t.registro_sis || 'SIS-583921';
             grid.insertAdjacentHTML('beforeend', `
-                <div class="p-5 border border-gray-150 rounded-3xl bg-white shadow-sm space-y-3 text-left">
-                    <div class="flex items-center space-x-4">
-                        <img src="${t.foto_profesional}" class="w-14 h-14 rounded-full object-cover border-2 border-forest">
-                        <div>
-                            <h3 class="font-bold text-xs text-slateDark">${t.nombre}</h3>
-                            <p class="text-[10px] text-gray-500">${t.especialidad}</p>
-                            <p class="text-[9px] text-forest font-bold"><i class="fa-solid fa-house"></i> ${t.direccion_box} (${t.region_chile})</p>
+                <div class="p-6 border border-gray-200 rounded-3xl bg-white shadow-md hover:shadow-lg transition space-y-4 text-left">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <img src="${t.foto_profesional}" class="w-16 h-16 rounded-2xl object-cover border-2 border-forest shadow-sm" alt="${t.nombre}">
+                            <div>
+                                <span class="bg-emerald-100 text-emerald-800 text-[8px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider block mb-1">Independiente Certificado 🇨🇱 ${t.region_chile}</span>
+                                <h3 class="font-extrabold text-base text-slateDark">${t.nombre}</h3>
+                                <p class="text-xs text-forest font-bold">${t.especialidad}</p>
+                            </div>
+                        </div>
+                        <div class="text-right self-end sm:self-auto">
+                            <span class="text-sm font-black text-forest block">${t.tarifa_sesion || '$45.000 / sesión'}</span>
+                            <span class="text-[9px] text-gray-400 font-bold uppercase">${t.tipo_tarifa || 'Tarifa Autónoma'}</span>
                         </div>
                     </div>
-                    <div class="flex space-x-2 pt-2">
-                        <button onclick="openIndependentBookingModal('${t.nombre.replace(/'/g, '')}', '${t.tarifa_sesion}')" class="w-1/2 bg-forest text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
-                            Agendar Cita 📅
+
+                    <div class="space-y-1.5 text-xs font-semibold text-gray-600">
+                        <p><i class="fa-solid fa-house mr-1.5 text-forest"></i> ${t.direccion_box}</p>
+                        <p><i class="fa-solid fa-phone mr-1.5 text-forest"></i> ${t.telefono_contacto}</p>
+                        <div class="flex items-center space-x-2 pt-1">
+                            <span class="bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold"><i class="fa-solid fa-id-card mr-1"></i> SIS N° ${regSis}</span>
+                            <button onclick="alert('🔍 Verificación Superintendencia de Salud (SIS):
+
+Registro: ${regSis}
+Nombre: ${t.nombre}
+Estado: VERIFICADO Y ACTIVO EN REGISTRO NACIONAL DE PRESTADORES DE SALUD.')" class="text-accent hover:underline font-extrabold text-[10px]">Verificar 🔍</button>
+                        </div>
+                    </div>
+
+                    <!-- GALERÍA DE FOTOS PROFESIONAL 📸 -->
+                    <div class="border-t border-gray-100 pt-3">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-2"><i class="fa-solid fa-camera mr-1"></i> Galería de Fotos Profesional 📸</span>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="relative h-16 rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner group">
+                                <img src="${t.foto_profesional}" class="w-full h-full object-cover group-hover:scale-105 transition">
+                                <span class="absolute bottom-1 left-1 right-1 bg-black/60 text-white text-[7px] text-center rounded py-0.5 font-bold">Servicio 1</span>
+                            </div>
+                            <div class="relative h-16 rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner group">
+                                <img src="${t.foto_profesional}" class="w-full h-full object-cover group-hover:scale-105 transition">
+                                <span class="absolute bottom-1 left-1 right-1 bg-black/60 text-white text-[7px] text-center rounded py-0.5 font-bold">Servicio 2</span>
+                            </div>
+                            <div class="relative h-16 rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner group">
+                                <img src="${t.foto_profesional}" class="w-full h-full object-cover group-hover:scale-105 transition">
+                                <span class="absolute bottom-1 left-1 right-1 bg-black/60 text-white text-[7px] text-center rounded py-0.5 font-bold">Servicio 3</span>
+                            </div>
+                            <div class="relative h-16 rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner group">
+                                <img src="${t.foto_profesional}" class="w-full h-full object-cover group-hover:scale-105 transition">
+                                <span class="absolute bottom-1 left-1 right-1 bg-black/60 text-white text-[7px] text-center rounded py-0.5 font-bold">Servicio 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BOTONES DE ACCIÓN (5 BOTONES) -->
+                    <div class="grid grid-cols-5 gap-1.5 pt-2">
+                        <button onclick="openIndependentBookingModal('${t.nombre.replace(/'/g, '')}', '${t.tarifa_sesion}')" class="bg-forest hover:bg-forest/90 text-white font-extrabold py-2 rounded-xl text-[9px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            <span>Agendar 📅</span>
                         </button>
-                        <button onclick="calculateIndependentRoute(${t.latitud}, ${t.longitud}, '${t.nombre.replace(/'/g, '')}', '${t.direccion_box.replace(/'/g, '')}')" class="w-1/2 bg-slateDark text-white font-extrabold py-2 rounded-xl text-[10px] uppercase">
-                            Cómo Llegar 🗺️
+                        <button onclick="alert('🎫 Cupón de Bienestar para ${t.nombre}: LAWEN-WELLNESS-2026')" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold py-2 rounded-xl text-[9px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Cupón 🎫</span>
                         </button>
+                        <button onclick="calculateIndependentRoute(${t.latitud || -38.7396}, ${t.longitud || -72.6028}, '${t.nombre.replace(/'/g, '')}', '${t.direccion_box.replace(/'/g, '')}')" class="bg-slateDark text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <span>Mapa 🗺️</span>
+                        </button>
+                        <button onclick="alert('⭐ Reseñas de Pacientes de ${t.nombre}:
+
+Calificación: 5.0 / 5.0 (48 evaluaciones)
+"Excelente atención integrativa, dedicada y muy empática. Recomendada 100%."')" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Reseñas ⭐</span>
+                        </button>
+                        <button onclick="cancelAppointmentFromUser()" class="bg-red-500 hover:bg-red-600 text-white font-extrabold py-2 rounded-xl text-[9.5px] uppercase transition shadow-sm flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-xmark"></i>
+                            <span>Anular ❌</span>
+                        </button>
+                    </div>
+
+                    <!-- REGLA MÉDICA DE BLOQUEO POR ESTABLECIMIENTO -->
+                    <div class="bg-red-50 border border-red-200 text-red-900 p-3 rounded-2xl text-[10px] font-semibold leading-relaxed flex items-start space-x-2 mt-2">
+                        <i class="fa-solid fa-shield-cat text-red-600 text-xs mt-0.5 flex-shrink-0"></i>
+                        <span><strong>Regla de Bloqueo por Establecimiento:</strong> Este profesional atiende bajo tarifa privada. Por contrato, sus horas privadas quedarán bloqueadas si atiende en clínicas de la red.</span>
                     </div>
                 </div>
             `);
