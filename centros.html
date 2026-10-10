@@ -85,9 +85,13 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <span><span class="hidden sm:inline">Portal </span>Especialistas 💼</span>
             </a>
-            <button onclick="openB2BRegisterModal()" class="text-[9px] md:text-xs bg-accent hover:bg-accent/90 text-white font-extrabold px-3.5 py-1.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
-                <i class="fa-solid fa-store"></i>
-                <span>Portal & Registro B2B 🏪</span>
+            <button onclick="openLocalLoginModal()" class="inline-flex items-center space-x-1.5 text-xs bg-slateDark hover:bg-slateDark/90 text-white font-bold px-3.5 py-2 rounded-full transition shadow-sm h-9 focus:outline-none cursor-pointer">
+                <i class="fa-solid fa-store text-accent"></i>
+                <span><span class="hidden sm:inline">Portal </span>de Aliados 🏢</span>
+            </button>
+            <button onclick="openB2BRegisterModal()" class="inline-flex items-center space-x-1.5 text-xs bg-accent hover:bg-accent/90 text-white font-extrabold px-4 py-2 rounded-full transition shadow-md focus:outline-none h-9 cursor-pointer">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Registrar Local B2B 🏪</span>
             </button>
         </div>
     </div>
@@ -98,11 +102,11 @@
 
     <!-- HERO / BANNER PRINCIPAL & SALA PROMO B2B -->
     <div class="bg-gradient-to-r from-forest via-forest/90 to-slateDark text-white rounded-3xl p-6 md:p-8 shadow-md relative overflow-hidden mb-6">
-        <!-- WATERMARK SUBTIL ASL IDEAS SPA (INFERIOR DERECHA DEL BANNER) -->
-        <div class="absolute bottom-2 right-3 flex items-center space-x-2 opacity-20 hover:opacity-40 transition pointer-events-none z-10">
-            <img src="logoASLideas.jpeg" onerror="this.src='logo.png';" class="w-8 h-8 md:w-10 md:h-10 object-contain rounded-xl bg-white/20 p-0.5 border border-white/30" alt="ASL Ideas SpA">
-            <div class="text-right hidden sm:block">
-                <span class="text-[7px] uppercase tracking-widest text-emerald-200 font-extrabold block">Tecnología & IA</span>
+        <!-- LOGO WATERMARK ASL IDEAS SPA (SUBTIL) -->
+        <div class="absolute bottom-3 right-4 flex items-center space-x-2 opacity-20 hover:opacity-40 transition pointer-events-none z-10">
+            <img src="logoASLideas.jpeg" onerror="this.src='logo.png';" class="w-10 h-10 object-contain rounded-xl bg-white/20 p-0.5 shadow-sm border border-white/30" alt="ASL Ideas SpA">
+            <div class="text-left hidden sm:block">
+                <span class="text-[7px] uppercase tracking-widest text-emerald-300 font-extrabold block">Tecnología & IA</span>
                 <strong class="text-[10px] font-black text-white tracking-wider">ASL Ideas SpA 💡</strong>
             </div>
         </div>
@@ -933,7 +937,14 @@
 <script>
     const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo';
-    const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    let _supabase = null;
+    try {
+        if (typeof supabase !== 'undefined' && supabase.createClient) {
+            _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        }
+    } catch(e) {
+        console.warn("Supabase init defer:", e);
+    }
 
     let activeRegion = 'all';
     let activeTherapy = 'all';
@@ -1070,9 +1081,13 @@ nombre: 'Naturópata Maite Soler',
         }
     ];
 
-    window.onload = function() {
-        renderAllGrids();
-    };
+    function initAppGrids() {
+        try { renderAllGrids(); } catch(e) { console.error("renderAllGrids error:", e); }
+    }
+    // Instant execution & load events
+    initAppGrids();
+    document.addEventListener('DOMContentLoaded', initAppGrids);
+    window.addEventListener('load', initAppGrids);
 
     function filterAllByRegion() {
         activeRegion = document.getElementById('globalRegionFilter').value;
