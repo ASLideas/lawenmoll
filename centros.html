@@ -72,7 +72,7 @@
             <span class="text-[8px] md:text-[9px] bg-accent/25 text-slateDark px-2 py-0.5 rounded-full font-bold">Ecosistema B2B 🌟</span>
             <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Ley 21.663</span>
         </div>
-        <div class="flex flex-wrap justify-center gap-1.5 md:gap-2">
+        <div class="flex flex-wrap justify-center items-center gap-1.5 md:gap-2">
             <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-bold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
                 <i class="fa-solid fa-leaf"></i>
                 <span>Secretos<span class="hidden sm:inline"> de la Abuela</span> 👵</span>
@@ -91,7 +91,7 @@
             </button>
             <button onclick="openB2BRegisterModal()" class="text-[9px] md:text-xs bg-accent hover:bg-accent/90 text-white font-extrabold px-3 py-1.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
                 <i class="fa-solid fa-plus-circle"></i>
-                <span>➕ Registrar Mi Local B2B</span>
+                <span>Registrar Local B2B 🏪</span>
             </button>
         </div>
     </div>
@@ -248,7 +248,7 @@
                 <div class="bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
                     <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-map-location-dot mr-1"></i> Selecciona tu Región (Chile)</label>
                     <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
-                        <option value="all">🇨🇱 Todas las Regiones de Chile</option>
+                        <option value="all">Todas las Regiones de Chile</option>
                         <option value="Arica y Parinacota">Arica y Parinacota</option>
                         <option value="Tarapacá">Tarapacá</option>
                         <option value="Antofagasta">Antofagasta</option>
@@ -904,7 +904,7 @@ nombre: 'Naturópata Maite Soler',
                     <div class="flex items-start justify-between">
                         <div>
                             <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
-                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile}</p>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">${c.region_chile}</p>
                         </div>
                         <span class="text-[10px] bg-forest/10 text-forest font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-hospital mr-1"></i> Clínica</span>
                     </div>
@@ -956,7 +956,7 @@ Presenta este cupón para activar tu 15% de descuento.')" class="bg-amber-500 ho
                     <div class="flex items-start justify-between">
                         <div>
                             <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
-                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile}</p>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">${c.region_chile}</p>
                         </div>
                         <span class="text-[10px] bg-amber-500 text-white font-black px-2.5 py-1 rounded-full shadow-sm">15% DCTO</span>
                     </div>
@@ -1008,7 +1008,7 @@ Presenta este código al pagar para aplicar tu 15% de descuento.')" class="bg-am
                     <div class="flex items-start justify-between">
                         <div>
                             <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
-                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile}</p>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">${c.region_chile}</p>
                         </div>
                         <span class="text-[10px] bg-forest text-white font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-dumbbell mr-1"></i> Movimiento</span>
                     </div>
@@ -1059,7 +1059,7 @@ Presenta este cupón en recepción para activar tus 3 días gratis.')" class="bg
                     <div class="flex items-start justify-between">
                         <div>
                             <h3 class="font-extrabold text-base text-slateDark">${c.nombre}</h3>
-                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">🇨🇱 ${c.region_chile} Sustentable & Orgánica</p>
+                            <p class="text-[10px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-0.5">${c.region_chile} Sustentable & Orgánica</p>
                         </div>
                         <span class="text-[10px] bg-emerald-700 text-white font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-seedling mr-1"></i> Botica</span>
                     </div>
@@ -1110,7 +1110,7 @@ Muestra este cupón en caja para aplicar tu descuento.')" class="bg-amber-500 ho
                         <div class="flex items-center space-x-3">
                             <img src="${t.foto_profesional}" class="w-16 h-16 rounded-2xl object-cover border-2 border-forest shadow-sm" alt="${t.nombre}">
                             <div>
-                                <span class="bg-emerald-100 text-emerald-800 text-[8px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider block mb-1">Independiente Certificado 🇨🇱 ${t.region_chile}</span>
+                                <span class="bg-emerald-100 text-emerald-800 text-[8px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider block mb-1">Independiente Certificado ${t.region_chile}</span>
                                 <h3 class="font-extrabold text-base text-slateDark">${t.nombre}</h3>
                                 <p class="text-xs text-forest font-bold">${t.especialidad}</p>
                             </div>
@@ -1332,5 +1332,82 @@ Calificación: 5.0 / 5.0 (48 evaluaciones)
         document.getElementById('mapModal').classList.add('hidden');
     }
 </script>
+
+<div id="b2bRegisterModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl border border-gray-100 flex flex-col max-h-[90vh] overflow-hidden animate-fadeIn">
+        <div class="bg-forest text-white p-5 flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+                <i class="fa-solid fa-store text-xl text-accent"></i>
+                <div>
+                    <h3 class="font-extrabold text-sm uppercase tracking-wider">Registrar / Editar Mi Local B2B</h3>
+                    <p class="text-[10px] text-emerald-100">Ingresa la información de tu comercio o servicio en LAWENMOLL</p>
+                </div>
+            </div>
+            <button onclick="closeB2BRegisterModal()" class="text-white hover:text-accent text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="p-6 overflow-y-auto space-y-4 text-xs font-sans text-gray-600">
+            <div>
+                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Nombre Comercial del Local o Profesional</label>
+                <input type="text" id="regLocalName" placeholder="Ej: Farmacia Herbolaria El Canelo" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Tipo de Local / Servicio</label>
+                    <select id="regLocalType" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                        <option value="clínica">Centro de Salud / Clínica</option>
+                        <option value="restaurante">Restaurante / Comida Sana</option>
+                        <option value="gym">Gimnasio / Yoga / Pilates</option>
+                        <option value="farmacia">Farmacia Natural / Herbolaria</option>
+                        <option value="terapeuta">Profesional Independiente</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Región de Chile</label>
+                    <select id="regLocalRegion" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                        <option value="Arica y Parinacota">Arica y Parinacota</option>
+                        <option value="Tarapacá">Tarapacá</option>
+                        <option value="Antofagasta">Antofagasta</option>
+                        <option value="Atacama">Atacama</option>
+                        <option value="Coquimbo">Coquimbo</option>
+                        <option value="Valparaíso">Valparaíso</option>
+                        <option value="Isla de Pascua">Isla de Pascua (Rapa Nui)</option>
+                        <option value="Región Metropolitana" selected>Región Metropolitana</option>
+                        <option value="O'Higgins">O'Higgins</option>
+                        <option value="Maule">Maule</option>
+                        <option value="Ñuble">Ñuble</option>
+                        <option value="Biobío">Biobío</option>
+                        <option value="La Araucanía">La Araucanía</option>
+                        <option value="Los Ríos">Los Ríos</option>
+                        <option value="Los Lagos">Los Lagos</option>
+                        <option value="Aysén">Aysén</option>
+                        <option value="Magallanes">Magallanes y Antártica</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Dirección Exacta / Comuna</label>
+                <input type="text" id="regLocalAddress" placeholder="Ej: Av. Providencia 1240, Providencia" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Teléfono WhatsApp de Contacto</label>
+                    <input type="text" id="regLocalPhone" value="+569" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Beneficio / Descuento Ofrecido</label>
+                    <input type="text" id="regLocalBenefit" placeholder="Ej: 15% DCTO con receta" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                </div>
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Descripción del Servicio / Especialidad</label>
+                <textarea id="regLocalDesc" placeholder="Describe los servicios que entregas a la comunidad..." class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest h-20 resize-none"></textarea>
+            </div>
+            <button onclick="saveNewB2BLocal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-4 rounded-2xl text-xs shadow-md transition uppercase tracking-wider">
+                Guardar y Publicar Local 🚀
+            </button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
