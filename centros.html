@@ -85,14 +85,10 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <span><span class="hidden sm:inline">Portal </span>Especialistas 💼</span>
             </a>
-            <button onclick="openLocalLoginModal()" class="inline-flex items-center space-x-1.5 text-xs bg-slateDark hover:bg-slateDark/90 text-white font-bold px-3.5 py-2 rounded-full transition shadow-sm h-9 focus:outline-none cursor-pointer">
-                <i class="fa-solid fa-store text-accent"></i>
-                <span><span class="hidden sm:inline">Portal </span>de Aliados 🏢</span>
-            </button>
-            <button onclick="openB2BRegisterModal()" class="inline-flex items-center space-x-1.5 text-xs bg-accent hover:bg-accent/90 text-white font-extrabold px-4 py-2 rounded-full transition shadow-md focus:outline-none h-9 cursor-pointer">
-                <i class="fa-solid fa-plus-circle"></i>
-                <span>Registrar Local B2B 🏪</span>
-            </button>
+            <button onclick="openLocalLoginModal()" class="inline-flex items-center space-x-1.5 text-xs bg-slateDark hover:bg-slateDark/90 text-white font-extrabold px-4 py-2 rounded-full transition shadow-md h-9 focus:outline-none cursor-pointer">
+    <i class="fa-solid fa-store text-accent mr-1"></i>
+    <span>Portal de Aliados 🏢</span>
+</button>
         </div>
     </div>
 </header>
@@ -829,6 +825,64 @@
                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Descripción del Servicio / Especialidad</label>
                 <textarea id="regLocalDesc" placeholder="Describe los servicios que entregas a la comunidad..." class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest h-20 resize-none"></textarea>
             </div>
+            <!-- MÓDULO DISEÐHӈ	PPQԈHSSSKO
+            <div class="border-t border-emerald-200 bg-emerald-50/60 p-4 rounded-2xl space-y-3 mt-3">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-extrabold text-xs text-forest uppercase trackingwider flex items-center">
+                        <i class="fa-solid fa-palette text-accent mr-1.5"></i>
+                        <span>Diseña con Nosotros (Afiches & Anuncios IA B2B) 🎯</span>
+                    </h4>
+                    <span class="text-[9px] bg-forest text-white font-extrabold px-2 py-0.5 rounded-full uppercase">Nuevo Studio B2B</span>
+                </div>
+                <p class="text-[10px] text-gray-600 font-medium">Diseña y edita afiches promocionales con marca co-branded LAWENMOLL + ASL Ideas SpA. </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-600 uppercase mb-1">Título del Anuncio / Oferta</label>
+                        <input type="text" id="adB2BTitle" value="15% DCTO en Menús Orgánicos Depurativos" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-slateDark">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-600 uppercase mb-1">Eslogan Promocional</label>
+                        <input type="text" id="adB2BSlogan" value="Alimentación consciente y ecológica en Providencia" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-slateDark">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-600 uppercase mb-1">Formato Visual del Anuncio</label>
+                        <select id="adB2BFormat" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-slateDark">
+                            <option value="cuadrado">0 Post Cuadrado Redes (1080x1080)</option>
+                            <option value="afiche">🄅 Afiche Imprimible A4 (Vitrina Local)</option>
+                            <option value="banner">🌐 Banner Destacado Web App</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-bold text-gray-600 uppercase mb-1">Foto o Imagen del Producto (URL)</label>
+                        <input type="text" id="adB2BImage" placeholder="https://images.unsplash.com/..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-mono">
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 pt-1">
+                    <button onclick="previewB2BAd()" class="w-1/2 bg-slateDark text-white font-extrabold py-2.5 rounded-xl text-xs uppercase trackingwider cursor-pointer flex items-center justify-center space-x-1">Vista Previa 🎨</button>
+                    <button onclick="publishB2BAd()" class="w-1/2 bg-accent text-white font-extrabold py-2.5 rounded-xl text-xs uppercase trackingwider cursor-pointer flex items-center justify-center space-x-1 shadow-sm">Publicar Anuncio á.</button>
+                </div>
+                <div id="adB2BPreviewBox" class="bg-white p-4 rounded-2xb border-2 border-dashed border-forest/30 hidden space-y-2.5">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="text-[9px] bg-forest/10 text-forest font-extrabold px-2 py-0.5 rounded-full uppercase">Co-Branded LAWENMOLL</span>
+                            <span id="adB2BFormatBadge" class="text-[9px] bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded-full uppercase">Post Cuadrado</span>
+                        </div>
+                        <span class="text-[9px] text-gray-400 font-semibold">ASL Ideas SpA 🎰</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-16 h-16 rounded-xl bg-gray-100 overflow-hidden border border-gray-200 flex-shrink-0">
+                            <img id="adB2BPreviewImg" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&outo=format&fit=crop" class="w-full h-full object-cover" alt="Anuncio Preview">
+                        </div>
+                        <div>
+                            <h5 id="adB2BPreviewTitle" class="font-extrabold text-xs text-slateDark">15% DCTO en Menús Orgánicos Depurativos</h5>
+                            <p id="adB2BPreviewSlogan" class="text-[10px] text-gray-500 font-medium">Alimentación consciente y ecológica en Providencia</p>
+                            <span class="text-[9px] bg-emerald-50 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full inline-block mt-1">Código Promocional: LAWEN-B2B</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button onclick="saveNewB2BLocal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition uppercase tracking-wider cursor-pointer">
                 Guardar y Publicar Local 🚀
             </button>
@@ -903,6 +957,7 @@
 </div>
 
 <!-- MODAL 3: ACCESO COMERCIAL DE ALIADOS B2B -->
+<!-- MODAL 3: ACCESO COMERCIAL DE ALIADOS B2B -->
 <div id="localLoginModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-fadeIn text-left">
         <div class="bg-slateDark text-white p-5 flex items-center justify-between">
@@ -915,21 +970,36 @@
             </div>
             <button onclick="closeLocalLoginModal()" class="text-white hover:text-accent text-xl focus:outline-none cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="p-6 space-y-4 text-xs font-sans text-gray-600">
+        <div class="p-6 space-y-3.5 text-xs font-sans text-gray-600">
+            <div class="bg-amber-50 border border-amber-200 text-amber-900 p-3 rounded-2xl text-[10.5px] font-semibold leading-relaxed">
+                🔑 <strong>Credenciales Demo de Aliado:</strong><br>
+                • <strong>Correo:</strong> <code class="bg-amber-100 px-1 py-0.5 rounded text-slateDark font-mono">aliado@lawenmoll.cl</code><br>
+                • <strong>Clave:</strong> <code class="bg-amber-100 px-1 py-0.5 rounded text-slateDark font-mono">lawenmoll2026</code>
+            </div>
             <div>
                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Correo Comercial Registrado</label>
-                <input type="email" id="loginB2BEmail" placeholder="contacto@tulocal.cl" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                <input type="email" id="loginB2BEmail" value="aliado@lawenmoll.cl" placeholder="contacto@tulocal.cl" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest font-mono">
             </div>
             <div>
                 <label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Contraseña de Acceso</label>
-                <input type="password" id="loginB2BPassword" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest">
+                <input type="password" id="loginB2BPassword" value="lawenmoll2026" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-2xl text-xs font-semibold focus:outline-none focus:border-forest font-mono">
             </div>
-            <button onclick="loginB2BPartner()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition uppercase tracking-wider cursor-pointer">
-                Ingresar a Mi Panel Comercial 🏢
-            </button>
+            <div class="space-y-2 pt-1">
+                <button onclick="loginB2BPartner()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition uppercase tracking-wider cursor-pointer flex items-center justify-center space-x-1.5">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Ingresar a Mi Panel Comercial 🏢</span>
+                </button>
+                <button onclick="loginB2BDemo()" class="w-full bg-slateDark hover:bg-slateDark/90 text-white font-extrabold py-2.5 rounded-2xl text-[11px] shadow-sm transition uppercase tracking-wider cursor-pointer flex items-center justify-center space-x-1.5">
+                    <i class="fa-solid fa-bolt text-amber-400"></i>
+                    <span>Ingreso Demo Rápido B2B ⚡</span>
+                </button>
+                <button onclick="closeLocalLoginModal(); openB2BRegisterModal();" class="w-full border border-forest text-forest hover:bg-forest/5 font-extrabold py-2.5 rounded-2xl text-[11px] transition uppercase tracking-wider cursor-pointer text-center block">
+                    ➕ ¿Nuevo Comercio? Registrar Local B2B
+                </button>
+            </div>
         </div>
     </div>
-</div>
+</div>>
 
 
 
@@ -1389,15 +1459,83 @@ nombre: 'Naturópata Maite Soler',
     }
 
     function openB2BRegisterModal() {
-        document.getElementById('b2bRegisterModal').classList.remove('hidden');
+        const modal = document.getElementById('b2bRegisterModal');
+        if (modal) modal.classList.remove('hidden');
     }
 
     function closeB2BRegisterModal() {
-        document.getElementById('b2bRegisterModal').classList.add('hidden');
+        const modal = document.getElementById('b2bRegisterModal');
+        if (modal) modal.classList.add('hidden');
     }
 
     function openLocalLoginModal() {
-        alert("🏢 Acceso de Aliados B2B: Ingresa tu correo y contraseña comercial registrados para entrar a tu panel.");
+        const modal = document.getElementById('localLoginModal');
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeLocalLoginModal() {
+        const modal = document.getElementById('localLoginModal');
+        if (modal) modal.classList.add('hidden');
+    }
+
+    function loginB2BPartner() {
+        const emailInput = document.getElementById('loginB2BEmail');
+        const passInput = document.getElementById('loginB2BPassword');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const pass = passInput ? passInput.value.trim() : '';
+
+        if (!email || !pass) {
+            alert('⚠️ Por favor ingresa tu Correo Comercial y Contraseña para continuar.');
+            return;
+        }
+
+        if (email.toLowerCase().includes('lawenmoll') || email.toLowerCase().includes('aliado') || pass === 'lawenmoll2026') {
+            alert("🎉 ¡ACCESO CONCEDIDO A PANEL COMERCIAL B2B!\n\n• Aliado: " + email + "\n• Estado: ACTIVO Y CERTIFICADO EN RED LAWENMOLL\n\nAbriendo panel de gestión y diseño de afiches B2B...");
+            closeLocalLoginModal();
+            openB2BRegisterModal();
+        } else {
+            alert("❌ Credenciales no encontradas. Usa 'aliado@lawenmoll.cl' con clave 'lawenmoll2026' o presiona 'Ingreso Demo Rápido B2B'.");
+        }
+    }
+
+    function loginB2BDemo() {
+        const emailInput = document.getElementById('loginB2BEmail');
+        const passInput = document.getElementById('loginB2BPassword');
+        if (emailInput) emailInput.value = 'aliado@lawenmoll.cl';
+        if (passInput) passInput.value = 'lawenmoll2026';
+        loginB2BPartner();
+    }
+
+    function previewB2BAd() {
+        const titleEl = document.getElementById('adB2BTitle');
+        const sloganEl = document.getElementById('adB2BSlogan');
+        const fmtEl = document.getElementById('adB2BFormat');
+        const imgEl = document.getElementById('adB2BImage');
+
+        const title = titleEl ? titleEl.value.trim() || 'Oferta Promocional B2B' : 'Oferta Promocional B2B';
+        const slogan = sloganEl ? sloganEl.value.trim() || 'Promoción respaldada por LAWENMOLL' : 'Promoción respaldada por LAWENMOLL';
+        const fmt = fmtEl ? fmtEl.value : 'cuadrado';
+        const imgUrl = imgEl ? imgEl.value.trim() : '';
+
+        const box = document.getElementById('adB2BPreviewBox');
+        const prevTitle = document.getElementById('adB2BPreviewTitle');
+        const prevSlogan = document.getElementById('adB2BPreviewSlogan');
+        const prevBadge = document.getElementById('adB2BFormatBadge');
+        const prevImg = document.getElementById('adB2BPreviewImg');
+
+        if (prevTitle) prevTitle.innerText = title;
+        if (prevSlogan) prevSlogan.innerText = slogan;
+        if (prevBadge) prevBadge.innerText = fmt === 'cuadrado' ? 'Post Redes' : (fmt === 'afiche' ? 'Afiche A4' : 'Banner Web');
+
+        if (imgUrl && prevImg) {
+            prevImg.src = imgUrl;
+        }
+        if (box) box.classList.remove('hidden');
+    }
+
+    function publishB2BAd() {
+        previewB2BAd();
+        alert("📢 ¡ANUNCIO PUBLICADO CON ÉXITO!\n\nTu afiche promocional ha sido sincronizado con marca dual LAWENMOLL & ASL Ideas SpA y ya está disponible en la vitrina comercial de la App.");
     }
 
     function openIndependentBookingModal(name, rate) {
