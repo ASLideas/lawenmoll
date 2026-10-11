@@ -109,7 +109,7 @@
     <div class="bg-gradient-to-r from-forest via-forest/90 to-slateDark text-white rounded-3xl p-6 md:p-8 shadow-md relative overflow-hidden mb-6">
         <!-- LOGO ASL IDEAS SPA (SELLO DE AGUA SIN CUADRO - MÁS GRANDE) -->
         <div class="absolute -bottom-2 -right-2 md:bottom-2 md:right-6 opacity-25 hover:opacity-40 transition pointer-events-none z-10 flex items-center space-x-3">
-            <img src="https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/logoASLideas.jpeg" onerror="fixASLLogo(this)" class="w-28 h-28 md:w-36 md:h-36 object-contain" alt="ASL Ideas SpA">
+            <img src="logoASLideas.jpeg" onerror="fixASLLogo(this)" class="w-28 h-28 md:w-36 md:h-36 object-contain" alt="ASL Ideas SpA">
             <div class="text-left hidden sm:block">
                 <span class="text-[8px] uppercase tracking-widest text-emerald-300 font-extrabold block">Sello Tecnológico & IA</span>
                 <strong class="text-xs font-black text-white tracking-wider">ASL Ideas SpA</strong>
@@ -121,7 +121,7 @@
                 <span>Red Nacional B2B • Arica a Magallanes & Isla de Pascua</span>
             </div>
             <div class="flex items-center space-x-3 my-2">
-                <img src="https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/logoASLideas.jpeg" onerror="fixASLLogo(this)" class="h-12 w-12 md:h-14 md:w-14 object-contain flex-shrink-0" alt="ASL Ideas SpA">
+                <img src="logoASLideas.jpeg" onerror="fixASLLogo(this)" class="h-12 w-12 md:h-14 md:w-14 object-contain flex-shrink-0" alt="ASL Ideas SpA">
                 <div class="text-left">
                     <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-300 block">Sello Tecnológico por ASL Ideas SpA</span>
                     <h1 class="text-2xl md:text-3xl font-black tracking-tight leading-tight text-white">
@@ -1662,50 +1662,6 @@ nombre: 'Naturópata Maite Soler',
         if (modal) modal.classList.add('hidden');
     }
 
-
-    function closeAdDesignModal() {
-        const modal = document.getElementById('adDesignModal');
-        if (modal) modal.classList.add('hidden');
-    }
-
-    function closePaymentModal() {
-        const modal = document.getElementById('paymentModal');
-        if (modal) modal.classList.add('hidden');
-    }
-
-    function processPaymentReal(method) {
-        alert("¡Pago procesado con éxito vía " + (method || 'Webpay') + "! Tu suscripción B2B se encuentra activa en LAWENMOLL.");
-        closePaymentModal();
-    }
-
-    function saveNewB2BLocal() {
-        const nameEl = document.getElementById('regLocalName');
-        const addrEl = document.getElementById('regLocalAddress');
-        const typeEl = document.getElementById('regLocalType');
-        const regEl = document.getElementById('regLocalRegion');
-
-        const name = nameEl ? nameEl.value.trim() : '';
-        const addr = addrEl ? addrEl.value.trim() : '';
-        const type = typeEl ? typeEl.value : 'clínica';
-        const reg = regEl ? regEl.value : 'Región Metropolitana';
-
-        if (!name || !addr) {
-            alert("Por favor completa el Nombre Comercial y la Dirección de tu local.");
-            return;
-        }
-
-        alert("¡Local " + name + " (" + type + " - " + reg + ") registrado y publicado con éxito en LAWENMOLL!");
-        closeB2BRegisterModal();
-    }
-
-    function fixASLLogo(img) {
-        if (!img.dataset.tried) {
-            img.dataset.tried = '1';
-            img.src = 'https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/logoASLideas.jpeg';
-        } else {
-            img.onerror = null;
-        }
-    }
 </script>
 <!-- MODAL: ANÚNCIATE CON NOSOTROS & DISEYO DE ANUNCIOS B2B -->
 <div id="adDesignModal" class="fixed inset-0 bg-slateDark/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
