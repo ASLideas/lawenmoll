@@ -581,7 +581,10 @@
                 <span class="text-[9px] uppercase font-bold text-forest block">Agendamiento Privado</span>
                 <h3 class="font-extrabold text-sm text-slateDark" id="indepBookingTitle">Nombre Terapeuta</h3>
             </div>
-            <span class="text-xs font-black text-forest" id="indepBookingPrice">$25.000 / Sesión</span>
+            <div class="flex items-center space-x-3">
+                <span class="text-xs font-black text-forest" id="indepBookingPrice">$25.000 / Sesión</span>
+                <button onclick="closeIndependentBookingModal()" class="text-gray-400 hover:text-slateDark text-2xl font-black focus:outline-none cursor-pointer px-2" title="Cerrar y Volver a Centros">✕</button>
+            </div>
         </div>
         <div class="space-y-3 text-xs">
             <div>
@@ -621,7 +624,7 @@
             </div>
         </div>
         <div class="flex space-x-2 pt-2">
-            <button onclick="closeIndependentBookingModal()" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl text-xs">Cancelar</button>
+            <button onclick="closeIndependentBookingModal()" class="w-1/3 border border-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs hover:bg-gray-100 cursor-pointer">Volver ↩️</button>
             <button onclick="bookIndependentAppointmentReal()" class="w-2/3 bg-forest text-white font-extrabold py-3 rounded-xl text-xs uppercase shadow-md">Confirmar Cita </button>
         </div>
     </div>
@@ -635,8 +638,11 @@
                 <span class="text-[9px] uppercase font-bold text-forest block" id="resBookingModalSub">Reserva B2B</span>
                 <h3 class="font-extrabold text-sm text-slateDark" id="resBookingModalTitle">Reservar Mesa / Hora</h3>
             </div>
-            <div id="bookingEstName" class="text-right">
-                <span class="block text-slateDark font-extrabold">Establecimiento</span>
+            <div class="flex items-center space-x-3">
+                <div id="bookingEstName" class="text-right">
+                    <span class="block text-slateDark font-extrabold">Establecimiento</span>
+                </div>
+                <button onclick="closeRestaurantBookingModal()" class="text-gray-400 hover:text-slateDark text-2xl font-black focus:outline-none cursor-pointer px-2" title="Cerrar y Volver a Centros">✕</button>
             </div>
         </div>
         <div class="space-y-3 text-xs">
@@ -680,7 +686,7 @@
             </div>
         </div>
         <div class="flex space-x-2 pt-2">
-            <button onclick="closeRestaurantBookingModal()" class="w-1/3 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl text-xs">Cancelar</button>
+            <button onclick="closeRestaurantBookingModal()" class="w-1/3 border border-gray-200 text-gray-700 font-bold py-3 rounded-xl text-xs hover:bg-gray-100 cursor-pointer">Volver ↩️</button>
             <button onclick="bookRestaurantTableReal()" class="w-2/3 bg-forest text-white font-extrabold py-3 rounded-xl text-xs uppercase shadow-md">Confirmar Reserva </button>
         </div>
     </div>
@@ -737,7 +743,7 @@
                     <p class="text-[10px] text-emerald-100">Ingresa la información de tu comercio o servicio en LAWENMOLL</p>
                 </div>
             </div>
-            <button onclick="closeB2BRegisterModal()" class="text-white hover:text-accent text-xl focus:outline-none cursor-pointer"></button>
+            <button onclick="closeB2BRegisterModal()" class="text-white hover:text-accent text-2xl font-black focus:outline-none cursor-pointer px-3 py-1" title="Cerrar y Volver a Centros">✕</button>
         </div>
         <div class="p-6 overflow-y-auto space-y-4 text-xs font-sans text-gray-600 text-left">
             <div>
@@ -883,7 +889,10 @@
                 </div>
             </div>
             <button onclick="saveNewB2BLocal()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition uppercase tracking-wider cursor-pointer">
-                Guardar y Publicar Local 
+                Guardar y Publicar Local
+            </button>
+            <button onclick="closeB2BRegisterModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-extrabold py-3 rounded-2xl text-xs uppercase tracking-wider cursor-pointer border border-gray-200 mt-2">
+                Volver a Centros ↩️
             </button>
         </div>
     </div>
@@ -900,7 +909,7 @@
                     <p class="text-[10px] text-gray-300">Conexión Segura Ley 21.663 • Encriptada</p>
                 </div>
             </div>
-            <button onclick="closePaymentModal()" class="text-white hover:text-accent text-xl focus:outline-none cursor-pointer"></button>
+            <button onclick="closePaymentModal()" class="text-white hover:text-accent text-2xl font-black focus:outline-none cursor-pointer px-3 py-1" title="Cerrar y Volver a Centros">✕</button>
         </div>
         <div class="p-6 space-y-4 text-xs font-sans text-gray-600">
             <div class="bg-forest/5 border border-forest/20 p-4 rounded-2xl flex items-center justify-between">
@@ -967,7 +976,7 @@
                     <p class="text-[10px] text-gray-300">Acceso Administrativo de Comercio</p>
                 </div>
             </div>
-            <button onclick="closeLocalLoginModal()" class="text-white hover:text-accent text-xl focus:outline-none cursor-pointer"></button>
+            <button onclick="closeLocalLoginModal()" class="text-white hover:text-accent text-2xl font-black focus:outline-none cursor-pointer px-3 py-1" title="Cerrar y Volver a Centros">✕</button>
         </div>
         <div class="p-6 space-y-3.5 text-xs font-sans text-gray-600">
             <div class="bg-amber-50 border border-amber-200 text-amber-900 p-3 rounded-2xl text-[10.5px] font-semibold leading-relaxed">
@@ -1673,7 +1682,7 @@ nombre: 'Naturópata Maite Soler',
                 <h3 class="font-extrabold text-sm uppercase tracking-wider">Anúnciate con Nosotros . Diseñador de Anuncios B2B</h3>
                 <p class="text-[10px] text-amber-100">Crea afiches promocionales, banners y ofertas con marca dual LAWENMOLL + </p>
             </div>
-            <button onclick="closeAdDesignModal()" class="text-white hover:text-amber-200 text-xl focus:outline-none cursor-pointer">Cerrar</button>
+            <button onclick="closeAdDesignModal()" class="text-white hover:text-amber-200 text-2xl font-black focus:outline-none cursor-pointer px-3 py-1" title="Cerrar y Volver a Centros">✕</button>
         </div>
         <div class="p-6 overflow-y-auto space-y-4 text-xs font-sans text-gray-600">
             <div>
