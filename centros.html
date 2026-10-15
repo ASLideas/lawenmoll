@@ -189,7 +189,7 @@
                             </label>
                             
                             <!-- Opción Precio Real + IVA -->
-                            <label class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl cursor-pointer select-none" id="labelOptStandard">
+                            <label class="flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 rounded-xl cursor-pointer select-none" id="labelOptStandard">
                                 <div class="flex items-center space-x-2.5">
                                     <input type="radio" name="billing_option" value="standard" onchange="updateBillingAmount('standard')" class="accent-forest h-4 w-4">
                                     <div>
@@ -230,23 +230,23 @@
                     <div id="b2bPanelWebpay" class="space-y-3 p-3 bg-gray-50 rounded-xl border border-gray-150">
                         <div>
                             <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre del Titular de la Tarjeta</label>
-                            <input type="text" id="b2bCardName" placeholder="Ej: Francisco Mora S." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            <input type="text" id="b2bCardName" placeholder="Ej: Francisco Mora S." class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                         </div>
                         <div>
                             <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Número de Tarjeta</label>
                             <div class="relative">
-                                <input type="text" id="b2bCardNum" placeholder="•••• •••• •••• ••••" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm pl-8">
+                                <input type="text" id="b2bCardNum" placeholder="•••• •••• •••• ••••" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm pl-8">
                                 <i class="fa-solid fa-credit-card absolute left-3 top-3 text-gray-400"></i>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Fecha Expiración</label>
-                                <input type="text" id="b2bCardExpiry" placeholder="MM/AA" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-center">
+                                <input type="text" id="b2bCardExpiry" placeholder="MM/AA" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-center">
                             </div>
                             <div>
                                 <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">CVV (Código Seguridad)</label>
-                                <input type="text" id="b2bCardCvv" placeholder="123" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-center">
+                                <input type="text" id="b2bCardCvv" placeholder="123" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-center">
                             </div>
                         </div>
                     </div>
@@ -424,7 +424,7 @@
                         <!-- Logo del Local -->
                         <div class="space-y-1">
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider">Logo Comercial / Foto Pública</label>
-                            <div class="flex items-center space-x-3 bg-white border border-gray-200 p-2 rounded-xl">
+                            <div class="flex items-center space-x-3 bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-xl">
                                 <div id="adminLogoPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div>
                                     <input type="file" id="adminLogoFileInput" accept="image/*" class="hidden" onchange="uploadAdminLogo(event)">
@@ -436,7 +436,7 @@
                         <!-- Galería / Menú / Máquinas del Local (SaaS B2B Galería) -->
                         <div class="space-y-1">
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider">Foto de Vitrina (Carta de Menú / Máquinas de Gym / Instalaciones)</label>
-                            <div class="flex items-center space-x-3 bg-white border border-gray-200 p-2 rounded-xl">
+                            <div class="flex items-center space-x-3 bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-xl">
                                 <div id="adminGalleryPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">️</div>
                                 <div>
                                     <input type="file" id="adminGalleryFileInput" accept="image/*" class="hidden" onchange="uploadAdminGallery(event)">
@@ -447,28 +447,28 @@
 
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre Comercial</label>
-                            <input type="text" id="adminLocalName" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                            <input type="text" id="adminLocalName" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Dirección del Local</label>
-                            <input type="text" id="adminLocalAddress" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                            <input type="text" id="adminLocalAddress" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Descripción / Propuesta de Valor</label>
-                            <textarea id="adminLocalDesc" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold h-16 resize-none"></textarea>
+                            <textarea id="adminLocalDesc" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold h-16 resize-none"></textarea>
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Beneficio / Descuento del Convenio</label>
-                            <input type="text" id="adminLocalBenefit" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                            <input type="text" id="adminLocalBenefit" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Capacidad Total (Mesas / Alumnos / Cupos)</label>
-                                <input type="number" id="adminLocalCapacity" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                                <input type="number" id="adminLocalCapacity" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
                             </div>
                             <div>
                                 <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-1">Mesas / Cupos Ocupados Actualmente</label>
-                                <input type="number" id="adminLocalOccupied" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
+                                <input type="number" id="adminLocalOccupied" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-xs focus:outline-none focus:border-forest font-semibold">
                             </div>
                         </div>
                     </div>
@@ -496,7 +496,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Nueva Contraseña Privada</label>
-                                    <input type="password" id="adminLocalPassword" placeholder="Ej: minuevaClave123" class="w-full bg-white border border-gray-200 p-1.5 rounded-lg text-xs text-slateDark focus:outline-none focus:border-forest font-semibold font-mono">
+                                    <input type="password" id="adminLocalPassword" placeholder="Ej: minuevaClave123" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-1.5 rounded-lg text-xs text-slateDark focus:outline-none focus:border-forest font-semibold font-mono">
                                 </div>
                             </div>
                         </div>
@@ -520,11 +520,11 @@
                         <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
                             <span id="adminDish1Label" class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 1</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="adminDish1Name" placeholder="Nombre (Ej: Bowl de Cúrcuma)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                                <input type="text" id="adminDish1Price" placeholder="Precio (Ej: $8.900)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish1Name" placeholder="Nombre (Ej: Bowl de Cúrcuma)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish1Price" placeholder="Precio (Ej: $8.900)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             </div>
-                            <input type="text" id="adminDish1Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                            <input type="text" id="adminDish1Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-[#FAF6F0] border border-amber-200/70 p-1.5 rounded-xl shadow-sm">
                                 <div id="adminDish1Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish1Input" accept="image/*" class="hidden" onchange="uploadAdminDish(1, event)">
@@ -538,11 +538,11 @@
                         <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
                             <span id="adminDish2Label" class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 2</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="adminDish2Name" placeholder="Nombre (Ej: Crema de Hinojo)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                                <input type="text" id="adminDish2Price" placeholder="Precio (Ej: $5.400)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish2Name" placeholder="Nombre (Ej: Crema de Hinojo)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish2Price" placeholder="Precio (Ej: $5.400)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             </div>
-                            <input type="text" id="adminDish2Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                            <input type="text" id="adminDish2Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-[#FAF6F0] border border-amber-200/70 p-1.5 rounded-xl shadow-sm">
                                 <div id="adminDish2Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish2Input" accept="image/*" class="hidden" onchange="uploadAdminDish(2, event)">
@@ -556,11 +556,11 @@
                         <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
                             <span id="adminDish3Label" class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 3</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="adminDish3Name" placeholder="Nombre (Ej: Tostadas de Palta)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                                <input type="text" id="adminDish3Price" placeholder="Precio (Ej: $5.900)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish3Name" placeholder="Nombre (Ej: Tostadas de Palta)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish3Price" placeholder="Precio (Ej: $5.900)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             </div>
-                            <input type="text" id="adminDish3Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                            <input type="text" id="adminDish3Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-[#FAF6F0] border border-amber-200/70 p-1.5 rounded-xl shadow-sm">
                                 <div id="adminDish3Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish3Input" accept="image/*" class="hidden" onchange="uploadAdminDish(3, event)">
@@ -574,11 +574,11 @@
                         <div class="bg-gray-50 border border-gray-200 p-3.5 rounded-2xl space-y-2.5 text-left">
                             <span id="adminDish4Label" class="text-[8px] font-bold text-forest uppercase tracking-wider block">Producto / Platillo 4</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="adminDish4Name" placeholder="Nombre (Ej: Jugo Verde)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                                <input type="text" id="adminDish4Price" placeholder="Precio (Ej: $3.800)" class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish4Name" placeholder="Nombre (Ej: Jugo Verde)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                                <input type="text" id="adminDish4Price" placeholder="Precio (Ej: $3.800)" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             </div>
-                            <input type="text" id="adminDish4Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
-                            <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
+                            <input type="text" id="adminDish4Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
+                            <div class="flex items-center space-x-2.5 bg-[#FAF6F0] border border-amber-200/70 p-1.5 rounded-xl shadow-sm">
                                 <div id="adminDish4Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish4Input" accept="image/*" class="hidden" onchange="uploadAdminDish(4, event)">
@@ -609,7 +609,7 @@
     </div>
 
     <!-- CABECERA -->
-    <header class="bg-white border-b border-gray-100 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
+    <header class="bg-[#FDFBF7] border-b border-amber-200/60 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
                 <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
@@ -618,17 +618,21 @@
             </div>
             
             <div class="flex flex-wrap justify-center items-center gap-1.5 md:gap-2">
-                <button onclick="openB2BModal()" class="text-[9px] md:text-xs bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-extrabold px-3.5 py-1.5 rounded-full transition-all shadow-md flex items-center space-x-1.5 animate-pulse cursor-pointer border border-amber-300">
+                <button onclick="openB2BRegisterModal()" class="text-[9px] md:text-xs bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-extrabold px-3.5 py-1.5 rounded-full transition-all shadow-md flex items-center space-x-1.5 cursor-pointer border border-amber-300 hover:scale-105">
                     <i class="fa-solid fa-pen-ruler text-xs"></i>
                     <span>Anúnciate / Diseña con nosotros</span>
                 </button>
-                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
+                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/10 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
                     <i class="fa-solid fa-clipboard-question"></i>
                     <span>Test Bienestar</span>
                 </a>
-                <a href="secretos.html" class="text-[9px] md:text-xs bg-sage text-white hover:bg-sage/90 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
+                <a href="secretos.html" class="text-[9px] md:text-xs bg-sage hover:bg-sage/90 text-white font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
                     <i class="fa-solid fa-book-open"></i>
                     <span>Diario Mural 👵</span>
+                </a>
+                <a href="terapeuta.html" class="text-[9px] md:text-xs bg-forest hover:bg-forest/90 text-white font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span>Portal Especialistas 💼</span>
                 </a>
             </div>
 
@@ -680,7 +684,7 @@
                 <!-- FILTRADO GEOGRÁFICO NACIONAL (CHILE) v19 -->
                 <div class="mb-3 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
                     <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-map-location-dot mr-1"></i> Selecciona tu Región (Chile)</label>
-                    <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
+                    <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-[#FAF6F0] border border-amber-200/70 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
                         <option value="all">Todas las Regiones (Arica a Punta Arenas)</option>
                         <option value="Arica y Parinacota">Región de Arica y Parinacota (Arica)</option>
                         <option value="Tarapacá">Región de Tarapacá (Iquique)</option>
@@ -705,7 +709,7 @@
                 <!-- FILTRADO POR TERAPIAS Y ESPECIALIDADES v143 -->
                 <div class="mb-4 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
                     <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-leaf mr-1"></i> Filtro por Terapia / Especialidad</label>
-                    <select id="globalTherapyFilter" onchange="filterAllByTherapy()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
+                    <select id="globalTherapyFilter" onchange="filterAllByTherapy()" class="w-full bg-[#FAF6F0] border border-amber-200/70 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
                         <option value="all"> Todas las Especialidades</option>
                         <option value="fitoterapia"> Fitoterapia & Herbolaria</option>
                         <option value="acupuntura">🪡 Acupuntura & MTC</option>
@@ -851,29 +855,29 @@
                     <button onclick="selectTherapyPill('all')" data-therapy="all" class="therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start">
                          Todas
                     </button>
-                    <button onclick="selectTherapyPill('fitoterapia')" data-therapy="fitoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                    <button onclick="selectTherapyPill('fitoterapia')" data-therapy="fitoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                          Fitoterapia
                     </button>
-                    <button onclick="selectTherapyPill('acupuntura')" data-therapy="acupuntura" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                    <button onclick="selectTherapyPill('acupuntura')" data-therapy="acupuntura" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                         🪡 Acupuntura
                     </button>
-                    <button onclick="selectTherapyPill('quiropraxia')" data-therapy="quiropraxia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                    <button onclick="selectTherapyPill('quiropraxia')" data-therapy="quiropraxia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                          Quiropraxia
                     </button>
-                    <button onclick="selectTherapyPill('magnetoterapia')" data-therapy="magnetoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                    <button onclick="selectTherapyPill('magnetoterapia')" data-therapy="magnetoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                          Magneto
                     </button>
-                    <button onclick="selectTherapyPill('nutricion')" data-therapy="nutricion" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                    <button onclick="selectTherapyPill('nutricion')" data-therapy="nutricion" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                          Nutrición
                     </button>
-                    <button onclick="selectTherapyPill('psicologia')" data-therapy="psicologia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
+                    <button onclick="selectTherapyPill('psicologia')" data-therapy="psicologia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                          Psicología
                     </button>
                 </div>
             </div>
             
             <!-- PESTAÑA 1: CENTROS DE SALUD NATURAL -->
-                        <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                        <div id="tabPanel-centros" class="tab-panel active bg-[#FDFBF7] rounded-3xl p-6 shadow-md border border-amber-200/60 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div>
                         <h2 class="text-xl font-bold text-forest font-sans"> Centros de Salud Natural y Clínicas</h2>
@@ -905,18 +909,18 @@
                     <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 mb-3">
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Elegir Especialista</label>
-                            <select id="clinicalSpecialist" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <select id="clinicalSpecialist" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                                 <option value="Dra. Eliana Ruiz">Dra. Eliana Ruiz (Médico Integrativa)</option>
                                 <option value="Klgo. Carlos Mendoza">Klgo. Carlos Mendoza (Kinesiólogo)</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Fecha de Consulta</label>
-                            <input type="date" id="clinicalDate" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <input type="date" id="clinicalDate" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Hora Disponible</label>
-                            <select id="clinicalTime" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <select id="clinicalTime" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                                 <option value="09:00">09:00 hrs</option>
                                 <option value="10:30">10:30 hrs</option>
                                 <option value="12:00">12:00 hrs</option>
@@ -926,11 +930,11 @@
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Nombre Paciente</label>
-                            <input type="text" id="clinicalPatientName" placeholder="Ej: Camila Silva" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <input type="text" id="clinicalPatientName" placeholder="Ej: Camila Silva" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Contacto Celular</label>
-                            <input type="text" id="clinicalPhone" value="+569" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
+                            <input type="text" id="clinicalPhone" value="+569" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
                         </div>
                     </div>
 
@@ -949,7 +953,7 @@
                 </div>
             </div>
 
-<div id="tabPanel-farmacias" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+<div id="tabPanel-farmacias" class="tab-panel bg-[#FDFBF7] rounded-3xl p-6 shadow-md border border-amber-200/60 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
                         <div id="farmaciaLogoContainer" class="w-14 h-14 rounded-full overflow-hidden border border-gray-150 shadow-sm flex-shrink-0 hidden">
@@ -997,18 +1001,18 @@
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Código de Receta / Plan</label>
-                            <input type="text" id="pharmaRecipeCode" placeholder="Ej: LW-48392" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm uppercase">
+                            <input type="text" id="pharmaRecipeCode" placeholder="Ej: LW-48392" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm uppercase">
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Establecimiento Farmacéutico</label>
-                            <select id="pharmaSelected" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            <select id="pharmaSelected" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                                 <option value="canelo">Farmacia Herbolaria "El Canelo"</option>
                                 <option value="makewe">Farmacia Mapuche "Makewe"</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Seleccionar Preparado / Hierba</label>
-                            <select id="pharmaProduct" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            <select id="pharmaProduct" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                                 <option value="Melisa Ansiedad">Tintura de Melisa (Cortisol / Ansiedad)</option>
                                 <option value="Arnica Lumbalgia">Extracto de Árnica (Dolor Lumbar)</option>
                                 <option value="Canela Glicemia">Té de Canela (Control Glicémico / Peso)</option>
@@ -1018,7 +1022,7 @@
                         </div>
                         <div>
                             <label class="block text-[8px] font-bold text-gray-400 uppercase mb-1">Tu Teléfono Celular</label>
-                            <input type="text" id="pharmaPhone" value="+569 " class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
+                            <input type="text" id="pharmaPhone" value="+569 " class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm">
                         </div>
                     </div>
 
@@ -1038,7 +1042,7 @@
             </div>
 
             <!-- PESTAÑA 2: RESTAURANTES SALUDABLES -->
-                        <div id="tabPanel-restaurantes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+                        <div id="tabPanel-restaurantes" class="tab-panel bg-[#FDFBF7] rounded-3xl p-6 shadow-md border border-amber-200/60 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
                         <div>
@@ -1077,7 +1081,7 @@
                 </div>
             </div>
 
-            <div id="tabPanel-gimnasios" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+            <div id="tabPanel-gimnasios" class="tab-panel bg-[#FDFBF7] rounded-3xl p-6 shadow-md border border-amber-200/60 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
                         <div>
@@ -1116,7 +1120,7 @@
                 </div>
             </div>
 
-<div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
+<div id="tabPanel-independientes" class="tab-panel bg-[#FDFBF7] rounded-3xl p-6 shadow-md border border-amber-200/60 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div>
                         <h2 class="text-xl font-bold text-forest font-sans">‍️ Profesionales de Consulta Privada o Domicilio</h2>
@@ -1737,7 +1741,7 @@
                 if (p.getAttribute('data-therapy') === activeTherapy) {
                     p.className = "therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start";
                 } else {
-                    p.className = "therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start";
+                    p.className = "therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start";
                 }
             });
             renderAllGrids();
@@ -1752,7 +1756,7 @@
                 if (p.getAttribute('data-therapy') === therapyValue) {
                     p.className = "therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start";
                 } else {
-                    p.className = "therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start";
+                    p.className = "therapy-pill-btn flex-shrink-0 text-gray-500 bg-[#FAF6F0] border border-amber-200/70 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start";
                 }
             });
 
@@ -2838,7 +2842,7 @@
 
             // Highlight transport button
             document.querySelectorAll('.transport-btn').forEach(btn => {
-                btn.className = "transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark";
+                btn.className = "transport-btn text-[9px] bg-[#FAF6F0] border border-amber-200/70 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark";
             });
             const activeBtn = document.getElementById('btn-route-' + mode);
             if (activeBtn) {
@@ -3505,6 +3509,10 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
 
         // Detectar de qué pestaña viene (tab parameter en la URL)
                 window.onload = function() {
+            const urlParamsCheck = new URLSearchParams(window.location.search);
+            if (urlParamsCheck.get('openB2B') === 'true' || window.location.hash === '#b2b') {
+                setTimeout(() => openB2BRegisterModal(), 300);
+            }
             loadTherapistsDropdown();
             renderAllGrids();
             syncPublicCentrosFromSupabase(); syncPublicTherapistsFromSupabase(); // Sincroniza en vivo desde Supabase!
@@ -4771,10 +4779,10 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (type === 'coupon') {
                 currentB2BAmount = 47530;
                 if(labelCoupon) labelCoupon.className = "flex items-center justify-between p-3 bg-white border-2 border-forest rounded-xl cursor-pointer select-none animate-scaleIn";
-                if(labelStandard) labelStandard.className = "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl cursor-pointer select-none";
+                if(labelStandard) labelStandard.className = "flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 rounded-xl cursor-pointer select-none";
             } else {
                 currentB2BAmount = 58310;
-                if(labelCoupon) labelCoupon.className = "flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl cursor-pointer select-none";
+                if(labelCoupon) labelCoupon.className = "flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 rounded-xl cursor-pointer select-none";
                 if(labelStandard) labelStandard.className = "flex items-center justify-between p-3 bg-white border-2 border-forest rounded-xl cursor-pointer select-none animate-scaleIn";
             }
             
@@ -5062,16 +5070,16 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             <!-- Selector de Tipo de Transporte -->
             <div class="bg-gray-50 p-3 border-b border-gray-150 flex flex-wrap items-center justify-center gap-2" id="mapTransportSelectorContainer">
                 <span class="text-[9px] font-bold text-gray-400 uppercase mr-2"><i class="fa-solid fa-person-walking"></i> Medio de Transporte:</span>
-                <button onclick="selectRouteTransport('metro')" id="btn-route-metro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                <button onclick="selectRouteTransport('metro')" id="btn-route-metro" class="transport-btn text-[9px] bg-[#FAF6F0] border border-amber-200/70 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
                     <span> Metro</span>
                 </button>
-                <button onclick="selectRouteTransport('micro')" id="btn-route-micro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                <button onclick="selectRouteTransport('micro')" id="btn-route-micro" class="transport-btn text-[9px] bg-[#FAF6F0] border border-amber-200/70 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
                     <span> Micro</span>
                 </button>
-                <button onclick="selectRouteTransport('colectivo')" id="btn-route-colectivo" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                <button onclick="selectRouteTransport('colectivo')" id="btn-route-colectivo" class="transport-btn text-[9px] bg-[#FAF6F0] border border-amber-200/70 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
                     <span> Colectivo</span>
                 </button>
-                <button onclick="selectRouteTransport('taxi')" id="btn-route-taxi" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
+                <button onclick="selectRouteTransport('taxi')" id="btn-route-taxi" class="transport-btn text-[9px] bg-[#FAF6F0] border border-amber-200/70 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
                     <span> Taxi / Uber</span>
                 </button>
             </div>
@@ -5267,28 +5275,28 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     <p class="text-[9px] text-gray-400 leading-normal">Escoge tu banco para autorizar la transferencia directa.</p>
                 </div>
                 <div class="grid grid-cols-1 gap-2 max-h-[220px] overflow-y-auto pr-1">
-                    <button onclick="selectFintocSimBank('Banco de Chile')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                    <button onclick="selectFintocSimBank('Banco de Chile')" class="w-full flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 hover:border-blue-500 hover:bg-blue-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
                         <div class="flex items-center space-x-3">
                             <div class="w-8 h-8 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 font-extrabold text-xs">BC</div>
                             <span class="text-xs font-bold text-gray-700">Banco de Chile</span>
                         </div>
                         <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-blue-500 transition"></i>
                     </button>
-                    <button onclick="selectFintocSimBank('Banco Santander')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-red-500 hover:bg-red-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                    <button onclick="selectFintocSimBank('Banco Santander')" class="w-full flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 hover:border-red-500 hover:bg-red-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
                         <div class="flex items-center space-x-3">
                             <div class="w-8 h-8 rounded-xl bg-red-100 flex items-center justify-center text-red-600 font-extrabold text-xs">BS</div>
                             <span class="text-xs font-bold text-gray-700">Banco Santander</span>
                         </div>
                         <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-red-500 transition"></i>
                     </button>
-                    <button onclick="selectFintocSimBank('BancoEstado')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-orange-500 hover:bg-orange-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                    <button onclick="selectFintocSimBank('BancoEstado')" class="w-full flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 hover:border-orange-500 hover:bg-orange-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
                         <div class="flex items-center space-x-3">
                             <div class="w-8 h-8 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-extrabold text-xs">BE</div>
                             <span class="text-xs font-bold text-gray-700">BancoEstado</span>
                         </div>
                         <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-orange-500 transition"></i>
                     </button>
-                    <button onclick="selectFintocSimBank('BCI')" class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-green-500 hover:bg-green-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
+                    <button onclick="selectFintocSimBank('BCI')" class="w-full flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 hover:border-green-500 hover:bg-green-50/5 rounded-2xl transition group focus:outline-none text-left shadow-sm">
                         <div class="flex items-center space-x-3">
                             <div class="w-8 h-8 rounded-xl bg-green-100 flex items-center justify-center text-green-700 font-extrabold text-xs">BCI</div>
                             <span class="text-xs font-bold text-gray-700">BCI</span>
@@ -5312,11 +5320,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 <div class="space-y-3">
                     <div>
                         <label class="block text-[8px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">RUT del Titular</label>
-                        <input type="text" id="fintocSimRut" placeholder="Ej: 19.876.543-K" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-bold text-gray-700 shadow-inner">
+                        <input type="text" id="fintocSimRut" placeholder="Ej: 19.876.543-K" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-bold text-gray-700 shadow-inner">
                     </div>
                     <div>
                         <label class="block text-[8px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Contraseña de Internet</label>
-                        <input type="password" id="fintocSimPass" placeholder="••••••••" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-bold text-gray-700 shadow-inner">
+                        <input type="password" id="fintocSimPass" placeholder="••••••••" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-bold text-gray-700 shadow-inner">
                     </div>
                     <button onclick="submitFintocSimCredentials()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition focus:outline-none mt-2">
                         Iniciar Sesión Segura
@@ -5345,7 +5353,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                         </div>
                         <span class="text-xs font-black text-gray-600">$450.000</span>
                     </label>
-                    <label class="w-full flex items-center justify-between p-3 bg-white border border-gray-200 rounded-2xl cursor-pointer select-none shadow-sm opacity-60">
+                    <label class="w-full flex items-center justify-between p-3 bg-[#FAF6F0] border border-amber-200/70 rounded-2xl cursor-pointer select-none shadow-sm opacity-60">
                         <div class="flex items-center space-x-3">
                             <input type="radio" name="fintocAccountType" class="accent-blue-600" disabled>
                             <div>
@@ -5375,7 +5383,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 </div>
                 <div class="space-y-3">
                     <div>
-                        <input type="text" id="fintocSimOtp" placeholder="123456" maxlength="6" class="w-full bg-white border border-gray-200 p-3 rounded-2xl text-lg focus:outline-none focus:border-blue-500 font-black tracking-[0.5em] text-center text-gray-700 shadow-inner">
+                        <input type="text" id="fintocSimOtp" placeholder="123456" maxlength="6" class="w-full bg-[#FAF6F0] border border-amber-200/70 p-3 rounded-2xl text-lg focus:outline-none focus:border-blue-500 font-black tracking-[0.5em] text-center text-gray-700 shadow-inner">
                     </div>
                     <button id="fintocSimBtnPay" onclick="submitFintocSimOtp()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md transition focus:outline-none flex items-center justify-center space-x-2 mt-2">
                         <i class="fa-solid fa-shield-halved"></i>
