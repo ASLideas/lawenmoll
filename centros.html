@@ -68,7 +68,7 @@
                 <!-- PASO 1: FORMULARIO Y ACUERDO DE CIBERSEGURIDAD B2B -->
                 <div id="b2bStepForm" class="space-y-4">
                     <div class="text-center">
-                        <span class="text-2xl">🏢</span>
+                        <span class="text-2xl"></span>
                         <h4 class="font-extrabold text-sm text-slateDark mt-1">Registrar mi Establecimiento</h4>
                         <p class="text-[10px] text-gray-400">Únete a la red y recibe derivaciones de pacientes de forma geolocalizada.</p>
                     </div>
@@ -121,7 +121,7 @@
                         <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Cargar Logo o Foto del Establecimiento (SaaS B2B)</label>
                         <div class="flex items-center space-x-3.5 bg-gray-50 border border-gray-200 p-2.5 rounded-2xl shadow-sm">
                             <div id="b2bLogoPreview" class="w-10 h-10 rounded-xl bg-forest/10 border border-forest/10 flex items-center justify-center text-lg overflow-hidden flex-shrink-0">
-                                🏢
+                                
                             </div>
                             <div class="flex-grow text-left">
                                 <input type="file" id="b2bLogoInput" accept="image/*" class="hidden" onchange="uploadB2BLogo(event)">
@@ -160,14 +160,14 @@
                     <!-- Botón de Acción Paso 1 -->
                     <button id="btnProceedToPay" onclick="proceedToB2BCheckout()" class="w-full bg-forest text-white font-extrabold py-3.5 rounded-2xl shadow-md transition text-xs flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed" disabled>
                         <i class="fa-solid fa-credit-card"></i>
-                        <span>Proceder al Pago Seguro 💳</span>
+                        <span>Proceder al Pago Seguro </span>
                     </button>
                 </div>
 
                 <!-- PASO 2: CHECKOUT WEBPAY / FINTOC SIMULADO -->
                 <div id="b2bStepCheckout" class="space-y-4 hidden animate-fadeIn">
                     <div class="text-center">
-                        <span class="text-2xl">💳</span>
+                        <span class="text-2xl"></span>
                         <h4 class="font-extrabold text-sm text-slateDark mt-1">Terminal de Pago B2B</h4>
                         <p class="text-[10px] text-gray-400">Transacción cifrada y protegida mediante Webpay Plus</p>
                     </div>
@@ -265,7 +265,7 @@
                     <!-- Botón de Confirmar Pago -->
                     <button id="btnConfirmB2BPayment" onclick="processB2BPayment()" class="w-full bg-forest hover:bg-forest/90 text-white font-extrabold py-3.5 rounded-2xl shadow-md transition text-xs flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-shield-halved"></i>
-                        <span id="btnConfirmB2BPaymentSpan">Confirmar y Pagar $47.530 CLP 🔒</span>
+                        <span id="btnConfirmB2BPaymentSpan">Confirmar y Pagar $47.530 CLP </span>
                     </button>
                 </div>
 
@@ -345,8 +345,8 @@
                     </div>
                 </div>
                 <div class="flex space-x-2 pt-2">
-                    <button onclick="closeB2BCancelModal()" class="w-1/2 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition text-[10px] uppercase">Conservar Plan 💖</button>
-                    <button onclick="processB2BCancellation()" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-md transition text-[10px] uppercase">Confirmar Baja 🚫</button>
+                    <button onclick="closeB2BCancelModal()" class="w-1/2 border border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition text-[10px] uppercase">Conservar Plan </button>
+                    <button onclick="processB2BCancellation()" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-md transition text-[10px] uppercase">Confirmar Baja </button>
                 </div>
             </div>
         </div>
@@ -357,7 +357,7 @@
     <div id="localLoginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark/60 backdrop-blur-sm animate-fadeIn">
         <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col p-6 space-y-5">
             <div class="text-center space-y-2">
-                <span class="text-3xl">🏢</span>
+                <span class="text-3xl"></span>
                 <h3 class="font-extrabold text-base text-forest uppercase tracking-wider">Acceso de Comercios B2B</h3>
                 <p class="text-[10px] text-gray-400">Inicia sesión para autogestionar tu vitrina, subir fotos/logos y validar cupones.</p>
             </div>
@@ -379,7 +379,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-1">
                         <label class="block text-[9px] font-bold text-gray-500 uppercase tracking-wider">Contraseña Privada</label>
-                        <a href="#" onclick="alert('🔑 ¿Olvidaste tu contraseña?\n\nPor favor, contacta con el área comercial de LAWENMOLL (soporte@lawenmoll.cl) para restablecer tus credenciales previa verificación de identidad de tu comercio B2B.');" class="text-[8px] text-forest font-bold hover:underline focus:outline-none">¿La olvidaste?</a>
+                        <a href="#" onclick="alert(' ¿Olvidaste tu contraseña?\n\nPor favor, contacta con el área comercial de LAWENMOLL (soporte@lawenmoll.cl) para restablecer tus credenciales previa verificación de identidad de tu comercio B2B.');" class="text-[8px] text-forest font-bold hover:underline focus:outline-none">¿La olvidaste?</a>
                     </div>
                     <input type="password" id="localPassword" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold font-mono">
                 </div>
@@ -401,7 +401,7 @@
             <!-- Header -->
             <div class="bg-slateDark text-white p-5 flex items-center justify-between flex-shrink-0">
                 <div class="flex items-center space-x-2">
-                    <span class="text-xl">⚙️</span>
+                    <span class="text-xl">️</span>
                     <div>
                         <h3 class="font-extrabold text-sm uppercase tracking-wider text-accent" id="adminHeaderTitle">Panel de Autogestión B2B</h3>
                         <p class="text-[9px] text-gray-400">Administra tu vitrina comercial en tiempo real en LAWENMOLL</p>
@@ -425,10 +425,10 @@
                         <div class="space-y-1">
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider">Logo Comercial / Foto Pública</label>
                             <div class="flex items-center space-x-3 bg-white border border-gray-200 p-2 rounded-xl">
-                                <div id="adminLogoPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">🏢</div>
+                                <div id="adminLogoPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div>
                                     <input type="file" id="adminLogoFileInput" accept="image/*" class="hidden" onchange="uploadAdminLogo(event)">
-                                    <button type="button" onclick="triggerAdminLogoFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Imagen 📷</button>
+                                    <button type="button" onclick="triggerAdminLogoFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Imagen </button>
                                 </div>
                             </div>
                         </div>
@@ -437,10 +437,10 @@
                         <div class="space-y-1">
                             <label class="block text-[8px] font-bold text-gray-400 uppercase tracking-wider">Foto de Vitrina (Carta de Menú / Máquinas de Gym / Instalaciones)</label>
                             <div class="flex items-center space-x-3 bg-white border border-gray-200 p-2 rounded-xl">
-                                <div id="adminGalleryPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">🖼️</div>
+                                <div id="adminGalleryPreview" class="w-10 h-10 rounded-lg bg-forest/5 flex items-center justify-center text-lg overflow-hidden flex-shrink-0 border border-gray-150">️</div>
                                 <div>
                                     <input type="file" id="adminGalleryFileInput" accept="image/*" class="hidden" onchange="uploadAdminGallery(event)">
-                                    <button type="button" onclick="triggerAdminGalleryFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Foto 📷</button>
+                                    <button type="button" onclick="triggerAdminGalleryFileInput()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cambiar Foto </button>
                                 </div>
                             </div>
                         </div>
@@ -482,7 +482,7 @@
                             <p class="text-[9px] text-gray-500 font-semibold leading-relaxed">Ingresa el código único del paciente de LAWENMOLL para validar su beneficio y descontar un 5% de tu membresía mensual de forma automática:</p>
                             <div class="flex space-x-2">
                                 <input type="text" id="couponValidateInput" placeholder="Ej: CLINIC-4839" class="w-2/3 bg-white border border-gray-250 p-2 rounded-xl text-xs focus:outline-none focus:border-forest font-bold uppercase font-sans tracking-wide text-center">
-                                <button onclick="validatePatientCoupon()" class="w-1/3 bg-forest hover:bg-forest/95 text-white font-extrabold text-[9px] uppercase py-2 rounded-xl shadow-md transition focus:outline-none">Validar 🚀</button>
+                                <button onclick="validatePatientCoupon()" class="w-1/3 bg-forest hover:bg-forest/95 text-white font-extrabold text-[9px] uppercase py-2 rounded-xl shadow-md transition focus:outline-none">Validar </button>
                             </div>
                         </div>
 
@@ -504,7 +504,7 @@
                         <!-- Botón de Suspensión SaaS -->
                         <button onclick="processB2BCancellationFromAdmin()" class="w-full bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-bold py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
                             <i class="fa-solid fa-rectangle-xmark"></i>
-                            <span>Dar de Baja Mi Membresía B2B 🚫</span>
+                            <span>Dar de Baja Mi Membresía B2B </span>
                         </button>
 
                     </div>
@@ -525,10 +525,10 @@
                             </div>
                             <input type="text" id="adminDish1Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
-                                <div id="adminDish1Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div id="adminDish1Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish1Input" accept="image/*" class="hidden" onchange="uploadAdminDish(1, event)">
-                                    <button type="button" onclick="document.getElementById('adminDish1Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                    <button type="button" onclick="document.getElementById('adminDish1Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto </button>
                                 </div>
                             </div>
                             <input type="hidden" id="adminDish1Photo" value="">
@@ -543,10 +543,10 @@
                             </div>
                             <input type="text" id="adminDish2Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
-                                <div id="adminDish2Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div id="adminDish2Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish2Input" accept="image/*" class="hidden" onchange="uploadAdminDish(2, event)">
-                                    <button type="button" onclick="document.getElementById('adminDish2Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                    <button type="button" onclick="document.getElementById('adminDish2Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto </button>
                                 </div>
                             </div>
                             <input type="hidden" id="adminDish2Photo" value="">
@@ -561,10 +561,10 @@
                             </div>
                             <input type="text" id="adminDish3Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
-                                <div id="adminDish3Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div id="adminDish3Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish3Input" accept="image/*" class="hidden" onchange="uploadAdminDish(3, event)">
-                                    <button type="button" onclick="document.getElementById('adminDish3Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                    <button type="button" onclick="document.getElementById('adminDish3Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto </button>
                                 </div>
                             </div>
                             <input type="hidden" id="adminDish3Photo" value="">
@@ -579,10 +579,10 @@
                             </div>
                             <input type="text" id="adminDish4Desc" placeholder="Ingredientes / Beneficios..." class="w-full bg-white border border-gray-200 p-2 rounded-lg text-[10px] focus:outline-none focus:border-forest font-semibold">
                             <div class="flex items-center space-x-2.5 bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm">
-                                <div id="adminDish4Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150">🍲</div>
+                                <div id="adminDish4Preview" class="w-8 h-8 rounded-lg bg-forest/5 flex items-center justify-center text-sm overflow-hidden flex-shrink-0 border border-gray-150"></div>
                                 <div class="flex-grow text-left">
                                     <input type="file" id="adminDish4Input" accept="image/*" class="hidden" onchange="uploadAdminDish(4, event)">
-                                    <button type="button" onclick="document.getElementById('adminDish4Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto 📷</button>
+                                    <button type="button" onclick="document.getElementById('adminDish4Input').click()" class="bg-forest/5 border border-forest/20 text-forest font-bold py-1 px-2.5 rounded-lg text-[8px] uppercase transition hover:bg-forest/10 focus:outline-none">Cargar Foto </button>
                                 </div>
                             </div>
                             <input type="hidden" id="adminDish4Photo" value="">
@@ -614,26 +614,24 @@
             <div class="flex items-center space-x-2">
                 <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
                 <span class="font-bold text-lg md:text-xl tracking-wider text-forest">LAWENMOLL</span>
-                <span class="text-[8px] md:text-[9px] bg-accent/25 text-slateDark px-2 py-0.5 rounded-full font-bold font-sans">Ecosistema B2B 🌟</span>
+                <span class="text-[8px] md:text-[9px] bg-accent/25 text-slateDark px-2 py-0.5 rounded-full font-bold font-sans">Ecosistema B2B </span>
             </div>
-            <div class="flex flex-wrap justify-center gap-1.5 md:gap-2">
-                <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-bold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
-                    <i class="fa-solid fa-leaf"></i>
-                    <span>Secretos<span class="hidden sm:inline"> de la Abuela</span> 👵</span>
-                </a>
-                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-semibold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
-                    <i class="fa-solid fa-clipboard-question"></i>
-                    <span>Volver<span class="hidden sm:inline"> al Test</span></span>
-                </a>
-                <a href="terapeuta.html" class="text-[9px] md:text-xs bg-forest hover:bg-forest/90 text-white font-bold px-2 py-1.5 md:px-3 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm">
-                    <i class="fa-solid fa-user-doctor"></i>
-                    <span><span class="hidden sm:inline">Portal </span>Especialistas 💼</span>
-                </a>
-                <button onclick="openLocalLoginModal()" class="text-[9px] md:text-xs bg-slateDark hover:opacity-95 text-white font-bold px-2.5 py-1.5 md:px-3.5 md:py-2 rounded-full transition flex items-center space-x-1 shadow-sm focus:outline-none">
-                    <i class="fa-solid fa-store text-accent"></i>
-                    <span><span class="hidden sm:inline">Portal </span>de Aliados 🏢</span>
+            
+            <div class="flex flex-wrap justify-center items-center gap-1.5 md:gap-2">
+                <button onclick="openB2BModal()" class="text-[9px] md:text-xs bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-extrabold px-3.5 py-1.5 rounded-full transition-all shadow-md flex items-center space-x-1.5 animate-pulse cursor-pointer border border-amber-300">
+                    <i class="fa-solid fa-pen-ruler text-xs"></i>
+                    <span>Anúnciate / Diseña con nosotros</span>
                 </button>
+                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <span>Test Bienestar</span>
+                </a>
+                <a href="secretos.html" class="text-[9px] md:text-xs bg-sage text-white hover:bg-sage/90 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Diario Mural 👵</span>
+                </a>
             </div>
+
         </div>
     </header>
 
@@ -655,7 +653,7 @@
         <p class="text-xs md:text-sm text-[#E0F7F4] font-medium leading-relaxed">Directorio oficial de Centros Médicos, Kinesiología, Gastronomía Saludable y Boticas de Salud en todo Chile.</p>
       </div>
       <div class="flex flex-col sm:flex-row md:flex-col gap-2.5 w-full md:w-auto shrink-0">
-        <a href="#" onclick="alert('Soporte por WhatsApp')" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-extrabold px-4 py-2.5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 border border-white/20">
+        <a href="#" onclick="alert('Soporte por WhatsApp')" class="w-full bg-[#1B4D3E] hover:bg-[#20ba5a] text-white text-xs font-extrabold px-4 py-2.5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 border border-white/20">
           <i class="fa-brands fa-whatsapp text-base"></i><span>Contáctanos por WhatsApp</span>
         </a>
         <a href="mailto:contacto@lawenmoll.cl" class="w-full bg-white/15 hover:bg-white/25 text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-md transition-all border border-white/25 flex items-center justify-center gap-2 backdrop-blur-xs">
@@ -683,10 +681,24 @@
                 <div class="mb-3 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
                     <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-map-location-dot mr-1"></i> Selecciona tu Región (Chile)</label>
                     <select id="globalRegionFilter" onchange="filterAllByRegion()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
-                        <option value="all">🇨🇱 Todas las Regiones</option>
-                        <option value="Región Metropolitana">📍 Región Metropolitana (Santiago)</option>
-                        <option value="Región de la Araucanía">🌲 Región de la Araucanía (Temuco)</option>
-                        <option value="Región de Valparaíso">🌊 Región de Valparaíso (Viña/Valpo)</option>
+                        <option value="all">Todas las Regiones (Arica a Punta Arenas)</option>
+                        <option value="Arica y Parinacota">Región de Arica y Parinacota (Arica)</option>
+                        <option value="Tarapacá">Región de Tarapacá (Iquique)</option>
+                        <option value="Antofagasta">Región de Antofagasta</option>
+                        <option value="Atacama">Región de Atacama (Copiapó)</option>
+                        <option value="Coquimbo">Región de Coquimbo (La Serena/Coquimbo)</option>
+                        <option value="Valparaíso">Región de Valparaíso (Viña/Valpo)</option>
+                        <option value="Isla de Pascua">Isla de Pascua (Rapa Nui)</option>
+                        <option value="Región Metropolitana">Región Metropolitana (Santiago)</option>
+                        <option value="O'Higgins">Región del Libertador General Bernardo O'Higgins (Rancagua)</option>
+                        <option value="Maule">Región del Maule (Talca)</option>
+                        <option value="Ñuble">Región de Ñuble (Chillán)</option>
+                        <option value="Biobío">Región del Biobío (Concepción)</option>
+                        <option value="La Araucanía">Región de La Araucanía (Temuco)</option>
+                        <option value="Los Ríos">Región de Los Ríos (Valdivia)</option>
+                        <option value="Los Lagos">Región de Los Lagos (Puerto Montt/Chiloé)</option>
+                        <option value="Aysén">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                        <option value="Magallanes">Región de Magallanes y Antártica Chilena (Punta Arenas)</option>
                     </select>
                 </div>
 
@@ -694,19 +706,19 @@
                 <div class="mb-4 bg-forest/5 p-3.5 rounded-2xl border border-forest/15">
                     <label class="block text-[8px] font-black text-forest uppercase tracking-wider mb-1.5"><i class="fa-solid fa-leaf mr-1"></i> Filtro por Terapia / Especialidad</label>
                     <select id="globalTherapyFilter" onchange="filterAllByTherapy()" class="w-full bg-white border border-gray-200 text-[11px] font-bold p-2.5 rounded-xl text-slateDark focus:outline-none focus:border-forest shadow-sm cursor-pointer">
-                        <option value="all">🌿 Todas las Especialidades</option>
-                        <option value="fitoterapia">🌱 Fitoterapia & Herbolaria</option>
+                        <option value="all"> Todas las Especialidades</option>
+                        <option value="fitoterapia"> Fitoterapia & Herbolaria</option>
                         <option value="acupuntura">🪡 Acupuntura & MTC</option>
-                        <option value="quiropraxia">👐 Quiropraxia & Kine</option>
-                        <option value="magnetoterapia">🧲 Magnetoterapia</option>
-                        <option value="nutricion">🍎 Nutrición Consciente</option>
-                        <option value="psicologia">🧠 Psicología Integrativa</option>
+                        <option value="quiropraxia"> Quiropraxia & Kine</option>
+                        <option value="magnetoterapia"> Magnetoterapia</option>
+                        <option value="nutricion"> Nutrición Consciente</option>
+                        <option value="psicologia"> Psicología Integrativa</option>
                     </select>
                 </div>
                 
                 <div class="space-y-2">
                     <button id="tab-centros" onclick="switchTab('centros', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-forest bg-forest/5 transition focus:outline-none flex items-center space-x-3.5 shadow-sm">
-                        <span class="text-2xl">🏢</span>
+                        <span class="text-2xl"></span>
                         <div>
                             <h4 class="font-extrabold text-xs text-slateDark">Centros de Salud Natural</h4>
                             <p class="text-[9px] text-gray-500 font-medium">Clínicas y boxes físicos asociados</p>
@@ -714,7 +726,7 @@
                     </button>
 
                     <button id="tab-restaurantes" onclick="switchTab('restaurantes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                        <span class="text-2xl">🥑</span>
+                        <span class="text-2xl"></span>
                         <div>
                             <h4 class="font-extrabold text-xs text-slateDark">Restaurantes Saludables</h4>
                             <p class="text-[9px] text-gray-500 font-medium font-sans">Menús interactivos y reservas</p>
@@ -722,7 +734,7 @@
                     </button>
 
                     <button id="tab-gimnasios" onclick="switchTab('gimnasios', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                        <span class="text-2xl">💪</span>
+                        <span class="text-2xl"></span>
                         <div>
                             <h4 class="font-extrabold text-xs text-slateDark">Gimnasios y Yoga</h4>
                             <p class="text-[9px] text-gray-500 font-medium font-sans">Instalaciones de movimiento y fuerza</p>
@@ -731,7 +743,7 @@
 
                     <!-- NUEVO TAB: FARMACIAS NATURALES -->
                     <button id="tab-farmacias" onclick="switchTab('farmacias', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                        <span class="text-2xl">🌿</span>
+                        <span class="text-2xl"></span>
                         <div>
                             <h4 class="font-extrabold text-xs text-slateDark">Farmacias Naturales</h4>
                             <p class="text-[9px] text-gray-500 font-medium font-sans">Recetarios magistrales y herbolaria</p>
@@ -740,7 +752,7 @@
 
                     <!-- NUEVO TAB: PROFESIONALES INDEPENDIENTES -->
                     <button id="tab-independientes" onclick="switchTab('independientes', this)" class="tab-btn w-full text-left p-3 rounded-2xl border border-gray-100 hover:border-forest/50 transition focus:outline-none flex items-center space-x-3.5 shadow-sm bg-white">
-                        <span class="text-2xl">🧑‍⚕️</span>
+                        <span class="text-2xl">‍️</span>
                         <div>
                             <h4 class="font-extrabold text-xs text-slateDark">Profesionales Independientes</h4>
                             <p class="text-[9px] text-gray-500 font-medium font-sans">Terapeutas y Psicólogos Clínicos (Casa/Oficina)</p>
@@ -752,7 +764,7 @@
             <!-- EXPLICACIÓN DEL MODELO DE CLIENTES (SaaS B2B para Clínicas, GYM y Restaurantes) -->
             <div class="bg-slateDark text-white rounded-3xl p-6 shadow-md border border-gray-800 space-y-4">
                 <div class="flex items-center space-x-2.5">
-                    <span class="text-2xl">💼</span>
+                    <span class="text-2xl"></span>
                     <div>
                         <h3 class="font-extrabold text-xs uppercase tracking-wider text-accent">Nuestros Clientes B2B</h3>
                         <p class="text-[9px] text-gray-400">Cómo LAWENMOLL rentabiliza el ecosistema</p>
@@ -802,7 +814,7 @@
                 </button>
                 <button onclick="openB2BCancelModal()" class="w-full mt-2 bg-transparent hover:bg-white/10 text-gray-300 hover:text-white border border-white/20 font-bold py-2 rounded-2xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                     <i class="fa-solid fa-ban"></i>
-                    <span>Cancelar Mi Suscripción B2B 🚫</span>
+                    <span>Cancelar Mi Suscripción B2B </span>
                 </button>
             </div>
 
@@ -837,25 +849,25 @@
                 <span class="block text-[8px] font-black text-gray-400 uppercase tracking-wider mb-2.5 flex items-center"><i class="fa-solid fa-sliders mr-1 text-forest animate-pulse"></i> Filtrar Rápidamente por Especialidad / Terapia</span>
                 <div class="flex space-x-2 overflow-x-auto pb-1 scrollbar-none snap-x snap-mandatory">
                     <button onclick="selectTherapyPill('all')" data-therapy="all" class="therapy-pill-btn flex-shrink-0 text-white bg-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all scale-105 focus:outline-none snap-start">
-                        🌿 Todas
+                         Todas
                     </button>
                     <button onclick="selectTherapyPill('fitoterapia')" data-therapy="fitoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
-                        🌱 Fitoterapia
+                         Fitoterapia
                     </button>
                     <button onclick="selectTherapyPill('acupuntura')" data-therapy="acupuntura" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
                         🪡 Acupuntura
                     </button>
                     <button onclick="selectTherapyPill('quiropraxia')" data-therapy="quiropraxia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
-                        👐 Quiropraxia
+                         Quiropraxia
                     </button>
                     <button onclick="selectTherapyPill('magnetoterapia')" data-therapy="magnetoterapia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
-                        🧲 Magneto
+                         Magneto
                     </button>
                     <button onclick="selectTherapyPill('nutricion')" data-therapy="nutricion" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
-                        🍎 Nutrición
+                         Nutrición
                     </button>
                     <button onclick="selectTherapyPill('psicologia')" data-therapy="psicologia" class="therapy-pill-btn flex-shrink-0 text-gray-500 bg-white border border-gray-200 hover:border-forest/40 hover:text-forest font-bold px-4 py-2 rounded-full text-xs shadow-sm transition-all focus:outline-none snap-start">
-                        🧠 Psicología
+                         Psicología
                     </button>
                 </div>
             </div>
@@ -864,7 +876,7 @@
                         <div id="tabPanel-centros" class="tab-panel active bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div>
-                        <h2 class="text-xl font-bold text-forest font-sans">🏢 Centros de Salud Natural y Clínicas</h2>
+                        <h2 class="text-xl font-bold text-forest font-sans"> Centros de Salud Natural y Clínicas</h2>
                         <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios clínicos acreditados y equipados para consultas integrativas, kinesiología y telemedicina.</p>
                         <div class="flex flex-wrap gap-2 mt-2">
                             <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider inline-block">Red de Clínicas y Boxes</span>
@@ -944,7 +956,7 @@
                             <img id="farmaciaLogoImg" src="" class="w-full h-full object-cover">
                         </div>
                         <div>
-                            <h2 class="text-xl font-bold text-forest font-sans">🌿 Farmacias Naturales y Magistrales</h2>
+                            <h2 class="text-xl font-bold text-forest font-sans"> Farmacias Naturales y Magistrales</h2>
                             <p class="text-xs text-gray-400 font-medium mt-0.5">Ecosistema de preparados tradicionales, homeopatía y herbolaria certificada en Chile.</p>
                             <div class="flex flex-wrap gap-2 mt-2">
                                 <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider inline-block">Socio Herbolario y Homeopatía</span>
@@ -1030,7 +1042,7 @@
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
                         <div>
-                            <h2 class="text-xl font-bold text-forest font-sans">🥑 Restaurantes Saludables y Alimentación Consciente</h2>
+                            <h2 class="text-xl font-bold text-forest font-sans"> Restaurantes Saludables y Alimentación Consciente</h2>
                             <p class="text-xs text-gray-400 font-medium mt-0.5">Ecosistema de gastronomía consciente y menús depurativos integrados con la salud del paciente.</p>
                             <div class="flex flex-wrap gap-2 mt-2">
                                 <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider inline-block">Nutrición de Precisión</span>
@@ -1069,7 +1081,7 @@
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div class="flex items-center space-x-3.5">
                         <div>
-                            <h2 class="text-xl font-bold text-forest font-sans">💪 Gimnasios y Centros de Movimiento</h2>
+                            <h2 class="text-xl font-bold text-forest font-sans"> Gimnasios y Centros de Movimiento</h2>
                             <p class="text-xs text-gray-400 font-medium mt-0.5">Espacios de entrenamiento supervisado por kinesiólogos y entrenadores metabólicos.</p>
                             <div class="flex flex-wrap gap-2 mt-2">
                                 <span class="text-[9px] bg-forest/10 text-forest px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider inline-block">Movimiento Terapéutico</span>
@@ -1107,7 +1119,7 @@
 <div id="tabPanel-independientes" class="tab-panel bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
                 <div class="flex justify-between items-start border-b border-gray-100 pb-4">
                     <div>
-                        <h2 class="text-xl font-bold text-forest font-sans">🧑‍⚕️ Profesionales de Consulta Privada o Domicilio</h2>
+                        <h2 class="text-xl font-bold text-forest font-sans">‍️ Profesionales de Consulta Privada o Domicilio</h2>
                         <p class="text-xs text-gray-400 font-medium mt-0.5">Terapeutas y Psicólogos de la Salud que atienden de forma autónoma.</p>
                         <div class="flex flex-wrap gap-2 mt-2">
                             <span class="text-[9px] bg-accent/20 text-accent px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider font-sans inline-block">Profesionales Libres</span>
@@ -1142,7 +1154,7 @@
                                 </div>
                             </div>
                             
-                            <!-- 📸 GALERÍA DE ESPACIO CLÍNICO / BOX (IDEA v61) -->
+                            <!--  GALERÍA DE ESPACIO CLÍNICO / BOX (IDEA v61) -->
                             <div class="mt-4 bg-sage/5 p-3.5 rounded-2xl border border-sage/10 w-full">
                                 <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-2 flex items-center"><i class="fa-solid fa-images mr-1.5 text-forest text-[10px]"></i> Espacio de Consulta & Gabinete de Herbolaria</span>
                                 <div class="flex space-x-2.5 overflow-x-auto pb-1 max-w-full">
@@ -1185,11 +1197,11 @@
                         <div class="flex flex-col sm:flex-row gap-2 pt-1">
                             <button onclick="calculateIndependentRoute(-33.4250, -70.6120, 'Consulta Maite Soler', 'Av. Providencia 1450')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Cómo Llegar (Mapa) 🗺️</span>
+                                <span>Cómo Llegar (Mapa) ️</span>
                             </button>
                             <button onclick="focusCancelBooking('cancelBookingCode', 'CLINIC-MAITE')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-ban"></i>
-                                <span>Cancelar Mi Cita ❌</span>
+                                <span>Cancelar Mi Cita </span>
                             </button>
                         </div>
                         
@@ -1215,7 +1227,7 @@
                                 </div>
                             </div>
                             
-                            <!-- 📸 GALERÍA DE ESPACIO CLÍNICO / BOX (IDEA v61) -->
+                            <!--  GALERÍA DE ESPACIO CLÍNICO / BOX (IDEA v61) -->
                             <div class="mt-4 bg-sage/5 p-3.5 rounded-2xl border border-sage/10 w-full">
                                 <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-2 flex items-center"><i class="fa-solid fa-images mr-1.5 text-forest text-[10px]"></i> Consulta de Psicología & Espacio de Terapia</span>
                                 <div class="flex space-x-2.5 overflow-x-auto pb-1 max-w-full">
@@ -1258,11 +1270,11 @@
                         <div class="flex flex-col sm:flex-row gap-2 pt-1">
                             <button onclick="calculateIndependentRoute(-33.4215, -70.6105, 'Oficina Ps. Tomás Araya', 'General Holley 142, Of. 304')" class="w-full sm:w-1/2 bg-forest/10 hover:bg-forest/20 text-forest font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Cómo Llegar (Mapa) 🗺️</span>
+                                <span>Cómo Llegar (Mapa) ️</span>
                             </button>
                             <button onclick="focusCancelBooking('cancelBookingCode', 'CLINIC-TOMAS')" class="w-full sm:w-1/2 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 rounded-xl text-[10px] shadow-sm transition flex items-center justify-center space-x-1.5 uppercase tracking-wider">
                                 <i class="fa-solid fa-ban"></i>
-                                <span>Cancelar Mi Cita ❌</span>
+                                <span>Cancelar Mi Cita </span>
                             </button>
                         </div>
                         
@@ -1286,7 +1298,7 @@
         
         // CONFIGURACIÓN DE CONEXIÓN CON TU BASE DE DATOS (SUPABASE)
         const supabaseUrl = 'https://kyzvygyzthmoudsepwsi.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo'; // 👈 AQUÍ PEGAS TU CLAVE ANON DE SUPABASE
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5enZ5Z3l6dGhtb3Vkc2Vwd3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3OTA2ODYsImV4cCI6MjEwMzM2NjY4Nn0.hF8OJh8ux6XQvl-YplGCI4x6fIOFzhZf94dDJqV25Xo'; //  AQUÍ PEGAS TU CLAVE ANON DE SUPABASE
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Cargar terapeutas dinámicamente en el selector
@@ -1642,7 +1654,7 @@
                     optsHtml += `<option value="Herbal Autoguiado">Remedio Herbolario Personalizado v3</option>`;
                     
                     selectProd.innerHTML = optsHtml;
-                    alert(`🌿 Conectado a ${pharm.nombre}: Se ha cargado su catálogo y recetario en vivo.`);
+                    alert(` Conectado a ${pharm.nombre}: Se ha cargado su catálogo y recetario en vivo.`);
                 }
             }
         }
@@ -1711,7 +1723,7 @@
                 activeRegion = filterEl.value;
             }
             renderAllGrids();
-            alert(`📍 Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion}`);
+            alert(` Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion}`);
         }
 
         function filterAllByTherapy() {
@@ -1796,7 +1808,7 @@
             renderPublicFarmaciasGrid();
             renderPublicTherapistsGrid();
             
-            alert(`📍 Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion}`);
+            alert(` Filtrando ecosistema de LAWENMOLL: Región configurada en ${activeRegion === 'all' ? 'Todas las Regiones' : activeRegion}`);
         }
 
         // --- RENDERIZADORES DINÁMICOS DE LA RED COMERCIAL v19 ---
@@ -1849,16 +1861,16 @@
                         </div>
                         <div class="grid grid-cols-2 gap-2 mt-4">
                             <button onclick="viewEstablishmentDetail('clínica', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
-                                Ver Personal 👥
+                                Ver Personal 
                             </button>
                             <button data-lat="${c.latitud || -33.4285}" data-lon="${c.longitud || -70.6125}" data-name="${c.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Trazar Ruta 🗺️</span>
+                                <span>Trazar Ruta ️</span>
                             </button>
                         </div>
                         <button onclick="openCouponClaimModal('${safeName}', '${c.codigo_descuento || 'LAWEN-CLINIC'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
                             <i class="fa-solid fa-ticket-simple"></i>
-                            <span>Obtener Cupón de Bienestar 🎫</span>
+                            <span>Obtener Cupón de Bienestar </span>
                         </button>
                     </div>
                 `;
@@ -1912,22 +1924,22 @@
                                 <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
                                 <p class="text-accent font-bold"><i class="fa-solid fa-key mr-1.5"></i> Código: ${promoCode}</p>
                                 <p class="text-slateDark font-extrabold mt-1 text-[9px] bg-amber-50 text-amber-800 px-2.5 py-1 rounded-xl inline-block border border-amber-100">
-                                    🍽️ Mesas Ocupadas: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
+                                    ️ Mesas Ocupadas: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
                                 </p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mt-4">
                             <button onclick="viewEstablishmentDetail('restaurante', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
-                                Ver Menú y Personal 👥
+                                Ver Menú y Personal 
                             </button>
                             <button data-lat="${c.latitud || -33.4225}" data-lon="${c.longitud || -70.6105}" data-name="${c.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Trazar Ruta 🗺️</span>
+                                <span>Trazar Ruta ️</span>
                             </button>
                         </div>
                         <button onclick="openCouponClaimModal('${safeName}', '${promoCode}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5">
                             <i class="fa-solid fa-ticket-simple"></i>
-                            <span>Obtener Cupón de Descuento 🎫</span>
+                            <span>Obtener Cupón de Descuento </span>
                         </button>
                     </div>
                 `;
@@ -1976,22 +1988,22 @@
                                 <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
                                 <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
                                 <p class="text-slateDark font-extrabold mt-1 text-[9px] bg-amber-50 text-amber-800 px-2.5 py-1 rounded-xl inline-block border border-amber-100">
-                                    🏋️ Alumnos Activos: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
+                                    ️ Alumnos Activos: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
                                 </p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mt-4">
                             <button onclick="viewEstablishmentDetail('gym', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
-                                Ver Clases y Personal 👥
+                                Ver Clases y Personal 
                             </button>
                             <button data-lat="${c.latitud || -33.4350}" data-lon="${c.longitud || -70.6190}" data-name="${c.nombre.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Trazar Ruta 🗺️</span>
+                                <span>Trazar Ruta ️</span>
                             </button>
                         </div>
                         <button onclick="openCouponClaimModal('${safeName}', '${c.codigo_descuento || 'LAWEN-GYM'}', '${logo}', '${benefit}')" class="w-full mt-2 bg-accent hover:bg-accent/90 text-white font-black py-2.5 rounded-xl text-[10px] uppercase shadow-sm transition flex items-center justify-center space-x-1.5 focus:outline-none">
                             <i class="fa-solid fa-ticket-simple"></i>
-                            <span>Obtener Cupón de Bienestar 🎫</span>
+                            <span>Obtener Cupón de Bienestar </span>
                         </button>
                     </div>
                 `;
@@ -2039,13 +2051,13 @@
                                 <p><i class="fa-solid fa-phone text-forest mr-1.5"></i> ${phone}</p>
                                 <p class="text-forest font-bold"><i class="fa-solid fa-tag mr-1.5"></i> Beneficio: ${benefit}</p>
                                 <p class="text-slateDark font-extrabold mt-1 text-[9px] bg-amber-50 text-amber-800 px-2.5 py-1 rounded-xl inline-block border border-amber-100">
-                                    🏋️ Alumnos Activos: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
+                                    ️ Alumnos Activos: ${c.mesas_ocupadas || 0} de ${c.capacidad_mesas || 12}
                                 </p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-2 mt-4">
                             <button onclick="viewEstablishmentDetail('farmacia', ${c.id})" class="bg-forest/10 hover:bg-forest/20 text-forest font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider">
-                                Ver Personal 👥
+                                Ver Personal 
                             </button>
                             <button onclick="selectPharmacyForOrder(${c.id})" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 rounded-xl text-[10px] transition shadow-sm uppercase tracking-wider flex items-center justify-center space-x-1">
                                 <i class="fa-solid fa-prescription-bottle-medical"></i>
@@ -2176,7 +2188,7 @@
                 const galleryHtml = `
                     <div class="mt-1.5 bg-sage/5 p-2 rounded-2xl border border-sage/10 w-full text-center">
                         <span class="text-[8px] uppercase font-bold text-gray-400 tracking-wider block mb-1.5 flex items-center justify-center">
-                            <i class="fa-solid fa-images mr-1.5 text-forest text-[8px]"></i> Galería de Fotos Profesional 📸
+                            <i class="fa-solid fa-images mr-1.5 text-forest text-[8px]"></i> Galería de Fotos Profesional 
                         </span>
                         <div class="grid grid-cols-4 gap-2 w-full px-0.5 justify-center">
                             ${galleryUrls.slice(0, 4).map(imgUrl => `
@@ -2194,7 +2206,7 @@
                     <div class="flex flex-col sm:flex-row gap-1.5 pt-1 w-full">
                         <button disabled class="w-full bg-gray-250 text-gray-400 font-extrabold py-1.5 rounded-xl text-[8px] uppercase cursor-not-allowed flex items-center justify-center space-x-1 shadow-inner border border-gray-200">
                             <i class="fa-solid fa-ban text-gray-400"></i>
-                            <span>🚫 Horas Bloqueadas (En Clínica)</span>
+                            <span> Horas Bloqueadas (En Clínica)</span>
                         </button>
                     </div>
                 ` : `
@@ -2202,17 +2214,17 @@
                         <div class="grid grid-cols-5 gap-1.5">
                             <button data-name="${tName.replace(/"/g, '&quot;')}" data-rate="${rate}" onclick="openIndependentBookingModalFromButton(this)" class="col-span-2 bg-forest hover:bg-forest/95 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] shadow-sm transition uppercase tracking-wider flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-calendar-check animate-pulse"></i>
-                                <span>Agendar 📅</span>
+                                <span>Agendar </span>
                             </button>
                             <button onclick="openCouponClaimModal('${safeName}', '${couponCode}', '${photo}', '10% DCTO en Cita Privada')" class="col-span-3 bg-accent hover:bg-accent/90 text-white font-extrabold py-1.5 rounded-xl text-[8.5px] uppercase shadow-sm transition flex items-center justify-center space-x-1 focus:outline-none">
                                 <i class="fa-solid fa-ticket-simple"></i>
-                                <span>Cupón 🎫</span>
+                                <span>Cupón </span>
                             </button>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5">
                             <button data-lat="${lat}" data-lon="${lon}" data-name="${tName.replace(/"/g, '&quot;')}" data-address="${address.replace(/"/g, '&quot;')}" onclick="planRouteFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Programar Tu Viaje">
                                 <i class="fa-solid fa-route"></i>
-                                <span>Mapa 🗺️</span>
+                                <span>Mapa ️</span>
                             </button>
                             <button data-name="${tName.replace(/"/g, '&quot;')}" data-type="terapeuta" onclick="viewEstablishmentDetailFromButton(this)" class="bg-forest/10 hover:bg-forest/20 text-forest font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Ver Reseñas y Perfil">
                                 <i class="fa-solid fa-star"></i>
@@ -2220,7 +2232,7 @@
                             </button>
                             <button onclick="focusCancelBooking('cancelBookingCode', '${t.codeVal || 'CLINIC-' + tName.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0,4).toUpperCase()}')" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold py-1.5 rounded-xl text-[8.5px] shadow-sm transition flex items-center justify-center space-x-1 uppercase tracking-wider focus:outline-none" title="Cancelar Mi Cita">
                                 <i class="fa-solid fa-ban"></i>
-                                <span>Anular ❌</span>
+                                <span>Anular </span>
                             </button>
                         </div>
                     </div>
@@ -2411,25 +2423,25 @@
                     let classes = [];
                     if (item.nombre.includes('SportLife')) {
                         classes = [
-                            { name: 'Yoga Kundalini Terapéutico 🧘', schedule: 'Lun y Mié: 08:30 - 09:30 hrs', price: '$35.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' },
-                            { name: 'Pilates Reformer Clínico 🤸', schedule: 'Mar y Jue: 17:00 - 18:00 hrs', price: '$45.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
-                            { name: 'Entrenamiento de Fuerza Adaptada 🏋️', schedule: 'Mar y Jue: 10:00 - 11:00 hrs', price: '$40.000 / mes', photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150' }
+                            { name: 'Yoga Kundalini Terapéutico ', schedule: 'Lun y Mié: 08:30 - 09:30 hrs', price: '$35.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' },
+                            { name: 'Pilates Reformer Clínico ', schedule: 'Mar y Jue: 17:00 - 18:00 hrs', price: '$45.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
+                            { name: 'Entrenamiento de Fuerza Adaptada ️', schedule: 'Mar y Jue: 10:00 - 11:00 hrs', price: '$40.000 / mes', photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150' }
                         ];
                     } else if (item.nombre.includes('Kundalini')) {
                         classes = [
-                            { name: 'Hatha Yoga para Columna 🧘', schedule: 'Lun y Mié: 09:00 - 10:00 hrs', price: '$32.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' },
-                            { name: 'Kundalini & Control de Estrés 🍃', schedule: 'Mar y Jue: 18:30 - 19:30 hrs', price: '$38.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
-                            { name: 'Meditación Cuencos Tibetanos 🥣', schedule: 'Viernes: 19:00 - 20:00 hrs', price: '$25.000 / mes', photo: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=150' }
+                            { name: 'Hatha Yoga para Columna ', schedule: 'Lun y Mié: 09:00 - 10:00 hrs', price: '$32.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' },
+                            { name: 'Kundalini & Control de Estrés ', schedule: 'Mar y Jue: 18:30 - 19:30 hrs', price: '$38.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
+                            { name: 'Meditación Cuencos Tibetanos ', schedule: 'Viernes: 19:00 - 20:00 hrs', price: '$25.000 / mes', photo: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=150' }
                         ];
                     } else if (item.nombre.includes('Vitale')) {
                         classes = [
-                            { name: 'Pilates Reformer Postural 🤸', schedule: 'Lun, Mié y Vie: 11:00 - 12:00 hrs', price: '$55.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
+                            { name: 'Pilates Reformer Postural ', schedule: 'Lun, Mié y Vie: 11:00 - 12:00 hrs', price: '$55.000 / mes', photo: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=150' },
                             { name: 'Kinesiología de Columna (Lumbago) 🩺', schedule: 'Mar y Jue: 15:00 - 16:00 hrs', price: '$48.000 / mes', photo: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=150' },
-                            { name: 'Fuerza Funcional de Bajo Impacto 💪', schedule: 'Lun y Mié: 18:00 - 19:00 hrs', price: '$40.000 / mes', photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150' }
+                            { name: 'Fuerza Funcional de Bajo Impacto ', schedule: 'Lun y Mié: 18:00 - 19:00 hrs', price: '$40.000 / mes', photo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150' }
                         ];
                     } else {
                         classes = [
-                            { name: 'Clase Dirigida General 🧘', schedule: 'Lunes a Viernes: Consulta Bloques', price: '$30.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' }
+                            { name: 'Clase Dirigida General ', schedule: 'Lunes a Viernes: Consulta Bloques', price: '$30.000 / mes', photo: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=150' }
                         ];
                     }
 
@@ -2465,28 +2477,28 @@
                     let dishes = [];
                     if (item.nombre.includes('Huerto')) {
                         dishes = [
-                            { name: 'Bowl Antiinflamatorio de Cúrcuma 🥣', desc: 'Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y tahini.', price: '$8.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
-                            { name: 'Crema de Hinojo Terapéutica 🍵', desc: 'Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal.', price: '$5.400', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
-                            { name: 'Tostadas de Palta Ancestral 🥑', desc: 'Pan de masa madre integral, palta madura machacada, sésamo negro y brotes.', price: '$5.900', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
-                            { name: 'Jugo Verde Lawen 🍹', desc: 'Extracción en frío de espinaca, apio, pepino fresco, manzana verde y menta.', price: '$3.800', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
+                            { name: 'Bowl Antiinflamatorio de Cúrcuma ', desc: 'Quinoa orgánica, cúrcuma fresca, palta, espinaca baby, camote asado y tahini.', price: '$8.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
+                            { name: 'Crema de Hinojo Terapéutica ', desc: 'Hinojo fresco, manzana verde, cebolla caramelizada, jengibre y caldo vegetal.', price: '$5.400', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
+                            { name: 'Tostadas de Palta Ancestral ', desc: 'Pan de masa madre integral, palta madura machacada, sésamo negro y brotes.', price: '$5.900', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
+                            { name: 'Jugo Verde Lawen ', desc: 'Extracción en frío de espinaca, apio, pepino fresco, manzana verde y menta.', price: '$3.800', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
                         ];
                     } else if (item.nombre.includes('Raíces')) {
                         dishes = [
-                            { name: 'Guiso de Mote y Changles 🥣', desc: 'Trigo mote de la zona, changles recolectados, sofrito criollo herbario y cilantro.', price: '$7.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
-                            { name: 'Sopa Purificadora de Piñón 🍵', desc: 'Piñones nativos molidos, zapallo asado, merkén ancestral, caldo de hierbas.', price: '$6.200', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
-                            { name: 'Ensalada Silvestre de Maqui 🥗', desc: 'Berros de agua, hojas de mostaza silvestre, aderezo concentrado de maqui y nueces.', price: '$5.800', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
-                            { name: 'Té de Canelo y Miel de Ulmo 🍵', desc: 'Corteza de canelo tierno infusionada, endulzado con miel de ulmo pura.', price: '$2.500', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
+                            { name: 'Guiso de Mote y Changles ', desc: 'Trigo mote de la zona, changles recolectados, sofrito criollo herbario y cilantro.', price: '$7.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
+                            { name: 'Sopa Purificadora de Piñón ', desc: 'Piñones nativos molidos, zapallo asado, merkén ancestral, caldo de hierbas.', price: '$6.200', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
+                            { name: 'Ensalada Silvestre de Maqui ', desc: 'Berros de agua, hojas de mostaza silvestre, aderezo concentrado de maqui y nueces.', price: '$5.800', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
+                            { name: 'Té de Canelo y Miel de Ulmo ', desc: 'Corteza de canelo tierno infusionada, endulzado con miel de ulmo pura.', price: '$2.500', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
                         ];
                     } else if (item.nombre.includes('Verde Amor')) {
                         dishes = [
-                            { name: 'Bowl de Acaí y Frutos Nativos 🥣', desc: 'Pulpa de acaí batida, granola artesanal, plátano, arándanos y semillas de chía.', price: '$6.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
-                            { name: 'Tarta de Frambuesas sin Azúcar 🍰', desc: 'Base de almendras y dátiles, frambuesas de Viña endulzadas con estevia de hoja.', price: '$4.500', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
-                            { name: 'Tostadas Hummus de Betarraga 🥑', desc: 'Pan integral con masa madre, hummus de betarraga asada, brotes, sésamo.', price: '$5.200', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
-                            { name: 'Smoothie Espirulina & Piña 🍹', desc: 'Piña natural, espirulina azul orgánica, leche de almendras prensada en local.', price: '$3.900', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
+                            { name: 'Bowl de Acaí y Frutos Nativos ', desc: 'Pulpa de acaí batida, granola artesanal, plátano, arándanos y semillas de chía.', price: '$6.900', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' },
+                            { name: 'Tarta de Frambuesas sin Azúcar ', desc: 'Base de almendras y dátiles, frambuesas de Viña endulzadas con estevia de hoja.', price: '$4.500', photo: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=150' },
+                            { name: 'Tostadas Hummus de Betarraga ', desc: 'Pan integral con masa madre, hummus de betarraga asada, brotes, sésamo.', price: '$5.200', photo: 'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=150' },
+                            { name: 'Smoothie Espirulina & Piña ', desc: 'Piña natural, espirulina azul orgánica, leche de almendras prensada en local.', price: '$3.900', photo: 'https://images.unsplash.com/photo-1610970881699-44a5587caaec?q=80&w=150' }
                         ];
                     } else {
                         dishes = [
-                            { name: 'Plato Consciente del Día 🥑', desc: 'Ingredientes 100% orgánicos, libres de agroquímicos, cosechados localmente.', price: '$6.500', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' }
+                            { name: 'Plato Consciente del Día ', desc: 'Ingredientes 100% orgánicos, libres de agroquímicos, cosechados localmente.', price: '$6.500', photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=150' }
                         ];
                     }
 
@@ -2496,7 +2508,7 @@
                         card.onclick = function(e) {
                             // Only trigger if they didn't click the reservation button itself
                             if (e.target.tagName !== 'BUTTON' && e.target.parentElement.tagName !== 'BUTTON') {
-                                viewDishDetail('dishModal', dish.name, dish.desc, '🌟 Aporte herbolario de nutrición consciente.', dish.photo);
+                                viewDishDetail('dishModal', dish.name, dish.desc, ' Aporte herbolario de nutrición consciente.', dish.photo);
                             }
                         };
                         card.innerHTML = `
@@ -2613,7 +2625,7 @@
             const comment = commentEl.value.trim();
 
             if (!name || !comment) {
-                alert("⚠️ Por favor completa tu Nombre/Profesión y tu Comentario antes de enviar.");
+                alert("️ Por favor completa tu Nombre/Profesión y tu Comentario antes de enviar.");
                 return;
             }
 
@@ -2645,9 +2657,9 @@
                         ]);
 
                     if (error) throw error;
-                    alert("🎉 ¡Reseña Profesional guardada con éxito en Supabase!");
+                    alert(" ¡Reseña Profesional guardada con éxito en Supabase!");
                 } else {
-                    alert("🎉 ¡Reseña agregada de forma local con éxito!");
+                    alert(" ¡Reseña agregada de forma local con éxito!");
                 }
 
                 defaultReviews.unshift(newReview);
@@ -2656,8 +2668,8 @@
                 loadReviewsForTarget(targetName, serviceType);
 
             } catch (err) {
-                console.error("❌ Error de Supabase al guardar la reseña:", err.message);
-                alert("❌ Error al guardar en base de datos: " + err.message);
+                console.error(" Error de Supabase al guardar la reseña:", err.message);
+                alert(" Error al guardar en base de datos: " + err.message);
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = originalText;
@@ -2696,7 +2708,7 @@
         function cancelRestaurantBookingFromTab(inputId) {
             const codeVal = document.getElementById(inputId).value.trim().toUpperCase();
             if (!codeVal) {
-                alert("⚠️ Por favor ingresa el Código de Reserva o Confirmación.");
+                alert("️ Por favor ingresa el Código de Reserva o Confirmación.");
                 return;
             }
             const mainInput = document.getElementById('cancelBookingCode');
@@ -2848,32 +2860,32 @@
             if (t.region === 'Región Metropolitana') {
                 if (mode === 'metro') {
                     const nearestStation = t.name.includes('SportLife') ? 'Metro Tobalaba o El Golf (Línea 1)' : t.name.includes('Tomás') ? 'Metro Los Leones (Línea 1)' : 'Metro Pedro de Valdivia (Línea 1)';
-                    textHtml = `🚇 <strong>Programando tu viaje en Metro de Santiago:</strong> Toma la <strong>Línea 1</strong> y desciende en la estación <strong>${nearestStation}</strong>. Camina aproximadamente 4 minutos hasta <strong>${t.address}</strong>. Costo del viaje: $730 - $840 CLP (según horario valle/punta). ¡Ruta calculada con éxito!`;
+                    textHtml = ` <strong>Programando tu viaje en Metro de Santiago:</strong> Toma la <strong>Línea 1</strong> y desciende en la estación <strong>${nearestStation}</strong>. Camina aproximadamente 4 minutos hasta <strong>${t.address}</strong>. Costo del viaje: $730 - $840 CLP (según horario valle/punta). ¡Ruta calculada con éxito!`;
                 } else if (mode === 'micro') {
-                    textHtml = `🚌 <strong>Programando tu viaje en Micro (RED Transantiago):</strong> Toma el recorrido troncal <strong>412, 418, 421 o 503</strong> que transita por el eje Av. Providencia. Desciende en el paradero más cercano a la altura del 1200. Costo del viaje: $730 CLP utilizando tu tarjeta bip! con transbordo de Metro integrado.`;
+                    textHtml = ` <strong>Programando tu viaje en Micro (RED Transantiago):</strong> Toma el recorrido troncal <strong>412, 418, 421 o 503</strong> que transita por el eje Av. Providencia. Desciende en el paradero más cercano a la altura del 1200. Costo del viaje: $730 CLP utilizando tu tarjeta bip! con transbordo de Metro integrado.`;
                 } else if (mode === 'colectivo') {
-                    textHtml = `🚗 <strong>Programando tu viaje en Colectivo:</strong> Toma la línea de colectivos autorizados del sector Providencia/Las Condes con dirección al Oriente. Te dejarán directamente a pasos de <strong>${t.address}</strong>. Costo aproximado: $1.200 - $1.500 CLP por persona.`;
+                    textHtml = ` <strong>Programando tu viaje en Colectivo:</strong> Toma la línea de colectivos autorizados del sector Providencia/Las Condes con dirección al Oriente. Te dejarán directamente a pasos de <strong>${t.address}</strong>. Costo aproximado: $1.200 - $1.500 CLP por persona.`;
                 } else if (mode === 'taxi') {
-                    textHtml = `🚕 <strong>Viaje en Taxi o Aplicación (Uber/Cabify):</strong> Solicita tu móvil con dirección directa a <strong>${t.address}</strong>. Tiempo de viaje estimado: 15 minutos desde el centro histórico. Tarifa aproximada: $4.500 - $6.500 CLP según tráfico actual de Santiago.`;
+                    textHtml = ` <strong>Viaje en Taxi o Aplicación (Uber/Cabify):</strong> Solicita tu móvil con dirección directa a <strong>${t.address}</strong>. Tiempo de viaje estimado: 15 minutos desde el centro histórico. Tarifa aproximada: $4.500 - $6.500 CLP según tráfico actual de Santiago.`;
                 }
             } else if (t.region === 'Región de Valparaíso') {
                 if (mode === 'metro') {
                     const station = t.name.includes('Hahnemann') ? 'Estación Viña del Mar' : 'Estación Miramar';
-                    textHtml = `🚇 <strong>Programando tu viaje en Metro Valparaíso (Limache-Puerto):</strong> Toma el tren suburbano y desciende en la estación <strong>${station}</strong>. Camina por el par de vías hacia <strong>${t.address}</strong>. Costo estimado: $800 - $1.150 CLP según zona de origen.`;
+                    textHtml = ` <strong>Programando tu viaje en Metro Valparaíso (Limache-Puerto):</strong> Toma el tren suburbano y desciende en la estación <strong>${station}</strong>. Camina por el par de vías hacia <strong>${t.address}</strong>. Costo estimado: $800 - $1.150 CLP según zona de origen.`;
                 } else if (mode === 'micro') {
-                    textHtml = `🚌 <strong>Programando tu viaje en Microbús Local:</strong> Toma las líneas de micros del Gran Valparaíso (recorridos <strong>101, 106, 602 o 605</strong>) que transitan por el eje Libertad o Álvarez. Desciende en el paradero de Calle Arlegui o 1 Norte. Costo: $450 - $600 CLP.`;
+                    textHtml = ` <strong>Programando tu viaje en Microbús Local:</strong> Toma las líneas de micros del Gran Valparaíso (recorridos <strong>101, 106, 602 o 605</strong>) que transitan por el eje Libertad o Álvarez. Desciende en el paradero de Calle Arlegui o 1 Norte. Costo: $450 - $600 CLP.`;
                 } else if (mode === 'colectivo') {
-                    textHtml = `🚗 <strong>Programando tu viaje en Colectivo local:</strong> Toma la línea de colectivos con dirección al centro de Viña del Mar (Avenida Libertad / 15 Norte). Te dejarán directamente en la esquina de <strong>${t.address}</strong>. Tarifa: $1.000 CLP.`;
+                    textHtml = ` <strong>Programando tu viaje en Colectivo local:</strong> Toma la línea de colectivos con dirección al centro de Viña del Mar (Avenida Libertad / 15 Norte). Te dejarán directamente en la esquina de <strong>${t.address}</strong>. Tarifa: $1.000 CLP.`;
                 } else if (mode === 'taxi') {
-                    textHtml = `🚕 <strong>Viaje en Taxi o Aplicación (Uber/Didi):</strong> Solicita un auto directo a <strong>${t.address}</strong>. Tiempo estimado: 10 minutos desde el terminal de buses o sectores costeros. Tarifa aproximada: $3.500 - $5.000 CLP.`;
+                    textHtml = ` <strong>Viaje en Taxi o Aplicación (Uber/Didi):</strong> Solicita un auto directo a <strong>${t.address}</strong>. Tiempo estimado: 10 minutos desde el terminal de buses o sectores costeros. Tarifa aproximada: $3.500 - $5.000 CLP.`;
                 }
             } else if (t.region === 'Región de la Araucanía') {
                 if (mode === 'micro') {
-                    textHtml = `🚌 <strong>Programando tu viaje en Micro de Temuco:</strong> Toma la línea de micros local <strong>Línea 1, Línea 7 o Línea 9</strong> que transitan de forma regular por el eje Av. Alemania o San Martín. Desciende frente al Portal Temuco o la altura del 0850. Costo: $450 CLP (estudiantes $150 CLP).`;
+                    textHtml = ` <strong>Programando tu viaje en Micro de Temuco:</strong> Toma la línea de micros local <strong>Línea 1, Línea 7 o Línea 9</strong> que transitan de forma regular por el eje Av. Alemania o San Martín. Desciende frente al Portal Temuco o la altura del 0850. Costo: $450 CLP (estudiantes $150 CLP).`;
                 } else if (mode === 'colectivo') {
-                    textHtml = `🚗 <strong>Programando tu viaje en Colectivo de Temuco:</strong> Toma las líneas de colectivos autorizadas de Temuco (<strong>Línea 11, 14, 15 o 24</strong>) que conectan el centro con el sector Poniente/Avenida Alemania. Te dejarán justo al frente de la consulta en <strong>${t.address}</strong>. Tarifa: $800 CLP (nocturna $1.000 CLP).`;
+                    textHtml = ` <strong>Programando tu viaje en Colectivo de Temuco:</strong> Toma las líneas de colectivos autorizadas de Temuco (<strong>Línea 11, 14, 15 o 24</strong>) que conectan el centro con el sector Poniente/Avenida Alemania. Te dejarán justo al frente de la consulta en <strong>${t.address}</strong>. Tarifa: $800 CLP (nocturna $1.000 CLP).`;
                 } else if (mode === 'taxi') {
-                    textHtml = `🚕 <strong>Viaje en Radiotaxi o Aplicación de Temuco:</strong> Solicita tu traslado directo a <strong>${t.address}</strong>. El trayecto demora aproximadamente 8 minutos desde la Plaza de Armas Aníbal Pinto. Tarifa estimada: $2.500 - $4.000 CLP.`;
+                    textHtml = ` <strong>Viaje en Radiotaxi o Aplicación de Temuco:</strong> Solicita tu traslado directo a <strong>${t.address}</strong>. El trayecto demora aproximadamente 8 minutos desde la Plaza de Armas Aníbal Pinto. Tarifa estimada: $2.500 - $4.000 CLP.`;
                 }
             }
 
@@ -2911,12 +2923,12 @@
             const agreeVal = document.getElementById('indepAgreeTerms').checked;
 
             if (!agreeVal) {
-                alert("⚠️ Debes consentir el tratamiento seguro de tus datos antes de continuar.");
+                alert("️ Debes consentir el tratamiento seguro de tus datos antes de continuar.");
                 return;
             }
 
             if (!nameVal || !dateVal || phoneVal === "+569" || phoneVal.length < 8) {
-                alert("⚠️ Por favor completa tu Nombre, selecciona la fecha y escribe un teléfono celular de contacto válido.");
+                alert("️ Por favor completa tu Nombre, selecciona la fecha y escribe un teléfono celular de contacto válido.");
                 return;
             }
 
@@ -2951,10 +2963,10 @@
                     if (error) throw error;
                 }
             } catch (err) {
-                console.error("❌ Error al guardar cita privada en Supabase:", err.message);
+                console.error(" Error al guardar cita privada en Supabase:", err.message);
             }
 
-            alert(`🎉 ¡CITA PRIVADA AGENDADA CON ÉXITO!\n\n` +
+            alert(` ¡CITA PRIVADA AGENDADA CON ÉXITO!\n\n` +
                   `• Profesional: ${activeIndependentTherapistName}\n` +
                   `• Paciente: ${nameVal}\n` +
                   `• Fecha: ${dateVal}\n` +
@@ -2963,7 +2975,7 @@
                   `⏰ NOTIFICACIÓN DE WHATSAPP GENERADA: Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para confirmar tu cita con el especialista de forma rápida.`);
 
             // Open WhatsApp with a beautiful message
-            const message = `*🌿 AGENDAMIENTO PRIVADO - LAWENMOLL*\n\n` +
+            const message = `* AGENDAMIENTO PRIVADO - LAWENMOLL*\n\n` +
                             `Hola, he agendado una cita privada de forma exitosa:\n` +
                             `• *Especialista:* ${activeIndependentTherapistName}\n` +
                             `• *Paciente:* ${nameVal}\n` +
@@ -3006,7 +3018,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (logoEl) logoEl.src = logoSrc;
 
             if (type === 'gym') {
-                if (titleEl) titleEl.innerText = "Inscripción de Clase Dirigida 🏋️";
+                if (titleEl) titleEl.innerText = "Inscripción de Clase Dirigida ️";
                 if (subEl) subEl.innerText = "Inscripción en red y pase libre B2B";
                 if (estNameEl) estNameEl.innerHTML = `<span class="block text-slateDark font-extrabold">${targetEstName}</span><span class="block text-[10px] text-forest font-bold mt-1">Clase: ${className}</span>`;
                 if (benefitTitleEl) benefitTitleEl.innerText = "Matrícula / Convenio";
@@ -3043,17 +3055,17 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const estNameText = document.getElementById('bookingEstName').innerText;
 
             if (!nameVal) {
-                alert("⚠️ Por favor ingresa tu Nombre Completo para proceder con la reserva.");
+                alert("️ Por favor ingresa tu Nombre Completo para proceder con la reserva.");
                 return;
             }
 
             if (!agreeVal) {
-                alert("⚠️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
+                alert("️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
                 return;
             }
 
             if (!dateVal || phoneVal.trim() === "+569" || phoneVal.length < 8) {
-                alert("⚠️ Por favor ingresa la fecha de tu reserva y un teléfono celular de contacto válido.");
+                alert("️ Por favor ingresa la fecha de tu reserva y un teléfono celular de contacto válido.");
                 return;
             }
 
@@ -3083,11 +3095,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) throw error;
                 }
             } catch (err) {
-                console.error("❌ Error al guardar reserva en Supabase:", err.message);
+                console.error(" Error al guardar reserva en Supabase:", err.message);
             }
 
             if (isGym) {
-                alert(`🎉 ¡CLASE DIRIGIDA AGENDADA CON ÉXITO!\n\n` +
+                alert(` ¡CLASE DIRIGIDA AGENDADA CON ÉXITO!\n\n` +
                       `• Gimnasio: ${estNameText.split('\n')[0]}\n` +
                       `• Clase: ${estNameText.split('Clase: ')[1] || 'Clase Dirigida'}\n` +
                       `• Alumno: ${nameVal}\n` +
@@ -3096,7 +3108,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                       `• Código Único de Registro: ${bookingCode}\n\n` +
                       `⏰ NOTIFICACIÓN DE WHATSAPP GENERADA: Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para confirmar tu inscripción con el gimnasio de forma rápida.`);
             } else {
-                alert(`🎉 ¡MESA RESERVADA CON ÉXITO EN ${estNameText.split('\n')[0].toUpperCase()}!\n\n` +
+                alert(` ¡MESA RESERVADA CON ÉXITO EN ${estNameText.split('\n')[0].toUpperCase()}!\n\n` +
                       `• Establecimiento: ${estNameText.split('\n')[0]}\n` +
                       `• Cliente: ${nameVal}\n` +
                       `• Fecha: ${dateVal}\n` +
@@ -3109,7 +3121,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             // WhatsApp confirmation redirect
             let message = '';
             if (isGym) {
-                message = `*🏋️ INSCRIPCIÓN DE CLASE - LAWENMOLL*\n\n` +
+                message = `*️ INSCRIPCIÓN DE CLASE - LAWENMOLL*\n\n` +
                           `Hola, quiero confirmar mi inscripción a la clase dirigida:\n` +
                           `• *Gimnasio:* ${estNameText.split('\n')[0]}\n` +
                           `• *Clase:* ${estNameText.split('Clase: ')[1] || 'Clase Dirigida'}\n` +
@@ -3119,7 +3131,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                           `• *Teléfono:* ${phoneVal}\n\n` +
                           `_Inscripción gestionada bajo el convenio SaaS B2B de LAWENMOLL._`;
             } else {
-                message = `*🥑 RESERVA DE MESA - LAWENMOLL*\n\n` +
+                message = `* RESERVA DE MESA - LAWENMOLL*\n\n` +
                           `Hola, he realizado una reserva de mesa de nutrición consciente:\n` +
                           `• *Establecimiento:* ${estNameText.split('\n')[0]}\n` +
                           `• *Cliente:* ${nameVal}\n` +
@@ -3145,7 +3157,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const handle = document.getElementById('slideVerifyHandle');
             if (handle) {
                 handle.style.left = '0px';
-                handle.innerHTML = '🌿';
+                handle.innerHTML = '';
                 handle.className = 'absolute h-full w-11 bg-forest hover:bg-forest/95 flex items-center justify-center text-sm rounded-2xl shadow-md z-20 cursor-grab';
             }
             const bg = document.getElementById('slideVerifyBg');
@@ -3155,7 +3167,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             }
             const text = document.getElementById('slideVerifyText');
             if (text) {
-                text.innerText = 'Arrastra la hojita para verificar 🌿';
+                text.innerText = 'Arrastra la hojita para verificar ';
                 text.className = 'text-[9px] font-bold text-gray-500 uppercase tracking-wider relative z-10 transition-colors pointer-events-none select-none';
             }
 
@@ -3181,7 +3193,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             // Verificar que el Deslizador de Bienestar se haya completado
             const verifiedVal = document.getElementById('slideVerifyCompleted') ? document.getElementById('slideVerifyCompleted').value === 'true' : true;
             if (!verifiedVal) {
-                alert("⚠️ Por favor desliza la hojita de bienestar herbolario hacia la derecha para verificar que eres un humano.");
+                alert("️ Por favor desliza la hojita de bienestar herbolario hacia la derecha para verificar que eres un humano.");
                 return;
             }
             const nameVal = document.getElementById('couponClaimName').value.trim();
@@ -3190,17 +3202,17 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const agreeVal = document.getElementById('couponClaimAgree').checked;
 
             if (!nameVal || !emailVal || phoneVal === "+569" || phoneVal.length < 8) {
-                alert("⚠️ Por favor completa tu Nombre, Correo y Celular de contacto para reclamar el cupón.");
+                alert("️ Por favor completa tu Nombre, Correo y Celular de contacto para reclamar el cupón.");
                 return;
             }
 
             if (!emailVal.includes('@') || !emailVal.includes('.')) {
-                alert("⚠️ Por favor ingresa un correo electrónico válido.");
+                alert("️ Por favor ingresa un correo electrónico válido.");
                 return;
             }
 
             if (!agreeVal) {
-                alert("⚠️ Debes consentir el tratamiento seguro de datos para validar tu beneficio.");
+                alert("️ Debes consentir el tratamiento seguro de datos para validar tu beneficio.");
                 return;
             }
 
@@ -3220,7 +3232,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) {
                         // Si da error de unicidad (duplicado)
                         if (error.code === '23505' || error.message.includes('unique') || error.message.includes('unico')) {
-                            alert(`⚠️ ¡SISTEMA DE SEGURIDAD LAWENMOLL!\n\n` +
+                            alert(`️ ¡SISTEMA DE SEGURIDAD LAWENMOLL!\n\n` +
                                   `Detectamos que el correo electrónico "${emailVal}" ya ha descargado el cupón "${activeClaimB2B.code}" anteriormente.\n\n` +
                                   `Límite de un (1) cupón por paciente para garantizar el uso justo del beneficio B2B.`);
                             return;
@@ -3229,13 +3241,13 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     }
                 }
             } catch (err) {
-                console.error("❌ Error de Supabase al validar cupón:", err.message);
-                alert("❌ Ocurrió un error al procesar el cupón: " + err.message);
+                console.error(" Error de Supabase al validar cupón:", err.message);
+                alert(" Ocurrió un error al procesar el cupón: " + err.message);
                 return;
             }
 
             // WhatsApp confirmation message compilation
-            const msg = `*🎫 CUPÓN DIGITAL RECLAMADO - LAWENMOLL*\n\n` +
+            const msg = `* CUPÓN DIGITAL RECLAMADO - LAWENMOLL*\n\n` +
                         `Hola, he obtenido mi cupón de beneficio exclusivo:\n` +
                         `• *Establecimiento:* ${activeClaimB2B.name}\n` +
                         `• *Beneficio:* ${activeClaimB2B.benefit}\n` +
@@ -3617,7 +3629,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const passVal = document.getElementById('localPassword').value.trim();
 
             if (!emailVal || !passVal) {
-                alert("⚠️ Por favor ingresa tu Correo Electrónico Comercial y Contraseña Privada.");
+                alert("️ Por favor ingresa tu Correo Electrónico Comercial y Contraseña Privada.");
                 return;
             }
 
@@ -3689,7 +3701,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                                 .from('centros_convenios')
                                 .update({ password: hashedPassVal })
                                 .eq('id', data.id);
-                            console.log("🔒 Cuenta B2B migrada de forma automática a hash SHA-256 seguro.");
+                            console.log(" Cuenta B2B migrada de forma automática a hash SHA-256 seguro.");
                             data.password = hashedPassVal;
                         }
                     }
@@ -3758,14 +3770,14 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (loggedInB2B.foto_local_1) {
                         preview.innerHTML = `<img src="${loggedInB2B.foto_local_1}" class="w-full h-full object-cover">`;
                     } else {
-                        preview.innerHTML = '🏢';
+                        preview.innerHTML = '';
                     }
 
                     const galleryPreview = document.getElementById('adminGalleryPreview');
                     if (loggedInB2B.foto_local_2) {
                         galleryPreview.innerHTML = `<img src="${loggedInB2B.foto_local_2}" class="w-full h-full object-cover">`;
                     } else {
-                        galleryPreview.innerHTML = '🖼️';
+                        galleryPreview.innerHTML = '️';
                     }
 
                     // Cargar platos del menú
@@ -3777,7 +3789,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (loggedInB2B.dish1_photo) {
                         d1Prev.innerHTML = `<img src="${loggedInB2B.dish1_photo}" class="w-full h-full object-cover">`;
                     } else {
-                        d1Prev.innerHTML = '🍲';
+                        d1Prev.innerHTML = '';
                     }
 
                     document.getElementById('adminDish2Name').value = loggedInB2B.dish2_name || '';
@@ -3788,7 +3800,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (loggedInB2B.dish2_photo) {
                         d2Prev.innerHTML = `<img src="${loggedInB2B.dish2_photo}" class="w-full h-full object-cover">`;
                     } else {
-                        d2Prev.innerHTML = '🍲';
+                        d2Prev.innerHTML = '';
                     }
 
                     document.getElementById('adminDish3Name').value = loggedInB2B.dish3_name || '';
@@ -3799,7 +3811,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (loggedInB2B.dish3_photo) {
                         d3Prev.innerHTML = `<img src="${loggedInB2B.dish3_photo}" class="w-full h-full object-cover">`;
                     } else {
-                        d3Prev.innerHTML = '🍲';
+                        d3Prev.innerHTML = '';
                     }
 
                     document.getElementById('adminDish4Name').value = loggedInB2B.dish4_name || '';
@@ -3810,17 +3822,17 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (loggedInB2B.dish4_photo) {
                         d4Prev.innerHTML = `<img src="${loggedInB2B.dish4_photo}" class="w-full h-full object-cover">`;
                     } else {
-                        d4Prev.innerHTML = '🍲';
+                        d4Prev.innerHTML = '';
                     }
 
                     // Abrir panel
                     document.getElementById('localAdminModal').classList.remove('hidden');
                 } else {
-                    alert("❌ Correo electrónico o contraseña incorrectos, o cuenta comercial inactiva.");
+                    alert(" Correo electrónico o contraseña incorrectos, o cuenta comercial inactiva.");
                 }
             } catch (err) {
                 console.error("Error al ingresar B2B:", err.message);
-                alert("❌ Error de comunicación con Supabase: " + err.message);
+                alert(" Error de comunicación con Supabase: " + err.message);
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = originalText;
@@ -3828,7 +3840,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         }
 
         function handleLocalLogout() {
-            const confirmLogout = confirm("❓ ¿Estás seguro de que deseas cerrar sesión en el panel comercial?");
+            const confirmLogout = confirm(" ¿Estás seguro de que deseas cerrar sesión en el panel comercial?");
             if (!confirmLogout) return;
 
             activeB2BClient = null;
@@ -3885,7 +3897,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
+                alert("️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
                 return;
             }
 
@@ -3910,7 +3922,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
+                alert("️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
                 return;
             }
 
@@ -3932,7 +3944,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert("⚠️ Por favor selecciona una imagen válida (PNG o JPG).");
+                alert("️ Por favor selecciona una imagen válida (PNG o JPG).");
                 return;
             }
 
@@ -3966,7 +3978,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const occupied = parseInt(document.getElementById('adminLocalOccupied').value) || 0;
 
             if (!name || !address || !desc || !benefit) {
-                alert("⚠️ Todos los campos son obligatorios.");
+                alert("️ Todos los campos son obligatorios.");
                 return;
             }
 
@@ -4032,7 +4044,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) throw error;
                 }
                 
-                alert("💾 ¡Cambios de perfil B2B guardados de forma segura en Supabase!");
+                alert(" ¡Cambios de perfil B2B guardados de forma segura en Supabase!");
                 closeLocalAdminModal();
                 
                 // Actualizar localmente si es demo o persistente
@@ -4063,18 +4075,18 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 
             } catch (err) {
                 console.error("Error al actualizar B2B profile:", err.message);
-                alert("❌ Error al guardar perfil: " + err.message);
+                alert(" Error al guardar perfil: " + err.message);
             }
         }
 
         function validatePatientCoupon() {
             const code = document.getElementById('couponValidateInput').value.trim().toUpperCase();
             if (!code) {
-                alert("⚠️ Por favor ingresa el Código de Reserva del Paciente (Ej: CLINIC-4839 o MESA-1234).");
+                alert("️ Por favor ingresa el Código de Reserva del Paciente (Ej: CLINIC-4839 o MESA-1234).");
                 return;
             }
 
-            alert(`🎉 ¡CUPÓN VALIDADO CON ÉXITO!\n\n` +
+            alert(` ¡CUPÓN VALIDADO CON ÉXITO!\n\n` +
                   `• Código: ${code}\n` +
                   `• Estado: Válido y Vigente\n` +
                   `• Beneficio: Descuento Comercial del 5% Aplicado\n\n` +
@@ -4086,7 +4098,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         async function processB2BCancellationFromAdmin() {
             if (!activeB2BClient) return;
 
-            const confirmCancel = confirm("❓ ¿Estás seguro de que deseas dar de baja tu membresía de LAWENMOLL? Tu local desaparecerá del mapa de geolocalización.");
+            const confirmCancel = confirm(" ¿Estás seguro de que deseas dar de baja tu membresía de LAWENMOLL? Tu local desaparecerá del mapa de geolocalización.");
             if (!confirmCancel) return;
 
             try {
@@ -4099,11 +4111,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) throw error;
                 }
 
-                alert("🚫 ¡Suscripción Cancelada con Éxito!\nTu local se ha desactivado provisionalmente de la plataforma.");
+                alert(" ¡Suscripción Cancelada con Éxito!\nTu local se ha desactivado provisionalmente de la plataforma.");
 
-                const notify = confirm("💬 ¿Deseas abrir WhatsApp para notificar administrativamente de tu cancelación de membresía?");
+                const notify = confirm(" ¿Deseas abrir WhatsApp para notificar administrativamente de tu cancelación de membresía?");
                 if (notify) {
-                    const msg = `*🚫 BAJA DE SUSCRIPCIÓN B2B - LAWENMOLL*\n\n` +
+                    const msg = `* BAJA DE SUSCRIPCIÓN B2B - LAWENMOLL*\n\n` +
                                 `Hola, lamento informar que he dado de baja mi membresía comercial:\n` +
                                 `• *Establecimiento:* ${activeB2BClient.nombre}\n` +
                                 `• *RUT:* ${activeB2BClient.email}\n` +
@@ -4117,7 +4129,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
 
             } catch (err) {
                 console.error("Error al cancelar B2B:", err.message);
-                alert("❌ Error al dar de baja: " + err.message);
+                alert(" Error al dar de baja: " + err.message);
             }
         }
 
@@ -4157,7 +4169,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const passwordVal = document.getElementById('b2bPassword').value.trim();
 
             if (!nameVal || !rutVal || !addressVal || !emailVal || !passwordVal) {
-                alert("⚠️ Por favor completa todos los campos, incluyendo Correo Electrónico y Contraseña Privada para proceder.");
+                alert("️ Por favor completa todos los campos, incluyendo Correo Electrónico y Contraseña Privada para proceder.");
                 return;
             }
 
@@ -4228,7 +4240,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const rut = document.getElementById('fintocSimRut').value.trim();
             const pass = document.getElementById('fintocSimPass').value.trim();
             if (!rut || !pass) {
-                alert("⚠️ Por favor ingresa tu RUT y contraseña de simulación.");
+                alert("️ Por favor ingresa tu RUT y contraseña de simulación.");
                 return;
             }
             showFintocSimScreen(3);
@@ -4241,7 +4253,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
         async function submitFintocSimOtp() {
             const otp = document.getElementById('fintocSimOtp').value.trim();
             if (!otp) {
-                alert("⚠️ Ingresa el código de transferencia.");
+                alert("️ Ingresa el código de transferencia.");
                 return;
             }
             const btn = document.getElementById('fintocSimBtnPay');
@@ -4288,7 +4300,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) throw error;
                 }
             } catch (err) {
-                console.error("❌ Error al registrar local en Supabase desde Fintoc Sim:", err.message);
+                console.error(" Error al registrar local en Supabase desde Fintoc Sim:", err.message);
             }
 
             // Success flow final
@@ -4314,7 +4326,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 const cardCvv = document.getElementById('b2bCardCvv').value.trim();
 
                 if (!cardName || !cardNum || !cardExpiry || !cardCvv) {
-                    alert("⚠️ Por favor completa todos los datos de tu tarjeta de crédito o débito.");
+                    alert("️ Por favor completa todos los datos de tu tarjeta de crédito o débito.");
                     return;
                 }
 
@@ -4347,7 +4359,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                         if (error) throw error;
                     }
                 } catch (err) {
-                    console.error("❌ Error al registrar local en Supabase:", err.message);
+                    console.error(" Error al registrar local en Supabase:", err.message);
                 }
 
                 setTimeout(() => {
@@ -4375,22 +4387,22 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const agreeVal = document.getElementById('clinicalAgreeTerms').checked;
 
             if (!agreeVal) {
-                alert("⚠️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
+                alert("️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
                 return;
             }
 
             if (!patientNameVal) {
-                alert("⚠️ Por favor ingresa el Nombre del Paciente para agendar la cita.");
+                alert("️ Por favor ingresa el Nombre del Paciente para agendar la cita.");
                 return;
             }
 
             if (!agreeVal) {
-                alert("⚠️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
+                alert("️ Debes consentir el tratamiento seguro de tus datos clínicos y de salud antes de continuar.");
                 return;
             }
 
             if (!dateVal || phoneVal.trim() === "+569") {
-                alert("⚠️ Por favor selecciona la fecha de consulta y escribe un celular de contacto válido.");
+                alert("️ Por favor selecciona la fecha de consulta y escribe un celular de contacto válido.");
                 return;
             }
 
@@ -4425,11 +4437,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) throw error;
                 }
             } catch (err) {
-                console.error("❌ Error al guardar cita en Supabase:", err.message);
+                console.error(" Error al guardar cita en Supabase:", err.message);
             }
 
             // Trigger simulated Browser/SMS Notification Alert
-            alert(`🎉 ¡HORA CLÍNICA AGENDADA CON ÉXITO!
+            alert(` ¡HORA CLÍNICA AGENDADA CON ÉXITO!
 
 ` +
                   `• Profesional: ${specialistVal}
@@ -4449,7 +4461,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if ("Notification" in window) {
                 Notification.requestPermission().then(permission => {
                     if (permission === "granted") {
-                        new Notification("LAWENMOLL 🌿", {
+                        new Notification("LAWENMOLL ", {
                             body: `Recordatorio: Tienes hora agendada con ${specialistVal} para el ${dateVal} a las ${timeVal} hrs.`,
                             icon: 'lawenmoll_logo.jpg'
                         });
@@ -4468,18 +4480,18 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const agree = document.getElementById('pharmaAgreeTerms').checked;
 
             if (!agree) {
-                alert("⚠️ Debes consentir el tratamiento ciberseguro de tus datos médicos y de receta antes de continuar.");
+                alert("️ Debes consentir el tratamiento ciberseguro de tus datos médicos y de receta antes de continuar.");
                 return;
             }
 
             if (!recipeCode || phone === "+569") {
-                alert("⚠️ Por favor ingresa tu Código de Receta Digital (ej: LW-12345) y tu Teléfono Celular.");
+                alert("️ Por favor ingresa tu Código de Receta Digital (ej: LW-12345) y tu Teléfono Celular.");
                 return;
             }
 
             const pharmaName = pharmaId === 'canelo' ? 'Farmacia Herbolaria "El Canelo"' : 'Farmacia Mapuche "Makewe"';
 
-            alert(`🎉 ¡RECETA VALIDADA Y PEDIDO GENERADO!\n\n` +
+            alert(` ¡RECETA VALIDADA Y PEDIDO GENERADO!\n\n` +
                   `• Farmacia: ${pharmaName}\n` +
                   `• Producto solicitado: ${productName}\n` +
                   `• Código de Receta: ${recipeCode.toUpperCase()}\n` +
@@ -4487,7 +4499,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                   `Al hacer clic en Aceptar, te conectaremos directamente por WhatsApp para coordinar el retiro en local o despacho a domicilio gratis.`);
 
             // Open WhatsApp Web with a beautiful clinical message
-            const message = `*🌿 PEDIDO DE RECETA - LAWENMOLL*\n\n` +
+            const message = `* PEDIDO DE RECETA - LAWENMOLL*\n\n` +
                             `Hola, quiero realizar el despacho/retiro de mi receta digital:\n` +
                             `• *Código de Receta:* ${recipeCode.toUpperCase()}\n` +
                             `• *Farmacia:* ${pharmaName}\n` +
@@ -4502,7 +4514,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const codeVal = document.getElementById('cancelBookingCode').value.trim().toUpperCase();
 
             if (!codeVal) {
-                alert("⚠️ Por favor ingresa el Código de Reserva o Confirmación de tu cita o mesa.");
+                alert("️ Por favor ingresa el Código de Reserva o Confirmación de tu cita o mesa.");
                 return;
             }
 
@@ -4521,12 +4533,12 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 if (fetchError) throw fetchError;
 
                 if (!appointment) {
-                    alert("❌ No se encontró ninguna cita o reserva de mesa registrada con el código: " + codeVal);
+                    alert(" No se encontró ninguna cita o reserva de mesa registrada con el código: " + codeVal);
                     return;
                 }
 
                 if (appointment.estado_cita === 'Cancelada') {
-                    alert("⚠️ Esta cita ya se encuentra Cancelada.");
+                    alert("️ Esta cita ya se encuentra Cancelada.");
                     return;
                 }
 
@@ -4538,11 +4550,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
 
                 if (updateError) throw updateError;
 
-                alert(`🎉 ¡Reserva Cancelada con Éxito!\n\n` +
+                alert(` ¡Reserva Cancelada con Éxito!\n\n` +
                       `• Código de Reserva: ${codeVal}\n` +
                       `• Estado: Cancelada y Liberada en Supabase.`);
 
-                const notify = confirm("💬 ¿Deseas enviar una notificación de cancelación por WhatsApp al especialista o centro médico para liberar el cupo?");
+                const notify = confirm(" ¿Deseas enviar una notificación de cancelación por WhatsApp al especialista o centro médico para liberar el cupo?");
                 if (notify) {
                     const place = appointment.lugar_cita || 'Centro Holístico "Lawen Ko"';
                     const date = appointment.fecha_cita || 'Fecha coordinada';
@@ -4550,7 +4562,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     const clientPhone = appointment.telefono_contacto || '+56912345678';
                     const modality = appointment.modal_cita || 'Presencial';
 
-                    const textMsg = `*🚫 NOTIFICACIÓN DE CANCELACIÓN - LAWENMOLL*\n\n` +
+                    const textMsg = `* NOTIFICACIÓN DE CANCELACIÓN - LAWENMOLL*\n\n` +
                                     `Hola, lamento informar que he cancelado mi cita programada:\n` +
                                     `• *Código de Reserva:* ${codeVal}\n` +
                                     `• *Lugar/Establecimiento:* ${place}\n` +
@@ -4565,8 +4577,8 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 
                 document.getElementById('cancelBookingCode').value = "";
             } catch (err) {
-                console.error("❌ Error al cancelar cita en Supabase:", err.message);
-                alert("❌ Error al procesar cancelación: " + err.message);
+                console.error(" Error al cancelar cita en Supabase:", err.message);
+                alert(" Error al procesar cancelación: " + err.message);
             }
         }
 
@@ -4578,12 +4590,12 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const agreeVal = document.getElementById('reserveAgreeTerms').checked;
 
             if (!agreeVal) {
-                alert("⚠️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
+                alert("️ Debes consentir el tratamiento y transmisión segura de tus datos de reserva antes de continuar.");
                 return;
             }
 
             if (!dateVal || phoneVal.trim() === "+569") {
-                alert("⚠️ Por favor ingresa la fecha de tu reserva y un teléfono de contacto válido.");
+                alert("️ Por favor ingresa la fecha de tu reserva y un teléfono de contacto válido.");
                 return;
             }
 
@@ -4611,10 +4623,10 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     if (error) throw error;
                 }
             } catch (err) {
-                console.error("❌ Error al guardar reserva de restaurante en Supabase:", err.message);
+                console.error(" Error al guardar reserva de restaurante en Supabase:", err.message);
             }
 
-            alert(`🎉 ¡Mesa Reservada con Éxito en Restaurante "Huerto Orgánico"!
+            alert(` ¡Mesa Reservada con Éxito en Restaurante "Huerto Orgánico"!
 
 ` +
                   `• Fecha: ${dateVal}
@@ -4637,11 +4649,11 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert("⚠️ Por favor selecciona una imagen válida (PNG o JPG).");
+                alert("️ Por favor selecciona una imagen válida (PNG o JPG).");
                 return;
             }
             if (file.size > 2 * 1024 * 1024) {
-                alert("⚠️ La imagen no debe superar los 2 MB para un óptimo rendimiento.");
+                alert("️ La imagen no debe superar los 2 MB para un óptimo rendimiento.");
                 return;
             }
 
@@ -4651,14 +4663,14 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 document.getElementById('b2bLogoBase64').value = base64Data;
                 document.getElementById('b2bLogoFileName').innerText = file.name;
                 document.getElementById('b2bLogoPreview').innerHTML = `<img src="${base64Data}" class="w-full h-full object-cover">`;
-                alert("📸 ¡Logo cargado correctamente de forma local! Listo para ser guardado de forma permanente.");
+                alert(" ¡Logo cargado correctamente de forma local! Listo para ser guardado de forma permanente.");
             };
             reader.readAsDataURL(file);
         }
 
         // --- INJECT v57 SECURITY PACK ---
 
-        // --- SISTEMA INTERACTIVO ANTI-BOTS: DESLIZADOR DE BIENESTAR 🌿 ---
+        // --- SISTEMA INTERACTIVO ANTI-BOTS: DESLIZADOR DE BIENESTAR  ---
         function initSlideVerify() {
             const handle = document.getElementById('slideVerifyHandle');
             const container = document.getElementById('slideVerifyContainer');
@@ -4700,9 +4712,9 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     handle.style.left = maxDrag + 'px';
                     bg.style.width = '100%';
                     bg.className = 'absolute left-0 top-0 h-full bg-emerald-500/20 rounded-2xl';
-                    handle.innerHTML = '✨';
+                    handle.innerHTML = '';
                     handle.className = 'absolute h-full w-11 bg-emerald-600 flex items-center justify-center text-sm rounded-2xl shadow-md z-20 cursor-default';
-                    text.innerText = '¡HUMANO VERIFICADO! 🌿';
+                    text.innerText = '¡HUMANO VERIFICADO! ';
                     text.className = 'text-[9px] font-black text-emerald-800 uppercase tracking-wider relative z-10';
                     handle.style.cursor = 'default';
                 }
@@ -4769,7 +4781,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             const formattedPrice = `$${currentB2BAmount.toLocaleString('es-CL')} CLP`;
             
             if(textAmount) textAmount.innerText = formattedPrice;
-            if(btnSpan) btnSpan.innerText = `Confirmar y Pagar ${formattedPrice} 🔒`;
+            if(btnSpan) btnSpan.innerText = `Confirmar y Pagar ${formattedPrice} `;
             if(receiptSpan) receiptSpan.innerText = `${formattedPrice} / mes`;
             if(simDisplaySpan) simDisplaySpan.innerText = formattedPrice;
             if(simBtnSpan) simBtnSpan.innerText = `Aprobar Transferencia de $${currentB2BAmount.toLocaleString('es-CL')}`;
@@ -4850,7 +4862,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 <button onclick="closeEstablishmentDetailModal()" class="bg-gray-200 hover:bg-gray-300 text-slateDark font-bold py-2.5 px-4 rounded-xl text-[10px] uppercase transition focus:outline-none">Cerrar Detalle</button>
                 <button id="estModalPlanBtn" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 px-4 rounded-xl text-[10px] uppercase shadow-md transition flex items-center space-x-1.5 focus:outline-none">
                     <i class="fa-solid fa-route animate-pulse"></i>
-                    <span>Planificar Viaje (Mapa) 🗺️</span>
+                    <span>Planificar Viaje (Mapa) ️</span>
                 </button>
             </div>
         </div>
@@ -4943,7 +4955,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 <button onclick="closeRestaurantBookingModal()" class="bg-gray-200 hover:bg-gray-300 text-slateDark font-bold py-2.5 px-4 rounded-xl text-[10px] uppercase transition focus:outline-none">Cerrar</button>
                 <button onclick="bookRestaurantTableReal()" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 px-4 rounded-xl text-[10px] uppercase shadow-md transition flex items-center space-x-1.5 focus:outline-none">
                     <i class="fa-solid fa-calendar-check"></i>
-                    <span>Confirmar Reserva de Mesa 📅</span>
+                    <span>Confirmar Reserva de Mesa </span>
                 </button>
             </div>
         </div>
@@ -5006,9 +5018,9 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     <div>
                         <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Canal de Contacto Preferido</label>
                         <select id="indepPatientContactChannel" class="w-full bg-gray-50 border border-gray-250 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                            <option value="WhatsApp" selected>🟢 WhatsApp Messenger</option>
-                            <option value="Telegram">🔵 Telegram</option>
-                            <option value="Llamada">📞 Llamada Directa</option>
+                            <option value="WhatsApp" selected> WhatsApp Messenger</option>
+                            <option value="Telegram"> Telegram</option>
+                            <option value="Llamada"> Llamada Directa</option>
                         </select>
                     </div>
                 </div>
@@ -5026,7 +5038,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 <button onclick="closeIndependentBookingModal()" class="bg-gray-200 hover:bg-gray-300 text-slateDark font-bold py-2.5 px-4 rounded-xl text-[10px] uppercase transition focus:outline-none">Cerrar</button>
                 <button onclick="bookIndependentAppointmentReal()" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 px-4 rounded-xl text-[10px] uppercase shadow-md transition flex items-center space-x-1.5 focus:outline-none">
                     <i class="fa-solid fa-calendar-check animate-pulse"></i>
-                    <span>Confirmar Agendamiento Privado 📅</span>
+                    <span>Confirmar Agendamiento Privado </span>
                 </button>
             </div>
         </div>
@@ -5051,16 +5063,16 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
             <div class="bg-gray-50 p-3 border-b border-gray-150 flex flex-wrap items-center justify-center gap-2" id="mapTransportSelectorContainer">
                 <span class="text-[9px] font-bold text-gray-400 uppercase mr-2"><i class="fa-solid fa-person-walking"></i> Medio de Transporte:</span>
                 <button onclick="selectRouteTransport('metro')" id="btn-route-metro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚇 Metro</span>
+                    <span> Metro</span>
                 </button>
                 <button onclick="selectRouteTransport('micro')" id="btn-route-micro" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚌 Micro</span>
+                    <span> Micro</span>
                 </button>
                 <button onclick="selectRouteTransport('colectivo')" id="btn-route-colectivo" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚗 Colectivo</span>
+                    <span> Colectivo</span>
                 </button>
                 <button onclick="selectRouteTransport('taxi')" id="btn-route-taxi" class="transport-btn text-[9px] bg-white border border-gray-200 px-3 py-1.5 rounded-full font-bold flex items-center space-x-1.5 hover:border-forest/50 transition focus:outline-none text-slateDark">
-                    <span>🚕 Taxi / Uber</span>
+                    <span> Taxi / Uber</span>
                 </button>
             </div>
             <!-- Indicaciones de Ruta -->
@@ -5115,7 +5127,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                     <div>
                         <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Electrónico (Para Validación Única)</label>
                         <input type="email" id="couponClaimEmail" placeholder="Ej: maria@ejemplo.cl" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-forest font-semibold shadow-sm text-slateDark">
-                        <span class="text-[8px] text-gray-400 font-bold mt-1 block">⚠️ Tu correo será registrado para impedir descargas duplicadas.</span>
+                        <span class="text-[8px] text-gray-400 font-bold mt-1 block">️ Tu correo será registrado para impedir descargas duplicadas.</span>
                     </div>
                     <div>
                         <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Celular de Contacto</label>
@@ -5127,9 +5139,9 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                         <label class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Verificación Humana de Bienestar</label>
                         <div class="relative w-full h-11 bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden select-none flex items-center justify-center" id="slideVerifyContainer">
                             <div id="slideVerifyBg" class="absolute left-0 top-0 h-full bg-forest/20 rounded-2xl transition-all duration-100" style="width: 0%;"></div>
-                            <span id="slideVerifyText" class="text-[9px] font-bold text-gray-500 uppercase tracking-wider relative z-10 transition-colors pointer-events-none select-none">Arrastra la hojita para verificar 🌿</span>
+                            <span id="slideVerifyText" class="text-[9px] font-bold text-gray-500 uppercase tracking-wider relative z-10 transition-colors pointer-events-none select-none">Arrastra la hojita para verificar </span>
                             <div id="slideVerifyHandle" class="absolute left-0 top-0 h-full w-11 bg-forest hover:bg-forest/95 flex items-center justify-center text-sm cursor-grab transition-all duration-100 rounded-2xl shadow-md z-20">
-                                🌿
+                                
                             </div>
                         </div>
                         <input type="hidden" id="slideVerifyCompleted" value="false">
@@ -5150,7 +5162,7 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
                 <button onclick="closeCouponClaimModal()" class="bg-gray-200 hover:bg-gray-300 text-slateDark font-bold py-2.5 px-4 rounded-xl text-[10px] uppercase transition focus:outline-none">Cerrar</button>
                 <button onclick="processCouponClaimReal()" class="bg-forest hover:bg-forest/95 text-white font-extrabold py-2.5 px-4 rounded-xl text-[10px] uppercase shadow-md transition flex items-center space-x-1.5 focus:outline-none">
                     <i class="fa-solid fa-cloud-arrow-down"></i>
-                    <span>Descargar Cupón Único 🎫</span>
+                    <span>Descargar Cupón Único </span>
                 </button>
             </div>
         </div>
@@ -5207,13 +5219,13 @@ function openRestaurantBookingModal(estName, type, className = '', classPrice = 
 
                 <!-- Botones de Acción -->
                 <div class="space-y-2 pt-1">
-                    <button onclick="shareSuccessCouponViaWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold py-3 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-1.5 focus:outline-none">
+                    <button onclick="shareSuccessCouponViaWhatsApp()" class="w-full bg-[#1B4D3E] hover:bg-[#20ba5a] text-white font-extrabold py-3 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-1.5 focus:outline-none">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>Enviar Copia a mi WhatsApp 💬</span>
+                        <span>Enviar Copia a mi WhatsApp </span>
                     </button>
                     <button onclick="downloadCouponImage()" class="w-full bg-forest hover:bg-forest/95 text-white font-extrabold py-3 rounded-2xl text-xs shadow-md transition flex items-center justify-center space-x-1.5 focus:outline-none">
                         <i class="fa-solid fa-download"></i>
-                        <span>Descargar Cupón en mi Celular 📷</span>
+                        <span>Descargar Cupón en mi Celular </span>
                     </button>
                 </div>
             </div>
