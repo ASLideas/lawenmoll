@@ -519,8 +519,15 @@
                                 </label>
                                 <label class="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-gray-100 cursor-pointer text-xs font-semibold shadow-sm">
                                     <input type="checkbox" value="Enfermedad Autoinmune" onchange="updateSelectedChronical()" class="accent-forest w-4 h-4">
-                                    <span>️ Enfermedad Autoinmune</span>
+                                    <span> Enfermedad Autoinmune</span>
                                 </label>
+                                <label class="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-gray-100 cursor-pointer text-xs font-semibold shadow-sm">
+                                    <input type="checkbox" id="chkOtherChronic" value="Otros" onchange="toggleOtherChronicInput(this)" class="accent-forest w-4 h-4">
+                                    <span> Otros (Escriba sus enfermedades)</span>
+                                </label>
+                            </div>
+                            <div id="otherChronicContainer" class="hidden mt-2 animate-fadeIn">
+                                <input type="text" id="inputOtherChronic" oninput="updateSelectedChronical()" placeholder="Escriba aquí su enfermedad o condición de salud..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-none focus:border-forest shadow-sm">
                             </div>
                         </div>
 
@@ -565,9 +572,17 @@
                                 <i class="fa-solid fa-circle-check text-gray-100"></i>
                             </button>
                             <button onclick="setMentalOption('Neurodivergente', this)" class="mental-opt border border-gray-200 p-3 rounded-2xl text-left text-xs font-bold hover:border-forest transition flex justify-between items-center shadow-sm bg-white">
-                                <span>️ Neurodivergente (TDAH / TEA / PAS)</span>
+                                <span> Neurodivergente (TDAH / TEA / PAS)</span>
                                 <i class="fa-solid fa-circle-check text-gray-100"></i>
                             </button>
+                            <button onclick="setMentalOption('Otros', this)" class="mental-opt border border-gray-200 p-3 rounded-2xl text-left text-xs font-bold hover:border-forest transition flex justify-between items-center shadow-sm bg-white">
+                                <span> Otros (Escriba su enfermedad o neurodivergencia)</span>
+                                <i class="fa-solid fa-circle-check text-gray-100"></i>
+                            </button>
+                        </div>
+                        <div id="otherMentalContainer" class="hidden mt-3 animate-fadeIn">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1">Ingrese su condición, enfermedad o neurodivergencia:</label>
+                            <input type="text" id="inputOtherMental" oninput="updateSelectedMental()" placeholder="Ej: Trastorno del Sueño, Bipolaridad, TOC..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-none focus:border-forest shadow-sm">
                         </div>
                     </div>
                     <input type="hidden" id="inputMental" value="Ninguna">
@@ -670,31 +685,31 @@
                         <span class="text-[10px] text-gray-400 font-bold">Objetivo de Bienestar</span>
                     </div>
                     <h2 class="text-2xl font-bold text-forest mb-2">Área de Apoyo</h2>
-                    <p class="text-gray-500 text-xs mb-6 font-semibold">¿En qué área de tu vida sientes que necesitas mayor apoyo hoy?</p>
+                    <p class="text-gray-500 text-xs mb-6 font-semibold">¿En qué área de tu vida sientes que necesitas mayor apoyo hoy? <span class="text-forest font-bold block mt-1">(Puedes marcar más de una opción)</span></p>
 
                     <div class="space-y-3">
-                        <button onclick="setOption('goal', 'calm', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <button onclick="toggleGoalOption('calm', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
                             <span class="text-xl"></span>
                             <div>
                                 <h4 class="font-bold text-xs">Calmar mi mente</h4>
                                 <p class="text-[10px] text-gray-400 font-medium">Reducir estrés, ansiedad y dormir mejor</p>
                             </div>
                         </button>
-                        <button onclick="setOption('goal', 'pain', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <button onclick="toggleGoalOption('pain', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
                             <span class="text-xl"></span>
                             <div>
                                 <h4 class="font-bold text-xs">Aliviar un dolor</h4>
                                 <p class="text-[10px] text-gray-400 font-medium">Tensión muscular, dolor de espalda o cuello</p>
                             </div>
                         </button>
-                        <button onclick="setOption('goal', 'activate', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <button onclick="toggleGoalOption('activate', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
                             <span class="text-xl"></span>
                             <div>
                                 <h4 class="font-bold text-xs">Activar mi cuerpo / Bajar peso</h4>
                                 <p class="text-[10px] text-gray-400 font-medium">Ganar fuerza, vitalidad, entrenar y quemar grasa</p>
                             </div>
                         </button>
-                        <button onclick="setOption('goal', 'nutrition', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
+                        <button onclick="toggleGoalOption('nutrition', this)" class="goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white">
                             <span class="text-xl"></span>
                             <div>
                                 <h4 class="font-bold text-xs">Nutrirme mejor (Alimentación)</h4>
@@ -1436,20 +1451,93 @@
             document.getElementById('btnToStep4').style.opacity = 1;
         }
 
+        function toggleOtherChronicInput(chk) {
+            const container = document.getElementById('otherChronicContainer');
+            if (chk.checked) {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('inputOtherChronic').value = '';
+            }
+            updateSelectedChronical();
+        }
+
         function updateSelectedChronical() {
             const checkboxes = document.querySelectorAll('#chronicOptionsContainer input:checked');
-            selections.selectedChronical = Array.from(checkboxes).map(c => c.value);
+            let list = Array.from(checkboxes).map(c => c.value);
+            if (list.includes('Otros')) {
+                list = list.filter(item => item !== 'Otros');
+                const customText = document.getElementById('inputOtherChronic')?.value.trim();
+                if (customText) {
+                    list.push(customText);
+                } else {
+                    list.push('Otras condiciones de salud');
+                }
+            }
+            selections.selectedChronical = list;
         }
 
         function setMentalOption(val, btn) {
-            selections.mental = val;
-            document.getElementById('inputMental').value = val;
+            const container = document.getElementById('otherMentalContainer');
             document.querySelectorAll('.mental-opt').forEach(b => {
                 b.className = "mental-opt border border-gray-200 p-3 rounded-2xl text-left text-xs font-bold hover:border-forest transition flex justify-between items-center shadow-sm bg-white";
                 b.querySelector('i').className = "fa-solid fa-circle-check text-gray-100";
             });
             btn.className = "mental-opt border-forest bg-forest/5 p-3 rounded-2xl text-left text-xs font-bold transition flex justify-between items-center shadow-sm";
             btn.querySelector('i').className = "fa-solid fa-circle-check text-forest";
+
+            if (val === 'Otros') {
+                container.classList.remove('hidden');
+                updateSelectedMental();
+            } else {
+                container.classList.add('hidden');
+                selections.mental = val;
+                document.getElementById('inputMental').value = val;
+            }
+        }
+
+        function updateSelectedMental() {
+            const customText = document.getElementById('inputOtherMental')?.value.trim();
+            if (customText) {
+                selections.mental = 'Otros: ' + customText;
+            } else {
+                selections.mental = 'Otros (condición no especificada)';
+            }
+            document.getElementById('inputMental').value = selections.mental;
+        }
+
+        if (!selections.goals) selections.goals = [];
+
+        function toggleGoalOption(val, btn) {
+            if (!selections.goals) selections.goals = [];
+            
+            if (selections.goals.includes(val)) {
+                selections.goals = selections.goals.filter(g => g !== val);
+                btn.className = "goal-opt w-full text-left border border-gray-200 p-3 rounded-2xl flex items-center space-x-3 hover:border-forest hover:bg-forest/5 transition focus:outline-none shadow-sm bg-white";
+            } else {
+                selections.goals.push(val);
+                btn.className = "goal-opt w-full text-left border-forest bg-forest/5 p-3 rounded-2xl flex items-center space-x-3 transition focus:outline-none shadow-sm text-forest font-bold";
+            }
+            
+            const goalLabels = {
+                'calm': 'Calmar mi mente',
+                'pain': 'Aliviar un dolor',
+                'activate': 'Activar mi cuerpo / Bajar peso',
+                'nutrition': 'Nutrirme mejor'
+            };
+            
+            const selectedLabels = selections.goals.map(g => goalLabels[g] || g);
+            selections.goal = selectedLabels.join(', ') || 'Calmar mi mente';
+            document.getElementById('inputGoal').value = selections.goal;
+            
+            const btnNext = document.getElementById('btnToStep7');
+            if (selections.goals.length > 0) {
+                btnNext.removeAttribute('disabled');
+                btnNext.style.opacity = 1;
+            } else {
+                btnNext.setAttribute('disabled', 'true');
+                btnNext.style.opacity = 0.5;
+            }
         }
 
         function setOption(type, value, btn) {
@@ -1642,23 +1730,12 @@
             };
 
             const svg_logo = `
-                <div style="display: inline-block; vertical-align: middle; margin-right: 12px; text-align: left;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100" style="display: block;">
-                        <circle cx="50" cy="50" r="46" fill="#FAF8F5" stroke="#52796F" stroke-width="3" />
-                        <circle cx="50" cy="50" r="41" fill="none" stroke="#84A59D" stroke-dasharray="3 3" stroke-width="1" />
-                        <path d="M50,80 Q48,50 50,25" fill="none" stroke="#52796F" stroke-width="2.5" stroke-linecap="round" />
-                        <path d="M50,45 Q65,30 60,18 Q45,25 50,45" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <path d="M50,45 Q35,30 40,18 Q55,25 50,45" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <path d="M50,58 Q68,48 65,38 Q48,42 50,58" fill="#52796F" stroke="#3A5F53" stroke-width="1" />
-                        <path d="M50,58 Q32,48 35,38 Q52,42 50,58" fill="#52796F" stroke="#3A5F53" stroke-width="1" />
-                        <path d="M50,70 Q62,65 60,55 Q48,58 50,70" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <path d="M50,70 Q38,65 40,55 Q52,58 50,70" fill="#84A59D" stroke="#52796F" stroke-width="1" />
-                        <circle cx="50" cy="20" r="3" fill="#F28482" />
-                    </svg>
-                </div>
-                <div style="display: inline-block; vertical-align: middle; text-align: left;">
-                    <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
-                    <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+                    <img src="lawenmoll_logo.jpg" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #52796F; display: inline-block; vertical-align: middle; margin-right: 12px;" alt="LAWENMOLL Logo" onerror="this.style.display='none'">
+                    <div style="display: inline-block; vertical-align: middle; text-align: left;">
+                        <h2 style="font-size: 9px; font-weight: 900; color: #84A59D; margin: 0; letter-spacing: 1.5px; text-transform: uppercase;">Ecosistema de Salud Integrativa</h2>
+                        <h1 style="font-size: 18px; font-weight: 900; color: #52796F; margin: 2px 0 0 0;">LAWENMOLL CHILE</h1>
+                    </div>
                 </div>
             `;
 
@@ -2047,7 +2124,23 @@
 
 
                     let textNut = "Plan de alimentación equilibrada limpia de " + targetCal + " kcal. Consumirás un plato distribuido en 50% verduras, 25% proteína magra y 25% carbohidratos complejos.";
-                    let textMov = "Entrenamiento de tonificación muscular en casa. 4 rondas de: 15 sentadillas libres, 10 flexiones de brazos completas y 30 segundos de plancha abdominal.";
+                    
+                    let textMov = "";
+                    const isWeightLossNeeded = (selections.goals && selections.goals.includes('activate')) || selections.goal.includes('activate') || isOverweight;
+                    
+                    if (isWeightLossNeeded) {
+                        textMov = "🏃‍♂️ <strong>Rutina Activa de Ejercicios en Casa para Bajar de Peso y Quemar Grasa (20 min):</strong><br>" +
+                                  "• <strong>Calentamiento (3 min):</strong> Elevación de rodillas al pecho y movilidad articular de tobillos y caderas.<br>" +
+                                  "• <strong>Bloque Principal (3-4 rondas):</strong> 15 Sentadillas guiadas con peso corporal, 12 Zancadas alternadas, 10 Flexiones apoyadas y 30s de Cardio Mantenido en el lugar.<br>" +
+                                  "• <strong>Enfriamiento (3 min):</strong> Estiramiento de cuádriceps e isquiotibiales y respiración diafragmática.<br>" +
+                                  "• <em>Derivación Wellness:</em> Puedes complementar tu rutina con el <strong>Pase Libre de 3 Días en SportLife</strong> o <strong>1 sesión con Personal Trainer</strong> en nuestros centros aliados.";
+                    } else {
+                        textMov = "🧘‍♀️ <strong>Rutina de Movilidad Suave y Descanso Restaurativo en Casa (15 min):</strong><br>" +
+                                  "• <strong>Calentamiento e Integración (3 min):</strong> Respiración diafragmática en posición decúbito supino (boca arriba).<br>" +
+                                  "• <strong>Movilidad Espinal y Descompresión (8 min):</strong> Movimiento Gato-Vaca (10 repeticiones), estiramiento del piramidal y torsiones suaves de columna en piso.<br>" +
+                                  "• <strong>Descanso Profundo (4 min):</strong> Posición de piernas sobre la pared (Viparita Karani) para promover la circulación venosa y calmar el sistema nervioso.<br>" +
+                                  "• <em>Derivación Wellness:</em> Recomendamos derivarte a <strong>Clases de Yoga Restaurativo (15% Desc. Exclusivo)</strong> en nuestros centros y locales aliados.";
+                    }
                     
                     document.getElementById('resNut').innerText = textNut;
                     document.getElementById('resMov').innerText = textMov;
