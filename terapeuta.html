@@ -97,27 +97,31 @@
     <div id="mainWorkspace" class="hidden flex-grow flex flex-col">
 
     <!-- CABECERA -->
-    <header class="bg-white border-b border-gray-200 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
+    <header class="bg-[#FDFBF7] border-b border-stone-200 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
                 <img src="lawenmoll_logo.jpg" class="h-8 w-8 rounded-full object-cover shadow-sm" alt="LAWENMOLL" onerror="this.src='https://kyzvygyzthmoudsepwsi.supabase.co/storage/v1/object/public/imagenes_lawenmoll/lawenmoll_logo.jpg';">
-                <span class="font-bold text-lg md:text-xl tracking-wider text-forest font-sans">LAWENMOLL <span class="text-[9px] bg-forest/10 text-forest px-2 py-0.5 rounded-full ml-1 font-semibold">Especialistas </span></span>
+                <span class="font-bold text-lg md:text-xl tracking-wider text-forest font-sans">LAWENMOLL <span class="text-[9px] bg-forest/10 text-forest px-2 py-0.5 rounded-full ml-1 font-semibold">Especialistas</span></span>
                 <span class="inline-flex items-center text-[8px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 shadow-sm ml-1.5"><i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Ciberseguridad Activa Ley 21.663</span>
             </div>
-            <div class="flex flex-wrap justify-center items-center gap-1.5 md:gap-3">
-                <a href="centros.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
-                    <i class="fa-solid fa-map-location-dot"></i>
-                    <span>Buscar Servicios </span>
+            <div class="flex flex-nowrap lg:flex-wrap items-center justify-center gap-1.5 md:gap-2 overflow-x-auto max-w-full py-1 no-scrollbar">
+                <a href="centros.html?openB2B=true" class="whitespace-nowrap text-[9px] md:text-xs bg-forest hover:bg-forest/90 text-white font-extrabold px-3 py-1.5 rounded-full transition-all shadow-sm flex items-center space-x-1.5 cursor-pointer border border-emerald-300 hover:scale-105 h-8">
+                    <i class="fa-solid fa-pen-ruler text-xs"></i>
+                    <span>Anúnciate / Diseña</span>
                 </a>
-                <a href="secretos.html" class="text-[9px] md:text-xs border border-accent text-accent hover:bg-accent/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
-                    <i class="fa-solid fa-leaf"></i>
-                    <span>Secretos<span class="hidden sm:inline"> de la Abuela</span> </span>
+                <a href="index.html" class="whitespace-nowrap text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/10 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm h-8">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <span>Test Bienestar</span>
                 </a>
-                <a href="index.html" class="text-[9px] md:text-xs border border-forest text-forest hover:bg-forest/5 font-semibold px-2 py-1.5 rounded-full transition flex items-center space-x-1">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Volver<span class="hidden sm:inline"> al Test</span></span>
+                <a href="secretos.html" class="whitespace-nowrap text-[9px] md:text-xs bg-sage hover:bg-sage/90 text-white font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm h-8">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Diario Mural</span>
                 </a>
-                <div class="text-right hidden sm:block">
+                <a href="centros.html" class="whitespace-nowrap text-[9px] md:text-xs bg-slateDark text-white hover:bg-slateDark/95 font-bold px-2.5 py-1.5 rounded-full transition flex items-center space-x-1 shadow-sm h-8">
+                    <i class="fa-solid fa-store"></i>
+                    <span>Portal de Aliados</span>
+                </a>
+                <div class="text-right hidden sm:block ml-1">
                     <div class="font-bold text-xs text-slateDark" id="headerTherapistName">Klgo. Carlos Mendoza</div>
                     <div class="text-[9px] text-gray-400" id="headerTherapistSpec">Kinesiólogo Integrativo • Santiago, Chile</div>
                 </div>
@@ -131,7 +135,7 @@
                     <input type="file" id="avatarFileInput" accept="image/*" class="hidden" onchange="uploadTherapistAvatar(event)">
                 </div>
                 <!-- BOTÓN DE CERRAR SESIÓN -->
-                <button onclick="handleLogout()" class="text-xs bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-bold py-1.5 px-3 rounded-xl transition flex items-center space-x-1 border border-red-200">
+                <button onclick="handleLogout()" class="whitespace-nowrap text-xs bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-bold px-2.5 rounded-xl transition flex items-center space-x-1 border border-red-200 h-8">
                     <i class="fa-solid fa-power-off"></i>
                     <span class="hidden md:inline">Cerrar Sesión</span>
                 </button>
