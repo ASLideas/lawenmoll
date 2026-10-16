@@ -1967,34 +1967,38 @@
             document.documentElement.appendChild(wrapper);
 
             // Wait for all images to complete loading to prevent missing logo on mobile slow networks
-            const imgs = element.querySelectorAll('img');
-            const promises = Array.from(imgs).map(img => {
-                if (img.complete) return Promise.resolve();
-                return new Promise(resolve => {
-                    img.onload = resolve;
-                    img.onerror = resolve;
-                });
-            });
+            const cleanup = () => {
+                try { if (wrapper && wrapper.parentNode) wrapper.parentNode.removeChild(wrapper); } catch(e){}
+                try { if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay); } catch(e){}
+                document.body.style.width = originalBodyWidth;
+                document.documentElement.style.width = originalHtmlWidth;
+                document.body.style.margin = originalBodyMargin;
+                document.body.style.padding = originalBodyPadding;
+                document.body.style.position = originalBodyPosition;
+                document.body.style.left = originalBodyLeft;
+                document.body.style.top = originalBodyTop;
+                window.scrollTo(currentScrollX, currentScrollY);
+                document.documentElement.style.scrollBehavior = htmlStyle;
+                document.body.style.scrollBehavior = bodyStyle;
+            };
 
-            Promise.all(promises).then(() => {
-                setTimeout(() => {
-                    html2pdf().from(element).set(opt).save().then(() => {
-                        document.documentElement.removeChild(wrapper);
-                        document.body.removeChild(overlay);
-                        // Restaurar estilos de layout originales
-                        document.body.style.width = originalBodyWidth;
-                        document.documentElement.style.width = originalHtmlWidth;
-                        document.body.style.margin = originalBodyMargin;
-                        document.body.style.padding = originalBodyPadding;
-                        document.body.style.position = originalBodyPosition;
-                        document.body.style.left = originalBodyLeft;
-                        document.body.style.top = originalBodyTop;
-                        window.scrollTo(currentScrollX, currentScrollY); // Restore scroll position instantly
-                        document.documentElement.style.scrollBehavior = htmlStyle;
-                        document.body.style.scrollBehavior = bodyStyle;
-            });
-                }, 500);
-            });
+            const generatePDF = () => {
+                if (typeof html2pdf !== 'undefined') {
+                    html2pdf().from(element).set(opt).save()
+                        .then(() => {
+                            cleanup();
+                        })
+                        .catch((err) => {
+                            console.error('Error al generar PDF:', err);
+                            cleanup();
+                        });
+                } else {
+                    cleanup();
+                    window.print();
+                }
+            };
+
+            setTimeout(generatePDF, 400);
         }
 
         async function saveTestData() {

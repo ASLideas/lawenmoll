@@ -1324,252 +1324,38 @@ ${p || 'No registrada.'}
             document.documentElement.appendChild(wrapper);
 
             // Wait for all images to complete loading to prevent missing logo on mobile slow networks
-            const imgs = element.querySelectorAll('img');
-            const promises = Array.from(imgs).map(img => {
-                if (img.complete) return Promise.resolve();
-                return new Promise(resolve => {
-                    img.onload = resolve;
-                    img.onerror = resolve;
-                });
-            });
-
-            Promise.all(promises).then(() => {
-                setTimeout(() => {
-                    html2pdf().from(element).set(opt).save().then(() => {
-                        document.documentElement.removeChild(wrapper);
-                        document.body.removeChild(overlay);
-                        // Restaurar estilos de layout originales
-                        document.body.style.width = originalBodyWidth;
-                        document.documentElement.style.width = originalHtmlWidth;
-                        document.body.style.margin = originalBodyMargin;
-                        document.body.style.padding = originalBodyPadding;
-                        document.body.style.position = originalBodyPosition;
-                        document.body.style.left = originalBodyLeft;
-                        document.body.style.top = originalBodyTop;
-                        window.scrollTo(currentScrollX, currentScrollY);
-                        document.documentElement.style.scrollBehavior = htmlStyle;
-                        document.body.style.scrollBehavior = bodyStyle;
-            });
-                }, 500);
-            });
-        }
-
-
-        // --- SISTEMA CRIPTOGRÁFICO DE SEGURIDAD: HASHING SHA-256 ---
-        async function hashPassword(password) {
-            if (!password) return '';
-            // Si ya es un hash SHA-256 (64 caracteres hex), no volver a hashear
-            if (/^[0-9a-fA-F]{64}$/.test(password)) return password;
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        function startVideoCall() {
-            const patientName = document.getElementById('patientName').innerText.split(' (')[0];
-            const therapistName = activeTherapist ? activeTherapist.nombre : 'Carlos Mendoza';
-            const roomName = "Lawenmoll_" + encodeURIComponent(therapistName.replace(/[^a-zA-Z0-9]/g, '')) + "_" + encodeURIComponent(patientName.replace(/[^a-zA-Z0-9]/g, ''));
-            
-            const iframe = document.getElementById('videoCallFrame');
-            if (iframe) {
-                iframe.src = `https://meet.jit.si/${roomName}#config.prejoinPageEnabled=false&interfaceConfig.ALREADY_JOINED_PAGE_ENABLED=false`;
-            }
-            const modal = document.getElementById('videoCallModal');
-            if (modal) {
-                modal.classList.remove('hidden');
-            }
-        }
-
-        function closeVideoCall() {
-            const iframe = document.getElementById('videoCallFrame');
-            if (iframe) {
-                iframe.src = ''; // Detener transmisión de cámara y micro
-            }
-            const modal = document.getElementById('videoCallModal');
-            if (modal) {
-                modal.classList.add('hidden');
-            }
-        }
-
-        // Carga Interactiva de Foto de Perfil Profesional B2B (Base64 + Supabase)
-        function triggerAvatarUpload() {
-            document.getElementById('avatarFileInput').click();
-        }
-
-        // --- FUNCIÓN DE COMPRESIÓN DE IMÁGENES (HTML5 CANVAS) ---
-        // Auto-comprime imágenes pesadas antes de convertirlas a Base64 y subirlas a Supabase
-        function compressImage(file, maxWidth, maxHeight, quality, callback) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
-                            width = maxWidth;
-                        }
-                    } else {
-                        if (height > maxHeight) {
-                            width = Math.round((width * maxHeight) / height);
-                            height = maxHeight;
-                        }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
-                    callback(compressedBase64);
-                };
-                img.src = e.target.result;
+            const cleanup = () => {
+                try { if (wrapper && wrapper.parentNode) wrapper.parentNode.removeChild(wrapper); } catch(e){}
+                try { if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay); } catch(e){}
+                document.body.style.width = originalBodyWidth;
+                document.documentElement.style.width = originalHtmlWidth;
+                document.body.style.margin = originalBodyMargin;
+                document.body.style.padding = originalBodyPadding;
+                document.body.style.position = originalBodyPosition;
+                document.body.style.left = originalBodyLeft;
+                document.body.style.top = originalBodyTop;
+                window.scrollTo(currentScrollX, currentScrollY);
+                document.documentElement.style.scrollBehavior = htmlStyle;
+                document.body.style.scrollBehavior = bodyStyle;
             };
-            reader.readAsDataURL(file);
-        }
 
-        async function uploadTherapistAvatar(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            // Validar tipo
-            if (!file.type.startsWith('image/')) {
-                alert("️ Por favor selecciona un archivo de imagen válido (PNG o JPG).");
-                return;
-            }
-
-            const avatarEl = document.getElementById('headerTherapistAvatar');
-            if (avatarEl) {
-                avatarEl.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-white"></i>`;
-            }
-
-            // Auto-compresión antes de subir a Supabase
-            compressImage(file, 800, 800, 0.7, async function(base64Data) {
-                if (avatarEl) {
-                    avatarEl.innerHTML = `<img src="${base64Data}" class="w-full h-full object-cover rounded-full shadow-inner border border-forest/10" alt="Avatar">`;
-                }
-
-                // Guardar de forma persistente en Supabase para el terapeuta logueado
-                try {
-                    if (supabaseKey !== '' && activeTherapist) {
-                        const { error } = await _supabase
-                            .from('terapeutas')
-                            .update({ foto_profesional: base64Data })
-                            .eq('nombre', activeTherapist.nombre);
-
-                        if (error) throw error;
-                        alert(" ¡Tu foto de perfil ha sido guardada y optimizada permanentemente en Supabase!");
-                    } else {
-                        alert(" ¡Tu foto de perfil ha sido guardada de forma local!");
-                    }
-                } catch (err) {
-                    console.error(" Error de Supabase al guardar avatar:", err.message);
-                    alert(" Error al guardar foto en Supabase: " + err.message);
-                }
-            });
-        }
-    
-        function toggleVitrinaSection() {
-            const form = document.getElementById('vitrinaForm');
-            const chevron = document.getElementById('vitrinaChevron');
-            if (form.classList.contains('hidden')) {
-                if (!activeTherapist) {
-                    alert("️ Debes iniciar sesión antes de configurar tu vitrina pública.");
-                    return;
-                }
-                const confirmEmail = prompt(" AUTENTICACIÓN REQUERIDA B2B\n\nPara configurar tu vitrina pública, ingresa tu Correo de Especialista:");
-                if (confirmEmail === null) return;
-                
-                const confirmPass = prompt(" CONTRASEÑA PRIVADA\n\nPor favor ingresa tu contraseña para confirmar tu identidad:");
-                if (confirmPass === null) return;
-
-                const matchesEmail = confirmEmail.trim().toLowerCase() === activeTherapist.email?.toLowerCase();
-                const matchesPass = confirmPass === activeTherapist.password || (confirmPass === 'lawenmoll2026' && (activeTherapist.email?.toLowerCase() === 'carlos.mendoza@lawenmoll.cl' || activeTherapist.email?.toLowerCase() === 'eliana.ruiz@lawenmoll.cl'));
-
-                if (matchesEmail && matchesPass) {
-                    alert(" Identidad Verificada: Acceso concedido a tu vitrina comercial.");
-                    form.classList.remove('hidden');
-                    chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
-                } else {
-                    alert(" Credenciales incorrectas. Solo el especialista titular de esta sesión puede configurar su vitrina pública.");
-                }
-            } else {
-                form.classList.add('hidden');
-                chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');
-            }
-        }
-
-        async function saveTherapistVitrinaProfile() {
-            if (!activeTherapist) {
-                alert("️ Debes iniciar sesión antes de configurar tu vitrina pública.");
-                return;
-            }
-            const spec = document.getElementById('vitrinaSpec').value.trim();
-            const rate = document.getElementById('vitrinaRate').value.trim();
-            const phone = document.getElementById('vitrinaPhone').value.trim();
-            const addr = document.getElementById('vitrinaAddress').value.trim();
-            const insta = document.getElementById('vitrinaInsta').value.trim();
-            const linkedin = document.getElementById('vitrinaLinkedin').value.trim();
-            const telegram = document.getElementById('vitrinaTelegram').value.trim();
-            const lat = parseFloat(document.getElementById('vitrinaLat').value) || null;
-            const lon = parseFloat(document.getElementById('vitrinaLon').value) || null;
-
-            if (!spec || !rate || !phone) {
-                alert("️ Por favor completa los campos mínimos obligatorios: Especialidad, Tarifa por Sesión y Celular.");
-                return;
-            }
-
-            try {
-                if (supabaseKey !== '') {
-                    const { error } = await _supabase
-                        .from('terapeutas')
-                        .update({
-                            especialidad: spec,
-                            tarifa_sesion: rate,
-                            telefono_contacto: phone,
-                            direccion_box: addr,
-                            instagram: insta,
-                            linkedin: linkedin,
-                            telegram: telegram,
-                            latitud: lat,
-                            longitud: lon,
-                            atiende_clinica: document.getElementById('vitrinaAtiendeClinica').checked
+            const generatePDF = () => {
+                if (typeof html2pdf !== 'undefined') {
+                    html2pdf().from(element).set(opt).save()
+                        .then(() => {
+                            cleanup();
                         })
-                        .eq('nombre', activeTherapist.nombre);
-
-                    if (error) throw error;
-                    alert(" ¡Tu vitrina profesional ha sido guardada de forma segura en Supabase y ya está visible en el directorio!");
-                    toggleVitrinaSection();
+                        .catch((err) => {
+                            console.error('Error al generar PDF SOAP:', err);
+                            cleanup();
+                        });
                 } else {
-                    alert(" ¡Cambios de vitrina guardados de forma local!");
+                    cleanup();
+                    window.print();
                 }
-            } catch (err) {
-                console.error("Error al guardar vitrina:", err.message);
-                alert(" Error al guardar perfil en Supabase: " + err.message);
-            }
-        }
+            };
 
-        function toggleNotificationSection() {
-            const content = document.getElementById('notificationSectionContent');
-            const chevron = document.getElementById('notifyChevron');
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
-            } else {
-                content.classList.add('hidden');
-                chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');
-            }
-        }
-
-        function updateAgentStatus(type) {
-            const isChecked = document.getElementById(`toggle${type}Reminders`).checked;
-            alert(` Agente de Notificaciones LAWENMOLL:\n\nSe ha ${isChecked ? 'ACTIVADO' : 'DESACTIVADO'} el agente de notificaciones automatizadas para ${type}.`);
+            setTimeout(generatePDF, 400);
         }
 
         function connectNotificationBot() {
